@@ -1,0 +1,137 @@
+#version 150
+
+struct Material {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	float shininess;
+}; 
+
+struct Light {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	
+	vec3 position;
+	vec3 direction;
+	
+	float linear;
+	float constant;
+	float quadratic;
+	
+	float cutoff;
+	float power;
+
+	int type;
+}; 
+
+//The fragment shader operates on each fragment in a given polygon and it has to output the final color
+//The final color is a combination of the object color, the texture and the Phong reflectance model based on the draw mode
+//The fragment shader receives the interpolated RGBA color, the UV texture coordinates, the normal and the current position sent from the vertex shader 
+
+//in vec4 fragmentColor;
+in vec2 fragmentTextureCoordinates;
+in vec3 fragmentNormal;
+in vec3 fragmentPosition;
+
+#define LIGHTS_SCENE 1
+
+uniform sampler2D normalMap;
+uniform sampler2D textureData;
+uniform sampler2D specularMap;
+
+uniform int hasNormalMap;
+uniform int hasSpecularMap;
+
+
+uniform int lightingEnabled;
+uniform vec3 viewerPosition;
+uniform Material material;
+uniform Light[LIGHTS_SCENE] pointLights;
+out vec4 finalColor;
+
+vec4 calculateLights(Light light) {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	vec3 lightDir;
+	float power;
+
+				//Ambient component
+	ambient = material.ambient*light.ambient;
+		//Diffuse component
+	vec3 norm = normalize(fragmentNormal);
+	// calculate with normalmap
+	if (hasNormalMap == 1) {
+		norm = texture(normalMap, fragmentTextureCoordinates).rgb;
+		norm = normalize(norm * 2.0 - 1.0);
+	}
+	// Directional light
+	if (light.type == 0) {
+		lightDir = normalize(-light.direction);
+		if (light.power == 0) {
+			light.power = 1;
+		}
+	} else {
+		lightDir = normalize(light.position - fragmentPosition);		
+	}
+
+	float diff = max(dot(norm, lightDir), 0.0);
+	diffuse = light.diffuse * diff * material.diffuse;
+				
+		//Specular component
+	vec3 viewDir = normalize(viewerPosition - fragmentPosition);
+	vec3 reflectDir = reflect(-lightDir, norm);  
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	specular = light.specular * spec * material.specular; 
+
+	if (light.type == 1) { // Point light 
+
+		float distance = length(light.position - fragmentPosition);
+		float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+		ambient *= attenuation;
+		diffuse *= attenuation;
+		specular *= attenuation;
+		power = light.power/distance;
+	} else if (light.type == 2 ) { // flashlight
+		float theta = dot(lightDir, normalize(-light.direction));
+		if (theta < light.cutoff) {
+			float distance = length(light.position - fragmentPosition);
+			float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+			ambient *= attenuation;
+			diffuse *= attenuation;
+			specular *= attenuation;
+			power = light.power/distance;
+		} 
+	}
+	
+	// calculate SpecularMap
+	if (hasSpecularMap == 1) {
+		vec4 mapInfo = texture(specularMap, fragmentTextureCoordinates);
+		specular *= mapInfo.r;
+		if (mapInfo.g > 0.5) {
+			diffuse = vec3(1.0f);
+		}
+	}
+
+	return vec4((ambient+diffuse+specular),1)*finalColor*light.power;
+}
+
+void main() {
+	vec4 tempColor;
+	float power;
+	//The final color can be computed using different approaches
+	finalColor = texture(textureData, fragmentTextureCoordinates);
+	
+	if (lightingEnabled == 1) {			
+		for (int i = 0; i < LIGHTS_SCENE; ++i)	{
+			tempColor += calculateLights(pointLights[i]);
+		}
+
+		finalColor = tempColor;
+		if (finalColor.a < 0.5) {
+			discard;
+		}
+	}
+
+}

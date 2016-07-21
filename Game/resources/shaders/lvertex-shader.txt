@@ -1,0 +1,49 @@
+#version 150
+
+//The vertex shader receives the 3D position and the UV texture coordinates of the current vector
+//This version do not use the color attribute of the vertices because the color is defined at object level
+in vec3 vertexPosition;
+//in vec4 vertexColor;
+in vec2 vertexUV;
+in vec3 vertexNormal;
+
+//Vertex shader sends the object's color and the texture positions to the next stage. Rasterizer will automatically interpolate the value for the different fragments
+//out vec4 fragmentColor;
+out vec2 fragmentTextureCoordinates;
+out vec3 fragmentNormal;
+out vec3 fragmentPosition;
+
+out vec3 tangent;
+out vec3 bitangent;
+
+	//MVP matrices
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
+	//The color of the object
+uniform vec2 textureScaleFactor;
+		//normal model matrix
+uniform mat3 modelNormalMatrix;
+
+
+void main() {
+		//Move the vertex from the local coordinates to the projection coordinates thanks to the transformation matrices
+	gl_Position = projectionMatrix*viewMatrix*modelMatrix*vec4(vertexPosition, 1);
+
+		//Compute the color that has to be send to the next stage. In this case, the color remains equally
+	////fragmentColor=vec4(1.0f);	
+	
+		//Compute the texture data that has to be send to next stage
+			//OpenGL expects the 0.0 coordinate on the y-axis to be on the bottom side of the image, but images usually have 0.0 at the top of the y-axis
+			//Moreover, we multiple by a factor that manage if the texture has to be repeated or not
+	
+	fragmentTextureCoordinates = vec2(vertexUV.x,1.0-vertexUV.y)*textureScaleFactor;
+
+		//Adjust the normals
+		
+	fragmentNormal = modelNormalMatrix * vertexNormal;
+
+		//We need the fragment position in the worlds coordinates, this is why the current position only uses the model transformation matrix
+	fragmentPosition=vec3(modelMatrix * vec4(vertexPosition, 1.0f));
+}
+

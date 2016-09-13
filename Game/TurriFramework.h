@@ -16,6 +16,7 @@ private:
 	InputManager tInput;
 	FPSLimiter tFPS;
 	TurriState tGameState;
+
 public:
 	//static TurriFramework& getInstance();
 	TurriFramework();

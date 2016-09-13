@@ -23,7 +23,6 @@
 #include "Car.h"
 #include "Immovable.h"
 #include "Movable.h"
-#include "Terrain.h"
 #include "TextureManager.h"
 #include "ParticleSystem.h"
 #include "ButtonManager.h"
@@ -36,6 +35,7 @@
 using namespace std;
 // new includes
 #include "OpenGLManagement.h"
+#include "TurriFramework.h"
 
 //Game has four possible states: INIT (Preparing environment), PLAY (Playing), EXIT (Exit from the game) or MENU (Game menu)
 enum class GameState { INIT, PLAY, EXIT, MENU, EDITOR, WIN, LOSE, FINISH };
@@ -97,9 +97,9 @@ private:
 	std::vector <Light> lights;
 
 	ParticleSystem gPSystem;
-	Terrain gTerrain;
 	Immovable gFinish;
-	Terrain gSkyBox;
+	Immovable gSkyBox;
+	Immovable gTerrain;
 
 	OBJ* gOBJPerson;
 	OBJ* gOBJBarrel;
@@ -110,7 +110,7 @@ private:
 	OBJ* gOBJSkyBox;
 	OBJ* gOBJDrop;
 	OBJ* gOBJRectangle;
-
+	///////////////////////////
 	bool rotateCamera = false;
 	bool sunsetActivated = false;
 	bool startGame = false;
@@ -142,4 +142,5 @@ private:
 
 	// news 
 	OpenGLManagement tOpenGL;
+	TurriFramework tFramework;
 };

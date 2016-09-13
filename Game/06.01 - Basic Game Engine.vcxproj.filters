@@ -83,9 +83,6 @@
     <ClCompile Include="Movable.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -140,6 +137,9 @@
     <ClCompile Include="TurriFramework.cpp">
       <Filter>NewEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>NewEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -189,9 +189,6 @@
     </ClInclude>
     <ClInclude Include="Movable.h">
       <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Classes</Filter>
@@ -248,6 +245,9 @@
       <Filter>NewEngine</Filter>
     </ClInclude>
     <ClInclude Include="TurriFramework.h">
+      <Filter>NewEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
       <Filter>NewEngine</Filter>
     </ClInclude>
   </ItemGroup>

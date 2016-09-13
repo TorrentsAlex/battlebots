@@ -11,6 +11,77 @@ OpenGLManagement::OpenGLManagement() :
 OpenGLManagement::~OpenGLManagement() {
 }
 
+
+// INIT METHODS
+void OpenGLManagement::initializeShaders() {
+	//Compile the shaders
+	oGLBuffer.addShader(GL_VERTEX_SHADER, "./resources/shaders/lvertex-shader.txt");
+	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "./resources/shaders/lfragment-shader.txt");
+	oGLBuffer.compileShaders();
+	//Attributes must be added before linking the code
+	oGLBuffer.addAttribute("vertexPosition");
+	oGLBuffer.addAttribute("vertexUV");
+	oGLBuffer.addAttribute("vertexNormal");
+
+	//Link the compiled shaders
+	oGLBuffer.linkShaders();
+
+	// vertex shader
+	uniform_modelMatrix = oGLBuffer.getUniformLocation("modelMatrix");
+	uniform_modelNormalMatrix = oGLBuffer.getUniformLocation("modelNormalMatrix");
+
+	uniform_viewMatrix = oGLBuffer.getUniformLocation("viewMatrix");
+	uniform_projectionMatrix = oGLBuffer.getUniformLocation("projectionMatrix");
+
+	// fragment shader
+	uniform_viewerPosition = oGLBuffer.getUniformLocation("viewerPosition");
+
+	// Material vec3
+	uniform_ambient = oGLBuffer.getUniformLocation("material.ambient");
+	uniform_diffuse = oGLBuffer.getUniformLocation("material.diffuse");
+	uniform_specular = oGLBuffer.getUniformLocation("material.specular");
+	uniform_shininess = oGLBuffer.getUniformLocation("material.shininess");
+
+	uniform_textureScale = oGLBuffer.getUniformLocation("textureScaleFactor");
+
+	// Material bools 
+	uniform_hasNormalMap = oGLBuffer.getUniformLocation("hasNormalMap");
+	uniform_hasSpecularMap = oGLBuffer.getUniformLocation("hasSpecularMap");
+
+	// Materials map
+	oGLBuffer.activateTexture(GL_TEXTURE0);
+	uniform_textureMap = oGLBuffer.getUniformLocation("textureData");
+
+	oGLBuffer.activateTexture(GL_TEXTURE1);
+	uniform_specularMap = oGLBuffer.getUniformLocation("specularMap");
+
+	oGLBuffer.activateTexture(GL_TEXTURE2);
+	uniform_normalMap = oGLBuffer.getUniformLocation("normalMap");
+
+	// lights
+	uniform_lightEnabled = oGLBuffer.getUniformLocation("lightingEnabled");
+
+	for (int i = 0; i < LIGHTS_SCENE; i++) {
+		// set up the uniform light variables
+		uniform_lightAmbient[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].ambient");
+		uniform_lightDiffuse[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].diffuse");
+		uniform_lightSpecular[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].specular");
+		uniform_lightPosition[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].position");
+		uniform_lightDirection[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].direction");
+
+		uniform_lightLinear[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].linear");
+		uniform_lightConstant[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].constant");
+		uniform_lightQuadratic[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].quadratic");
+		uniform_lightPower[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].power");
+		uniform_lightCutoff[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].cutoff");
+
+		uniform_lightType[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].type");
+	}
+
+
+	oGLBuffer.initializeBuffers();
+}
+
 void OpenGLManagement::start() {
 	oGLBuffer.clearColor();
 	oGLBuffer.use();
@@ -135,75 +206,4 @@ void OpenGLManagement::sendObject(Entity entity) {
 	//TODO: Pass the matrix as an uniform 
 	//Send data to GPU
 	oGLBuffer.sendDataToGPU(&entity.getVertexData(), entity.getNumVertices());
-}
-
-
-// INIT METHODS
-void OpenGLManagement::initializeShaders() {
-	//Compile the shaders
-	oGLBuffer.addShader(GL_VERTEX_SHADER, "./resources/shaders/lvertex-shader.txt");
-	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "./resources/shaders/lfragment-shader.txt");
-	oGLBuffer.compileShaders();
-	//Attributes must be added before linking the code
-	oGLBuffer.addAttribute("vertexPosition");
-	oGLBuffer.addAttribute("vertexUV");
-	oGLBuffer.addAttribute("vertexNormal");
-
-	//Link the compiled shaders
-	oGLBuffer.linkShaders();
-
-	// vertex shader
-	uniform_modelMatrix = oGLBuffer.getUniformLocation("modelMatrix");
-	uniform_modelNormalMatrix = oGLBuffer.getUniformLocation("modelNormalMatrix");
-
-	uniform_viewMatrix = oGLBuffer.getUniformLocation("viewMatrix");
-	uniform_projectionMatrix = oGLBuffer.getUniformLocation("projectionMatrix");
-
-	// fragment shader
-	uniform_viewerPosition = oGLBuffer.getUniformLocation("viewerPosition");
-
-	// Material vec3
-	uniform_ambient = oGLBuffer.getUniformLocation("material.ambient");
-	uniform_diffuse = oGLBuffer.getUniformLocation("material.diffuse");
-	uniform_specular = oGLBuffer.getUniformLocation("material.specular");
-	uniform_shininess = oGLBuffer.getUniformLocation("material.shininess");
-	
-	uniform_textureScale = oGLBuffer.getUniformLocation("textureScaleFactor");
-
-	// Material bools 
-	uniform_hasNormalMap = oGLBuffer.getUniformLocation("hasNormalMap");
-	uniform_hasSpecularMap = oGLBuffer.getUniformLocation("hasSpecularMap");
-
-	// Materials map
-	oGLBuffer.activateTexture(GL_TEXTURE0);
-	uniform_textureMap = oGLBuffer.getUniformLocation("textureData");
-	
-	oGLBuffer.activateTexture(GL_TEXTURE1);
-	uniform_specularMap = oGLBuffer.getUniformLocation("specularMap");
-
-	oGLBuffer.activateTexture(GL_TEXTURE2);
-	uniform_normalMap = oGLBuffer.getUniformLocation("normalMap");
-
-	// lights
-	uniform_lightEnabled = oGLBuffer.getUniformLocation("lightingEnabled");
-
-	for (int i = 0; i < LIGHTS_SCENE; i++) {
-		// set up the uniform light variables
-		uniform_lightAmbient[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].ambient");
-		uniform_lightDiffuse[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].diffuse");
-		uniform_lightSpecular[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].specular");
-		uniform_lightPosition[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].position");
-		uniform_lightDirection[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].direction");
-
-		uniform_lightLinear[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].linear");
-		uniform_lightConstant[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].constant");
-		uniform_lightQuadratic[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].quadratic");
-		uniform_lightPower[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].power");
-		uniform_lightCutoff[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].cutoff");
-
-		uniform_lightType[i] = oGLBuffer.getUniformLocation("pointLights[" + std::to_string(i) + "].type");
-	}
-
-
-	oGLBuffer.initializeBuffers();
 }

@@ -2,7 +2,7 @@
 
 int main(int argc, char ** argv) {
 
-	Game game("ENTI Rally", 1280,  800,true,60,false);
+	Game game("BattleBots", 1280,  800,true,60,false);
 	try {
 		game.start();
 	}

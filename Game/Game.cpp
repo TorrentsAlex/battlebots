@@ -153,15 +153,14 @@ void Game::load3DObjects() {
 	gFinish.setSquareBoundingBox();
 	
 	// Sky 
-	gOBJSkyBox = Geometry::LoadModelFromFile("./resources/skybox.obj", glm::vec3(255, 250, 5));
 	GameObject skyObject;
-	skyObject._translate = glm::vec3(-20, -20, -1);
+	skyObject._translate = glm::vec3(0, 0, 0);
 	skyObject._rotation = glm::vec3(0, 0, 1);
 	skyObject._angle = 5;
-	skyObject._scale = glm::vec3(3, 3, 3);
+	skyObject._scale = glm::vec3(1, 1, 1);
 	skyObject._textureRepetition = false;
 	gSkyBox.setGameObject(skyObject);
-	gSkyBox.setOBJ(gOBJSkyBox);
+	gSkyBox.setOBJ(Geometry::LoadModelFromFile("./resources/skybox2.obj", glm::vec3(255, 250, 5)));
 
 	// Rain
 	gOBJDrop = Geometry::LoadModelFromFile("./resources/droptriangle.obj", glm::vec3(255, 250, 5));
@@ -182,7 +181,7 @@ void Game::loadGameObjects() {
 	GLuint rockTexture = tManager.getTextureID("./resources/images/lantern.png");
 	GLuint finishTexture = tManager.getTextureID("./resources/images/finish.png");
 	GLuint terrainTexture = tManager.getTextureID("./resources/images/terrain_green.png");
-	GLuint skyTexture = tManager.getTextureID("./resources/images/sky.png");
+	GLuint skyTexture = tManager.getTextureID("./resources/images/blue_light.png");
 	GLuint zombieTexture = tManager.getTextureID("./resources/images/zombie.png");
 	GLuint dropTexture = tManager.getTextureID("./resources/images/water_drops.png");
 	GLuint barrelTexture = tManager.getTextureID("./resources/images/barrel.png");
@@ -604,6 +603,7 @@ void Game::doPhysics() {
 * Draw the sprites on the screen
 */
 void Game::renderGame() {
+
 	tOpenGL.start();
 	tOpenGL.sceneWithLights(true);
 	tOpenGL.sendLight(lights);

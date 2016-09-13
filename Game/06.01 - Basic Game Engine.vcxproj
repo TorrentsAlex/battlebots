@@ -183,10 +183,10 @@
     <ClCompile Include="OpenGLManagement.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Immovable.cpp" />
     <ClCompile Include="SpotLight.cpp" />
-    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TurriFramework.cpp" />
@@ -220,10 +220,10 @@
     <ClInclude Include="OpenGLManagement.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PointLight.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Immovable.h" />
     <ClInclude Include="SpotLight.h" />
-    <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TurriFramework.h" />

@@ -1,77 +1,78 @@
-{
-	"Sky" : {
-		"Texture" : "./resources/images/blue_light.png"
-	},
-	"Terrain": {
-		"Object": "./resources/objects/terrain3.obj",
-		"Texture": "./resources/images/terrain_green.png",
-		"TextureRepetition": true,
-		"TextureTilX": 80,
-		"TextureTilY": 80,
-	},
-	"Lights": {
+"firstScene":{  
+   "Sky":{  
+      "Texture":"./resources/images/blue_light.png"
+   },
+   "Terrain":{  
+      "Object":"./resources/objects/terrain3.obj",
+      "Texture":"./resources/images/terrain_green.png",
+      "TextureRepetition":true,
+      "TextureTilX":80,
+      "TextureTilY":80
+   },
+   "Lights":{  
 
-	},
-	"Decoration":[
-		{
-			"Object1": {
-				"Name": "Trees",
-				"Object": "./resources/tree_texturized.obj",
-				"Texture": "./resources/images/tree_texturea.png",
-				"Position": [
-					{
-						"x" : 12,
-						"y" : 29,
-						"z" : 0,
-						"rotation" : 10,
-						"angle": "z"
-					},
-					{
-						"x" : 43,
-						"y" : 18,
-						"z" : 0,
-						"rotation" : 250,
-						"angle": "z"
-					},
-					{
-						"x" : 37,
-						"y" : 9,
-						"z" : 0,
-						"rotation" : 90,
-						"angle": "z"
-					}
-				]
-			}
-		},
-		{	
-			"Object2":{	
-				"Name": "Lantern",
-				"Object": "./resources/lantern.obj",
-				"Texture": "./resources/images/lantern.png",
-				"Position": [
-					{
-						"x" : 3,
-						"y" : 15,
-						"z" : 0,
-						"rotation" : 10,
-						"angle": "z"
-					},
-					{
-						"x" : 5,
-						"y" : 20,
-						"z" : 0,
-						"rotation" : 250,
-						"angle": "z"
-					},
-					{
-						"x" : 24,
-						"y" : 25,
-						"z" : 0,
-						"rotation" : 90,
-						"angle": "z"
-					}
-				]
-			}
-		}
-	]
+   },
+   "Decoration":[  
+      {  
+         "Object1":{  
+            "Name":"Trees",
+            "Object":"./resources/tree_texturized.obj",
+            "Texture":"./resources/images/tree_texturea.png",
+            "Position":[  
+               {  
+                  "x":12,
+                  "y":29,
+                  "z":0,
+                  "rotation":10,
+                  "angle":"z"
+               },
+               {  
+                  "x":43,
+                  "y":18,
+                  "z":0,
+                  "rotation":250,
+                  "angle":"z"
+               },
+               {  
+                  "x":37,
+                  "y":9,
+                  "z":0,
+                  "rotation":90,
+                  "angle":"z"
+               }
+            ]
+         }
+      },
+      {  
+         "Object2":{  
+            "Name":"Lantern",
+            "Object":"./resources/lantern.obj",
+            "Texture":"./resources/images/lantern.png",
+            "Position":[  
+               {  
+                  "x":3,
+                  "y":15,
+                  "z":0,
+                  "rotation":10,
+                  "angle":"z"
+               },
+               {  
+                  "x":5,
+                  "y":20,
+                  "z":0,
+                  "rotation":250,
+                  "angle":"z"
+               },
+               {  
+                  "x":24,
+                  "y":25,
+                  "z":0,
+                  "rotation":90,
+                  "angle":"z"
+               }
+            ]
+         }
+      }
+   ]
 }
+

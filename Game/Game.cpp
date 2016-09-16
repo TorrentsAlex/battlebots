@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 /**
 * Constructor
 * Note: It uses an initialization list to set the parameters
@@ -14,7 +13,6 @@ Game::Game(std::string windowTitle, int screenWidth, int screenHeight, bool enab
 	_screenHeight(screenHeight),
 	_gameState(GameState::INIT),
 	_fpsLimiter(enableLimiterFPS, maxFPS, printFPS),
-	editor(),
 	gCar(),
 	tManager(),
 	textureMode(1),
@@ -65,9 +63,6 @@ void Game::start() {
 		case GameState::LOSE:
 			lose();
 			break;
-		case GameState::EDITOR:
-			runEditor();
-			break;
 		}
 	}
 }
@@ -115,23 +110,23 @@ void Game::load3DObjects() {
 	gOBJBarrel = Geometry::LoadModelFromFile("./resources/barrel.obj", glm::vec3(0, 200, 0));
 
 	gCar.setGameObject(gameObject);
-	gCar.setOBJ(Geometry::LoadModelFromFile("./resources/bmw.obj", glm::vec3(125, 125, 125)));
+	gCar.setOBJ(Geometry::LoadModelFromFile("./resources/objects/car.obj", glm::vec3(125, 125, 125)));
 
 	cout << "Car loaded" << endl;
 	// Load the trees, object and the scene
 	gOBJRock = Geometry::LoadModelFromFile("./resources/lantern.obj", glm::vec3(0, 100, 200));
 	cout << "rock loaded" << endl;
 
-	gOBJTerrain = Geometry::LoadModelFromFile("./resources/terrain3.obj", glm::vec3(7, 100, 35));
+	gOBJTerrain = Geometry::LoadModelFromFile("./resources/objects/terrain.obj", glm::vec3(7, 100, 35));
 	cout << "Terrain loaded" << endl;
 	gOBJPerson = Geometry::LoadModelFromFile("./resources/zombie.obj", glm::vec3(200, 0, 37));
 	cout << "zombie loaded" << endl;
 
 	GameObject terrainObject;
-	terrainObject._translate = glm::vec3(-20, -20, 0);
-	terrainObject._rotation = glm::vec3(0, 0, 1);
-	terrainObject._angle = 5;
-	terrainObject._scale = glm::vec3(3, 3, 3);
+	terrainObject._translate = glm::vec3(0, 0, 0);
+	terrainObject._rotation = glm::vec3(0, 0, 0);
+	terrainObject._angle = 0;
+	terrainObject._scale = glm::vec3(1, 1, 1);
 	terrainObject._textureRepetition = true;
 	terrainObject.xTil = 80;
 	terrainObject.yTil = 80;
@@ -155,9 +150,9 @@ void Game::load3DObjects() {
 	// Sky 
 	GameObject skyObject;
 	skyObject._translate = glm::vec3(0, 0, 0);
-	skyObject._rotation = glm::vec3(0, 0, 1);
-	skyObject._angle = 5;
-	skyObject._scale = glm::vec3(1, 1, 1);
+	skyObject._rotation = glm::vec3(0, 0, 0);
+	skyObject._angle = 0;
+	skyObject._scale = glm::vec3(4, 4, 4);
 	skyObject._textureRepetition = false;
 	gSkyBox.setGameObject(skyObject);
 	gSkyBox.setOBJ(Geometry::LoadModelFromFile("./resources/skybox2.obj", glm::vec3(255, 250, 5)));
@@ -353,14 +348,6 @@ void Game::executePlayerCommands() {
 	}
 	switch (_gameState) {
 	case GameState::MENU:
-		if (_inputManager.isKeyPressed(SDLK_e)) {
-			_gameState = GameState::EDITOR;
-			camera->setEditorCamera();
-			camera->setViewMatrix();	
-			loadGameObjects();
-
-			cout << "run editor" << endl;
-		}
 		if (_inputManager.isKeyPressed(SDLK_p)) {
 			_gameState = GameState::PLAY;
 			gCar.restartPosition();
@@ -368,24 +355,6 @@ void Game::executePlayerCommands() {
 			gPSystem.startRain();
 
 			cout << "play" << endl;
-		}
-		break;
-	case GameState::EDITOR:
-		editor.playerCommands(_inputManager);
-		if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-			glm::vec2 mouseCoords = _inputManager.getMouseCoords();
-			mouseCoords.x /= 7.0f;
-			mouseCoords.y /= 7.0f;
-			editor.newCoord(glm::vec2(mouseCoords.x, mouseCoords.y));
-		}
-		if (_inputManager.isKeyPressed(SDLK_RETURN)) {
-
-			editor.saveCurrentObjects();
-		}
-
-		if (_inputManager.isKeyPressed(SDLK_p)) {
-			_gameState = GameState::PLAY;
-			loadGameObjects();
 		}
 		break;
 	case GameState::PLAY:
@@ -489,7 +458,7 @@ void Game::update() {
 				gCar.restartPosition();
 			}
 			// Update the camera 
-			glm::vec3 forwardCar = gCar.getForwardVector();
+			/*glm::vec3 forwardCar = gCar.getForwardVector();
 			forwardCar *= -1; // get the back vector
 			glm::vec3 pos = gCar.getGameObject()._translate;
 			camera->setCameraFront(pos); // where the camera points
@@ -498,7 +467,7 @@ void Game::update() {
 			pos.y += forwardCar.y * camera->getArmLenght();
 			if (!rotateCamera) {
 				camera->setCameraPosition(pos);
-			}
+			}*/
 			
 			// set the center of storm and update
 			gPSystem.updateCenterOfRain(gCar.getPosition());
@@ -515,7 +484,7 @@ void Game::doPhysics() {
 	case GameState::MENU:
 		break;
 	case GameState::PLAY:;
-		
+		return;
 		for (int i = 0; i < gListOfPerson.size(); i++) {
 			// Detect collision with others enemies
 			for (int j = 0; j < gListOfPerson.size(); j++) {

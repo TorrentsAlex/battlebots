@@ -19,7 +19,6 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "CollisionDetector.h"
-#include "Editor.h"
 #include "Car.h"
 #include "Immovable.h"
 #include "Movable.h"
@@ -38,7 +37,7 @@ using namespace std;
 #include "TurriFramework.h"
 
 //Game has four possible states: INIT (Preparing environment), PLAY (Playing), EXIT (Exit from the game) or MENU (Game menu)
-enum class GameState { INIT, PLAY, EXIT, MENU, EDITOR, WIN, LOSE, FINISH };
+enum class GameState { INIT, PLAY, EXIT, MENU, WIN, LOSE, FINISH };
 enum class KeyPressed { NONE, UP, DOWN, RIGHT, LEFT };
 enum class DrawMode {FILL, LINE};
 
@@ -59,7 +58,6 @@ private:
 	int _screenHeight;				//Screen height in pixels				
 	GameState _gameState;			//It describes the game state				
 	Window _window;					//Manage the OpenGL context
-	Editor editor;
 	FPSLimiter _fpsLimiter;			//Manage the synchronization between frame rate and refresh rate
 	InputManager _inputManager;		//Manage the input devices		
 	ButtonManager bManager;

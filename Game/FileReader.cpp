@@ -7,6 +7,24 @@ FileReader::FileReader() {
 FileReader::~FileReader() {
 }
 
+
+string FileReader::LoadStringFromFile(string fileName) {
+	string fileString;
+	string line;
+	ifstream myFile(fileName);
+	
+	if (myFile.is_open()) {
+		while (getline(myFile, line)) {
+
+			fileString += line;
+		}
+		myFile.close();
+	} else {
+		cout << "Unable to open file!" << fileName << endl;
+	}
+	return fileString;
+}
+
 vector<vector<float>> FileReader::LoadArrayFromFile(string fileName) {
 	string line;
 

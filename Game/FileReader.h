@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+
 #include <vector>
 #include <sstream>
 #include "OBJ.h"
@@ -25,6 +26,7 @@ public:
 
 	static void SaveArrayToFile(vector<vector<float>> vector, std::string fileName);
 
-	static bool CheckExistFile(std::string fileName);
+	static bool CheckExistFile(string fileName);
 
+	static string LoadStringFromFile(string fileName);
 };

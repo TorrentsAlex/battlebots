@@ -1,7 +1,11 @@
+#include <Windows.h>
+
 #include "Game.h"
 
 int main(int argc, char ** argv) {
-
+	// Hide the command line
+	//ShowWindow(GetConsoleWindow(), SW_HIDE);
+	
 	Game game("BattleBots", 1280,  800,true,60,false);
 	try {
 		game.start();

@@ -183,6 +183,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneCreator.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Immovable.cpp" />
     <ClCompile Include="SpotLight.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneCreator.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Immovable.h" />
     <ClInclude Include="SpotLight.h" />

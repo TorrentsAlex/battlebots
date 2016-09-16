@@ -3,13 +3,13 @@
 Camera::Camera(): 
 	cAspectRatio(1), 
 	cFOV(45.0f), 
-	cFar(400.0f), 
-	cNear(0.1f), 
-	cProjectionWidth(5.0f), 
-	cProjectionHeight(5.0f),
-	cCameraUp(0.0f,0.0f,0.1f),
-	armLenght(5.f),
-	cCameraPosPersp(0.01f, -armLenght, 1.5f),
+	cFar(4000.0f), 
+	cNear(0.05f), 
+	cProjectionWidth(15.0f), 
+	cProjectionHeight(15.0f),
+	cCameraUp(0.0f,0.0f,0.0f),
+	armLenght(150.f),
+	cCameraPosPersp(0.0f, -armLenght, 150.5f),
 	cCameraPosOrtho(0.01f, 0.0f, 80.0f), 
 	cCameraPosEditor(0.01f, 0.0f, 400.0f) {
 }
@@ -54,6 +54,7 @@ void Camera::setOrthoCamera() {
 
 	cCameraMode = CameraMode::ORTHOGRAPHIC;
 }
+
 void Camera::setEditorCamera() {
 	cProjectionMatrix = glm::ortho(-cProjectionWidth / 2, cProjectionWidth / 2, -cProjectionHeight / 2, cProjectionHeight / 2, cNear, cFar);
 	cCameraPos = cCameraPosEditor;
@@ -61,7 +62,6 @@ void Camera::setEditorCamera() {
 
 	cCameraMode = CameraMode::EDITOR;
 }
-
 
 void Camera::setViewMatrix() {
 	glm::vec3 cameraDirection = glm::normalize(cCameraPos - cCameraFront);

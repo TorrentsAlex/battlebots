@@ -14,6 +14,5 @@ void SceneCreator::createScene(string file) {
 
 	string jsonString = FileReader::LoadStringFromFile(file);
 	json myjson(jsonString); //;= json::parse(jsonString);
-	cout << myjson["firstScene"] << endl;
-
+	//cout << myjson["firstScene"] << endl;
 }

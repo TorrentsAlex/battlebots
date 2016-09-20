@@ -199,7 +199,6 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="CollisionDetector.h" />
-    <ClInclude Include="Cube.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ErrorManagement.h" />

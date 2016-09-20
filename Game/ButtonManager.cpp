@@ -14,7 +14,7 @@ void ButtonManager::initButtons() {
 	color.g = (Uint8)0;
 	color.b = (Uint8)0;
 	color.a = (Uint8)255;
-	button.setTextureId(textManager.getTextureID("Eloi Salles y Alex Torrents", color));
+	button.setTextureId(textManager.getTextureID("Alex Torrents", color));
 	play.setTextureId(textManager.getTextureID("P: Play", color));
 	editor.setTextureId(textManager.getTextureID("E: Editor", color));
 

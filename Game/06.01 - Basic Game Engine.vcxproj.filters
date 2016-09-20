@@ -150,9 +150,6 @@
     <ClCompile Include="FPSLimiter.cpp">
       <Filter>Engine\Systems\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Ex06.01-Main.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -164,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="jsoncpp.cpp">
       <Filter>Engine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

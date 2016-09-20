@@ -3,13 +3,14 @@
 #include <iostream>
 
 #include "FileReader.h"
-#include "json.hpp"
+#include "json/json.h"
 
 using namespace std;
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 class SceneCreator {
 private:
+	Json::Value root;
 public:
 	SceneCreator();
 	~SceneCreator();

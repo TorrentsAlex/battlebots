@@ -171,6 +171,7 @@
     <ClCompile Include="Ex06.01-Main.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Movable.cpp" />
@@ -205,6 +206,8 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="json\json-forwards.h" />
+    <ClInclude Include="json\json.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Movable.h" />

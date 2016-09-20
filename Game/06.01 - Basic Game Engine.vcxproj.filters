@@ -47,6 +47,9 @@
     <Filter Include="Engine\Systems\Window">
       <UniqueIdentifier>{857cc730-403f-4e5b-9744-d2b3f80e0795}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Modes">
+      <UniqueIdentifier>{d16d3a56-205e-49cc-aeb6-0ad0b531185f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -79,9 +82,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
     <ClCompile Include="SceneCreator.cpp">
@@ -159,6 +159,12 @@
     <ClCompile Include="MaterialManager.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Engine\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -177,9 +183,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Engine\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
     <ClInclude Include="SceneCreator.h">
@@ -268,6 +271,15 @@
     </ClInclude>
     <ClInclude Include="MaterialManager.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json-forwards.h">
+      <Filter>Engine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>Engine\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

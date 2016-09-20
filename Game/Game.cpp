@@ -209,7 +209,7 @@ void Game::loadGameObjects() {
 	// Trees
 	for (GameObject tGObject : treeObjects) {
 		tGObject._textureRepetition = false;
-		//tGObject._scale *= 2.0f;
+		tGObject._scale *= 20.0f;
 		Immovable tree(gOBJTree, tGObject);
 		tree.setTextureId(treeTexture);
 		tree.setMaterial(gMaterialManager.getMaterialComponents(TERRAIN));
@@ -228,7 +228,7 @@ void Game::loadGameObjects() {
 	// Rocks
 	for (GameObject tGObject : rockObjects) {
 		tGObject._textureRepetition = false;
-		tGObject._scale *= 2.0f;
+		tGObject._scale *= 20.0f;
 		Immovable rock(gOBJRock, tGObject);
 		rock.setTextureId(rockTexture);
 		rock.setMaterial(gMaterialManager.getMaterialComponents(METAL));

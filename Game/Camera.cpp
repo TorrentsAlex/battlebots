@@ -3,12 +3,12 @@
 Camera::Camera(): 
 	cAspectRatio(1), 
 	cFOV(45.0f), 
-	cFar(4000.0f), 
-	cNear(0.05f), 
+	cFar(8000.0f), 
+	cNear(1.5f), 
 	cProjectionWidth(15.0f), 
 	cProjectionHeight(15.0f),
 	cCameraUp(0.0f,0.0f,0.0f),
-	armLenght(150.f),
+	armLenght(125.f),
 	cCameraPosPersp(0.0f, -armLenght, 150.5f),
 	cCameraPosOrtho(0.01f, 0.0f, 80.0f), 
 	cCameraPosEditor(0.01f, 0.0f, 400.0f) {

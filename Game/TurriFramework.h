@@ -17,12 +17,19 @@ private:
 	FPSLimiter tFPS;
 	TurriState tGameState;
 
-public:
-	//static TurriFramework& getInstance();
 	TurriFramework();
 
-	TurriFramework(std::string name, int width, int height);
+public:
+
+	static TurriFramework& Instance() {
+		static TurriFramework instance;
+		return instance;
+	}
+	TurriFramework(TurriFramework const&) = delete;
+	void operator=(TurriFramework const&) = delete;
 	~TurriFramework();
+	
+	
 	void startLoop();
 	void endLoop();
 

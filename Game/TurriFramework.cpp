@@ -3,11 +3,23 @@
 
 
 TurriFramework::TurriFramework() :
+	tWindow(),
+	tOpenGL(),
+	tCamera(),
 	tFPS(false, 60, true) {
+	tWindow.create("Turri Engine", 800, 800, 0);
 
+	tOpenGL.initializeShaders();
+
+	tCamera.initializeZBuffer(tWindow.getWindowResolution());
+	tCamera.setPerspectiveCamera();
+	tCamera.setViewMatrix();
+	tCamera.setCameraPosition(glm::vec3(0.0));
+
+	tGameState = TurriState::GAME;
 }
 
-
+/*
 TurriFramework::TurriFramework(std::string name, int width, int height) :
 	tWindow(),
 	tOpenGL(),
@@ -25,7 +37,7 @@ TurriFramework::TurriFramework(std::string name, int width, int height) :
 	
 	tGameState = TurriState::GAME;
 }
-
+*/
 TurriFramework::~TurriFramework() {
 }
 /*

@@ -140,5 +140,5 @@ private:
 
 	// news 
 	OpenGLManagement tOpenGL;
-	TurriFramework tFramework;
+	//TurriFramework tFramework;
 };

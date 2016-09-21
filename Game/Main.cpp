@@ -9,7 +9,7 @@ int main(int argc, char ** argv) {
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 	SceneCreator sceneCr;
 
-	//sceneCr.createScene("./resources/Scenes/Scene2.json");
+	sceneCr.createScene("./resources/Scenes/Scene1.json");
 
 	Game game("BattleBots", 1280,  800,true,60,false);
 	try {

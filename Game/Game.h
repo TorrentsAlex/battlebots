@@ -23,7 +23,6 @@
 #include "Immovable.h"
 #include "Movable.h"
 #include "TextureManager.h"
-#include "ParticleSystem.h"
 #include "ButtonManager.h"
 #include "MaterialManager.h"
 #include <glm/gtx/rotate_vector.hpp>
@@ -51,6 +50,8 @@ public:
 	void load3DObjects();
 	void loadGameObjects();
 
+
+	
 private:
 	//Attributes	
 	std::string _windowTitle;		//Window Titale
@@ -91,11 +92,8 @@ private:
 	PointLight gRightFlashLight;
 	PointLight gLeftFlashLight;
 
-
 	std::vector <Light> lights;
 
-	ParticleSystem gPSystem;
-	Immovable gFinish;
 	Immovable gSkyBox;
 	Immovable gTerrain;
 
@@ -109,34 +107,19 @@ private:
 	OBJ* gOBJDrop;
 	OBJ* gOBJRectangle;
 	///////////////////////////
-	bool rotateCamera = false;
-	bool sunsetActivated = false;
 	bool startGame = false;
-	bool painted;
-	// timing
-	std::clock_t c_start;
-	std::clock_t c_end;
-
 	glm::ivec2 mousePosition;
-	bool clicked;
 	//Internal methods
 	void initSystems();
-	void initShaders();
-	void gameLoop();
 	void processInput();
 	void doPhysics();
 	void update();
 	void executePlayerCommands();
 	void renderGame();
-	void renderMenu();
 
-
-	void menu();
 	void run();
-	void win();
-	void lose();
-	void runEditor();
 
+	bool isRunning();
 
 	// news 
 	OpenGLManagement tOpenGL;

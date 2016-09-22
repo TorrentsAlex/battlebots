@@ -16,7 +16,6 @@ Game::Game(std::string windowTitle, int screenWidth, int screenHeight, bool enab
 	gCar(),
 	tManager(),
 	textureMode(1),
-	gPSystem(),
 	bManager(),
 	gMaterialManager(),
 	gDirectionalLight(),
@@ -51,37 +50,11 @@ void Game::start() {
 			cout << "e : editor" << endl;
 			break;
 		case GameState::MENU:
-			//gCar.restartPosition();
-			menu();
-			break;
 		case GameState::PLAY:
 			run();
 			break;
-		case GameState::WIN:
-			win();
-			break;
-		case GameState::LOSE:
-			lose();
-			break;
 		}
 	}
-}
-
-void Game::menu() {
-	processInput();
-	
-	executePlayerCommands();
-	update();
-	renderMenu();
-}
-
-void Game::win() {
-}
-void Game::lose() {}
-
-void Game::runEditor() {
-	processInput();
-	executePlayerCommands();
 }
 
 /*
@@ -90,7 +63,22 @@ void Game::runEditor() {
 void Game::run() {
 
 	//Start the game if all the elements are ready
-	gameLoop();
+	while (_gameState != GameState::EXIT) {
+		//Start synchronization between refresh rate and frame rate
+		_fpsLimiter.startSynchronization();
+		//Process the input information (keyboard and mouse)
+		processInput();
+		//Execute the player actions (keyboard and mouse)
+		executePlayerCommands();
+		// update the scene
+		update();
+		//Update the game status
+		doPhysics();
+		//Draw the objects on the screen
+		renderGame();
+		//Force synchronization
+		_fpsLimiter.forceSynchronization();
+	}
 
 	_gameState = GameState::EXIT;
 }
@@ -132,20 +120,6 @@ void Game::load3DObjects() {
 	terrainObject.yTil = 80;
 	gTerrain.setGameObject(terrainObject);
 	gTerrain.setOBJ(gOBJTerrain);
-
-	// Loading the finish object
-	gOBJFinish = Geometry::LoadModelFromFile("./resources/finish.obj", glm::vec3(255, 250, 5));
-	cout << "Finish loaded" << endl;
-	GameObject finishObject;
-	finishObject._translate = glm::vec3(25, 65, 0);
-	finishObject._rotation = glm::vec3(0, 0, 0);
-	finishObject._angle = 0;
-	finishObject._scale = glm::vec3(1, 1, 1);
-	finishObject._textureRepetition = false;
-	gFinish.setGameObject(finishObject);
-	gFinish.setOBJ(gOBJFinish);
-	// set the square bounding box
-	gFinish.setSquareBoundingBox();
 	
 	// Sky 
 	GameObject skyObject;
@@ -156,11 +130,6 @@ void Game::load3DObjects() {
 	skyObject._textureRepetition = false;
 	gSkyBox.setGameObject(skyObject);
 	gSkyBox.setOBJ(Geometry::LoadModelFromFile("./resources/skybox2.obj", glm::vec3(255, 250, 5)));
-
-	// Rain
-	gOBJDrop = Geometry::LoadModelFromFile("./resources/droptriangle.obj", glm::vec3(255, 250, 5));
-	gPSystem.setOBJ(gOBJDrop);
-	gPSystem.initParticleSystem(gCar.getPosition());
 	
 	// OBject for text  
 	gOBJRectangle = Geometry::LoadModelFromFile("./resources/rectangle.obj", glm::vec3(255,255,255));
@@ -174,11 +143,9 @@ void Game::loadGameObjects() {
 	GLuint carTexture = tManager.getTextureID("./resources/images/car.png");
 	GLuint treeTexture = tManager.getTextureID("./resources/images/tree_texturea.png");
 	GLuint rockTexture = tManager.getTextureID("./resources/images/lantern.png");
-	GLuint finishTexture = tManager.getTextureID("./resources/images/finish.png");
 	GLuint terrainTexture = tManager.getTextureID("./resources/images/terrain_green.png");
 	GLuint skyTexture = tManager.getTextureID("./resources/images/blue_light.png");
 	GLuint zombieTexture = tManager.getTextureID("./resources/images/zombie.png");
-	GLuint dropTexture = tManager.getTextureID("./resources/images/water_drops.png");
 	GLuint barrelTexture = tManager.getTextureID("./resources/images/barrel.png");
 
 	// Specular maps
@@ -187,21 +154,18 @@ void Game::loadGameObjects() {
 	// normal map
 	barrelNormal = tManager.getTextureID("./resources/images/barrelNormal.png");
 
-	// Sett texttures id's
+	// Set texttures id's
 	gCar.setTextureId(carTexture);
-	gFinish.setTextureId(finishTexture);
 	gTerrain.setTextureId(terrainTexture);
 	gSkyBox.setTextureId(skyTexture);
-	gPSystem.setTextureId(dropTexture);
 
 	// Setting materials;
 	gCar.setMaterial(gMaterialManager.getMaterialComponents(METAL));
-	gFinish.setMaterial(gMaterialManager.getMaterialComponents(METAL));
 	gTerrain.setMaterial(gMaterialManager.getMaterialComponents(TERRAIN));
 
 	// Load Scenes
 	vector<GameObject> rockObjects, personObjects, treeObjects, barrelObjects;
-	rockObjects = Geometry::LoadGameElements("./resources/Scenes/rockScene.txt");
+	rockObjects = Geometry::LoadGameElements("./resources/Scenes/lanterns_position.txt");
 	treeObjects = Geometry::LoadGameElements("./resources/Scenes/treeScene.txt");
 	barrelObjects = Geometry::LoadGameElements("./resources/Scenes/barrelScene.txt");
 	personObjects = Geometry::LoadGameElements("./resources/Scenes/zombieScene.txt");
@@ -219,6 +183,8 @@ void Game::loadGameObjects() {
 	for (GameObject tGObject : barrelObjects) {
 		tGObject._textureRepetition = false;
 		tGObject._scale *= 2.0f;
+		tGObject._translate.x *= 10.0f;
+		tGObject._translate.y *= 10.0f;
 		Immovable barrel(gOBJBarrel, tGObject);
 		barrel.setTextureId(barrelTexture);
 		barrel.setMaterial(gMaterialManager.getMaterialComponents(METAL));
@@ -229,18 +195,12 @@ void Game::loadGameObjects() {
 	for (GameObject tGObject : rockObjects) {
 		tGObject._textureRepetition = false;
 		tGObject._scale *= 20.0f;
+		tGObject._translate.x *= 10.0f;
+		tGObject._translate.y *= 10.0f;
 		Immovable rock(gOBJRock, tGObject);
 		rock.setTextureId(rockTexture);
 		rock.setMaterial(gMaterialManager.getMaterialComponents(METAL));
 		gListOfRocks.push_back(rock);
-	}
-	// Persons
-	for (GameObject pGObject : personObjects) {
-		pGObject._textureRepetition = false;
-		Movable person(gOBJPerson, pGObject);
-		person.setTextureId(zombieTexture);
-		person.setMaterial(gMaterialManager.getMaterialComponents(TERRAIN));
-		gListOfPerson.push_back(person);
 	}
 
 	//gSunLight.setType(LIGHT_DIRECTIONAL);
@@ -270,35 +230,6 @@ void Game::initSystems() {
 	camera->setViewMatrix();
 }
 
-/*
-* Initialize the shaders:
-* Compiles, sets the variables between C++ and the Shader program and links the shader program
-*/
-void Game::initShaders() {
-	
-}
-
-/*
-* Game execution: Gets input events, processes game logic and draws sprites on the screen
-*/
-void Game::gameLoop() {
-	while (_gameState != GameState::EXIT) {
-		//Start synchronization between refresh rate and frame rate
-		_fpsLimiter.startSynchronization();
-		//Process the input information (keyboard and mouse)
-		processInput();
-		//Execute the player actions (keyboard and mouse)
-		executePlayerCommands();
-		// update the scene
-		update();
-		//Update the game status
-		doPhysics();
-		//Draw the objects on the screen
-		renderGame();
-		//Force synchronization
-		_fpsLimiter.forceSynchronization();
-	}
-}
 
 /*
 * Processes input with SDL
@@ -340,19 +271,12 @@ void Game::processInput() {
 * Executes the actions sent by the user by means of the keyboard and mouse
 */
 void Game::executePlayerCommands() {
-	if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
-		glm::vec2 mouseCoords = _inputManager.getMouseCoords();
-		mousePosition = glm::vec2(mouseCoords.x, mouseCoords.y);
-		clicked = true;
 
-	}
 	switch (_gameState) {
 	case GameState::MENU:
 		if (_inputManager.isKeyPressed(SDLK_p)) {
 			_gameState = GameState::PLAY;
 			gCar.restartPosition();
-			// Start the miracle of rain
-			gPSystem.startRain();
 
 			cout << "play" << endl;
 		}
@@ -392,22 +316,6 @@ void Game::executePlayerCommands() {
 			cout << "x:" << position.x << "  y: " << position.y << endl;
 		}
 
-		// Wind 
-		if (_inputManager.isKeyPressed(SDLK_q)) {
-			sunsetActivated = sunsetActivated ? false : true;
-			if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-				gPSystem.moreXWind();
-			} else if (_inputManager.isKeyDown(SDL_BUTTON_RIGHT)) {
-				gPSystem.lessXWind();
-			}
-		}
-		if (_inputManager.isKeyDown(SDLK_e)) {
-			if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-				gPSystem.moreYWind();
-			} else if (_inputManager.isKeyDown(SDL_BUTTON_RIGHT)) {
-				gPSystem.lessYWind();
-			}
-		}
 		// Draw Mode
 		if (_inputManager.isKeyPressed(SDLK_l)) {
 			drawMode = drawMode == DrawMode::FILL ? DrawMode::LINE : DrawMode::FILL;
@@ -446,32 +354,6 @@ void Game::update() {
 			newPost.x -= 60;
 			newPost.y -= 60;
 			gSkyBox.setPosition(newPost);
-
-			// Lose
-			if (gCar.getLife() <= 0) {
-				c_end = std::clock();
-				float totalTime = 1000.0 * (c_end * c_start) / CLOCKS_PER_SEC;
-				cout << "Total time: " << totalTime << "ms" << endl;
-				cout << "Life: " << gCar.getLife();
-				cout << "Lose" << endl;
-				_gameState = GameState::FINISH;
-				gCar.restartPosition();
-			}
-			// Update the camera 
-			/*glm::vec3 forwardCar = gCar.getForwardVector();
-			forwardCar *= -1; // get the back vector
-			glm::vec3 pos = gCar.getGameObject()._translate;
-			camera->setCameraFront(pos); // where the camera points
-
-			pos.x += forwardCar.x * camera->getArmLenght();
-			pos.y += forwardCar.y * camera->getArmLenght();
-			if (!rotateCamera) {
-				camera->setCameraPosition(pos);
-			}*/
-			
-			// set the center of storm and update
-			gPSystem.updateCenterOfRain(gCar.getPosition());
-			gPSystem.update();
 			break;
 	}
 }
@@ -485,51 +367,6 @@ void Game::doPhysics() {
 		break;
 	case GameState::PLAY:;
 		return;
-		for (int i = 0; i < gListOfPerson.size(); i++) {
-			// Detect collision with others enemies
-			for (int j = 0; j < gListOfPerson.size(); j++) {
-				//If no the same enemy
-				if (j != i) {
-					glm::vec2 coll = CollisionDetector::GetCollision(gListOfPerson.at(i).getBoundingBox(), gListOfPerson.at(j).getBoundingBox());
-					if (coll.x != 0 && coll.y != 0) {
-						coll.x = gListOfPerson.at(i).getXPosition() + coll.x - 0.1;
-						coll.y = gListOfPerson.at(i).getYPosition() + coll.y - 0.1;
-
-						gListOfPerson.at(i).setPosition(coll);
-					}
-				}
-			}
-
-				// Check with the bigger sphere
-				glm::vec2 collision = CollisionDetector::GetCollision(gCar.getBoundingBox(), gListOfPerson.at(i).getBoundingBox());
-				if (collision.x != 0 && collision.y != 0) {
-					for (int i = 0; i < gListOfPerson.size(); i++) {
-						// check with the all 3 sphere collisions of the car
-						glm::vec2 frontCollision = CollisionDetector::GetCollision(gCar.getFrontBoundingBox(), gListOfPerson.at(i).getBoundingBox());
-						glm::vec2 middleCollision = CollisionDetector::GetCollision(gCar.getMiddleBoundingBox(), gListOfPerson.at(i).getBoundingBox());
-						glm::vec2 backCollision = CollisionDetector::GetCollision(gCar.getBackBoundingBox(), gListOfPerson.at(i).getBoundingBox());
-						if (frontCollision.x != 0 && frontCollision.y != 0) {
-							// launch zombie 
-							frontCollision.x *= -1;
-							frontCollision.y *= -1;
-							//gCar.launchCar();
-						}
-						// check with de middle and back collision 
-						if ((backCollision.x != 0 && backCollision.y != 0) ||
-							(middleCollision.x != 0 && middleCollision.y != 0)) {
-							// launch char with the higher vector 
-							collision.x = backCollision.x != 0 ? backCollision.x : middleCollision.x;
-							collision.y = backCollision.y != 0 ? backCollision.y : middleCollision.y;
-							collision.y *= -1;
-							collision.x *= -1;
-							gCar.substractLife(5);
-							gCar.launchCar(collision);
-						}
-					}
-				}
-			}
-		
-		
 		//Calculate the collisions only when the car is moving
 		if (gCar.getVelocity() != 0) {
 			for (Immovable tree : gListOfTrees) {
@@ -546,19 +383,6 @@ void Game::doPhysics() {
 					collision.x *= -1;
 					collision.y *= -1;
 					gCar.launchCar(collision);
-				}
-			}
-
-			// collision with the finish box only when car is near
-			if (gCar.getYPosition() > 40) {
-				glm::vec2 collision = CollisionDetector::GetCollision(gCar.getFrontBoundingBox(), gFinish.getSquareBoundingBox());
-				if (collision.x != 0 && collision.y != 0) {
-					c_end = std::clock();
-					float totalTime = 1000.0 * (c_end * c_start) / CLOCKS_PER_SEC;
-					cout << "Total time: " << totalTime << "ms" << endl;
-					cout << "Life: " << gCar.getLife();
-					cout << "win" << endl;
-					_gameState = GameState::FINISH;
 				}
 			}
 		}
@@ -640,9 +464,5 @@ void Game::renderGame() {
 
 	//Swap the display buffers (displays what was just drawn)
 	_window.swapBuffer();
-
-}
-
-void Game::renderMenu() {
 
 }

@@ -1,8 +1,9 @@
 #include <Windows.h>
 
 #include "Game.h"
-
 #include "SceneCreator.h"
+
+#include "GameController.h"
 
 int main(int argc, char ** argv) {
 	// Hide the command line
@@ -12,8 +13,15 @@ int main(int argc, char ** argv) {
 	sceneCr.createScene("./resources/Scenes/Scene1.json");
 
 	Game game("BattleBots", 1280,  800,true,60,false);
+
+	//GameController::getInstance().init("BattleBots", 1280, 800, true, 60, false);
 	try {
 		game.start();
+		/*while(GameController::getInstance().isRunning()) {
+			GameController::getInstance().input();
+			GameController::getInstance().update();
+			GameController::getInstance().render();
+		}*/
 	}
 	catch (std::exception e) {
 		std::cerr << "ERROR: " << e.what() << std::endl;

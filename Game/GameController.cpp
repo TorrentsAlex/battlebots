@@ -2,14 +2,16 @@
 
 
 
-GameController::GameController() {
+bool GameController::isRunning() {
+	return running;
 }
 
-
-GameController::~GameController() {
+void GameController::init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS) {
 
 }
 
 void GameController::input() {}
+
 void GameController::update() {}
+
 void GameController::render() {}

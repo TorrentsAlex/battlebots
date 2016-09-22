@@ -1,10 +1,17 @@
 {
-	"SkyTexture" : "./resources/images/blue_light.png",
-	"Terrain": {
-		"Object": "./resources/objects/terrain.obj",
-		"Texture": "./resources/images/terrain_green.png",
-		"TextureRepetition": true,
-		"TextureTilX": 80,
-		"TextureTilY": 80,
+	"sky" :{ 
+		"object" : "./resources/objects/skybox.obj",
+		"texture": "./resources/images/blue_light.png"},
+	"terrain": {
+		"object": "./resources/objects/terrain.obj",
+		"texture": "./resources/images/terrain_green.png",
+		"texturerepetition": true,
+		"texturetilx": 80,
+		"texturetily": 80
 	},
+	"decoration" : {
+		"object" : "./resources/objects/lantern.obj",
+		"texture" : "./resources/images/lantern.png",
+		"position" : "./resources/Scenes/lanterns_position.txt"
+	}
 }

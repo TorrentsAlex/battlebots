@@ -50,6 +50,12 @@
     <Filter Include="Game\Modes">
       <UniqueIdentifier>{d16d3a56-205e-49cc-aeb6-0ad0b531185f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Utils\JSON">
+      <UniqueIdentifier>{efa87a1b-872e-4695-9d3d-cdbfa6f98717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utils\Volumes">
+      <UniqueIdentifier>{633600c0-0728-460a-be3f-c8d33b3a685b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -81,9 +87,6 @@
     <ClCompile Include="TurriFramework.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="SceneCreator.cpp">
       <Filter>Engine\Level</Filter>
     </ClCompile>
@@ -111,19 +114,10 @@
     <ClCompile Include="Movable.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Car.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Engine\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionDetector.cpp">
-      <Filter>Engine\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
       <Filter>Engine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
@@ -150,14 +144,8 @@
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="MaterialManager.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Engine\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="jsoncpp.cpp">
-      <Filter>Engine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Game</Filter>
@@ -168,8 +156,25 @@
     <ClCompile Include="Robot.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="AllvsAll.cpp" />
-    <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="AllvsAll.cpp">
+      <Filter>Game\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Engine\Utils\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Engine\Utils\Volumes</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Engine\Utils\Volumes</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Engine\Systems\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -186,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="TurriFramework.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Engine\Entities</Filter>
     </ClInclude>
     <ClInclude Include="SceneCreator.h">
       <Filter>Engine\Level</Filter>
@@ -220,22 +222,10 @@
     <ClInclude Include="OBJ.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Engine\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Car.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Engine\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionDetector.h">
-      <Filter>Engine\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>Engine\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
       <Filter>Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
@@ -274,22 +264,36 @@
     <ClInclude Include="GameConstants.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="MaterialManager.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Engine\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="json\json-forwards.h">
-      <Filter>Engine\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="json\json.h">
-      <Filter>Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Robot.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="AllvsAll.h" />
-    <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="AllvsAll.h">
+      <Filter>Game\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h" />
+    <ClInclude Include="json\json.h">
+      <Filter>Engine\Utils\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json-forwards.h">
+      <Filter>Engine\Utils\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Engine\Utils\Volumes</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Engine\Utils\Volumes</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Engine\Systems\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseMode.h">
+      <Filter>Engine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

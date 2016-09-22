@@ -9,7 +9,7 @@ Movable::Movable() {
 }
 
 Movable::Movable(OBJ* mesh, GameObject gameObject):
-	Object(mesh, gameObject) {
+	Entity(mesh, gameObject) {
 	init();
 }
 

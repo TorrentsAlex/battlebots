@@ -3,7 +3,7 @@
 #include <glm\glm.hpp>
 #include <time.h>
 
-#include "Object.h"
+#include "Entity.h"
 
 #define GRAVITY -0.00981
 #define MAX_PARTICLES 500
@@ -15,7 +15,7 @@ struct Particle {
 	float weight;
 };
 
-class ParticleSystem: public Object {
+class ParticleSystem: public Entity {
 private:
 	std::vector<Particle> pParticles;
 	int currentParticle = 0;

@@ -1,9 +1,9 @@
 #pragma once
-#include "Object.h"
+#include "Entity.h"
 #include "Immovable.h"
 #include "CollisionDetector.h"
 
-class Movable: public Object {
+class Movable: public Entity {
 private:	
 	glm::vec3 fForwardV;
 	float velocity = 0.04;

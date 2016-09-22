@@ -5,82 +5,107 @@
 Entity::Entity() {
 }
 
-Entity::Entity(Vertex* vertex) {
-	eVertex = vertex;
-}
 
 Entity::~Entity() {
-	delete eVertex;
 }
 
+Entity::Entity(OBJ* mesh, GameObject gameObject) {
+	sMesh = mesh;
+	sGameObject = gameObject;
+	sBoundingBox.calculateBoundingBoxes(mesh);
 
-// Set The vertex position
-void Entity::setVertexPosition(GLfloat x, GLfloat y, GLfloat z) {
-	eVertex->setPosition(x, y, z);
+	sBoundingBox.setCenter(sGameObject._translate.x, sGameObject._translate.y);
 }
 
-void Entity::setVertexPosition(glm::vec3 pos) {
-	eVertex->setPosition(pos.x, pos.y, pos.z);
+// Setters
+void Entity::setOBJ(OBJ* mesh) {
+	sMesh = mesh;
+	sBoundingBox.calculateBoundingBoxes(mesh);
 }
 
-// Set the vertex uv
-void Entity::setVertexUV(GLfloat u, GLfloat v) {
-	eVertex->setUV(u, v);
+void Entity::setGameObject(GameObject gameObject) {
+	sGameObject = gameObject;
+	sBoundingBox.setCenter(sGameObject._translate.x, sGameObject._translate.y);
 }
 
-void Entity::setVertexUV(glm::vec3 uv) {
-	eVertex->setUV(uv.x, uv.y);
+void Entity::setSquareBoundingBox() {
+	haveSquareBBox = true;
+	sSquareBoundingBox.setCenter(sGameObject._translate.x, sGameObject._translate.y);
+	sSquareBoundingBox.setSize(sMesh->width.y - sMesh->width.x, sMesh->lenght.y - sMesh->lenght.x);
 }
 
-// Set the vertex Normal
-void Entity::setVertexNormal(GLfloat x, GLfloat y, GLfloat z) {
-	eVertex->setNormal(x, y, z);
+void Entity::setPosition(glm::vec3 newPos) {
+	sGameObject._translate.x = newPos.x;
+	sGameObject._translate.y = newPos.y;
+	
+}
+void Entity::setPosition(glm::vec2 newPos) {
+	sGameObject._translate.x = newPos.x;
+	sGameObject._translate.y = newPos.y;
+
+}
+void Entity::setTextureId(string texturePath) {
+	oTexturePath = texturePath;
 }
 
-void Entity::setVertexNormal(glm::vec3 normal) {
-	eVertex->setNormal(normal.x, normal.y, normal.z);
+void Entity::setTextureId(GLuint textureId) {
+	oTextureId = textureId;
 }
 
-void Entity::setNumVertices(int numVertices) {
-	eNumVertices = numVertices;
+void Entity::setMaterial(Material material) {
+	oMaterial = material;
 }
-
-// Transformation Methods
-void Entity::setPosition(glm::vec3 pos) {
-	eObjTransform.position = pos;
-}
-
-void Entity::setPosition(float x, float y, float z) {
-	eObjTransform.position = glm::vec3(x, y, z);
-}
-
-void Entity::setScale(glm::vec3 scale) {
-	eObjTransform.scale = scale;
-}
-
-void Entity::setScale(float x, float y, float z) {
-	eObjTransform.scale = glm::vec3(x, y, z);
-}
-
-void Entity::setRotation(glm::vec3 rot, float angle) {
-	eObjTransform.scale = rot;
-	eObjTransform.angle = angle;
-}
-
-void Entity::setRotation(float x, float y, float z, float angle) {
-	eObjTransform.rotation = glm::vec3(x, y, z);
-	eObjTransform.angle = angle;
-}
-
 // Getters
-Vertex& Entity::getVertexData() {
-	return *eVertex;
+Vertex* Entity::getMesh() {
+	return sMesh->mesh;
 }
 
 int Entity::getNumVertices() {
-	return eNumVertices;
+	return sMesh->numVertices;
 }
 
-ObjectTransformation Entity::getTransformation() {
-	return eObjTransform;
+GameObject Entity::getGameObject() {
+	return sGameObject;
 }
+
+Material Entity::getMaterial() {
+	return oMaterial;
+}
+
+glm::vec3 Entity::getPosition() {
+	return sGameObject._translate;
+}
+
+float Entity::getXPosition() {
+	return sGameObject._translate.x;
+}
+
+float Entity::getYPosition() {
+	return sGameObject._translate.y;
+}
+
+glm::vec3 Entity::getScale() {
+	return sGameObject._scale;
+}
+
+Sphere Entity::getBoundingBox() {
+	return sBoundingBox;
+}
+
+Box Entity::getSquareBoundingBox() {
+	return sSquareBoundingBox;
+}
+
+GLuint Entity::getTextureId() {
+	return oTextureId;
+}
+
+// x y z angle
+glm::vec4 Entity::getRotation() {
+	glm::vec4 rotation(sGameObject._rotation, sGameObject._angle);
+	return rotation;
+}
+
+// logistic methods
+
+void Entity::update() {}

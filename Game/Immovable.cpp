@@ -4,7 +4,7 @@ Immovable::Immovable() {
 }
 
 Immovable::Immovable(OBJ* mesh, GameObject gameObject) :
-	Object(mesh, gameObject) {
+	Entity(mesh, gameObject) {
 }
 
 Immovable::~Immovable() {

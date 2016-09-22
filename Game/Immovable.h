@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-#include "Object.h"
+#include "Entity.h"
 
-class Immovable: public Object {
+class Immovable: public Entity {
 protected:
 
 public:

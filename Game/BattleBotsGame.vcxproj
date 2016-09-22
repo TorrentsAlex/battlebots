@@ -167,9 +167,8 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ErrorManagement.cpp" />
-    <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
@@ -180,7 +179,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGLManagement.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -198,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllvsAll.h" />
+    <ClInclude Include="BaseMode.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonManager.h" />
@@ -205,12 +205,10 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="DirectionalLight.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="ErrorManagement.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FPSLimiter.h" />
-    <ClInclude Include="GameLoop.h" />
-    <ClInclude Include="json.hpp" />
+    <ClInclude Include="GameController.h" />
     <ClInclude Include="json\json-forwards.h" />
     <ClInclude Include="json\json.h" />
     <ClInclude Include="Light.h" />
@@ -222,7 +220,7 @@
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="OBJ.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="OpenGLManagement.h" />
     <ClInclude Include="ParticleSystem.h" />

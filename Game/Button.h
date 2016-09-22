@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include "Object.h"
+#include "Entity.h"
 
-class Button: public Object {
+class Button: public Entity {
 private:
 	int id;
 	std::string text;

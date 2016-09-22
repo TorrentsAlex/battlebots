@@ -38,13 +38,13 @@ glm::vec2 CollisionDetector::GetCollision(Sphere s1, Box b2) {
 	// the sphere is on the left of the box
 	if (s1.getXCenter() < (b2.getXCenter() - b2.getWidth() / 2.0f)) {
 		closestX = b2.getXCenter() - b2.getWidth() / 2.0f;
-	} else  if(s1.getXCenter() > (b2.getXCenter() + b2.getWidth() / 2.0f)) {
+	} else if(s1.getXCenter() > (b2.getXCenter() + b2.getWidth() / 2.0f)) {
 		closestX = b2.getXCenter() + b2.getWidth() / 2.0f;
 	}
 	// The sphere is under the box
 	if (s1.getYCenter() < (b2.getYCenter() - b2.getHeight() / 2.0f)) {
 		closestY = b2.getYCenter() - b2.getHeight() / 2.0f;
-	} else  if (s1.getYCenter() > (b2.getYCenter() + b2.getHeight() / 2.0f)) {
+	} else if (s1.getYCenter() > (b2.getYCenter() + b2.getHeight() / 2.0f)) {
 		closestY= b2.getYCenter() + b2.getHeight() / 2.0f;
 	}
 

@@ -10,7 +10,6 @@
 #include "GameConstants.h"
 #include "OpenGL.h"
 #include "MaterialManager.h"
-#include "Entity.h"
 #include "Light.h"
 
 #include "GameObject.h"
@@ -73,7 +72,7 @@ public:
 	void sendMaterial(Material material);
 	void unbindMaps();
 
-	void sendObject(Entity entity);
+	//void sendObject(Entity entity);
 	void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVertices);
 	void start();
 	void end();

@@ -186,6 +186,7 @@ void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVerti
 }
 
 // Calculate the transformation of the entity and send to OPENGL
+/*
 void OpenGLManagement::sendObject(Entity entity) {
 	glm::mat4 modelMatrix;
 	glm::mat3 normalMatrix;
@@ -207,3 +208,4 @@ void OpenGLManagement::sendObject(Entity entity) {
 	//Send data to GPU
 	oGLBuffer.sendDataToGPU(&entity.getVertexData(), entity.getNumVertices());
 }
+*/

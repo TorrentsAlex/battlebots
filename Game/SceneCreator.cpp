@@ -17,5 +17,5 @@ void SceneCreator::createScene(string file) {
 
 	reader.parse(jsonString, root);
 	cout << root.get("SkyTexture", "none").asString() << endl;
-
+	//return scene
 }

@@ -1,11 +1,11 @@
 #pragma once
-#include "Object.h"
+#include "Entity.h"
 
 #define LIGHT_DIRECTIONAL 0
 #define LIGHT_POINT 1
 #define LIGHT_SPOT 2
 
-class Light: public Object {
+class Light: public Entity {
 protected:
 	int lType = LIGHT_DIRECTIONAL;
 	glm::vec3 lAmbient;

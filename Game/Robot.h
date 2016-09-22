@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Object.h"
+#include "Entity.h"
 
-class Robot : Object {
+class Robot : Entity {
 public:
 	Robot();
 	~Robot();

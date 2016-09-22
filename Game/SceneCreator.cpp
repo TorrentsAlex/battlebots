@@ -10,12 +10,23 @@ SceneCreator::~SceneCreator() {
 }
 
 void SceneCreator::createScene(string file) {
+	Scene newScene;
+	Json::Reader reader; 
 
+	// Load File and save it into string
 	string jsonString = FileReader::LoadStringFromFile(file);
-	//json myjson(jsonString); //;= json::parse(jsonString);
-	Json::Reader reader;
 
 	reader.parse(jsonString, root);
-	cout << root.get("SkyTexture", "none").asString() << endl;
+	cout << "sky texture: "<< root.get("skytexture", "none").asString() << endl;
+	cout << "terrain model: " << root["terrain"]["object"]<< endl;
+	cout << "terrain texture: " << root["terrain"]["texture"] << endl;
+
+
+
+	cout << "decoration object: " << root["decoration"]["object"] << endl;
+	cout << "decoration texture: " << root["decoration"]["texture"] << endl;
+	cout << "decoration position: " << root["decoration"]["position"] << endl;
+
+
 	//return scene
 }

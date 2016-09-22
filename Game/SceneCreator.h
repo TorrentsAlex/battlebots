@@ -5,6 +5,8 @@
 #include "FileReader.h"
 #include "json/json.h"
 
+#include "Scene.h"
+
 using namespace std;
 //using json = nlohmann::json;
 

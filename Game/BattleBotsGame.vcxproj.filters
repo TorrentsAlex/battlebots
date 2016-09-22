@@ -105,9 +105,6 @@
     <ClCompile Include="TextManager.cpp">
       <Filter>Engine\Text</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Engine\Systems\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
@@ -209,9 +206,6 @@
     </ClInclude>
     <ClInclude Include="TextManager.h">
       <Filter>Engine\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Immovable.h">
       <Filter>Engine\Entities</Filter>

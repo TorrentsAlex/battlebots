@@ -182,7 +182,6 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGLManagement.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -223,7 +222,6 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="OpenGLManagement.h" />
-    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Scene.h" />

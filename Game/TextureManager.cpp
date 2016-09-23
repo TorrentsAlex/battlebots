@@ -3,10 +3,6 @@
 #include "ErrorManagement.h"
 
 
-TextureManager::TextureManager() {
-
-}
-
 
 TextureManager::~TextureManager() {
 	for (unsigned int i = 0; i < _textureData.size(); i++) {

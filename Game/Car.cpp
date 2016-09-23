@@ -14,12 +14,12 @@ Car::~Car() {
 }
 
 // Model methods
-void Car::setOBJ(OBJ * obj) {
+void Car::setOBJ(OBJ  obj) {
 	cObject = obj;
-	cWidth = cObject->width.y - cObject->width.x;
-	cHeight = cObject->lenght.y - cObject->lenght.x;
+	cWidth = cObject.width.y - cObject.width.x;
+	cHeight = cObject.lenght.y - cObject.lenght.x;
 	// Set the bounding boxes
-	cBoundingBox.calculateBoundingBoxes(cObject);
+	//cBoundingBox.calculateBoundingBoxes(cObject);
 	
 	cFrontBBox.setCenter(cGameObject._translate.x, cGameObject._translate.y + (cHeight / 2.0f - cWidth / 2.0f));
 	cFrontBBox.setRadius(cWidth/2.0f);
@@ -54,11 +54,11 @@ Material Car::getMaterial() {
 }
 
 int Car::getNumVertices() {
-	return cObject->numVertices;
+	return cObject.numVertices;
 }
 
 Vertex * Car::getMesh() {
-	return cObject->mesh;
+	return cObject.mesh;
 }
 
 float Car::getVelocity() {

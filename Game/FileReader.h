@@ -24,6 +24,8 @@ public:
 	static vector<glm::vec3> LoadVec3FromFile(std::string fileName);
 	static OBJ* LoadOBJFromFile(std::string fileName);
 
+	static OBJ LoadOBJFromFile(std::string fileName, bool yes);
+
 	static void SaveArrayToFile(vector<vector<float>> vector, std::string fileName);
 
 	static bool CheckExistFile(string fileName);

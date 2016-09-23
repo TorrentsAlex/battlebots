@@ -14,7 +14,6 @@ Game::Game(std::string windowTitle, int screenWidth, int screenHeight, bool enab
 	_gameState(GameState::INIT),
 	_fpsLimiter(enableLimiterFPS, maxFPS, printFPS),
 	gCar(),
-	tManager(),
 	textureMode(1),
 	bManager(),
 	gMaterialManager(),
@@ -92,22 +91,22 @@ void Game::load3DObjects() {
 	gameObject._scale = glm::vec3(1, 1, 1);
 
 	cout << "Loading objects..." << endl;
-	gOBJTree = Geometry::LoadModelFromFile("./resources/tree_texturized.obj", glm::vec3(0, 200, 0));
+	gOBJTree = Geometry::LoadModelFromFile("./resources/tree_texturized.obj");
 	cout << "Tree loaded" << endl;
 
-	gOBJBarrel = Geometry::LoadModelFromFile("./resources/barrel.obj", glm::vec3(0, 200, 0));
+	gOBJBarrel = Geometry::LoadModelFromFile("./resources/barrel.obj");
 
 	gCar.setGameObject(gameObject);
-	gCar.setOBJ(Geometry::LoadModelFromFile("./resources/objects/car.obj", glm::vec3(125, 125, 125)));
+	gCar.setOBJ(Geometry::LoadModelFromFile("./resources/objects/car.obj", true));
 
 	cout << "Car loaded" << endl;
 	// Load the trees, object and the scene
-	gOBJRock = Geometry::LoadModelFromFile("./resources/lantern.obj", glm::vec3(0, 100, 200));
+	gOBJRock = Geometry::LoadModelFromFile("./resources/lantern.obj");
 	cout << "rock loaded" << endl;
 
-	gOBJTerrain = Geometry::LoadModelFromFile("./resources/objects/terrain.obj", glm::vec3(7, 100, 35));
+	gOBJTerrain = Geometry::LoadModelFromFile("./resources/objects/terrain.obj");
 	cout << "Terrain loaded" << endl;
-	gOBJPerson = Geometry::LoadModelFromFile("./resources/zombie.obj", glm::vec3(200, 0, 37));
+	gOBJPerson = Geometry::LoadModelFromFile("./resources/zombie.obj");
 	cout << "zombie loaded" << endl;
 
 	GameObject terrainObject;
@@ -129,30 +128,31 @@ void Game::load3DObjects() {
 	skyObject._scale = glm::vec3(4, 4, 4);
 	skyObject._textureRepetition = false;
 	gSkyBox.setGameObject(skyObject);
-	gSkyBox.setOBJ(Geometry::LoadModelFromFile("./resources/skybox2.obj", glm::vec3(255, 250, 5)));
+	gSkyBox.setOBJ(Geometry::LoadModelFromFile("./resources/skybox2.obj"));
 	
 	// OBject for text  
-	gOBJRectangle = Geometry::LoadModelFromFile("./resources/rectangle.obj", glm::vec3(255,255,255));
+	gOBJRectangle = Geometry::LoadModelFromFile("./resources/rectangle.obj");
 	cout << "Objects Loaded\n" << endl;
 }
 
 void Game::loadGameObjects() {
+	TextureManager;
 
 	bManager.initButtons();
 	// Load TEXTURES
-	GLuint carTexture = tManager.getTextureID("./resources/images/car.png");
-	GLuint treeTexture = tManager.getTextureID("./resources/images/tree_texturea.png");
-	GLuint rockTexture = tManager.getTextureID("./resources/images/lantern.png");
-	GLuint terrainTexture = tManager.getTextureID("./resources/images/terrain_green.png");
-	GLuint skyTexture = tManager.getTextureID("./resources/images/blue_light.png");
-	GLuint zombieTexture = tManager.getTextureID("./resources/images/zombie.png");
-	GLuint barrelTexture = tManager.getTextureID("./resources/images/barrel.png");
+	GLuint carTexture = TextureManager::Instance().getTextureID("./resources/images/car.png");
+	GLuint treeTexture = TextureManager::Instance().getTextureID("./resources/images/tree_texturea.png");
+	GLuint rockTexture = TextureManager::Instance().getTextureID("./resources/images/lantern.png");
+	GLuint terrainTexture = TextureManager::Instance().getTextureID("./resources/images/terrain_green.png");
+	GLuint skyTexture = TextureManager::Instance().getTextureID("./resources/images/blue_light.png");
+	GLuint zombieTexture = TextureManager::Instance().getTextureID("./resources/images/zombie.png");
+	GLuint barrelTexture = TextureManager::Instance().getTextureID("./resources/images/barrel.png");
 
 	// Specular maps
-	barrelSpecular = tManager.getTextureID("./resources/images/barrelS.png");
-	lanternSpecular = tManager.getTextureID("./resources/images/lanternS.png");
+	barrelSpecular = TextureManager::Instance().getTextureID("./resources/images/barrelS.png");
+	lanternSpecular = TextureManager::Instance().getTextureID("./resources/images/lanternS.png");
 	// normal map
-	barrelNormal = tManager.getTextureID("./resources/images/barrelNormal.png");
+	barrelNormal = TextureManager::Instance().getTextureID("./resources/images/barrelNormal.png");
 
 	// Set texttures id's
 	gCar.setTextureId(carTexture);

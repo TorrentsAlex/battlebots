@@ -144,6 +144,87 @@ OBJ* FileReader::LoadOBJFromFile(string fileName) {
 	return object;
 }
 
+OBJ FileReader::LoadOBJFromFile(string fileName, bool ys) {
+	OBJ object;
+	string line;
+
+	std::string vertex1, vertex2, vertex3;
+	vector<float> face1, face2, face3;
+
+	ifstream myfile(fileName);
+	if (myfile.is_open()) {
+
+		vector<float> vline;
+		glm::vec3 vertex;
+		while (getline(myfile, line)) {
+
+			// Vertexs
+			if (line.substr(0, 2) == "v ") {
+				vline = split(line, ' ');
+				vertex.x = vline.at(2);
+				vertex.y = vline.at(3);
+				vertex.z = vline.at(4);
+				object.vertexs.push_back(vertex);
+			}
+
+			// Textures
+			if (line.substr(0, 2) == "vt") {
+				line = line.substr(2, line.size());
+				vline = split(line, ' ');
+				vertex.x = vline.at(1);
+				vertex.y = vline.at(2);
+				vertex.z = vline.at(3);
+				object.textures_coord.push_back(vertex);
+			}
+
+			// Normals
+			if (line.substr(0, 2) == "vn") {
+				line = line.substr(2, line.size());
+				vline = split(line, ' ');
+				vertex.x = vline.at(1);
+				vertex.y = vline.at(2);
+				vertex.z = vline.at(3);
+				object.vertex_normals.push_back(vertex);
+			}
+
+			// Faces
+			if (line.substr(0, 2) == "f ") {
+				line = line.substr(2, line.size());
+
+				vector<string> faces = splitString(line, ' ');
+
+				vertex1 = faces.at(0);
+				vertex2 = faces.at(1);
+				vertex3 = faces.at(2);
+
+				face1 = split(vertex1, '/');
+				face2 = split(vertex2, '/');
+				face3 = split(vertex3, '/');
+
+				// faces
+				object.faces.push_back(face1.at(0) - 1);
+				object.faces.push_back(face2.at(0) - 1);
+				object.faces.push_back(face3.at(0) - 1);
+
+				// uv
+				object.uv.push_back(face1.at(1) - 1);
+				object.uv.push_back(face2.at(1) - 1);
+				object.uv.push_back(face3.at(1) - 1);
+
+				// normals
+				object.normals.push_back(face1.at(2) - 1);
+				object.normals.push_back(face2.at(2) - 1);
+				object.normals.push_back(face3.at(2) - 1);
+
+			}
+		}
+		myfile.close();
+	} else {
+		cout << "Unable to open file!" << fileName << endl;
+	}
+	return object;
+}
+
 void FileReader::SaveArrayToFile(vector<vector<float>> vector, std::string fileName) {
 	ofstream file(fileName, ofstream::app);
 	if (file.is_open()) {

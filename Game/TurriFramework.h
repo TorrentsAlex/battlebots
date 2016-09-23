@@ -29,7 +29,6 @@ public:
 	void operator=(TurriFramework const&) = delete;
 	~TurriFramework();
 	
-	
 	void startLoop();
 	void endLoop();
 

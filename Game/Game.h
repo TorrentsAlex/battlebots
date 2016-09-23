@@ -67,7 +67,6 @@ private:
 	KeyPressed keyPressed;
 	KeyPressed keyRotated;
 
-	TextureManager tManager;
 	Camera* camera;
 	DrawMode drawMode;
 	int textureMode;
@@ -106,6 +105,7 @@ private:
 	OBJ* gOBJSkyBox;
 	OBJ* gOBJDrop;
 	OBJ* gOBJRectangle;
+	
 	///////////////////////////
 	bool startGame = false;
 	glm::ivec2 mousePosition;

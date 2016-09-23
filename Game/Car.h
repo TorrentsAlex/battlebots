@@ -35,7 +35,7 @@ private:
 
 	glm::vec2 cBounceVector;
 	glm::vec2 cMaxBounceDistance;
-	OBJ* cObject;
+	OBJ cObject;
 	GameObject cGameObject;
 	Sphere cBoundingBox;
 	float cDistanceFrontBB;
@@ -63,7 +63,7 @@ public:
 	// Setters
 	void setGameObject(GameObject gObject);
 	void setPosition(glm::vec3 pos);
-	void setOBJ(OBJ * obj);
+	void setOBJ(OBJ obj);
 	void setTextureId(string texturePath);
 	void setTextureId(GLuint textureId);
 	void setMaterial(Material material);

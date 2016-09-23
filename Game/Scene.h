@@ -5,6 +5,7 @@
 class Scene {
 
 private:
+	Entity sSkybox;
 	Entity sRobot1;
 
 	Entity sTerrain;
@@ -16,6 +17,7 @@ public:
 	~Scene();
 	
 	// Setters
+	void setSkyBoc(Entity skybox);
 	void setRobots(Entity robots);
 	void setTerrain(Entity terrain);
 	void setDecoration(std::vector<Entity> decoration);

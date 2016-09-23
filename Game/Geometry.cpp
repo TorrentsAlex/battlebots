@@ -20,21 +20,6 @@ Geometry::~Geometry() {
 
 }
 
-/* Load the objects */
-void Geometry::loadCube(int CUBE, glm::vec3 color) {
-
-}
-
-
-void Geometry::loadPyramid(int PYRAMID, glm::vec3 color) {
-	
-}
-
-/*
-* Load the game elements from a text file
-*/
-void Geometry::loadGameElements(char fileName[100]) {
-}
 
 /*
 * Get the vertices data for an specific object
@@ -70,7 +55,7 @@ GameObject & Geometry::getGameElement(int objectID) {
 	return (_listOfObjects[objectID]);
 }
 
-OBJ* Geometry::LoadModelFromFile(std::string file, glm::vec3 color) {
+OBJ* Geometry::LoadModelFromFile(std::string file) {
 	float xMin = 5000, xMax = 0, yMin = 50000, yMax = 0;
 	glm::vec3 currentVertex;
 	// read the file and add the vertex and the faces into the object
@@ -91,7 +76,6 @@ OBJ* Geometry::LoadModelFromFile(std::string file, glm::vec3 color) {
 			object->mesh[i].setPosition(object->vertexs.at(v1).x, object->vertexs.at(v1).y, object->vertexs.at(v1).z);
 			object->mesh[i].setUV(object->textures_coord.at(vt1).x, object->textures_coord.at(vt1).y);
 			object->mesh[i].setNormal(object->vertex_normals.at(vn1).x, object->vertex_normals.at(vn1).y, object->vertex_normals.at(vn1).z);
-			//object->mesh[i].setColor(color.x, color.y, color.z, 255);
 		}
 	} catch (std::exception e) {
 		std::cerr << "ERROR: " << iDebug <<" i " << e.what() << std::endl;
@@ -120,6 +104,59 @@ OBJ* Geometry::LoadModelFromFile(std::string file, glm::vec3 color) {
 	object->width.y = xMax;
 	object->lenght.x = yMin;
 	object->lenght.y = yMax;
+
+	return object;
+}
+
+OBJ Geometry::LoadModelFromFile(std::string file, bool from) {
+	float xMin = 5000, xMax = 0, yMin = 50000, yMax = 0;
+	glm::vec3 currentVertex;
+	// read the file and add the vertex and the faces into the object
+	OBJ object = FileReader::LoadOBJFromFile(file, true);
+
+	// Create the object with the vertices and faces  
+	object.mesh = new Vertex[object.faces.size()];
+	object.numVertices = object.faces.size();
+	int v1, vt1, vn1, iDebug;
+
+	try {
+		for (int i = 0; i < object.faces.size(); i++) {
+			iDebug = i;
+			v1 = object.faces.at(i);
+			vt1 = object.uv.at(i);
+			vn1 = object.normals.at(i);
+
+			object.mesh[i].setPosition(object.vertexs.at(v1).x, object.vertexs.at(v1).y, object.vertexs.at(v1).z);
+			object.mesh[i].setUV(object.textures_coord.at(vt1).x, object.textures_coord.at(vt1).y);
+			object.mesh[i].setNormal(object.vertex_normals.at(vn1).x, object.vertex_normals.at(vn1).y, object.vertex_normals.at(vn1).z);
+		}
+	} catch (std::exception e) {
+		std::cerr << "ERROR: " << iDebug << " i " << e.what() << std::endl;
+	}
+	// We only need to know the vertex, the faces don't 
+	for (int i = 0; i < object.vertexs.size(); i++) {
+		currentVertex = object.vertexs.at(i);
+		if (currentVertex.z < 1) {
+			// X 
+			if (currentVertex.x > xMax) {
+				xMax = currentVertex.x;
+			}
+			if (currentVertex.x < xMin) {
+				xMin = currentVertex.x;
+			}
+			// Y
+			if (currentVertex.y > yMax) {
+				yMax = currentVertex.y;
+			}
+			if (currentVertex.y < yMin) {
+				yMin = currentVertex.y;
+			}
+		}
+	}
+	object.width.x = xMin;
+	object.width.y = xMax;
+	object.lenght.x = yMin;
+	object.lenght.y = yMax;
 
 	return object;
 }

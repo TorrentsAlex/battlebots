@@ -18,13 +18,9 @@ class Geometry {
 	int _numVertices[NUMBASICOBJECTS];
 	std::vector <GameObject> _listOfObjects;
 
-
 public:
 	Geometry();
 	~Geometry();
-	void loadCube(int CUBE, glm::vec3 color);
-	void loadPyramid(int CUBE, glm::vec3 color);
-	void loadGameElements(char fileName[100]);
 	Vertex * getData(int objectID);
 	int getNumVertices(int objectID);
 	int getNumGameElements();
@@ -32,6 +28,7 @@ public:
 
 
 	static  std::vector<GameObject> LoadGameElements(std::string file);
-	static OBJ* LoadModelFromFile(std::string file, glm::vec3 color);
-	
+	static OBJ* LoadModelFromFile(std::string file);
+
+	static OBJ LoadModelFromFile(std::string file, bool from);
 };

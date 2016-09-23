@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "FileReader.h"
+#include "Geometry.h"
 #include "json/json.h"
 
 #include "Scene.h"
@@ -12,7 +13,6 @@ using namespace std;
 
 class SceneCreator {
 private:
-	Json::Value root;
 public:
 	SceneCreator();
 	~SceneCreator();

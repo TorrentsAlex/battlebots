@@ -17,7 +17,6 @@ struct GLTexture {
 //This class manages all the data related to the different textures used in the game
 class TextureManager {
 public:
-	~TextureManager();
 	GLuint getTextureID(std::string filePath);
 
 	// Pattern singleton
@@ -27,11 +26,12 @@ public:
 	}
 	TextureManager(TextureManager const&) = delete;
 	void operator=(TextureManager const&) = delete;
-	~TextureManager();
 
+	void deleteTextures();
 
 private:
 	TextureManager() {};
+
 
 	GLuint loadTexture(std::string filePath);
 	std::vector <GLTexture> _textureData;

@@ -20,8 +20,6 @@
 #include "Camera.h"
 #include "CollisionDetector.h"
 #include "Car.h"
-#include "Immovable.h"
-#include "Movable.h"
 #include "TextureManager.h"
 #include "ButtonManager.h"
 #include "MaterialManager.h"
@@ -50,8 +48,6 @@ public:
 	void load3DObjects();
 	void loadGameObjects();
 
-
-	
 private:
 	//Attributes	
 	std::string _windowTitle;		//Window Titale
@@ -71,17 +67,12 @@ private:
 	DrawMode drawMode;
 	int textureMode;
 
-
 	GLuint barrelSpecular;
 	GLuint lanternSpecular;
 	GLuint barrelNormal;
 	
 	// Objects
 	Car gCar;
-	std::vector<Immovable> gListOfTrees;
-	std::vector<Immovable> gListOfRocks;
-	std::vector<Immovable> gListOfbarrels;
-	std::vector<Movable> gListOfPerson;
 
 	DirectionalLight gDirectionalLight;
 	Light gSunLight;
@@ -92,19 +83,7 @@ private:
 	PointLight gLeftFlashLight;
 
 	std::vector <Light> lights;
-
-	Immovable gSkyBox;
-	Immovable gTerrain;
-
-	OBJ* gOBJPerson;
-	OBJ* gOBJBarrel;
-	OBJ* gOBJTree;
-	OBJ* gOBJRock;
-	OBJ* gOBJTerrain;
-	OBJ* gOBJFinish;
-	OBJ* gOBJSkyBox;
-	OBJ* gOBJDrop;
-	OBJ* gOBJRectangle;
+ 
 	
 	///////////////////////////
 	bool startGame = false;

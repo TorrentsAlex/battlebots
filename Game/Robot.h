@@ -6,5 +6,7 @@ class Robot : Entity {
 public:
 	Robot();
 	~Robot();
+
+	void update();
 };
 

@@ -8,3 +8,7 @@ Robot::Robot() {
 
 Robot::~Robot() {
 }
+
+
+void Robot::update() {
+}

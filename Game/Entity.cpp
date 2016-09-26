@@ -9,103 +9,96 @@ Entity::Entity() {
 Entity::~Entity() {
 }
 
-Entity::Entity(OBJ* mesh, GameObject gameObject) {
-	sMesh = mesh;
-	sGameObject = gameObject;
-	sBoundingBox.calculateBoundingBoxes(mesh);
+Entity::Entity(OBJ mesh, GameObject gameObject) {
+	eMesh = mesh;
+	eGameObject = gameObject;
+	//sBoundingBox.calculateBoundingBoxes(mesh);
 
-	sBoundingBox.setCenter(sGameObject._translate.x, sGameObject._translate.y);
+	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
 }
 
 // Setters
-void Entity::setOBJ(OBJ* mesh) {
-	sMesh = mesh;
-	sBoundingBox.calculateBoundingBoxes(mesh);
+void Entity::setOBJ(OBJ mesh) {
+	eMesh = mesh;
+	//sBoundingBox.calculateBoundingBoxes(mesh);
 }
 
 void Entity::setGameObject(GameObject gameObject) {
-	sGameObject = gameObject;
-	sBoundingBox.setCenter(sGameObject._translate.x, sGameObject._translate.y);
+	eGameObject = gameObject;
+	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
 }
 
 void Entity::setSquareBoundingBox() {
 	haveSquareBBox = true;
-	sSquareBoundingBox.setCenter(sGameObject._translate.x, sGameObject._translate.y);
-	sSquareBoundingBox.setSize(sMesh->width.y - sMesh->width.x, sMesh->lenght.y - sMesh->lenght.x);
+	eSquareBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
+	eSquareBoundingBox.setSize(eMesh.width.y - eMesh.width.x, eMesh.lenght.y - eMesh.lenght.x);
 }
 
 void Entity::setPosition(glm::vec3 newPos) {
-	sGameObject._translate.x = newPos.x;
-	sGameObject._translate.y = newPos.y;
+	eGameObject._translate.x = newPos.x;
+	eGameObject._translate.y = newPos.y;
 	
 }
 void Entity::setPosition(glm::vec2 newPos) {
-	sGameObject._translate.x = newPos.x;
-	sGameObject._translate.y = newPos.y;
+	eGameObject._translate.x = newPos.x;
+	eGameObject._translate.y = newPos.y;
 
-}
-void Entity::setTextureId(string texturePath) {
-	oTexturePath = texturePath;
 }
 
 void Entity::setTextureId(GLuint textureId) {
-	oTextureId = textureId;
+	eMaterial.textureMap = textureId;
 }
 
 void Entity::setMaterial(Material material) {
-	oMaterial = material;
+	eMaterial = material;
 }
 // Getters
 Vertex* Entity::getMesh() {
-	return sMesh->mesh;
+	return eMesh.mesh;
 }
 
 int Entity::getNumVertices() {
-	return sMesh->numVertices;
+	return eMesh.numVertices;
 }
 
 GameObject Entity::getGameObject() {
-	return sGameObject;
+	return eGameObject;
 }
 
 Material Entity::getMaterial() {
-	return oMaterial;
+	return eMaterial;
 }
 
 glm::vec3 Entity::getPosition() {
-	return sGameObject._translate;
+	return eGameObject._translate;
 }
 
 float Entity::getXPosition() {
-	return sGameObject._translate.x;
+	return eGameObject._translate.x;
 }
 
 float Entity::getYPosition() {
-	return sGameObject._translate.y;
+	return eGameObject._translate.y;
 }
 
 glm::vec3 Entity::getScale() {
-	return sGameObject._scale;
+	return eGameObject._scale;
 }
 
 Sphere Entity::getBoundingBox() {
-	return sBoundingBox;
+	return eBoundingBox;
 }
 
 Box Entity::getSquareBoundingBox() {
-	return sSquareBoundingBox;
+	return eSquareBoundingBox;
 }
 
 GLuint Entity::getTextureId() {
-	return oTextureId;
+	return eMaterial.textureMap;
 }
 
 // x y z angle
 glm::vec4 Entity::getRotation() {
-	glm::vec4 rotation(sGameObject._rotation, sGameObject._angle);
+	glm::vec4 rotation(eGameObject._rotation, eGameObject._angle);
 	return rotation;
 }
-
-// logistic methods
-
-void Entity::update() {}

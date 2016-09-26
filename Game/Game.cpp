@@ -78,11 +78,11 @@ void Game::run() {
 		//Force synchronization
 		_fpsLimiter.forceSynchronization();
 	}
-
+	TextureManager::Instance().deleteTextures();
 	_gameState = GameState::EXIT;
 }
 
-void Game::load3DObjects() {
+void Game::load3DObjects() {/*
 	GameObject gameObject;
 	gameObject._translate = glm::vec3(43.8919, 19.3604, 0);
 	gameObject._rotation = glm::vec3(0, 0, 1);
@@ -132,10 +132,10 @@ void Game::load3DObjects() {
 	
 	// OBject for text  
 	gOBJRectangle = Geometry::LoadModelFromFile("./resources/rectangle.obj");
-	cout << "Objects Loaded\n" << endl;
+	cout << "Objects Loaded\n" << endl;*/
 }
 
-void Game::loadGameObjects() {
+void Game::loadGameObjects() {/*
 	TextureManager;
 
 	bManager.initButtons();
@@ -213,7 +213,7 @@ void Game::loadGameObjects() {
 	//	gSunLight.setLinear(0.014f);
 	//gSunLight.setQuadratic(0.0007f);
 	lights.push_back(gSunLight);
-
+	*/
 }
 /*
 * Initializes all the game engine components
@@ -350,10 +350,10 @@ void Game::update() {
 		case GameState::PLAY:
 			// Update the objects
 			gCar.update();
-			glm::vec3 newPost = camera->getPosition();
-			newPost.x -= 60;
-			newPost.y -= 60;
-			gSkyBox.setPosition(newPost);
+			//glm::vec3 newPost = camera->getPosition();
+			//newPost.x -= 60;
+			//newPost.y -= 60;
+			//gSkyBox.setPosition(newPost);
 			break;
 	}
 }
@@ -368,25 +368,6 @@ void Game::doPhysics() {
 	case GameState::PLAY:;
 		return;
 		//Calculate the collisions only when the car is moving
-		if (gCar.getVelocity() != 0) {
-			for (Immovable tree : gListOfTrees) {
-				glm::vec2 collision = CollisionDetector::GetCollision(gCar.getFrontBoundingBox(), tree.getBoundingBox());
-				if (collision.x != 0 && collision.y != 0) {
-					collision.x *= -1;
-					collision.y *= -1;
-					gCar.launchCar(collision);
-				}
-			}
-			for (Immovable rock : gListOfRocks) {
-				glm::vec2 collision = CollisionDetector::GetCollision(gCar.getFrontBoundingBox(), rock.getBoundingBox());
-				if (collision.x != 0 && collision.y != 0) {
-					collision.x *= -1;
-					collision.y *= -1;
-					gCar.launchCar(collision);
-				}
-			}
-		}
-
 		break;
 	}
 }

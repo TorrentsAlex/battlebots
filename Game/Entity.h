@@ -8,30 +8,25 @@
 
 class Entity {
 protected:
-	OBJ* sMesh;
-	GameObject sGameObject;
+	OBJ eMesh;
+	GameObject eGameObject;
 
-	Sphere sBoundingBox;
-	Box sSquareBoundingBox;
+	Sphere eBoundingBox;
+	Box eSquareBoundingBox;
 	bool haveSquareBBox;
-
-	string oTexturePath;
-	GLuint oTextureId;
 	
-	Material oMaterial;
+	Material eMaterial;
+
 public:
 	Entity();
-	Entity(OBJ* mesh, GameObject gameObject);
+	Entity(OBJ mesh, GameObject gameObject);
 	~Entity();
 
-	virtual void update();
-
 	// Setters
-	void setOBJ(OBJ* mesh);
+	void setOBJ(OBJ mesh);
 	void setGameObject(GameObject gameObject);
 
 	void setSquareBoundingBox();
-	void setTextureId(string texturePath);
 	void setTextureId(GLuint textureId);
 	void setPosition(glm::vec3 newPos);
 	void setPosition(glm::vec2 newPos);
@@ -53,6 +48,9 @@ public:
 	glm::vec3 getScale();
 	// x y z angle
 	glm::vec4 getRotation();
+
+
+	virtual void update();
 
 };
 

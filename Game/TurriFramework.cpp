@@ -46,11 +46,11 @@ TurriFramework& TurriFramework::getInstance() {
 	return turri;
 }*/
 
-void TurriFramework::startLoop() {
+void TurriFramework::startSync() {
 	tFPS.startSynchronization();
 }
 
-void TurriFramework::endLoop() {
+void TurriFramework::endSync() {
 	tFPS.forceSynchronization();
 }
 
@@ -59,13 +59,58 @@ void TurriFramework::update() {
 	tInput.update();
 }
 
-void TurriFramework::render() {
+// Render methods
+void TurriFramework::startRender() {
 	tOpenGL.start();
+}
+
+void TurriFramework::stopRender() {
+	
+	tOpenGL.sceneWithLights(false);
 
 	tOpenGL.end();
 	tWindow.swapBuffer();
 }
 
+void TurriFramework::renderRobots(Entity robot) {
+	
+	tOpenGL.sendMaterial(robot.getMaterial());
+	tOpenGL.sendObject(robot.getMesh(), robot.getGameObject(), robot.getNumVertices());
+}
+
+void TurriFramework::renderScene(std::vector<Light> lights, Scene scene) {
+	tOpenGL.sceneWithLights(true);
+	tOpenGL.sendLight(lights);
+
+	// send material
+
+	// Terrain
+	Entity terrain = scene.getTerrain();
+	tOpenGL.sendObject(terrain.getMesh(), terrain.getGameObject(), terrain.getNumVertices());
+
+	// Decoration
+	vector<Entity> vectorDecoration = scene.getDecoration();
+
+	for (Entity nextDecoration : vectorDecoration) {
+		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
+	}
+
+	// SkyBox
+	Entity skyBox = scene.getSkyBox();
+	tOpenGL.sendObject(skyBox.getMesh(), skyBox.getGameObject(), skyBox.getNumVertices());
+
+}
+
+// send Camera values
+void TurriFramework::renderViewerPosition(glm::vec3 cameraPosition) {
+	tOpenGL.sendViewerPosition(cameraPosition);
+}
+
+void TurriFramework::renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 projectionMatrix) {
+	tOpenGL.sendViewTransformationMatrix(viewMatrix, projectionMatrix);
+}
+
+// .....
 unsigned int TurriFramework::keyPressed() {
 	return tInput.keyPressed();
 }

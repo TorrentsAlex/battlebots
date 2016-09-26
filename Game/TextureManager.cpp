@@ -4,7 +4,7 @@
 
 
 
-TextureManager::~TextureManager() {
+void TextureManager::deleteTextures() {
 	for (unsigned int i = 0; i < _textureData.size(); i++) {
 		glDeleteTextures(1, &_textureData[i].id);
 	}

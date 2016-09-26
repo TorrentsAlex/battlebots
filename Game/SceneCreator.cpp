@@ -9,8 +9,8 @@ SceneCreator::SceneCreator() {
 SceneCreator::~SceneCreator() {
 }
 
-void SceneCreator::createScene(string file) {
-	Scene newScene();
+Scene SceneCreator::createScene(string file) {
+	Scene newScene;
 	Json::Reader reader; 
 	Json::Value json;
 
@@ -21,23 +21,46 @@ void SceneCreator::createScene(string file) {
 	
 	// SkyBox
 	OBJ objSky = Geometry::LoadModelFromFile(json["sky"]["object"].asString(), true);
-	GLuint textureSky = 
-	cout << "sky texture: " << json["sky"]["texture"].asString() << endl;
+	GLuint textureSky = TextureManager::Instance().getTextureID(json["sky"]["texture"].asString());
+	newScene.setSkyBox(objSky, textureSky);
+
+	// Terrain
+	OBJ objTerrain = Geometry::LoadModelFromFile(json["terrain"]["object"].asString(), true);
+	GLuint textureTerrain = TextureManager::Instance().getTextureID(json["terrain"]["texture"].asString());
+	// Terrain material
+	string jsonMaterialString = FileReader::LoadStringFromFile(json["terrain"]["material"].asString());
+	Json::Value jsonMaterial;
+	reader.parse(jsonMaterialString, jsonMaterial);
+	Material terrainMaterial;
+	terrainMaterial.ambient = glm::vec3(jsonMaterial["ambient"]["r"].asFloat(), jsonMaterial["ambient"]["g"].asFloat(), jsonMaterial["ambient"]["b"].asFloat());
+	terrainMaterial.diffuse = glm::vec3(jsonMaterial["diffuse"]["r"].asFloat(), jsonMaterial["ambient"]["g"].asFloat(), jsonMaterial["ambient"]["b"].asFloat());
+	terrainMaterial.specular = glm::vec3(jsonMaterial["specular"]["r"].asFloat(), jsonMaterial["ambient"]["g"].asFloat(), jsonMaterial["ambient"]["b"].asFloat());
+	terrainMaterial.shininess = jsonMaterial["shininess"].asFloat();
+	newScene.setTerrain(objTerrain, textureTerrain, terrainMaterial);
+
+	// Decoration
+	OBJ objDecoration = Geometry::LoadModelFromFile(json["decoration"]["object"].asString(), true);
+	GLuint textureDecoration = TextureManager::Instance().getTextureID(json["terrain"]["texture"].asString());
+	vector<GameObject> vectorDecoration = Geometry::LoadGameElements(json["decoration"]["elements"].asString());
+
+	Entity entity;
+	entity.setOBJ(objDecoration);
+
+	vector<Entity> vEntityDecorations;
+	for (GameObject gODecoration : vectorDecoration) {
+		gODecoration._scale *= 20.0f;
+		gODecoration._translate.x *= 10.0f;
+		gODecoration._translate.y *= 10.0f;
+
+		entity.setMaterial(terrainMaterial);
+		entity.setTextureId(textureDecoration);
+		entity.setGameObject(gODecoration);
+
+		vEntityDecorations.push_back(entity);
+	}
+		
+	newScene.setDecoration(vEntityDecorations);
 
 
-	//Geometry::LoadModelFromFile(json["skybox"]["object"].asString());
-//	newScene.setSkybox();
-	/*
-	cout << "sky texture: "<< root.get("skytexture", "none").asString() << endl;
-	cout << "terrain model: " << root["terrain"]["object"]<< endl;
-	cout << "terrain texture: " << root["terrain"]["texture"] << endl;
-
-
-
-	cout << "decoration object: " << root["decoration"]["object"] << endl;
-	cout << "decoration texture: " << root["decoration"]["texture"] << endl;
-	cout << "decoration position: " << root["decoration"]["position"] << endl;
-	*/
-
-	//return scene
+	return newScene;
 }

@@ -17,6 +17,6 @@ public:
 	SceneCreator();
 	~SceneCreator();
 
-	void createScene(string file);
+	Scene createScene(string file);
 };
 

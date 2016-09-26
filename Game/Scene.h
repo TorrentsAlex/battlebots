@@ -17,14 +17,15 @@ public:
 	~Scene();
 	
 	// Setters
-	void setSkyBoc(Entity skybox);
+	void setSkyBox(OBJ object, GLuint texture);
 	void setRobots(Entity robots);
-	void setTerrain(Entity terrain);
+	void setTerrain(OBJ object, GLuint texture, Material material);
 	void setDecoration(std::vector<Entity> decoration);
 
 	// Getters
 	Entity getRobots();
 	Entity getTerrain();
+	Entity getSkyBox();
 	std::vector<Entity> getDecoration();
 
 

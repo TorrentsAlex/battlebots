@@ -7,12 +7,19 @@ Scene::Scene() {
 Scene::~Scene() {
 }
 
+void Scene::setSkyBox(OBJ object, GLuint texture) {
+	sSkybox.setOBJ(object);
+	sSkybox.setTextureId(texture);
+}
+
 void Scene::setRobots(Entity robots) {
 	sRobot1 = robots;
 }
 
-void Scene::setTerrain(Entity terrain) {
-	sTerrain = terrain;
+void Scene::setTerrain(OBJ object, GLuint texture, Material material) {
+	sTerrain.setOBJ(object);
+	sTerrain.setMaterial(material);
+	sTerrain.setTextureId(texture);
 }
 
 void Scene::setDecoration(std::vector<Entity> decoration) {
@@ -26,6 +33,10 @@ Entity Scene::getRobots() {
 
 Entity Scene::getTerrain() {
 	return sTerrain;
+}
+
+Entity Scene::getSkyBox() {
+	return sSkybox;
 }
 
 std::vector<Entity> Scene::getDecoration() {

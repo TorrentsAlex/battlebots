@@ -1,50 +1,19 @@
 #include "TurriFramework.h"
 
 
+void TurriFramework::init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS) {
+	tFPS.init(true, 60, false);
+	// Up SDL window
+	tWindow.create(name, screenWidth, screenheight, 0);
 
-TurriFramework::TurriFramework() :
-	tWindow(),
-	tOpenGL(),
-	tCamera(),
-	tFPS(false, 60, true) {
-	tWindow.create("Turri Engine", 800, 800, 0);
-
+	// Up shaders
 	tOpenGL.initializeShaders();
 
+	// Up Camera
 	tCamera.initializeZBuffer(tWindow.getWindowResolution());
 	tCamera.setPerspectiveCamera();
 	tCamera.setViewMatrix();
-	tCamera.setCameraPosition(glm::vec3(0.0));
-
-	tGameState = TurriState::GAME;
 }
-
-/*
-TurriFramework::TurriFramework(std::string name, int width, int height) :
-	tWindow(),
-	tOpenGL(),
-	tCamera(),
-	tFPS(false, 60, true) {
-
-	tWindow.create("Turri Engine", 800, 800, 0);
-
-	tOpenGL.initializeShaders();
-
-	tCamera.initializeZBuffer(tWindow.getWindowResolution());
-	tCamera.setPerspectiveCamera();
-	tCamera.setViewMatrix();
-	tCamera.setCameraPosition(glm::vec3(0.0));
-	
-	tGameState = TurriState::GAME;
-}
-*/
-TurriFramework::~TurriFramework() {
-}
-/*
-TurriFramework& TurriFramework::getInstance() {
-	static TurriFramework turri;
-	return turri;
-}*/
 
 void TurriFramework::startSync() {
 	tFPS.startSynchronization();
@@ -82,21 +51,24 @@ void TurriFramework::renderScene(std::vector<Light> lights, Scene scene) {
 	tOpenGL.sceneWithLights(true);
 	tOpenGL.sendLight(lights);
 
-	// send material
-
 	// Terrain
 	Entity terrain = scene.getTerrain();
+
+	// send material
+	tOpenGL.sendMaterial(terrain.getMaterial());
 	tOpenGL.sendObject(terrain.getMesh(), terrain.getGameObject(), terrain.getNumVertices());
 
 	// Decoration
 	vector<Entity> vectorDecoration = scene.getDecoration();
 
+	tOpenGL.sendMaterial(vectorDecoration.at(0).getMaterial());
 	for (Entity nextDecoration : vectorDecoration) {
 		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
 	}
 
 	// SkyBox
 	Entity skyBox = scene.getSkyBox();
+	tOpenGL.sendMaterial(skyBox.getMaterial());
 	tOpenGL.sendObject(skyBox.getMesh(), skyBox.getGameObject(), skyBox.getNumVertices());
 
 }
@@ -113,12 +85,4 @@ void TurriFramework::renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 pr
 // .....
 unsigned int TurriFramework::keyPressed() {
 	return tInput.keyPressed();
-}
-
-void TurriFramework::setGameState(TurriState newState) {
-	tGameState = newState;
-}
-
-TurriState TurriFramework::getGameState() {
-	return tGameState;
 }

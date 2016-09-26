@@ -1,13 +1,18 @@
 #pragma once
 #include <string>
 
+#include "TurriFramework.h"
+
 using namespace std;
+enum class GameState { INIT, MENU, PLAY, EXIT, FINISH };
 
 class GameController {
 private:
-	GameController() {}
 
 	bool running;
+
+	// Constructor
+	GameController() {}
 
 public:
 

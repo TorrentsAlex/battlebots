@@ -8,16 +8,13 @@
 
 #include "Scene.h"
 
-enum class TurriState { MENU, GAME, EXIT };
-
 class TurriFramework {
 private:
-	Camera tCamera;
 	Window tWindow;
+	Camera tCamera;
 	OpenGLManagement tOpenGL;
 	InputManager tInput;
 	FPSLimiter tFPS;
-	TurriState tGameState;
 
 	TurriFramework();
 
@@ -30,6 +27,8 @@ public:
 	TurriFramework(TurriFramework const&) = delete;
 	void operator=(TurriFramework const&) = delete;
 	~TurriFramework();
+
+	void init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS);
 	
 	void startSync();
 	void endSync();
@@ -45,7 +44,5 @@ public:
 
 	unsigned int keyPressed();
 
-	void setGameState(TurriState newState);
-	TurriState getGameState();
 };
 

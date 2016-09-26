@@ -22,6 +22,7 @@ class FPSLimiter {
 public:
 	//Initialize the max FPS
 	FPSLimiter(bool enable, int maxFPS, bool printFPS);
+	void init(bool enable, int maxFPS, bool printFPS);
 
 	// Sets the desired max FPS. This method is useful if we decide to change the maxFPS during the execution
 	void setMaxFPS(int maxFPS);

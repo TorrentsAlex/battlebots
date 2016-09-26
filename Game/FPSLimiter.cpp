@@ -15,6 +15,13 @@ FPSLimiter::FPSLimiter(bool enable,int maxFPS, bool printFPS) : _enable(enable),
 	_previousTickFrame = (float)SDL_GetTicks();
 }
 	
+void FPSLimiter::init(bool enable, int maxFPS, bool printFPS) {
+	//Initialize the array that will manage the last 10 rendered frames
+	for (int i = 0; i < NUM_SAMPLES; i++) {
+		_frameTimes[i] = (1000.0f / _maxFPS);
+	}
+	_previousTickFrame = (float)SDL_GetTicks();
+}
 /*
 * Sets the desired max FPS. This method is useful if we decide to change the maxFPS during the execution
 * @param maxFPS is the max FPS

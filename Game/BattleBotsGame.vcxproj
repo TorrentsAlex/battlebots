@@ -175,7 +175,6 @@
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="Movable.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -187,7 +186,6 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneCreator.cpp" />
     <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="Immovable.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -212,7 +210,6 @@
     <ClInclude Include="json\json.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MaterialManager.h" />
-    <ClInclude Include="Movable.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameObject.h" />
@@ -227,7 +224,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneCreator.h" />
     <ClInclude Include="Sphere.h" />
-    <ClInclude Include="Immovable.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="TextManager.h" />
     <ClInclude Include="TextureManager.h" />

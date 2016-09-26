@@ -108,9 +108,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Movable.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Car.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
@@ -146,9 +143,6 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Immovable.cpp">
-      <Filter>Engine\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Robot.cpp">
       <Filter>Game\Entities</Filter>
@@ -206,12 +200,6 @@
     </ClInclude>
     <ClInclude Include="TextManager.h">
       <Filter>Engine\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="Immovable.h">
-      <Filter>Engine\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Movable.h">
-      <Filter>Engine\Entities</Filter>
     </ClInclude>
     <ClInclude Include="OBJ.h">
       <Filter>Engine\Entities</Filter>

@@ -7,11 +7,13 @@
 		"texture": "./resources/images/terrain_green.png",
 		"texturerepetition": true,
 		"texturetilx": 80,
-		"texturetily": 80
+		"texturetily": 80, 
+		"material" : "./resources/materials/metal.json"
 	},
 	"decoration" : {
 		"object" : "./resources/objects/lantern.obj",
 		"texture" : "./resources/images/lantern.png",
-		"position" : "./resources/Scenes/lanterns_position.txt"
+		"elements" : "./resources/Scenes/lanterns_position.txt",
+		"material" : "./resources/materials/metal.json"
 	}
 }

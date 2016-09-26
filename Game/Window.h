@@ -4,7 +4,7 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 using namespace std;
-#include <glm\glm.hpp>
+#include <glm/glm.hpp>
 #include <string>
 #include "GameConstants.h"
 //This class manages the window input/output using the SDL library

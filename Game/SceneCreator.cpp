@@ -38,7 +38,7 @@ Scene SceneCreator::createScene(string file) {
 	cout << "decoration..." << endl;
 	// Decoration
 	OBJ objDecoration = Geometry::LoadModelFromFile(json["decoration"]["object"].asString(), true);
-	GLuint textureDecoration = TextureManager::Instance().getTextureID(json["terrain"]["texture"].asString());
+	GLuint textureDecoration = TextureManager::Instance().getTextureID(json["decoration"]["texture"].asString());
 	vector<GameObject> vectorDecoration = Geometry::LoadGameElements(json["decoration"]["elements"].asString());
 
 	Entity entity;
@@ -47,8 +47,8 @@ Scene SceneCreator::createScene(string file) {
 	vector<Entity> vEntityDecorations;
 	for (GameObject gODecoration : vectorDecoration) {
 		gODecoration._scale *= 20.0f;
-		gODecoration._translate.x *= 10.0f;
-		gODecoration._translate.y *= 10.0f;
+		gODecoration._translate.x *= 1.0f;
+		gODecoration._translate.y *= 1.0f;
 
 		entity.setMaterial(terrainMaterial);
 		entity.setTextureId(textureDecoration);

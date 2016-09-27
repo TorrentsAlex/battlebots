@@ -1,14 +1,18 @@
 #include "Light.h"
 
-Light::Light() {}
+Light::Light() {
+	lType = LIGHT_DIRECTIONAL;
+}
 
 Light::Light(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular) {
+	lType = LIGHT_DIRECTIONAL;
 	lAmbient = ambient;
 	lDiffuse = diffuse;
 	lSpecular = specular;
 }
 
 Light::Light(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, glm::vec3 direction, glm::vec3 position) {
+	lType = LIGHT_DIRECTIONAL;
 	lAmbient = ambient;
 	lDiffuse = diffuse;
 	lSpecular = specular;

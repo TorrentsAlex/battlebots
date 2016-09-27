@@ -21,6 +21,7 @@ int main(int argc, char ** argv) {
 			GameController::Instance().render();
 
 			TurriFramework::Instance().endSync();
+			SDL_Delay(1);
 		}
 	}
 	catch (std::exception e) {

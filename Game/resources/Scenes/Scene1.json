@@ -5,9 +5,6 @@
 	"terrain": {
 		"object": "./resources/objects/terrain.obj",
 		"texture": "./resources/images/terrain_green.png",
-		"texturerepetition": true,
-		"texturetilx": 80,
-		"texturetily": 80, 
 		"material" : "./resources/materials/metal.json"
 	},
 	"decoration" : {

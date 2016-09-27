@@ -1,9 +1,17 @@
 {
-    "encoding" : "UTF-8",
-    "plug-ins" : [
-        "python",
-        "c++",
-        "ruby"
-        ],
-    "indent" : { "length" : 3, "use_space": true }
+	"sky" :{ 
+		"object" : "./resources/objects/skybox.obj",
+		"texture": "./resources/images/red.jpg"
+	},
+	"terrain": {
+		"object": "./resources/objects/cylinder_terrain.obj",
+		"texture": "./resources/images/rockydesert.jpg",
+		"material" : "./resources/materials/metal.json"
+	},
+	"decoration" : {
+		"object" : "./resources/objects/tree_texturized.obj",
+		"texture" : "./resources/images/tree_texture.png",
+		"elements" : "./resources/scenes/treeScene.txt",
+		"material" : "./resources/materials/metal.json"
+	}
 }

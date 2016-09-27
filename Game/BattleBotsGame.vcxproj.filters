@@ -147,7 +147,6 @@
     <ClCompile Include="AllvsAll.cpp">
       <Filter>Game\Modes</Filter>
     </ClCompile>
-    <ClCompile Include="GameController.cpp" />
     <ClCompile Include="jsoncpp.cpp">
       <Filter>Engine\Utils\JSON</Filter>
     </ClCompile>
@@ -168,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,7 +248,6 @@
     <ClInclude Include="AllvsAll.h">
       <Filter>Game\Modes</Filter>
     </ClInclude>
-    <ClInclude Include="GameController.h" />
     <ClInclude Include="json\json.h">
       <Filter>Engine\Utils\JSON</Filter>
     </ClInclude>
@@ -276,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

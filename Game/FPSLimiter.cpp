@@ -7,6 +7,8 @@
 * Initialize the FPS limiter
 * @param maxFPS is the max FPS
 */
+FPSLimiter::FPSLimiter() {
+}
 FPSLimiter::FPSLimiter(bool enable,int maxFPS, bool printFPS) : _enable(enable),_maxFPS(maxFPS), _printFPS(printFPS), _currentFrame(-1){
 		//Initialize the array that will manage the last 10 rendered frames
 	for (int i = 0; i < NUM_SAMPLES; i++) {

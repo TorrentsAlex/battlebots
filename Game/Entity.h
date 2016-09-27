@@ -50,7 +50,5 @@ public:
 	glm::vec4 getRotation();
 
 
-	virtual void update();
-
 };
 

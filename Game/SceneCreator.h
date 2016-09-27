@@ -13,9 +13,17 @@ using namespace std;
 
 class SceneCreator {
 private:
+
+	SceneCreator() {};
 public:
-	SceneCreator();
-	~SceneCreator();
+	static SceneCreator& Instance() {
+		static SceneCreator instance;	// Guaranteed to be destroyed.
+										// Instantiated on first use.
+		return instance;
+	}
+	// Singleton Pattern - Delete Copy constructor and operator=
+	SceneCreator(SceneCreator const&) = delete;
+	void operator=(SceneCreator const&) = delete;
 
 	Scene createScene(string file);
 };

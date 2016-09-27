@@ -9,16 +9,18 @@ int main(int argc, char ** argv) {
 	// Hide the command line
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-	//Game game("BattleBots", 1280,  800,true,60,false);
 	TurriFramework::Instance().init("BattleBots", 1280, 800, true, 60, false);
 
-	GameController::getInstance().init("BattleBots", 1280, 800, true, 60, false);
+	GameController::Instance().init();
 	try {
-		//game.start();
-		while(GameController::getInstance().isRunning()) {
-			GameController::getInstance().input();
-			GameController::getInstance().update();
-			GameController::getInstance().render();
+		while(GameController::Instance().isRunning()) {
+			TurriFramework::Instance().startSync();
+
+			GameController::Instance().input();
+			GameController::Instance().update();
+			GameController::Instance().render();
+
+			TurriFramework::Instance().endSync();
 		}
 	}
 	catch (std::exception e) {

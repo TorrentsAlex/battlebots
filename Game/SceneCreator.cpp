@@ -2,14 +2,8 @@
 
 
 
-SceneCreator::SceneCreator() {
-}
-
-
-SceneCreator::~SceneCreator() {
-}
-
 Scene SceneCreator::createScene(string file) {
+	cout << "creating scene" << endl;
 	Scene newScene;
 	Json::Reader reader; 
 	Json::Value json;
@@ -18,15 +12,18 @@ Scene SceneCreator::createScene(string file) {
 	string jsonString = FileReader::LoadStringFromFile(file);
 	// Parse the string into json
 	reader.parse(jsonString, json);
-	
+	cout << "skybox..." << endl;
+
 	// SkyBox
 	OBJ objSky = Geometry::LoadModelFromFile(json["sky"]["object"].asString(), true);
 	GLuint textureSky = TextureManager::Instance().getTextureID(json["sky"]["texture"].asString());
 	newScene.setSkyBox(objSky, textureSky);
 
+	cout << "terrain..." << endl;
 	// Terrain
 	OBJ objTerrain = Geometry::LoadModelFromFile(json["terrain"]["object"].asString(), true);
 	GLuint textureTerrain = TextureManager::Instance().getTextureID(json["terrain"]["texture"].asString());
+	
 	// Terrain material
 	string jsonMaterialString = FileReader::LoadStringFromFile(json["terrain"]["material"].asString());
 	Json::Value jsonMaterial;
@@ -38,6 +35,7 @@ Scene SceneCreator::createScene(string file) {
 	terrainMaterial.shininess = jsonMaterial["shininess"].asFloat();
 	newScene.setTerrain(objTerrain, textureTerrain, terrainMaterial);
 
+	cout << "decoration..." << endl;
 	// Decoration
 	OBJ objDecoration = Geometry::LoadModelFromFile(json["decoration"]["object"].asString(), true);
 	GLuint textureDecoration = TextureManager::Instance().getTextureID(json["terrain"]["texture"].asString());

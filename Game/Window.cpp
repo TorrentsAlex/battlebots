@@ -29,9 +29,7 @@ Window::Window() 	{
 * Destructor
 */
 Window::~Window() {
-	for (int i = 0; i < GAME_TEXTURES; i++) {
-		SDL_DestroyTexture(textures[i]);
-	}
+
 	if (_sdlWindow != 0)
 		SDL_DestroyWindow(_sdlWindow);
 

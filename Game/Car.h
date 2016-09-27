@@ -14,7 +14,7 @@ enum class CarRotateState {STRAIGHT, RIGHT, LEFT, AXIS};
 class Car {
 private:
 	float life = 100;
-	float cSpeed = 0.0014;
+	float cSpeed = 0.001f;
 	float cBrake = 0.007;
 
 	float cVelocity = 0;

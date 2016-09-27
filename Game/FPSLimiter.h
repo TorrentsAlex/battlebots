@@ -21,6 +21,7 @@ class FPSLimiter {
 	void updateAverageFPS();
 public:
 	//Initialize the max FPS
+	FPSLimiter();
 	FPSLimiter(bool enable, int maxFPS, bool printFPS);
 	void init(bool enable, int maxFPS, bool printFPS);
 

@@ -7,7 +7,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-#include "GameConstants.h"
 #include "OpenGL.h"
 #include "MaterialManager.h"
 #include "Light.h"

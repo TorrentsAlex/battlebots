@@ -56,6 +56,12 @@
     <Filter Include="Engine\Utils\Volumes">
       <UniqueIdentifier>{633600c0-0728-460a-be3f-c8d33b3a685b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Views">
+      <UniqueIdentifier>{def3bdd8-aeee-4963-becb-455035d749b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Views">
+      <UniqueIdentifier>{18ca16b7-aa42-4ba7-98ef-876a8657cbe1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -114,17 +120,11 @@
     <ClCompile Include="CollisionDetector.cpp">
       <Filter>Engine\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="FileReader.cpp">
       <Filter>Engine\Text</Filter>
     </ClCompile>
     <ClCompile Include="Geometry.cpp">
       <Filter>Engine\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonManager.cpp">
-      <Filter>Engine\Systems\Textures</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Engine\Systems\Textures</Filter>
@@ -134,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="FPSLimiter.cpp">
       <Filter>Engine\Systems\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Engine\Level</Filter>
@@ -165,6 +162,12 @@
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Game\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game\Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,9 +213,6 @@
     <ClInclude Include="CollisionDetector.h">
       <Filter>Engine\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="FileReader.h">
       <Filter>Engine\Text</Filter>
     </ClInclude>
@@ -225,9 +225,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonManager.h">
-      <Filter>Engine\Systems\Textures</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Engine\Systems\Textures</Filter>
     </ClInclude>
@@ -239,12 +236,6 @@
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Engine\Systems\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameConstants.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Engine\Level</Filter>
@@ -271,11 +262,20 @@
     <ClInclude Include="MaterialManager.h">
       <Filter>Engine\Systems\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="BaseMode.h">
-      <Filter>Engine\Level</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TurriIncludes.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScreen.h">
+      <Filter>Engine\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game\Views</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

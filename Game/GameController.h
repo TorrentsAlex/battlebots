@@ -1,14 +1,16 @@
 #pragma once
 #include <string>
 
-#include "TurriFramework.h"
+#include "TurriIncludes.h"
+#include "Game.h"
 
 using namespace std;
 enum class GameState { INIT, MENU, PLAY, EXIT, FINISH };
 
 class GameController {
 private:
-
+	GameState gGameState;
+	StateManager gCurrentScreen;
 	bool running;
 
 	// Constructor
@@ -16,7 +18,7 @@ private:
 
 public:
 
-	static GameController& getInstance() {
+	static GameController& Instance() {
 		static GameController instance;	// Guaranteed to be destroyed.
 								// Instantiated on first use.
 		return instance;
@@ -26,7 +28,7 @@ public:
 	void operator=(GameController const&) = delete;
 
 	// init methods	
-	void init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS);
+	void init();
 	
 	bool isRunning();
 

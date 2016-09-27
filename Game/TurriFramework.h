@@ -16,7 +16,7 @@ private:
 	InputManager tInput;
 	FPSLimiter tFPS;
 
-	TurriFramework();
+	TurriFramework() {};
 
 public:
 
@@ -26,7 +26,6 @@ public:
 	}
 	TurriFramework(TurriFramework const&) = delete;
 	void operator=(TurriFramework const&) = delete;
-	~TurriFramework();
 
 	void init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS);
 	

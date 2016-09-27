@@ -161,8 +161,6 @@
   <ItemGroup>
     <ClCompile Include="AllvsAll.cpp" />
     <ClCompile Include="Box.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CollisionDetector.cpp" />
@@ -187,6 +185,7 @@
     <ClCompile Include="SceneCreator.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SpotLight.cpp" />
+    <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TurriFramework.cpp" />
@@ -194,10 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllvsAll.h" />
-    <ClInclude Include="BaseMode.h" />
+    <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="Box.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="CollisionDetector.h" />
@@ -211,7 +208,6 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="InputManager.h" />
@@ -225,9 +221,11 @@
     <ClInclude Include="SceneCreator.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SpotLight.h" />
+    <ClInclude Include="StateManager.h" />
     <ClInclude Include="TextManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TurriFramework.h" />
+    <ClInclude Include="TurriIncludes.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

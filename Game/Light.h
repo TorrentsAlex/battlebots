@@ -5,7 +5,7 @@
 #define LIGHT_POINT 1
 #define LIGHT_SPOT 2
 
-class Light: public Entity {
+class Light {
 protected:
 	int lType = LIGHT_DIRECTIONAL;
 	glm::vec3 lAmbient;

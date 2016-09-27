@@ -17,7 +17,6 @@ private:
 	void render() override;
 	void clean() override;
 
-
 	Scene gScene;
 	Robot robot1;
 	vector<Light> lights;

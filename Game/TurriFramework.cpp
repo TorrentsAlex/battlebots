@@ -57,6 +57,7 @@ void TurriFramework::renderScene(std::vector<Light> lights, Scene scene) {
 	// send material
 	tOpenGL.sendMaterial(terrain.getMaterial());
 	tOpenGL.sendObject(terrain.getMesh(), terrain.getGameObject(), terrain.getNumVertices());
+	tOpenGL.unbindMaps();
 
 	// Decoration
 	vector<Entity> vectorDecoration = scene.getDecoration();
@@ -65,12 +66,22 @@ void TurriFramework::renderScene(std::vector<Light> lights, Scene scene) {
 	for (Entity nextDecoration : vectorDecoration) {
 		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
 	}
+	tOpenGL.unbindMaps();
+
+
+	tOpenGL.sceneWithLights(false);
 
 	// SkyBox
 	Entity skyBox = scene.getSkyBox();
 	tOpenGL.sendMaterial(skyBox.getMaterial());
 	tOpenGL.sendObject(skyBox.getMesh(), skyBox.getGameObject(), skyBox.getNumVertices());
+	tOpenGL.unbindMaps();
+}
 
+void TurriFramework::renderCamera() {
+	tOpenGL.sendViewerPosition(tCamera.getPosition());
+
+	tOpenGL.sendViewTransformationMatrix(tCamera.getViewMatrix(), tCamera.getProjectionCamera());
 }
 
 // send Camera values

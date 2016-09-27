@@ -38,6 +38,7 @@ public:
 
 	void renderRobots(Entity robot);
 	void renderViewerPosition(glm::vec3 cameraPosition);
+	void renderCamera();
 	void renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 projectionMatrix);
 	void renderScene(std::vector<Light> lights, Scene scene);
 

@@ -8,6 +8,8 @@
 
 #include "Scene.h"
 
+#include "Light.h"
+
 using namespace std;
 //using json = nlohmann::json;
 

@@ -2,15 +2,16 @@
 
 #include "Entity.h"
 
+#include "Light.h"
 class Scene {
-
 private:
 	Entity sSkybox;
-	Entity sRobot1;
 
 	Entity sTerrain;
 	
-	std::vector<Entity> sDecoration;
+	vector<Entity> sDecoration;
+
+	vector<Light> sLights;
 
 public:
 	Scene();
@@ -18,17 +19,17 @@ public:
 	
 	// Setters
 	void setSkyBox(OBJ object, GLuint texture);
-	void setRobots(Entity robots);
 	void setTerrain(OBJ object, GLuint texture, Material material);
-	void setDecoration(std::vector<Entity> decoration);
+	void setDecoration(vector<Entity> decoration);
+	void setLights(vector<Light> lights);
 
 	// Getters
-	Entity getRobots();
 	Entity getTerrain();
 	Entity getSkyBox();
-	std::vector<Entity> getDecoration();
+	vector<Entity> getDecoration();
+	vector<Light> getLights();
 
-
+	void clean();
 	void update();
 };
 

@@ -19,6 +19,5 @@ private:
 
 	Scene gScene;
 	Robot robot1;
-	vector<Light> lights;
 
 };

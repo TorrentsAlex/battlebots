@@ -8,19 +8,15 @@ Scene::~Scene() {
 }
 
 void Scene::setSkyBox(OBJ object, GLuint texture) {
-	GameObject terrainObject;
-	terrainObject._angle = 0;
-	terrainObject._translate = glm::vec3(0, 0, 0);
-	terrainObject._scale = glm::vec3(1, 1, 1);
-	terrainObject._rotation = glm::vec3(0, 0, 0);
+	GameObject skyObject;
+	skyObject._angle = 0;
+	skyObject._translate = glm::vec3(0, 0, 0);
+	skyObject._scale = glm::vec3(1, 1, 1);
+	skyObject._rotation = glm::vec3(0, 0, 0);
 
 	sSkybox.setOBJ(object);
 	sSkybox.setTextureId(texture);
-	sSkybox.setGameObject(terrainObject);
-}
-
-void Scene::setRobots(Entity robots) {
-	sRobot1 = robots;
+	sSkybox.setGameObject(skyObject);
 }
 
 void Scene::setTerrain(OBJ object, GLuint texture, Material material) {
@@ -40,11 +36,11 @@ void Scene::setDecoration(std::vector<Entity> decoration) {
 	sDecoration = decoration;
 }
 
-// Getters
-Entity Scene::getRobots() {
-	return sRobot1;
+void Scene::setLights(vector<Light> lights) {
+	sLights = lights;
 }
 
+// Getters
 Entity Scene::getTerrain() {
 	return sTerrain;
 }
@@ -57,8 +53,14 @@ std::vector<Entity> Scene::getDecoration() {
 	return sDecoration;
 }
 
+vector<Light> Scene::getLights() {
+	return sLights;
+}
+
+void Scene::clean() {
+}
+
 // 
 void Scene::update() {
-
 
 }

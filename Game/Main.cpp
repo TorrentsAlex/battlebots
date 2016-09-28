@@ -23,10 +23,11 @@ int main(int argc, char ** argv) {
 			TurriFramework::Instance().endSync();
 			SDL_Delay(1);
 		}
-	}
-	catch (std::exception e) {
+	} catch (std::exception e) {
 		std::cerr << "ERROR: " << e.what() << std::endl;
 	}
+	TextureManager::Instance().deleteTextures();
+	//TurriFramework::Instance().clean();
 
 	return 0;
 }

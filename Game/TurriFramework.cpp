@@ -47,9 +47,9 @@ void TurriFramework::renderRobots(Entity robot) {
 	tOpenGL.sendObject(robot.getMesh(), robot.getGameObject(), robot.getNumVertices());
 }
 
-void TurriFramework::renderScene(std::vector<Light> lights, Scene scene) {
+void TurriFramework::renderScene(Scene scene) {
 	tOpenGL.sceneWithLights(true);
-	tOpenGL.sendLight(lights);
+	tOpenGL.sendLight(scene.getLights());
 
 	// Terrain
 	Entity terrain = scene.getTerrain();
@@ -67,7 +67,6 @@ void TurriFramework::renderScene(std::vector<Light> lights, Scene scene) {
 		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
 	}
 	tOpenGL.unbindMaps();
-
 
 	tOpenGL.sceneWithLights(false);
 

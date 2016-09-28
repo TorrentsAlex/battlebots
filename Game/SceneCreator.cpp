@@ -59,42 +59,47 @@ Scene SceneCreator::createScene(string file) {
 	
 	// Lights
 	vector<Light> sceneLights;
-	Json::Value ligsfds = json["lights"];
-	Light l;
+	Json::Value jsonLights = json["lights"];
+	for (int i = 0; i < jsonLights.size(); i++) {
+		Light l;
+		glm::vec3 ambient, diffuse, specular, position, direction;
+
+		Json::Value currentLight;
+		string stringlight = FileReader::LoadStringFromFile(jsonLights[i].asString());
+		// Parse the string into json
+		reader.parse(stringlight, currentLight);
+
 		// ambient
-	glm::vec3 ambient;
-	ambient.r = json["lights"]["ambient"]["r"].asFloat();
-	ambient.g = json["lights"]["ambient"]["g"].asFloat();
-	ambient.b = json["lights"]["ambient"]["b"].asFloat();
-	l.setAmbient(ambient);
-	
-	glm::vec3 diffuse;
-	diffuse.r = json["lights"]["diffuse"]["r"].asFloat();
-	diffuse.g = json["lights"]["diffuse"]["g"].asFloat();
-	diffuse.b = json["lights"]["diffuse"]["b"].asFloat();
+		ambient.r = currentLight["ambient"]["r"].asFloat();
+		ambient.g = currentLight["ambient"]["g"].asFloat();
+		ambient.b = currentLight["ambient"]["b"].asFloat();
 
-	glm::vec3 specular;
-	specular.r = json["lights"]["specular"]["r"].asFloat();
-	specular.g = json["lights"]["specular"]["g"].asFloat();
-	specular.b = json["lights"]["specular"]["b"].asFloat();
+		diffuse.r = currentLight["diffuse"]["r"].asFloat();
+		diffuse.g = currentLight["diffuse"]["g"].asFloat();
+		diffuse.b = currentLight["diffuse"]["b"].asFloat();
 
-	// position
-	if (!json["lights"]["position"].isNull()) {
-		l.setPosition(glm::vec3(json["lights"]["position"]["x"].asFloat(), json["lights"]["position"]["y"].asFloat(), json["lights"]["position"]["z"].asFloat()));
-	}
+		specular.r = currentLight["specular"]["r"].asFloat();
+		specular.g = currentLight["specular"]["g"].asFloat();
+		specular.b = currentLight["specular"]["b"].asFloat();
 
-	// direction
-	//if (json["lights"]["direction"].isObject()) {
-		glm::vec3 direction;
-		direction.x = json["lights"]["direction"]["x"].asFloat();
-		direction.y = json["lights"]["direction"]["y"].asFloat();
-		direction.z = json["lights"]["direction"]["z"].asFloat();
+		// position
+		
+
+		// direction
+		direction.x = currentLight["direction"]["x"].asFloat();
+		direction.y = currentLight["direction"]["y"].asFloat();
+		direction.z = currentLight["direction"]["z"].asFloat();
+
+		// set the values into the light
+		l.setAmbient(ambient);
+		l.setDiffuse(diffuse);
+		l.setSpecular(specular);
 		l.setDirection(direction);
-	//}
 
-
-	sceneLights.push_back(l);
+		sceneLights.push_back(l);
+	}
 	newScene.setLights(sceneLights);
+
 	newScene.setDecoration(vEntityDecorations);
 
 	return newScene;

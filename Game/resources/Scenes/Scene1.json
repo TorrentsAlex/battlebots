@@ -13,29 +13,8 @@
 		"elements" : "./resources/Scenes/lanterns_position.txt",
 		"material" : "./resources/materials/metal.json"
 	},
-	"lights" : {
-			"type" : "directional",
-			"position" : null,
-			"direction" : {
-				"x" : 0.8,
-				"y" : 0.8,
-				"z" : -0.8
-			},
-			"ambient" : {
-				"r" : 1.4,
-				"g" : 1.5,
-				"b" : 1.4
-			},
-			"diffuse" : {
-				"r" : 1.0,
-				"g" : 1.0,
-				"b" : 3.0
-			},
-			"specular" : {
-				"r" : 1.4,
-				"g" : 1.5,
-				"b" : 2.4
-			}
-	}
-	
+	"lights" : [
+		"./resources/materials/lights/directional_white.json",
+		"./resources/materials/lights/directional_red.json"
+	]
 }

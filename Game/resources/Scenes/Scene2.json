@@ -13,5 +13,29 @@
 		"texture" : "./resources/images/tree_texture.png",
 		"elements" : "./resources/scenes/treeScene.txt",
 		"material" : "./resources/materials/metal.json"
+	},
+	"lights" : {
+		"type" : "directional",
+		"position" : null,
+		"direction" : {
+			"x" : 0.8,
+			"y" : 0.8,
+			"z" : -0.8
+		},
+		"ambient" : {
+			"r" : 3.9,
+			"g" : 3.5,
+			"b" : 3.9
+		},
+		"diffuse" : {
+			"r" : 2.0,
+			"g" : 2.0,
+			"b" : 3.0
+		},
+		"specular" : {
+			"r" : 2.4,
+			"g" : 2.5,
+			"b" : 2.4
+		},
 	}
 }

@@ -1,7 +1,7 @@
 #include "InputManager.h"
 
 
-InputManager::InputManager() :_mouseCoords(0) {
+void InputManager::init() {
 	if (SDL_NumJoysticks() < 1) {
 		printf("Warning: No joysticks connected!\n");
 	} else {
@@ -13,9 +13,9 @@ InputManager::InputManager() :_mouseCoords(0) {
 	}
 }
 
-
-InputManager::~InputManager() 	{
+void InputManager::clean() {
 	SDL_JoystickClose(gameController);
+
 }
 
 

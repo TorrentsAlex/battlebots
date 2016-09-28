@@ -8,8 +8,17 @@
 // Otherwise, it is released.
 class InputManager {
 public:
-	InputManager();
-	~InputManager();
+
+	static InputManager& Instance() {
+		static InputManager instance;
+		return instance;
+	}
+
+	InputManager(InputManager const&) = delete;
+	void operator=(InputManager const&) = delete;
+
+	void init();
+	void clean();
 
 	void update();
 	void pressKey(unsigned int keyID);
@@ -28,6 +37,8 @@ public:
 	glm::ivec2 getMouseCoords() { return _mouseCoords; }
 
 private:
+
+	InputManager() {}
 	bool wasKeyDown(unsigned int keyID);
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
 	std::unordered_map<unsigned int, bool> _keyMap;

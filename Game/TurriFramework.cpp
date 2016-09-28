@@ -2,9 +2,12 @@
 
 
 void TurriFramework::init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS) {
-	tFPS.init(true, 60, false);
+	tFPS.init(enableLimiterFPS, maxFPS, printFPS);
 	// Up SDL window
 	tWindow.create(name, screenWidth, screenheight, 0);
+
+	// init input manager
+	InputManager::Instance().init();
 
 	// Up shaders
 	tOpenGL.initializeShaders();
@@ -25,7 +28,7 @@ void TurriFramework::endSync() {
 
 void TurriFramework::update() {
 	// Update Inputs
-	tInput.update();
+	InputManager::Instance().update();
 }
 
 // Render methods
@@ -92,7 +95,4 @@ void TurriFramework::renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 pr
 	tOpenGL.sendViewTransformationMatrix(viewMatrix, projectionMatrix);
 }
 
-// .....
-unsigned int TurriFramework::keyPressed() {
-	return tInput.keyPressed();
-}
+// Input methods

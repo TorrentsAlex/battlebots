@@ -9,7 +9,7 @@ int main(int argc, char ** argv) {
 	// Hide the command line
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-	TurriFramework::Instance().init("BattleBots", 1280, 800, true, 60, false);
+	TurriFramework::Instance().init("BattleBots", 1280, 800, true, 80, true);
 
 	GameController::Instance().init();
 	try {
@@ -21,7 +21,6 @@ int main(int argc, char ** argv) {
 			GameController::Instance().render();
 
 			TurriFramework::Instance().endSync();
-			SDL_Delay(1);
 		}
 	} catch (std::exception e) {
 		std::cerr << "ERROR: " << e.what() << std::endl;

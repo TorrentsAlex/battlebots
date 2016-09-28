@@ -13,7 +13,6 @@ private:
 	Window tWindow;
 	Camera tCamera;
 	OpenGLManagement tOpenGL;
-	InputManager tInput;
 	FPSLimiter tFPS;
 
 	TurriFramework() {};
@@ -29,9 +28,11 @@ public:
 
 	void init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS);
 	
+	// FPS methods
 	void startSync();
 	void endSync();
 
+	// Render methods
 	void update();
 	void startRender();
 	void stopRender();
@@ -42,7 +43,7 @@ public:
 	void renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 projectionMatrix);
 	void renderScene(Scene scene);
 
-	unsigned int keyPressed();
+	// Input methods 
 
 };
 

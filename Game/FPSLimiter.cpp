@@ -18,6 +18,9 @@ FPSLimiter::FPSLimiter(bool enable,int maxFPS, bool printFPS) : _enable(enable),
 }
 	
 void FPSLimiter::init(bool enable, int maxFPS, bool printFPS) {
+	_enable = enable;
+	_maxFPS = maxFPS;
+	_printFPS = printFPS;
 	//Initialize the array that will manage the last 10 rendered frames
 	for (int i = 0; i < NUM_SAMPLES; i++) {
 		_frameTimes[i] = (1000.0f / _maxFPS);

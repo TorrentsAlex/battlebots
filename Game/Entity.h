@@ -49,6 +49,5 @@ public:
 	// x y z angle
 	glm::vec4 getRotation();
 
-
 };
 

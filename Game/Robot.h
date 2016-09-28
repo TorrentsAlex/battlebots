@@ -2,7 +2,9 @@
 
 #include "Entity.h"
 
-class Robot : Entity {
+class Robot {
+private:
+
 public:
 	Robot();
 	~Robot();

@@ -281,5 +281,5 @@ float Car::getWidth() {
 
 
 void Car::rotateCarInMenu() {
-	cGameObject._angle += 0.01;
+	cGameObject._angle += 0.01f;
 }

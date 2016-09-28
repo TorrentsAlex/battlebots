@@ -15,7 +15,7 @@ class Car {
 private:
 	float life = 100;
 	float cSpeed = 0.001f;
-	float cBrake = 0.007;
+	float cBrake = 0.007f;
 
 	float cVelocity = 0;
 	float cVelocityMax = 5;

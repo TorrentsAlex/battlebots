@@ -11,7 +11,7 @@
 enum class CarVelocityState { STOP, ACCELERATE, BRAKE, REVERSE, DESACCELERATE, BOUNCE};
 enum class CarRotateState {STRAIGHT, RIGHT, LEFT, AXIS};
 
-class Car {
+class Car  {
 private:
 	float life = 100;
 	float cSpeed = 0.001f;

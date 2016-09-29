@@ -44,7 +44,7 @@ void TurriFramework::stopRender() {
 	tWindow.swapBuffer();
 }
 
-void TurriFramework::renderRobots(Entity robot) {
+void TurriFramework::renderRobots(Robot robot) {
 	
 	tOpenGL.sendMaterial(robot.getMaterial());
 	tOpenGL.sendObject(robot.getMesh(), robot.getGameObject(), robot.getNumVertices());
@@ -80,19 +80,11 @@ void TurriFramework::renderScene(Scene scene) {
 	tOpenGL.unbindMaps();
 }
 
+// send Camera values
 void TurriFramework::renderCamera() {
 	tOpenGL.sendViewerPosition(tCamera.getPosition());
 
 	tOpenGL.sendViewTransformationMatrix(tCamera.getViewMatrix(), tCamera.getProjectionCamera());
-}
-
-// send Camera values
-void TurriFramework::renderViewerPosition(glm::vec3 cameraPosition) {
-	tOpenGL.sendViewerPosition(cameraPosition);
-}
-
-void TurriFramework::renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 projectionMatrix) {
-	tOpenGL.sendViewTransformationMatrix(viewMatrix, projectionMatrix);
 }
 
 // Input methods

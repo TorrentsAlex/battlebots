@@ -7,6 +7,7 @@
 #include "FPSLimiter.h"
 
 #include "Scene.h"
+#include "Robot.h"
 
 class TurriFramework {
 private:
@@ -37,11 +38,10 @@ public:
 	void startRender();
 	void stopRender();
 
-	void renderRobots(Entity robot);
-	void renderViewerPosition(glm::vec3 cameraPosition);
-	void renderCamera();
-	void renderViewTransformation(glm::mat4 viewMatrix, glm::mat4 projectionMatrix);
+	void renderRobots(Robot robot);
 	void renderScene(Scene scene);
+	// Camera methods
+	void renderCamera();
 
 	// Input methods 
 

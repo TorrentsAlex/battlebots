@@ -9,7 +9,9 @@ void InputManager::init() {
 		gameController = SDL_JoystickOpen(0);
 		if (gameController == NULL) {
 			printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
-		} 
+		} else {
+			cout << "open controller " << gameController << endl;
+		}
 	}
 }
 

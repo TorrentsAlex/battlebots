@@ -40,7 +40,7 @@ void Game::render() {
 
 	TurriFramework::Instance().renderScene(gScene);
 
-	TurriFramework::Instance().renderRobots(robot1);
+	TurriFramework::Instance().renderRobot(robot1);
 
 	TurriFramework::Instance().stopRender();
 }

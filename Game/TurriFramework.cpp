@@ -44,7 +44,7 @@ void TurriFramework::stopRender() {
 	tWindow.swapBuffer();
 }
 
-void TurriFramework::renderRobots(Robot robot) {
+void TurriFramework::renderRobot(Entity robot) {
 	
 	tOpenGL.sendMaterial(robot.getMaterial());
 	tOpenGL.sendObject(robot.getMesh(), robot.getGameObject(), robot.getNumVertices());

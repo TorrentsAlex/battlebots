@@ -2,7 +2,7 @@
 
 void Game::init() {
 	cout << "init game" << endl;
-	gScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
+	gScene = SceneCreator::Instance().createScene("./resources/scenes/Scene1.json");
 }
 
 

@@ -171,6 +171,10 @@
     <ClCompile Include="GameController.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="InitScreen.cpp">
+      <Filter>Game\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -281,5 +285,9 @@
     <ClInclude Include="GameController.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="InitScreen.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsScreen.h" />
   </ItemGroup>
 </Project>

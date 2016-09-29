@@ -3,9 +3,11 @@
 
 #include "TurriIncludes.h"
 #include "Game.h"
+#include "InitScreen.h"
+#include "OptionsScreen.h"
 
 using namespace std;
-enum class GameState { INIT, MENU, PLAY, EXIT, FINISH };
+enum class GameState { INIT, OPTIONS, MENU, PLAY, EXIT, FINISH };
 
 class GameController {
 private:
@@ -27,6 +29,8 @@ public:
 	GameController(GameController const&) = delete;
 	void operator=(GameController const&) = delete;
 
+	// Change current state
+	void changeState(GameState nextState);
 	// init methods	
 	void init();
 	

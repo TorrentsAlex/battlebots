@@ -8,9 +8,23 @@ bool GameController::isRunning() {
 	return true;
 }
 
+void GameController::changeState(GameState nextstate) {
+	switch(nextstate) {
+	case GameState::MENU:
+		gCurrentScreen.changestate(new InitScreen());
+		break;
+	case GameState::PLAY:
+		gCurrentScreen.changestate(new Game());
+		break;
+	case GameState::OPTIONS:
+		gCurrentScreen.changestate(new OptionsScreen());
+		break;
+	}
+
+}
+
 void GameController::init() {
-	gGameState = GameState::PLAY;
-	gCurrentScreen.changestate(new Game());
+	changeState(GameState::MENU);
 }
 
 void GameController::input() {

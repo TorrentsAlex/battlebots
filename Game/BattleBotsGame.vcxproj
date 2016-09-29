@@ -167,6 +167,7 @@
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="ErrorManagement.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="InitScreen.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGLManagement.cpp" />
+    <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -203,6 +205,7 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="InitScreen.h" />
     <ClInclude Include="json\json-forwards.h" />
     <ClInclude Include="json\json.h" />
     <ClInclude Include="Light.h" />
@@ -215,6 +218,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="OpenGLManagement.h" />
+    <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Scene.h" />

@@ -22,9 +22,8 @@ public:
 	*/
 	static vector<vector<float>> LoadArrayFromFile(std::string fileName);
 	static vector<glm::vec3> LoadVec3FromFile(std::string fileName);
-	static OBJ* LoadOBJFromFile(std::string fileName);
 
-	static OBJ LoadOBJFromFile(std::string fileName, bool yes);
+	static OBJ LoadOBJFromFile(std::string fileName);
 
 	static void SaveArrayToFile(vector<vector<float>> vector, std::string fileName);
 

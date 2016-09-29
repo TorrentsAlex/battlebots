@@ -10,7 +10,7 @@ OBJ Geometry::LoadModelFromFile(std::string file) {
 	float xMin = 5000, xMax = 0, yMin = 50000, yMax = 0;
 	glm::vec3 currentVertex;
 	// read the file and add the vertex and the faces into the object
-	OBJ object = FileReader::LoadOBJFromFile(file, true);
+	OBJ object = FileReader::LoadOBJFromFile(file);
 
 	// Create the object with the vertices and faces  
 	object.mesh = new Vertex[object.faces.size()];

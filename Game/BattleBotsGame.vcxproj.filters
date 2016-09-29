@@ -174,7 +174,18 @@
     <ClCompile Include="InitScreen.cpp">
       <Filter>Game\Views</Filter>
     </ClCompile>
-    <ClCompile Include="OptionsScreen.cpp" />
+    <ClCompile Include="OptionsScreen.cpp">
+      <Filter>Game\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayersScreen.cpp">
+      <Filter>Game\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeScreen.cpp">
+      <Filter>Game\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="ArenaScreen.cpp">
+      <Filter>Game\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -288,6 +299,15 @@
     <ClInclude Include="InitScreen.h">
       <Filter>Game\Views</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="OptionsScreen.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayersScreen.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeScreen.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="ArenaScreen.h" />
   </ItemGroup>
 </Project>

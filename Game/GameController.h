@@ -5,9 +5,12 @@
 #include "Game.h"
 #include "InitScreen.h"
 #include "OptionsScreen.h"
+#include "PlayersScreen.h"
+#include "ModeScreen.h"
+#include "ArenaScreen.h"
 
 using namespace std;
-enum class GameState { INIT, OPTIONS, MENU, PLAY, EXIT, FINISH };
+enum class GameState { MENU, OPTIONS, PLAYERS, MODE, ARENA, PLAY, EXIT, FINISH };
 
 class GameController {
 private:

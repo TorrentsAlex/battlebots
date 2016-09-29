@@ -19,6 +19,15 @@ void GameController::changeState(GameState nextstate) {
 	case GameState::OPTIONS:
 		gCurrentScreen.changestate(new OptionsScreen());
 		break;
+	case GameState::PLAYERS:
+		gCurrentScreen.changestate(new PlayersScreen());
+		break;
+	case GameState::MODE:
+		gCurrentScreen.changestate(new ModeScreen());
+		break;
+	case GameState::ARENA:
+		gCurrentScreen.changestate(new ArenaScreen());
+		break;
 	}
 
 }

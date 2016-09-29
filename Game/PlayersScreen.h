@@ -3,21 +3,18 @@
 #include "Scene.h"
 #include "GameController.h"
 
-class OptionsScreen: public BaseScreen
+class PlayersScreen: public BaseScreen
 {
-
 private:
-
 
 	void init() override;
 	void input() override;
 	void update() override;
 	void render() override;
 	void clean() override;
-	void goToMenu();
+	void goToMode();
 
-	Scene optionsScene;
-
+	Scene playersScene;
 public:
 	
 };

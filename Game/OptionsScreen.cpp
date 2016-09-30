@@ -4,6 +4,7 @@
 
 
 void OptionsScreen::init() {
+	cout << "OPTIONS MENU!!"<< endl;
 	optionsScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
 }
 
@@ -26,9 +27,6 @@ void OptionsScreen::render() {
 	TurriFramework::Instance().stopRender();
 	// Resolution + Volumen
 	// RENDER
-	SDL_Delay(3000);
-	goToMenu();
-
 }
 
 void OptionsScreen::clean() {

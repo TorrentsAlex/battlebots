@@ -1,11 +1,8 @@
 #include "GameController.h"
 
-
-bool GameController::isRunning() {
-	if (gGameState == GameState::EXIT) {
-		return false;
-	}
-	return true;
+void GameController::init() {
+	running = true;
+	changeState(GameState::MENU);
 }
 
 void GameController::changeState(GameState nextstate) {
@@ -28,15 +25,14 @@ void GameController::changeState(GameState nextstate) {
 	case GameState::ARENA:
 		gCurrentScreen.changestate(new ArenaScreen());
 		break;
+	case GameState::EXIT:
+		running = false;
 	}
 
 }
 
-void GameController::init() {
-	changeState(GameState::MENU);
-}
-
 void GameController::input() {
+	InputManager::Instance().handleInput();
 	gCurrentScreen.input();
 }
 

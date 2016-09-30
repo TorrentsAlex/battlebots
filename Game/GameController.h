@@ -37,10 +37,10 @@ public:
 	// init methods	
 	void init();
 	
-	bool isRunning();
-
 	void input();
 	void update();
 	void render();
+
+	void quit();
 };
 

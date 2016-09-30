@@ -22,16 +22,26 @@ void InputManager::clean() {
 
 
 	//Copy the current key states to a data structure that contains the previous states
-void InputManager::update() {
+void InputManager::handleInput() {
 		//Loop through _keyMap using a for each loop, and copy it over to _previousKeyMap
 		//C++ 11 introduces the concept "for each loop" on data structures based on iterators that has begin and end
 	for (auto & it : _keyMap) {
 		//Copy in the position of the key (it->first), the value (it->second)
 		_previousKeyMap[it.first] = it.second;
 	}
-	//for (auto it = _keyMap.begin(); it != _keyMap.end(); it++) {
-	//	_previousKeyMap[it->first] = it->second;
-	//}		
+	
+	SDL_Event evnt;
+	while (SDL_PollEvent(&evnt)) {
+		switch (evnt.type) {
+		case SDL_QUIT:
+			GameController::Instance().quit();
+		case SDL_KEYDOWN:
+			pressKey(evnt.key.keysym.sym);
+			break;
+		case SDL_KEYUP:
+			releaseKey(evnt.key.keysym.sym);
+		}
+	}
 }
 
 

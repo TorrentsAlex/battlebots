@@ -62,6 +62,9 @@
     <Filter Include="Engine\Views">
       <UniqueIdentifier>{18ca16b7-aa42-4ba7-98ef-876a8657cbe1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Input\Command">
+      <UniqueIdentifier>{ecc886a6-1b53-462a-9566-120fa0c5ed9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -186,6 +189,9 @@
     <ClCompile Include="ArenaScreen.cpp">
       <Filter>Game\Views</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -309,5 +315,17 @@
       <Filter>Game\Views</Filter>
     </ClInclude>
     <ClInclude Include="ArenaScreen.h" />
+    <ClInclude Include="Command.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpCommand.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootCommand.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

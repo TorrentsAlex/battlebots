@@ -13,7 +13,7 @@ int main(int argc, char ** argv) {
 
 	GameController::Instance().init();
 	try {
-		while(GameController::Instance().isRunning()) {
+		while(TurriFramework::Instance().isRunning()) {
 			TurriFramework::Instance().startSync();
 
 			GameController::Instance().input();

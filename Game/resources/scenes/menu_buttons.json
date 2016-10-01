@@ -1,12 +1,12 @@
 {
 	"object" : "./resources/objects/button.obj",
-	"size" : 2,
+	"size" : 3,
 	"button0" : {
 		"name" : "start",
 		"position" : {
 			"x" : 20,
 			"y" : 20,
-			"z" : 0
+			"z" : 20
 		},
 		"texture_on" : "./resources/images/button_start_on.png",
 		"texture_off" : "./resources/images/button_start.png"
@@ -20,5 +20,15 @@
 		},
 		"texture_on" : "./resources/images/button_options_on.png",
 		"texture_off" : "./resources/images/button_options.png"
+	},
+	"button2" : {
+	"name" : "exit",
+	"position" : {
+		"x" : 20,
+		"y" : 20,
+		"z" : 0
+	},
+	"texture_on" : "./resources/images/button_exit_on.png",
+	"texture_off" : "./resources/images/button_exit.png"
 	}
 }

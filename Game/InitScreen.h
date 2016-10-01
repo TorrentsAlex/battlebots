@@ -1,10 +1,9 @@
 #pragma once
 #include "BaseScreen.h"
 #include "Scene.h"
-#include "Button.h"
+#include "ButtonManager.h"
 #include "GameController.h"
 
-enum class InitState {START, OPTIONS};
 
 class InitScreen : public BaseScreen {
 private:
@@ -19,9 +18,9 @@ private:
 
 	Scene menuScene;
 
+	ButtonManager iBManager;
 	vector<Button> iButtons;
 
-	InitState initState;
 
 public:
 

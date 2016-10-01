@@ -129,9 +129,10 @@ vector<Button> SceneCreator::createButtons(string file) {
 		buttonObject._translate.z = json[currentButton]["position"]["z"].asInt();
 		
 		buttonObject._scale = glm::vec3(1, 1, 1);
-		buttonObject._angle = 180;
-		buttonObject._rotation = glm::vec3(0,0,1);
+		buttonObject._angle = 0;
+		buttonObject._rotation = glm::vec3(0,0,0);
 		
+		newButton.setName(json[currentButton]["name"].asString());
 		newButton.setGameObject(buttonObject);
 		newButton.setMaterial(mat);
 		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_off"].asString()));

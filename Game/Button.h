@@ -8,6 +8,8 @@ enum class ButtonState {
 
 class Button : public Entity {
 private:
+	string bName;
+
 	GLuint bTextureOff;
 	GLuint bTextureOn;
 	ButtonState currentState;
@@ -16,9 +18,14 @@ public:
 	Button();
 	~Button();
 
+
 	void setTextureOff(GLuint textureOff);
-	void changeState();
+	void changeStateOn();
+	void changeStateOff();
 
 	bool isOn();
+
+	void setName(string name);
+	string getName();
 };
 

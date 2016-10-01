@@ -65,6 +65,9 @@
     <Filter Include="Engine\Systems\Input\Command">
       <UniqueIdentifier>{ecc886a6-1b53-462a-9566-120fa0c5ed9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Entities\EntityManagers">
+      <UniqueIdentifier>{14fdc447-2e65-46d2-bbf9-374489cbe451}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonManager.cpp">
+      <Filter>Game\Entities\EntityManagers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +332,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonManager.h">
+      <Filter>Game\Entities\EntityManagers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

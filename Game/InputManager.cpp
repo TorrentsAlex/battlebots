@@ -13,11 +13,15 @@ void InputManager::init() {
 			cout << "open controller " << gameController << endl;
 		}
 	}
+	// mapping 
+	ButtonA = new JumpCommand();
+	ButtonX = new ShootCommand();
 }
 
 void InputManager::clean() {
 	SDL_JoystickClose(gameController);
-
+	delete ButtonA;
+	delete ButtonX;
 }
 
 
@@ -29,21 +33,30 @@ void InputManager::handleInput() {
 		//Copy in the position of the key (it->first), the value (it->second)
 		_previousKeyMap[it.first] = it.second;
 	}
-	
+
 	SDL_Event evnt;
+
 	while (SDL_PollEvent(&evnt)) {
 		switch (evnt.type) {
 		case SDL_QUIT:
-			GameController::Instance().quit();
+			TurriFramework::Instance().quit();
+			break;
 		case SDL_KEYDOWN:
 			pressKey(evnt.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
 			releaseKey(evnt.key.keysym.sym);
+			break;
 		}
 	}
 }
 
+Command* InputManager::getGamePadCommand() {
+	if (isKeyPressed(SDLK_a)) return ButtonA;
+	if (isKeyPressed(SDLK_s)) return ButtonX;
+
+	return nullptr;
+}
 
 void InputManager::pressKey(unsigned int keyID) {
 	// Here we are treating _keyMap as an associative array.

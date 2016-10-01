@@ -1,0 +1,24 @@
+{
+	"object" : "./resources/objects/button.obj",
+	"size" : 2,
+	"button0" : {
+		"name" : "start",
+		"position" : {
+			"x" : 20,
+			"y" : 20,
+			"z" : 0
+		},
+		"texture_on" : "./resources/images/button_start_on.png",
+		"texture_off" : "./resources/images/button_start.png"
+	},
+	"button1" : {
+		"name" : "options",
+		"position" : {
+			"x" : 20,
+			"y" : 20,
+			"z" : 10
+		},
+		"texture_on" : "./resources/images/button_options_on.png",
+		"texture_off" : "./resources/images/button_options.png"
+	}
+}

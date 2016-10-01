@@ -16,6 +16,11 @@ void TurriFramework::init(string name, int screenWidth, int screenheight, bool e
 	tCamera.initializeZBuffer(tWindow.getWindowResolution());
 	tCamera.setPerspectiveCamera();
 	tCamera.setViewMatrix();
+	running = true;
+}
+
+bool TurriFramework::isRunning() {
+	return running;
 }
 
 void TurriFramework::startSync() {
@@ -28,7 +33,7 @@ void TurriFramework::endSync() {
 
 void TurriFramework::update() {
 	// Update Inputs
-	InputManager::Instance().update();
+	//InputManager::Instance().update();
 }
 
 // Render methods
@@ -44,7 +49,7 @@ void TurriFramework::stopRender() {
 	tWindow.swapBuffer();
 }
 
-void TurriFramework::renderRobot(Entity robot) {
+void TurriFramework::renderEntity(Entity robot) {
 	
 	tOpenGL.sendMaterial(robot.getMaterial());
 	tOpenGL.sendObject(robot.getMesh(), robot.getGameObject(), robot.getNumVertices());
@@ -88,3 +93,7 @@ void TurriFramework::renderCamera() {
 }
 
 // Input methods
+
+void TurriFramework::quit() {
+	running = false;
+}

@@ -120,6 +120,7 @@ vec4 calculateLights(Light light) {
 void main() {
 	vec4 tempColor;
 	float power;
+
 	//The final color can be computed using different approaches
 	finalColor = texture(textureData, fragmentTextureCoordinates);
 	
@@ -129,8 +130,10 @@ void main() {
 		}
 
 		finalColor = tempColor;
-		if (finalColor.a < 0.5) {
-			discard;
-		}
+	}
+
+	// Alpha blending
+	if (finalColor.a < 0.9) {
+		discard;
 	}
 }

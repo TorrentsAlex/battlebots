@@ -19,6 +19,8 @@ private:
 
 	bool running;
 
+	void clearMaps();
+
 public:
 
 	static TurriFramework& Instance() {
@@ -41,8 +43,12 @@ public:
 	void startRender();
 	void stopRender();
 
-	void renderEntity(Entity robot);
+	void renderEntity(Entity entity);
 	void renderScene(Scene scene);
+
+	void renderLights(vector<Light> lights);
+	void disableLights();
+	
 	// Camera methods
 	void renderCamera();
 

@@ -49,23 +49,33 @@ void TurriFramework::stopRender() {
 	tWindow.swapBuffer();
 }
 
-void TurriFramework::renderEntity(Entity robot) {
+void TurriFramework::clearMaps() {
+	tOpenGL.unbindMaps();
+}
+
+void TurriFramework::renderLights(vector<Light> lights) {
+	tOpenGL.sceneWithLights(true);
+	tOpenGL.sendLight(lights);
+}
+
+void TurriFramework::disableLights() {
+	tOpenGL.sceneWithLights(false);
+}
+
+void TurriFramework::renderEntity(Entity entity) {
 	
-	tOpenGL.sendMaterial(robot.getMaterial());
-	tOpenGL.sendObject(robot.getMesh(), robot.getGameObject(), robot.getNumVertices());
+	tOpenGL.sendMaterial(entity.getMaterial());
+	tOpenGL.sendObject(entity.getMesh(), entity.getGameObject(), entity.getNumVertices());
+	clearMaps();
 }
 
 void TurriFramework::renderScene(Scene scene) {
-	tOpenGL.sceneWithLights(true);
-	tOpenGL.sendLight(scene.getLights());
-
 	// Terrain
 	Entity terrain = scene.getTerrain();
-
-	// send material
 	tOpenGL.sendMaterial(terrain.getMaterial());
 	tOpenGL.sendObject(terrain.getMesh(), terrain.getGameObject(), terrain.getNumVertices());
-	tOpenGL.unbindMaps();
+	
+	clearMaps();
 
 	// Decoration
 	vector<Entity> vectorDecoration = scene.getDecoration();
@@ -73,16 +83,9 @@ void TurriFramework::renderScene(Scene scene) {
 	tOpenGL.sendMaterial(vectorDecoration.at(0).getMaterial());
 	for (Entity nextDecoration : vectorDecoration) {
 		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
-	}
-	tOpenGL.unbindMaps();
-
-	tOpenGL.sceneWithLights(false);
-
-	// SkyBox
-	Entity skyBox = scene.getSkyBox();
-	tOpenGL.sendMaterial(skyBox.getMaterial());
-	tOpenGL.sendObject(skyBox.getMesh(), skyBox.getGameObject(), skyBox.getNumVertices());
-	tOpenGL.unbindMaps();
+	}	
+	
+	clearMaps();
 }
 
 // send Camera values
@@ -94,6 +97,8 @@ void TurriFramework::renderCamera() {
 
 // Input methods
 
+
+// Finish the game loop
 void TurriFramework::quit() {
 	running = false;
 }

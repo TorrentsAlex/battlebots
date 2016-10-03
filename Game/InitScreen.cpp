@@ -41,15 +41,24 @@ void InitScreen::update() {
 void InitScreen::render() {
 
 	TurriFramework::Instance().startRender();
-
+	// Render camera and projections views
 	TurriFramework::Instance().renderCamera();
+	
+	// send the lights to shaders
+	TurriFramework::Instance().renderLights(menuScene.getLights());
+
 	vector<Button> buttons = iBManager.getButtons();
-	for (int i = 0; i < buttons.size(); i++) {
+		for (int i = 0; i < buttons.size(); i++) {
 		TurriFramework::Instance().renderEntity(buttons.at(i));
 	}
 	TurriFramework::Instance().renderScene(menuScene);
-	TurriFramework::Instance().stopRender();
 
+	// Render the skybox without lights
+	TurriFramework::Instance().disableLights();
+	TurriFramework::Instance().renderEntity(menuScene.getSkyBox());
+
+
+	TurriFramework::Instance().stopRender();
 }
 
 void InitScreen::clean() {

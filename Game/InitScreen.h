@@ -1,13 +1,13 @@
 #pragma once
 #include "BaseScreen.h"
 #include "Scene.h"
+#include "ButtonManager.h"
 #include "GameController.h"
 
-class InitScreen : public BaseScreen
-{
 
+class InitScreen : public BaseScreen {
 private:
-
+	
 	void init() override;
 	void input() override;
 	void update() override;
@@ -17,6 +17,10 @@ private:
 	void goToPlayers();
 
 	Scene menuScene;
+
+	ButtonManager iBManager;
+	vector<Button> iButtons;
+
 
 public:
 

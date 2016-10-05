@@ -10,6 +10,8 @@
 
 #include "Light.h"
 
+#include "Button.h"
+
 using namespace std;
 //using json = nlohmann::json;
 
@@ -28,5 +30,6 @@ public:
 	void operator=(SceneCreator const&) = delete;
 
 	Scene createScene(string file);
+	vector<Button> createButtons(string file);
 };
 

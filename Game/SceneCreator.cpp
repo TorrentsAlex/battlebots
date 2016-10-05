@@ -1,7 +1,5 @@
 #include "SceneCreator.h"
 
-
-
 Scene SceneCreator::createScene(string file) {
 	cout << "creating scene" << endl;
 	Scene newScene;
@@ -103,4 +101,43 @@ Scene SceneCreator::createScene(string file) {
 	newScene.setDecoration(vEntityDecorations);
 
 	return newScene;
+}
+
+vector<Button> SceneCreator::createButtons(string file) {
+	string buttonsString = FileReader::LoadStringFromFile(file);
+	Json::Reader reader;
+	Json::Value json;
+
+	reader.parse(buttonsString, json);
+	int size = json["size"].asInt();
+	OBJ object = Geometry::LoadModelFromFile(json["object"].asString());
+	vector<Button> vectorButtons;
+	for (int i = 0; i < size; i++) {
+		string currentButton = "button" + std::to_string(i);
+		Button newButton;
+		newButton.setOBJ(object);
+
+		Material mat;
+		mat.ambient = glm::vec3(1, 1, 1);
+		mat.diffuse = glm::vec3(1, 1, 1);
+		mat.specular = glm::vec3(1, 1, 1);
+
+		mat.textureMap = TextureManager::Instance().getTextureID(json[currentButton]["texture_on"].asString());
+		GameObject buttonObject;
+		buttonObject._translate.x = json[currentButton]["position"]["x"].asInt();
+		buttonObject._translate.y = json[currentButton]["position"]["y"].asInt();
+		buttonObject._translate.z = json[currentButton]["position"]["z"].asInt();
+		
+		buttonObject._scale = glm::vec3(1, 1, 1);
+		buttonObject._angle = 0;
+		buttonObject._rotation = glm::vec3(0,0,0);
+		
+		newButton.setName(json[currentButton]["name"].asString());
+		newButton.setGameObject(buttonObject);
+		newButton.setMaterial(mat);
+		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_off"].asString()));
+		vectorButtons.push_back(newButton);
+	}
+
+	return vectorButtons;
 }

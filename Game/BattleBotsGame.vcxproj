@@ -162,6 +162,8 @@
     <ClCompile Include="AllvsAll.cpp" />
     <ClCompile Include="ArenaScreen.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CollisionDetector.cpp" />
@@ -201,9 +203,12 @@
     <ClInclude Include="ArenaScreen.h" />
     <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="CollisionDetector.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="ErrorManagement.h" />
     <ClInclude Include="FileReader.h" />
@@ -212,6 +217,7 @@
     <ClInclude Include="InitScreen.h" />
     <ClInclude Include="json\json-forwards.h" />
     <ClInclude Include="json\json.h" />
+    <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Game.h" />
@@ -229,6 +235,7 @@
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneCreator.h" />
+    <ClInclude Include="ShootCommand.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="StateManager.h" />

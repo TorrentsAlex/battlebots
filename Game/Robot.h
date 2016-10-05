@@ -1,11 +1,12 @@
 #pragma once
 
+#include <iostream>
+
 #include "Entity.h"
-#include "TurriFramework.h"
 
 class Robot : public Entity {
 private:
-	SDL_Joystick* rGamePad;
+//	SDL_Joystick* rGamePad;
 
 public:
 	Robot();
@@ -14,6 +15,10 @@ public:
 	void update();
 	void input();
 
-	void setGamePad(SDL_Joystick* gamepad);
+	//void setGamePad(SDL_Joystick* gamepad);
+
+	void jump();
+	void shoot();
+
 };
 

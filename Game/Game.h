@@ -18,6 +18,6 @@ private:
 	void clean() override;
 
 	Scene gScene;
-	Robot robot1;
+	Robot* robot1;
 
 };

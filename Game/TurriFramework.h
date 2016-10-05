@@ -7,7 +7,6 @@
 #include "FPSLimiter.h"
 
 #include "Scene.h"
-#include "TurriIncludes.h"
 
 class TurriFramework {
 private:
@@ -17,6 +16,10 @@ private:
 	FPSLimiter tFPS;
 
 	TurriFramework() {};
+
+	bool running;
+
+	void clearMaps();
 
 public:
 
@@ -29,6 +32,8 @@ public:
 
 	void init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS);
 	
+	bool isRunning();
+
 	// FPS methods
 	void startSync();
 	void endSync();
@@ -38,12 +43,17 @@ public:
 	void startRender();
 	void stopRender();
 
-	void renderRobot(Entity robot);
+	void renderEntity(Entity entity);
 	void renderScene(Scene scene);
+
+	void renderLights(vector<Light> lights);
+	void disableLights();
+	
 	// Camera methods
 	void renderCamera();
 
 	// Input methods 
+	void quit();
 
 };
 

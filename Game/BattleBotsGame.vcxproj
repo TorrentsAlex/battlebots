@@ -214,6 +214,7 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="GamePad.h" />
     <ClInclude Include="InitScreen.h" />
     <ClInclude Include="JoystickCommand.h" />
     <ClInclude Include="json\json-forwards.h" />

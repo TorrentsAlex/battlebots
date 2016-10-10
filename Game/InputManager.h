@@ -62,8 +62,6 @@ private:
 	void setMouseCoords(int x, int y);
 	bool wasKeyDown(unsigned int keyID);
 
-	SDL_Joystick* gameController;
-
 	GamePad* pad1;
 	GamePad* pad2;
 	GamePad* pad3;

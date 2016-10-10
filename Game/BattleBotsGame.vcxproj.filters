@@ -339,5 +339,8 @@
     <ClInclude Include="JoystickCommand.h">
       <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
+    <ClInclude Include="GamePad.h">
+      <Filter>Engine\Systems\Input</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

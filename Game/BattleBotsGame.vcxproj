@@ -215,6 +215,7 @@
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="InitScreen.h" />
+    <ClInclude Include="JoystickCommand.h" />
     <ClInclude Include="json\json-forwards.h" />
     <ClInclude Include="json\json.h" />
     <ClInclude Include="JumpCommand.h" />

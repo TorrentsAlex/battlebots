@@ -14,16 +14,15 @@ void InputManager::init() {
 		}
 	}
 	// mapping 
-	ButtonA = new JumpCommand();
-	ButtonX = new ShootCommand();
+	pad1->iButton_A = new JumpCommand();
+	pad1->iButton_X = new ShootCommand();
 }
 
 void InputManager::clean() {
 	SDL_JoystickClose(gameController);
-	delete ButtonA;
-	delete ButtonX;
+	pad1->clean();
+	delete pad1;
 }
-
 
 	//Copy the current key states to a data structure that contains the previous states
 void InputManager::handleInput() {
@@ -51,10 +50,29 @@ void InputManager::handleInput() {
 	}
 }
 
-Command* InputManager::getGamePadCommand() {
-	if (isKeyPressed(SDLK_a)) return ButtonA;
-	if (isKeyPressed(SDLK_s)) return ButtonX;
+Command* InputManager::getGamePadCommand(GamePad& pad) {
+	// Right buttons
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_A)) return pad.iButton_A;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_B)) return pad.iButton_B;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_X)) return pad.iButton_X;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_Y)) return pad.iButton_Y;
+	
+	// DPAD
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_UP)) return pad.iButton_UP;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_DOWN)) return pad.iButton_DOWN;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_LEFT)) return pad.iButton_LEFT;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) return pad.iButton_RIGHT;
+	
+	// Buttons from joystick
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_LEFTSTICK)) return pad.iButton_L3;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_RIGHTSTICK)) return pad.iButton_R3; 
 
+	//
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) return pad.iButton_LB;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) return pad.iButton_RB;
+
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_BACK)) return pad.iButton_SELECT;
+	if (isKeyPressed(SDL_CONTROLLER_BUTTON_START)) return pad.iButton_START;
 	return nullptr;
 }
 

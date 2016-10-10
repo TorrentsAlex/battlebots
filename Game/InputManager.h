@@ -8,11 +8,13 @@
 #include "Command.h"
 #include "ShootCommand.h"
 #include "JumpCommand.h"
-
+#include "GamePad.h"
 
 // Input manager stores a key map that maps SDL_Keys to booleans.
 // If the value in the key map is true, then the key is pressed.
 // Otherwise, it is released.
+
+
 class InputManager {
 public:
 
@@ -34,7 +36,7 @@ public:
 	unsigned int keyPressed();
 
 	// Game Pad buttons
-	Command* getGamePadCommand();
+	Command* getGamePadCommand(GamePad& pad);
 		
 		//Returns true if the key is held down
 	bool isKeyDown(unsigned int keyID);
@@ -50,6 +52,7 @@ private:
 
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
 	std::unordered_map<unsigned int, bool> _keyMap;
+
 	glm::ivec2 _mouseCoords;
 	
 	// gestionate keyboard inputs
@@ -61,8 +64,8 @@ private:
 
 	SDL_Joystick* gameController;
 
-	// Commands
-	Command* ButtonA;
-	Command* ButtonX;
-
+	GamePad* pad1;
+	GamePad* pad2;
+	GamePad* pad3;
+	GamePad* pad4;
 };

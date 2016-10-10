@@ -20,5 +20,7 @@ public:
 	void jump();
 	void shoot();
 
+	void pointGun(float x, float y);
+
 };
 

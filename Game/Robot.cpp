@@ -24,3 +24,7 @@ void Robot::jump() {
 void Robot::shoot() {
 	cout << "shoot" << endl;
 }
+
+void Robot::pointGun(float x, float y) {
+
+}

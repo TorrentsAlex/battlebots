@@ -320,7 +320,6 @@
     <ClInclude Include="ModeScreen.h">
       <Filter>Game\Views</Filter>
     </ClInclude>
-
     <ClInclude Include="ArenaScreen.h" />
     <ClInclude Include="Command.h">
       <Filter>Engine\Systems\Input\Command</Filter>
@@ -336,7 +335,9 @@
     </ClInclude>
     <ClInclude Include="ButtonManager.h">
       <Filter>Game\Entities\EntityManagers</Filter>
-
+    </ClInclude>
+    <ClInclude Include="JoystickCommand.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

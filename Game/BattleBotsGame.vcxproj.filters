@@ -324,23 +324,17 @@
     <ClInclude Include="Command.h">
       <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
-    <ClInclude Include="JumpCommand.h">
-      <Filter>Engine\Systems\Input\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="ShootCommand.h">
-      <Filter>Engine\Systems\Input\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="ButtonManager.h">
       <Filter>Game\Entities\EntityManagers</Filter>
     </ClInclude>
-    <ClInclude Include="JoystickCommand.h">
-      <Filter>Engine\Systems\Input\Command</Filter>
-    </ClInclude>
     <ClInclude Include="GamePad.h">
       <Filter>Engine\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonCommands.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

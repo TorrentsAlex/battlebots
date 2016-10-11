@@ -23,7 +23,7 @@ void InitScreen::input() {
 	if (InputManager::Instance().isKeyPressed(SDLK_RETURN)) {
 		string currentButton = iBManager.getCurrentButton();
 		if (currentButton.compare("start") == 0) {
-			cout << "start" << endl;
+			GameController::Instance().changeState(GameState::PLAY);
 		}// goToPlayers;
 		if (currentButton.compare("options") == 0) { 
 			cout << "options" << endl; 

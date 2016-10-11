@@ -2,24 +2,42 @@
 
 
 void InputManager::init() {
+	pad1 = new GamePad();
+	//SDL_GameControllerAddMappingsFromFile("./resources/gamecontrollerdb.txt");
 	if (SDL_NumJoysticks() < 1) {
 		printf("Warning: No joysticks connected!\n");
 	} else {
 		//Load joystick
-		gameController = SDL_JoystickOpen(0);
-		if (gameController == NULL) {
+		pad1->gameController = SDL_GameControllerOpen(0);
+		if (pad1->gameController == NULL) {
 			printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
 		} else {
-			cout << "open controller " << gameController << endl;
+			cout << "open controller " << pad1->gameController << endl;
 		}
 	}
 	// mapping 
 	pad1->iButton_A = new JumpCommand();
-	pad1->iButton_X = new ShootCommand();
+	pad1->iButton_X = new ShootCommand();	
+	pad1->iButton_Y = new Y();
+	pad1->iButton_B = new B();
+
+	pad1->iButton_UP = new UP();
+	pad1->iButton_DOWN = new Down();
+	pad1->iButton_RIGHT = new Right();
+	pad1->iButton_LEFT = new Left();
+
+	pad1->iButton_LB = new Lb();
+	pad1->iButton_RB = new RB();
+
+	pad1->iButton_SELECT = new Select();
+	pad1->iButton_START = new Start();
+
+	pad1->iButton_L3 = new L3();
+	pad1->iButton_R3 = new R3();
 }
 
 void InputManager::clean() {
-	SDL_JoystickClose(gameController);
+	SDL_GameControllerClose(pad1->gameController);
 	pad1->clean();
 	delete pad1;
 }
@@ -50,29 +68,27 @@ void InputManager::handleInput() {
 	}
 }
 
-Command* InputManager::getGamePadCommand(GamePad& pad) {
-	// Right buttons
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_A)) return pad.iButton_A;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_B)) return pad.iButton_B;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_X)) return pad.iButton_X;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_Y)) return pad.iButton_Y;
-	
-	// DPAD
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_UP)) return pad.iButton_UP;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_DOWN)) return pad.iButton_DOWN;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_LEFT)) return pad.iButton_LEFT;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) return pad.iButton_RIGHT;
-	
-	// Buttons from joystick
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_LEFTSTICK)) return pad.iButton_L3;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_RIGHTSTICK)) return pad.iButton_R3; 
+Command* InputManager::getGamePadCommand() {
 
-	//
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) return pad.iButton_LB;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) return pad.iButton_RB;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_A))return pad1->iButton_A;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_B))return pad1->iButton_B;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_X))return pad1->iButton_X;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_Y))return pad1->iButton_Y;
 
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_BACK)) return pad.iButton_SELECT;
-	if (isKeyPressed(SDL_CONTROLLER_BUTTON_START)) return pad.iButton_START;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN))return pad1->iButton_DOWN;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP))return pad1->iButton_UP;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))return pad1->iButton_RIGHT;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT))return pad1->iButton_LEFT;
+	
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))return pad1->iButton_L3;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))return pad1->iButton_R3;
+
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_BACK))return pad1->iButton_SELECT;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_START))return pad1->iButton_START;
+	
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))return pad1->iButton_LB;
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))return pad1->iButton_RB;
+
 	return nullptr;
 }
 
@@ -129,7 +145,7 @@ bool InputManager::isKeyPressed(unsigned int keyID) {
 }	
 
 int InputManager::getAxis() {
-	return 	SDL_JoystickGetAxis(gameController, 0);
+	return -1;//SDL_JoystickGetAxis(pad1->gameController, 0);
 }
 
 unsigned int InputManager::keyPressed() {

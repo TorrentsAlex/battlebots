@@ -27,6 +27,7 @@ int main(int argc, char ** argv) {
 		system("pause");
 	}
 	TextureManager::Instance().deleteTextures();
+	InputManager::Instance().clean();
 	//TurriFramework::Instance().clean();
 
 	return 0;

@@ -2,8 +2,7 @@
 
 struct GamePad {
 
-	SDL_Joystick* gameController;
-
+	SDL_GameController* gameController;
 
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
 	std::unordered_map<unsigned int, bool> _keyMap;

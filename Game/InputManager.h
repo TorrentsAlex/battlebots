@@ -6,8 +6,7 @@
 #include "TurriFramework.h"
 
 #include "Command.h"
-#include "ShootCommand.h"
-#include "JumpCommand.h"
+#include "ButtonCommands.h"
 #include "GamePad.h"
 
 // Input manager stores a key map that maps SDL_Keys to booleans.
@@ -36,7 +35,7 @@ public:
 	unsigned int keyPressed();
 
 	// Game Pad buttons
-	Command* getGamePadCommand(GamePad& pad);
+	Command* getGamePadCommand();
 		
 		//Returns true if the key is held down
 	bool isKeyDown(unsigned int keyID);

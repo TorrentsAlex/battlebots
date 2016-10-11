@@ -201,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="AllvsAll.h" />
     <ClInclude Include="ArenaScreen.h" />
+    <ClInclude Include="AxisCommand.h" />
     <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Button.h" />

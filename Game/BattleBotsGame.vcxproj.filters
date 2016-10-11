@@ -320,7 +320,6 @@
     <ClInclude Include="ModeScreen.h">
       <Filter>Game\Views</Filter>
     </ClInclude>
-    <ClInclude Include="ArenaScreen.h" />
     <ClInclude Include="Command.h">
       <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
@@ -334,6 +333,12 @@
       <Filter>Engine\Systems\Input</Filter>
     </ClInclude>
     <ClInclude Include="ButtonCommands.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ArenaScreen.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisCommand.h">
       <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
   </ItemGroup>

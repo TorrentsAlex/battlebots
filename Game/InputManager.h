@@ -7,12 +7,14 @@
 
 #include "Command.h"
 #include "ButtonCommands.h"
+#include "AxisCommand.h"
 #include "GamePad.h"
 
 // Input manager stores a key map that maps SDL_Keys to booleans.
 // If the value in the key map is true, then the key is pressed.
 // Otherwise, it is released.
 
+const int JOYSTICK_DEAD_ZONE = 8000;
 
 class InputManager {
 public:
@@ -29,13 +31,15 @@ public:
 	void clean();
 
 	void handleInput();
+
 	
-		//Returns true if the key was just pressed
+	//Returns true if the key was just pressed
 	bool isKeyPressed(unsigned int keyID); 
 	unsigned int keyPressed();
 
 	// Game Pad buttons
-	Command* getGamePadCommand();
+	std::vector<Command*> getGamePadCommand();
+	std::vector<JoystickCommand*> getGamePadJoysticks();
 		
 		//Returns true if the key is held down
 	bool isKeyDown(unsigned int keyID);
@@ -47,7 +51,6 @@ public:
 private:
 
 	InputManager() {}
-
 
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
 	std::unordered_map<unsigned int, bool> _keyMap;

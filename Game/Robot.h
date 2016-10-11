@@ -7,6 +7,7 @@
 class Robot : public Entity {
 private:
 //	SDL_Joystick* rGamePad;
+	//GamePad* gamepad;
 
 public:
 	Robot();

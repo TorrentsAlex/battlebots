@@ -27,6 +27,12 @@ struct GamePad {
 	Command* iButton_L3;
 	Command* iButton_R3;
 
+	JoystickCommand* iJoystick_LEFT; 
+	JoystickCommand* iJoystick_RIGHT;
+
+	JoystickCommand* iJoystick_LEFT_SHOULDER; 
+	JoystickCommand* iJoystick_RIGHT_SHOULDER;
+	
 	void clean() {
 		delete iButton_A;
 		delete iButton_X;
@@ -46,5 +52,11 @@ struct GamePad {
 
 		delete iButton_L3;
 		delete iButton_R3;
+
+		delete iJoystick_LEFT;
+		delete iJoystick_RIGHT;
+
+		delete iJoystick_LEFT_SHOULDER;
+		delete iJoystick_RIGHT_SHOULDER;
 	}
 };

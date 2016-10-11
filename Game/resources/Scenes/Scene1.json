@@ -14,7 +14,6 @@
 		"material" : "./resources/materials/metal.json"
 	},
 	"lights" : [
-		"./resources/materials/lights/directional_white.json",
-		"./resources/materials/lights/directional_red.json"
+		"./resources/materials/lights/directional_white.json"
 	]
 }

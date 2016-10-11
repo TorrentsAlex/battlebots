@@ -82,7 +82,6 @@ Scene SceneCreator::createScene(string file) {
 
 		// position
 		
-
 		// direction
 		direction.x = currentLight["direction"]["x"].asFloat();
 		direction.y = currentLight["direction"]["y"].asFloat();

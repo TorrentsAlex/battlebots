@@ -25,9 +25,19 @@ void Game::init() {
 }
 
 void Game::input() {
-	Command* com = InputManager::Instance().getGamePadCommand();
-	if (com) {
-		com->execute(*robot1);
+	// Joystick
+	std::vector<JoystickCommand*> joystickComm = InputManager::Instance().getGamePadJoysticks();
+	for (JoystickCommand* jcom: joystickComm) {
+		if (jcom) {
+			jcom->execute(*robot1);
+		}
+	}
+	// Buttons
+	std::vector<Command*> commands = InputManager::Instance().getGamePadCommand();
+	for (Command* com : commands) {
+		if (com) {
+			com->execute(*robot1);
+		}
 	}
 }
 
@@ -35,9 +45,6 @@ void Game::update() {
 	GameObject robotObject = robot1->getGameObject();
 	robotObject._angle += 1.50f;
 	robot1->setGameObject(robotObject);
-
-	
-
 }
 
 void Game::render() {
@@ -45,10 +52,15 @@ void Game::render() {
 
 	TurriFramework::Instance().renderCamera();
 
+	TurriFramework::Instance().renderLights(gScene.getLights());
+		TurriFramework::Instance().renderEntity(*robot1);
+
 	TurriFramework::Instance().renderScene(gScene);
 
-	TurriFramework::Instance().renderEntity(*robot1);
+	TurriFramework::Instance().disableLights();
 
+	
+	TurriFramework::Instance().renderEntity(gScene.getSkyBox());
 	TurriFramework::Instance().stopRender();
 }
 

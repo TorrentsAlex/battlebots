@@ -18,6 +18,7 @@ void InputManager::init() {
 	// mapping 
 	pad1->iButton_A = new JumpCommand();
 	pad1->iButton_X = new ShootCommand();	
+
 	pad1->iButton_Y = new Y();
 	pad1->iButton_B = new B();
 
@@ -34,6 +35,12 @@ void InputManager::init() {
 
 	pad1->iButton_L3 = new L3();
 	pad1->iButton_R3 = new R3();
+
+	pad1->iJoystick_LEFT = new LeftJoystick();
+	pad1->iJoystick_RIGHT = new RightJoystick();
+
+	pad1->iJoystick_LEFT_SHOULDER = new LeftShoulder();
+	pad1->iJoystick_RIGHT_SHOULDER = new RightShoulder();
 }
 
 void InputManager::clean() {
@@ -68,28 +75,80 @@ void InputManager::handleInput() {
 	}
 }
 
-Command* InputManager::getGamePadCommand() {
+std::vector<JoystickCommand*> InputManager::getGamePadJoysticks() {
+	std::vector<JoystickCommand*> commands;
 
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_A))return pad1->iButton_A;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_B))return pad1->iButton_B;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_X))return pad1->iButton_X;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_Y))return pad1->iButton_Y;
-
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN))return pad1->iButton_DOWN;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP))return pad1->iButton_UP;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))return pad1->iButton_RIGHT;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT))return pad1->iButton_LEFT;
+	int leftXAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_LEFTX);
+	int leftYAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_LEFTY);
+	// We want to ignore light taps, so we use a dead zone where input from the joystick is ignored
+	if ((leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) &&
+		(leftYAxis > JOYSTICK_DEAD_ZONE || leftYAxis < -JOYSTICK_DEAD_ZONE)) {
+		pad1->iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, leftYAxis));
+		commands.push_back(pad1->iJoystick_LEFT);
+	} else if (leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) {
+		pad1->iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, 0));
+		commands.push_back(pad1->iJoystick_LEFT);
+	} else if (leftYAxis > JOYSTICK_DEAD_ZONE || leftYAxis < -JOYSTICK_DEAD_ZONE) {
+		pad1->iJoystick_LEFT->setAxis(glm::vec2(0, leftYAxis));
+		commands.push_back(pad1->iJoystick_LEFT);
+	}
 	
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))return pad1->iButton_L3;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))return pad1->iButton_R3;
+	int rightXAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_RIGHTX);
+	int rightYAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_RIGHTY);
 
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_BACK))return pad1->iButton_SELECT;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_START))return pad1->iButton_START;
+	if ((rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) &&
+		(rightYAxis > JOYSTICK_DEAD_ZONE || rightYAxis < -JOYSTICK_DEAD_ZONE)) {
+		pad1->iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, rightYAxis));
+		commands.push_back(pad1->iJoystick_RIGHT);
+	}
+	else if (rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) {
+		pad1->iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, 0));
+		commands.push_back(pad1->iJoystick_RIGHT);
+	}
+	else if (rightYAxis > JOYSTICK_DEAD_ZONE || rightYAxis < -JOYSTICK_DEAD_ZONE) {
+		pad1->iJoystick_RIGHT->setAxis(glm::vec2(0, rightYAxis));
+		commands.push_back(pad1->iJoystick_RIGHT);
+	}
 	
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))return pad1->iButton_LB;
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))return pad1->iButton_RB;
+	// Shoulders
+	int shoulderLeft = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
+	if (shoulderLeft != 0) {
+		pad1->iJoystick_LEFT_SHOULDER->setAxis(glm::vec2(shoulderLeft, -1));
+		commands.push_back(pad1->iJoystick_LEFT_SHOULDER);
+	}
+	
+	int shoulderRight = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+	if (shoulderRight != 0) {
+		pad1->iJoystick_RIGHT_SHOULDER->setAxis(glm::vec2(shoulderRight, -1));
+		commands.push_back(pad1->iJoystick_RIGHT_SHOULDER);
+	}
+	
+	return commands;
+}
 
-	return nullptr;
+std::vector<Command*> InputManager::getGamePadCommand() {
+	std::vector<Command*> commands;
+
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_A)) commands.push_back(pad1->iButton_A);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_B))  commands.push_back(pad1->iButton_B);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_X))  commands.push_back(pad1->iButton_X);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_Y))  commands.push_back(pad1->iButton_Y);
+
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN))  commands.push_back(pad1->iButton_DOWN);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP))  commands.push_back(pad1->iButton_UP);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))  commands.push_back(pad1->iButton_RIGHT);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  commands.push_back(pad1->iButton_LEFT);
+	
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))  commands.push_back(pad1->iButton_L3);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))  commands.push_back(pad1->iButton_R3);
+
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_BACK))  commands.push_back(pad1->iButton_SELECT);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_START))  commands.push_back(pad1->iButton_START);
+	
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))  commands.push_back(pad1->iButton_LB);
+	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))  commands.push_back(pad1->iButton_RB);
+
+	return commands;
 }
 
 void InputManager::pressKey(unsigned int keyID) {

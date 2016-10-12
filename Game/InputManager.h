@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_map>
+#include <string>
 #include <glm/glm.hpp>
 #include "Window.h"
 
@@ -38,18 +39,25 @@ public:
 	unsigned int keyPressed();
 
 	// Game Pad buttons
-	std::vector<Command*> getGamePadCommand();
-	std::vector<JoystickCommand*> getGamePadJoysticks();
-		
+	std::vector<Command*> getGamePadCommand(GamePad& pad);
+	std::vector<JoystickCommand*> getGamePadJoysticks(GamePad& pad);
+
+	void getController(GamePad& pad);
+	void closeController(GamePad& pad);
+	void mapping(GamePad& pad);
+
 		//Returns true if the key is held down
 	bool isKeyDown(unsigned int keyID);
 	unsigned int keyDown();
 	int getAxis();
 
 	glm::ivec2 getMouseCoords() { return _mouseCoords; }
-
+	GamePad* pad1;
+	GamePad* pad2;
+	GamePad* pad3;
+	GamePad* pad4;
 private:
-
+	int numControllers;
 	InputManager() {}
 
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
@@ -64,8 +72,5 @@ private:
 	void setMouseCoords(int x, int y);
 	bool wasKeyDown(unsigned int keyID);
 
-	GamePad* pad1;
-	GamePad* pad2;
-	GamePad* pad3;
-	GamePad* pad4;
+	
 };

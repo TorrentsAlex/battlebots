@@ -3,26 +3,7 @@
 
 void InputManager::init() {
 	numControllers = 0;
-	//pad1 = new GamePad();
-//	pad2 = new GamePad();
-	//SDL_GameControllerAddMappingsFromFile("./resources/gamecontrollerdb.txt");
-	//if (SDL_NumJoysticks() < 1) {
-	//	printf("Warning: No joysticks connected!\n");
-	//} else {
-	//	//Load joystick
-	//	pad1->gameController = SDL_GameControllerOpen(0);
-	//	if (pad1->gameController == NULL) {
-	//		printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
-	//	} else {
-	//		cout << "open controller " << pad1->gameController << endl;
-	//	}
-	//	pad2->gameController = SDL_GameControllerOpen(1);
-	//	if (pad2->gameController == NULL) {
-	//		printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
-	//	} else {
-	//		cout << "open controller " << pad1->gameController << endl;
-	//	}
-	//}
+
 	pad1 = new GamePad();
 	pad2 = new GamePad();
 	
@@ -31,62 +12,7 @@ void InputManager::init() {
 
 	mapping(*pad1);
 	mapping(*pad2);
-	
-	//pad1->open();
-	//pad2->open();
-	
-	////// mapping 
-	//pad1->iButton_A = new JumpCommand();
-	//pad1->iButton_X = new ShootCommand();	
 
-	//pad1->iButton_Y = new Y();
-	//pad1->iButton_B = new B();
-
-	//pad1->iButton_UP = new UP();
-	//pad1->iButton_DOWN = new Down();
-	//pad1->iButton_RIGHT = new Right();
-	//pad1->iButton_LEFT = new Left();
-
-	//pad1->iButton_LB = new Lb();
-	//pad1->iButton_RB = new RB();
-
-	//pad1->iButton_SELECT = new Select();
-	//pad1->iButton_START = new Start();
-
-	//pad1->iButton_L3 = new L3();
-	//pad1->iButton_R3 = new R3();
-
-	//pad1->iJoystick_LEFT = new LeftJoystick();
-	//pad1->iJoystick_RIGHT = new RightJoystick();
-
-	//pad1->iJoystick_LEFT_SHOULDER = new LeftShoulder();
-	//pad1->iJoystick_RIGHT_SHOULDER = new RightShoulder();	// mapping 
-
-	//pad2->iButton_A = new JumpCommand();
-	//pad2->iButton_X = new ShootCommand();
-
-	//pad2->iButton_Y = new Y();
-	//pad2->iButton_B = new B();
-
-	//pad2->iButton_UP = new UP();
-	//pad2->iButton_DOWN = new Down();
-	//pad2->iButton_RIGHT = new Right();
-	//pad2->iButton_LEFT = new Left();
-
-	//pad2->iButton_LB = new Lb();
-	//pad2->iButton_RB = new RB();
-
-	//pad2->iButton_SELECT = new Select();
-	//pad2->iButton_START = new Start();
-
-	//pad2->iButton_L3 = new L3();
-	//pad2->iButton_R3 = new R3();
-
-	//pad2->iJoystick_LEFT = new LeftJoystick();
-	//pad2->iJoystick_RIGHT = new RightJoystick();
-
-	//pad2->iJoystick_LEFT_SHOULDER = new LeftShoulder();
-	//pad2->iJoystick_RIGHT_SHOULDER = new RightShoulder();
 }
 
 void InputManager::clean() {
@@ -180,33 +106,24 @@ std::vector<JoystickCommand*> InputManager::getGamePadJoysticks(GamePad& pad) {
 
 	int leftXAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_LEFTX);
 	int leftYAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_LEFTY);
+	//invert Y Axis
+	leftYAxis *= -1;
+
 	// We want to ignore light taps, so we use a dead zone where input from the joystick is ignored
-	if ((leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) &&
+	if ((leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) ||
 		(leftYAxis > JOYSTICK_DEAD_ZONE || leftYAxis < -JOYSTICK_DEAD_ZONE)) {
 		pad.iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, leftYAxis));
-		commands.push_back(pad.iJoystick_LEFT);
-	} else if (leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) {
-		pad.iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, 0));
-		commands.push_back(pad.iJoystick_LEFT);
-	} else if (leftYAxis > JOYSTICK_DEAD_ZONE || leftYAxis < -JOYSTICK_DEAD_ZONE) {
-		pad.iJoystick_LEFT->setAxis(glm::vec2(0, leftYAxis));
 		commands.push_back(pad.iJoystick_LEFT);
 	}
 	
 	int rightXAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_RIGHTX);
 	int rightYAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_RIGHTY);
+	// invert y axis
+	rightYAxis *= -1;
 
-	if ((rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) &&
+	if ((rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) ||
 		(rightYAxis > JOYSTICK_DEAD_ZONE || rightYAxis < -JOYSTICK_DEAD_ZONE)) {
 		pad.iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, rightYAxis));
-		commands.push_back(pad.iJoystick_RIGHT);
-	}
-	else if (rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) {
-		pad.iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, 0));
-		commands.push_back(pad.iJoystick_RIGHT);
-	}
-	else if (rightYAxis > JOYSTICK_DEAD_ZONE || rightYAxis < -JOYSTICK_DEAD_ZONE) {
-		pad.iJoystick_RIGHT->setAxis(glm::vec2(0, rightYAxis));
 		commands.push_back(pad.iJoystick_RIGHT);
 	}
 	

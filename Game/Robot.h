@@ -2,21 +2,25 @@
 
 #include <iostream>
 
-#include "Entity.h"
+#include "Bullet.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 class Robot : public Entity {
 private:
+	
+	float velocity = 0.5;
+	std::vector<Bullet> bullets;
+	Bullet currentBullet;
+	bool canShoot;
 
 public:
 	Robot();
 	~Robot();
 	glm::vec3 vectorForward;
 
-	void update();
+	virtual void update() override;
 	void input();
 	std::string name;
-	//void setGamePad(SDL_Joystick* gamepad);
-	//GamePad* gamepad;
 
 	void jump();
 	void shoot();
@@ -25,6 +29,12 @@ public:
 
 	void movement(glm::vec2 axis);
 	void rotation(glm::vec2 axis);
+
+
+	void setBullet(Bullet nextBullet);
+
+	vector<Bullet> getBullets();
+
 
 };
 

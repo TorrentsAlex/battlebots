@@ -198,6 +198,7 @@
     <ClCompile Include="ButtonManager.cpp">
       <Filter>Game\Entities\EntityManagers</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -341,5 +342,6 @@
     <ClInclude Include="AxisCommand.h">
       <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h" />
   </ItemGroup>
 </Project>

@@ -162,6 +162,7 @@
     <ClCompile Include="AllvsAll.cpp" />
     <ClCompile Include="ArenaScreen.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="AxisCommand.h" />
     <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Camera.h" />

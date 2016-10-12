@@ -61,10 +61,11 @@ public:
 		std::cout << "LB" << std::endl;
 	};
 };
+
 class RB : public Command {
 public:
 	virtual void execute(Robot& actor) {
-		std::cout << "RB" << std::endl;
+		actor.shoot();
 	};
 };
 

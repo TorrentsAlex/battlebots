@@ -2,54 +2,154 @@
 
 
 void InputManager::init() {
-	pad1 = new GamePad();
+	numControllers = 0;
+	//pad1 = new GamePad();
+//	pad2 = new GamePad();
 	//SDL_GameControllerAddMappingsFromFile("./resources/gamecontrollerdb.txt");
+	//if (SDL_NumJoysticks() < 1) {
+	//	printf("Warning: No joysticks connected!\n");
+	//} else {
+	//	//Load joystick
+	//	pad1->gameController = SDL_GameControllerOpen(0);
+	//	if (pad1->gameController == NULL) {
+	//		printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
+	//	} else {
+	//		cout << "open controller " << pad1->gameController << endl;
+	//	}
+	//	pad2->gameController = SDL_GameControllerOpen(1);
+	//	if (pad2->gameController == NULL) {
+	//		printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
+	//	} else {
+	//		cout << "open controller " << pad1->gameController << endl;
+	//	}
+	//}
+	pad1 = new GamePad();
+	pad2 = new GamePad();
+	
+	getController(*pad1);
+	getController(*pad2);
+
+	mapping(*pad1);
+	mapping(*pad2);
+	
+	//pad1->open();
+	//pad2->open();
+	
+	////// mapping 
+	//pad1->iButton_A = new JumpCommand();
+	//pad1->iButton_X = new ShootCommand();	
+
+	//pad1->iButton_Y = new Y();
+	//pad1->iButton_B = new B();
+
+	//pad1->iButton_UP = new UP();
+	//pad1->iButton_DOWN = new Down();
+	//pad1->iButton_RIGHT = new Right();
+	//pad1->iButton_LEFT = new Left();
+
+	//pad1->iButton_LB = new Lb();
+	//pad1->iButton_RB = new RB();
+
+	//pad1->iButton_SELECT = new Select();
+	//pad1->iButton_START = new Start();
+
+	//pad1->iButton_L3 = new L3();
+	//pad1->iButton_R3 = new R3();
+
+	//pad1->iJoystick_LEFT = new LeftJoystick();
+	//pad1->iJoystick_RIGHT = new RightJoystick();
+
+	//pad1->iJoystick_LEFT_SHOULDER = new LeftShoulder();
+	//pad1->iJoystick_RIGHT_SHOULDER = new RightShoulder();	// mapping 
+
+	//pad2->iButton_A = new JumpCommand();
+	//pad2->iButton_X = new ShootCommand();
+
+	//pad2->iButton_Y = new Y();
+	//pad2->iButton_B = new B();
+
+	//pad2->iButton_UP = new UP();
+	//pad2->iButton_DOWN = new Down();
+	//pad2->iButton_RIGHT = new Right();
+	//pad2->iButton_LEFT = new Left();
+
+	//pad2->iButton_LB = new Lb();
+	//pad2->iButton_RB = new RB();
+
+	//pad2->iButton_SELECT = new Select();
+	//pad2->iButton_START = new Start();
+
+	//pad2->iButton_L3 = new L3();
+	//pad2->iButton_R3 = new R3();
+
+	//pad2->iJoystick_LEFT = new LeftJoystick();
+	//pad2->iJoystick_RIGHT = new RightJoystick();
+
+	//pad2->iJoystick_LEFT_SHOULDER = new LeftShoulder();
+	//pad2->iJoystick_RIGHT_SHOULDER = new RightShoulder();
+}
+
+void InputManager::clean() {
+	//closeController(*pad1);
+	//closeController(*pad2);
+
+	SDL_GameControllerClose(pad1->gameController);
+	SDL_GameControllerClose(pad2->gameController);
+	pad1->clean();
+	pad2->clean();
+	delete pad1;
+	delete pad2;
+}
+
+void InputManager::mapping(GamePad& pad) {
+	pad.iButton_A = new JumpCommand();
+	pad.iButton_X = new ShootCommand();
+
+	pad.iButton_Y = new Y();
+	pad.iButton_B = new B();
+
+	pad.iButton_UP = new UP();
+	pad.iButton_DOWN = new Down();
+	pad.iButton_RIGHT = new Right();
+	pad.iButton_LEFT = new Left();
+
+	pad.iButton_LB = new Lb();
+	pad.iButton_RB = new RB();
+
+	pad.iButton_SELECT = new Select();
+	pad.iButton_START = new Start();
+
+	pad.iButton_L3 = new L3();
+	pad.iButton_R3 = new R3();
+
+	pad.iJoystick_LEFT = new LeftJoystick();
+	pad.iJoystick_RIGHT = new RightJoystick();
+
+	pad.iJoystick_LEFT_SHOULDER = new LeftShoulder();
+	pad.iJoystick_RIGHT_SHOULDER = new RightShoulder();
+}
+
+void InputManager::getController(GamePad& pad) {
 	if (SDL_NumJoysticks() < 1) {
 		printf("Warning: No joysticks connected!\n");
 	} else {
 		//Load joystick
-		pad1->gameController = SDL_GameControllerOpen(0);
-		if (pad1->gameController == NULL) {
+		pad.gameController = SDL_GameControllerOpen(numControllers);
+		if (pad.gameController == NULL) {
 			printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
 		} else {
-			cout << "open controller " << pad1->gameController << endl;
+			cout << "open controller " << pad.gameController << endl;
+			numControllers++;
 		}
 	}
-	// mapping 
-	pad1->iButton_A = new JumpCommand();
-	pad1->iButton_X = new ShootCommand();	
-
-	pad1->iButton_Y = new Y();
-	pad1->iButton_B = new B();
-
-	pad1->iButton_UP = new UP();
-	pad1->iButton_DOWN = new Down();
-	pad1->iButton_RIGHT = new Right();
-	pad1->iButton_LEFT = new Left();
-
-	pad1->iButton_LB = new Lb();
-	pad1->iButton_RB = new RB();
-
-	pad1->iButton_SELECT = new Select();
-	pad1->iButton_START = new Start();
-
-	pad1->iButton_L3 = new L3();
-	pad1->iButton_R3 = new R3();
-
-	pad1->iJoystick_LEFT = new LeftJoystick();
-	pad1->iJoystick_RIGHT = new RightJoystick();
-
-	pad1->iJoystick_LEFT_SHOULDER = new LeftShoulder();
-	pad1->iJoystick_RIGHT_SHOULDER = new RightShoulder();
 }
 
-void InputManager::clean() {
-	SDL_GameControllerClose(pad1->gameController);
-	pad1->clean();
-	delete pad1;
+void InputManager::closeController(GamePad& pad) {
+	if (pad.gameController) {
+		SDL_GameControllerClose(pad.gameController);
+	}
 }
-
-	//Copy the current key states to a data structure that contains the previous states
+//Copy the current key states to a data structure that contains the previous states
 void InputManager::handleInput() {
 		//Loop through _keyMap using a for each loop, and copy it over to _previousKeyMap
 		//C++ 11 introduces the concept "for each loop" on data structures based on iterators that has begin and end
@@ -75,78 +175,78 @@ void InputManager::handleInput() {
 	}
 }
 
-std::vector<JoystickCommand*> InputManager::getGamePadJoysticks() {
+std::vector<JoystickCommand*> InputManager::getGamePadJoysticks(GamePad& pad) {
 	std::vector<JoystickCommand*> commands;
 
-	int leftXAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_LEFTX);
-	int leftYAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_LEFTY);
+	int leftXAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_LEFTX);
+	int leftYAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_LEFTY);
 	// We want to ignore light taps, so we use a dead zone where input from the joystick is ignored
 	if ((leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) &&
 		(leftYAxis > JOYSTICK_DEAD_ZONE || leftYAxis < -JOYSTICK_DEAD_ZONE)) {
-		pad1->iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, leftYAxis));
-		commands.push_back(pad1->iJoystick_LEFT);
+		pad.iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, leftYAxis));
+		commands.push_back(pad.iJoystick_LEFT);
 	} else if (leftXAxis > JOYSTICK_DEAD_ZONE || leftXAxis < -JOYSTICK_DEAD_ZONE) {
-		pad1->iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, 0));
-		commands.push_back(pad1->iJoystick_LEFT);
+		pad.iJoystick_LEFT->setAxis(glm::vec2(leftXAxis, 0));
+		commands.push_back(pad.iJoystick_LEFT);
 	} else if (leftYAxis > JOYSTICK_DEAD_ZONE || leftYAxis < -JOYSTICK_DEAD_ZONE) {
-		pad1->iJoystick_LEFT->setAxis(glm::vec2(0, leftYAxis));
-		commands.push_back(pad1->iJoystick_LEFT);
+		pad.iJoystick_LEFT->setAxis(glm::vec2(0, leftYAxis));
+		commands.push_back(pad.iJoystick_LEFT);
 	}
 	
-	int rightXAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_RIGHTX);
-	int rightYAxis = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_RIGHTY);
+	int rightXAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_RIGHTX);
+	int rightYAxis = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_RIGHTY);
 
 	if ((rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) &&
 		(rightYAxis > JOYSTICK_DEAD_ZONE || rightYAxis < -JOYSTICK_DEAD_ZONE)) {
-		pad1->iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, rightYAxis));
-		commands.push_back(pad1->iJoystick_RIGHT);
+		pad.iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, rightYAxis));
+		commands.push_back(pad.iJoystick_RIGHT);
 	}
 	else if (rightXAxis > JOYSTICK_DEAD_ZONE || rightXAxis < -JOYSTICK_DEAD_ZONE) {
-		pad1->iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, 0));
-		commands.push_back(pad1->iJoystick_RIGHT);
+		pad.iJoystick_RIGHT->setAxis(glm::vec2(rightXAxis, 0));
+		commands.push_back(pad.iJoystick_RIGHT);
 	}
 	else if (rightYAxis > JOYSTICK_DEAD_ZONE || rightYAxis < -JOYSTICK_DEAD_ZONE) {
-		pad1->iJoystick_RIGHT->setAxis(glm::vec2(0, rightYAxis));
-		commands.push_back(pad1->iJoystick_RIGHT);
+		pad.iJoystick_RIGHT->setAxis(glm::vec2(0, rightYAxis));
+		commands.push_back(pad.iJoystick_RIGHT);
 	}
 	
 	// Shoulders
-	int shoulderLeft = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
+	int shoulderLeft = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
 	if (shoulderLeft != 0) {
-		pad1->iJoystick_LEFT_SHOULDER->setAxis(glm::vec2(shoulderLeft, -1));
-		commands.push_back(pad1->iJoystick_LEFT_SHOULDER);
+		pad.iJoystick_LEFT_SHOULDER->setAxis(glm::vec2(shoulderLeft, -1));
+		commands.push_back(pad.iJoystick_LEFT_SHOULDER);
 	}
 	
-	int shoulderRight = SDL_GameControllerGetAxis(pad1->gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+	int shoulderRight = SDL_GameControllerGetAxis(pad.gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
 	if (shoulderRight != 0) {
-		pad1->iJoystick_RIGHT_SHOULDER->setAxis(glm::vec2(shoulderRight, -1));
-		commands.push_back(pad1->iJoystick_RIGHT_SHOULDER);
+		pad.iJoystick_RIGHT_SHOULDER->setAxis(glm::vec2(shoulderRight, -1));
+		commands.push_back(pad.iJoystick_RIGHT_SHOULDER);
 	}
 	
 	return commands;
 }
 
-std::vector<Command*> InputManager::getGamePadCommand() {
+std::vector<Command*> InputManager::getGamePadCommand(GamePad& pad) {
 	std::vector<Command*> commands;
 
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_A)) commands.push_back(pad1->iButton_A);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_B))  commands.push_back(pad1->iButton_B);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_X))  commands.push_back(pad1->iButton_X);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_Y))  commands.push_back(pad1->iButton_Y);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_A)) commands.push_back(pad.iButton_A);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_B))  commands.push_back(pad.iButton_B);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_X))  commands.push_back(pad.iButton_X);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_Y))  commands.push_back(pad.iButton_Y);
 
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN))  commands.push_back(pad1->iButton_DOWN);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP))  commands.push_back(pad1->iButton_UP);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))  commands.push_back(pad1->iButton_RIGHT);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  commands.push_back(pad1->iButton_LEFT);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN))  commands.push_back(pad.iButton_DOWN);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_UP))  commands.push_back(pad.iButton_UP);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))  commands.push_back(pad.iButton_RIGHT);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  commands.push_back(pad.iButton_LEFT);
 	
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))  commands.push_back(pad1->iButton_L3);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))  commands.push_back(pad1->iButton_R3);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))  commands.push_back(pad.iButton_L3);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))  commands.push_back(pad.iButton_R3);
 
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_BACK))  commands.push_back(pad1->iButton_SELECT);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_START))  commands.push_back(pad1->iButton_START);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_BACK))  commands.push_back(pad.iButton_SELECT);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_START))  commands.push_back(pad.iButton_START);
 	
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))  commands.push_back(pad1->iButton_LB);
-	if (SDL_GameControllerGetButton(pad1->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))  commands.push_back(pad1->iButton_RB);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))  commands.push_back(pad.iButton_LB);
+	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))  commands.push_back(pad.iButton_RB);
 
 	return commands;
 }
@@ -204,7 +304,7 @@ bool InputManager::isKeyPressed(unsigned int keyID) {
 }	
 
 int InputManager::getAxis() {
-	return -1;//SDL_JoystickGetAxis(pad1->gameController, 0);
+	return -1;//SDL_JoystickGetAxis(pad.gameController, 0);
 }
 
 unsigned int InputManager::keyPressed() {

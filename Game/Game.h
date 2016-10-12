@@ -19,5 +19,6 @@ private:
 
 	Scene gScene;
 	Robot* robot1;
+	Robot* robot2;
 
 };

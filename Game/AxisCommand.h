@@ -5,7 +5,7 @@
 class LeftJoystick : public JoystickCommand {
 public:
 	virtual void execute(Robot& actor) {
-		std::cout << "left joystick: x" << cAxis.x << " y:" << cAxis.y << std::endl;
+		actor.movement(cAxis);
 	}
 };
 
@@ -13,7 +13,7 @@ public:
 class RightJoystick : public JoystickCommand {
 public:
 	virtual void execute(Robot& actor) {
-		std::cout << "Right joystick: x" << cAxis.x << " y:" << cAxis.y << std::endl;
+		actor.rotation(cAxis);
 	}
 };
 

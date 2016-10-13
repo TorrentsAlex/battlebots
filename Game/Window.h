@@ -18,11 +18,12 @@ public:
 	~Window();
 
 	int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
-	int getScreenWidth() { return _screenWidth; }
-	int getScreenHeight() { return _screenHeight; }
+	
+	//int getScreenWidth() { return _screenWidth; }
+	//int getScreenHeight() { return _screenHeight; }
 	void swapBuffer();		
 	
-	glm::vec2 getWindowResolution();
+	glm::vec2 getNativeResolution();
 private:
 	SDL_DisplayMode currentMode;
 	//TTF_Font* g_font;

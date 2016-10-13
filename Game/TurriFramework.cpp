@@ -13,7 +13,7 @@ void TurriFramework::init(string name, int screenWidth, int screenheight, bool e
 	tOpenGL.initializeShaders();
 
 	// Up Camera
-	tCamera.initializeZBuffer(tWindow.getWindowResolution());
+	tCamera.initializeZBuffer(tWindow.getNativeResolution()); // le esta pasando el nativo, cuidao!!!
 	tCamera.setPerspectiveCamera();
 	tCamera.setViewMatrix();
 	running = true;
@@ -93,6 +93,18 @@ void TurriFramework::renderCamera() {
 	tOpenGL.sendViewerPosition(tCamera.getPosition());
 
 	tOpenGL.sendViewTransformationMatrix(tCamera.getViewMatrix(), tCamera.getProjectionCamera());
+}
+
+void TurriFramework::setScreenSize(int widthScreen, int heightScreen, bool isFullScreen) {
+	if (isFullScreen) {
+		//resolution = window. get native screensize()
+
+		//tWindow.setScreenSize();
+		//tOpenGL.setScreenSize();
+	} else {
+	
+	}
+
 }
 
 // Input methods

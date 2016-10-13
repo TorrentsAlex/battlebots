@@ -34,8 +34,8 @@ Camera::~Camera() {
 void Camera::initializeZBuffer(glm::vec2 windowResolution) {
 	//Initialize the Zbuffer
 	glEnable(GL_DEPTH_TEST);
-	glViewport(0, 0, 1280, 800);
-	cAspectRatio = 1280.0f/800.0f;
+	glViewport(0, 0, windowResolution.x, windowResolution.y);
+	cAspectRatio = windowResolution.x / windowResolution.y;
 }
 
 // Setters

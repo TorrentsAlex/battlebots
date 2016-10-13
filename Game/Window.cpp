@@ -98,6 +98,6 @@ void Window::swapBuffer() {
 
 
 
-glm::vec2 Window::getWindowResolution() {
+glm::vec2 Window::getNativeResolution() {
 	return glm::vec2(currentMode.w, currentMode.h);
 }

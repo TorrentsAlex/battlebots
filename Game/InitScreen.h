@@ -13,15 +13,10 @@ private:
 	void update() override;
 	void render() override;
 	void clean() override;
-	void goToOptions();
-	void goToPlayers();
 
 	Scene menuScene;
 
 	ButtonManager iBManager;
-	vector<Button> iButtons;
-
-
 public:
 
 };

@@ -18,13 +18,17 @@ public:
 	~Window();
 
 	int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
-	int getScreenWidth() { return _screenWidth; }
-	int getScreenHeight() { return _screenHeight; }
-	void swapBuffer();		
 	
-	glm::vec2 getWindowResolution();
+	//int getScreenWidth() { return _screenWidth; }
+	//int getScreenHeight() { return _screenHeight; }
+	void swapBuffer();	
+
+	void setScreenSize(int resolutionX, int resolutionY);
+	void setFullScreen();
+	void setWindowedScreen();
+	glm::vec2 getNativeResolution();
 private:
-	SDL_DisplayMode currentMode;
+	SDL_DisplayMode wSDLDisplayMode;
 	//TTF_Font* g_font;
 	SDL_Color windowBackGroundColor;
 	int _windowHeight, _windowWidth;

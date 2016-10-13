@@ -1,6 +1,7 @@
 #include "Game.h"
 
 void Game::init() {
+	
 	cout << "init game" << endl;
 	gScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
 
@@ -21,7 +22,7 @@ void Game::init() {
 	robot1->setOBJ(robotOBJ);
 	robot1->setMaterial(robotMaterial);
 	robot1->setTextureId(TextureManager::Instance().getTextureID("./resources/images/robot_01_txt.jpg"));
-
+	TurriFramework::Instance().setScreenSize(860,640);
 }
 
 void Game::input() {

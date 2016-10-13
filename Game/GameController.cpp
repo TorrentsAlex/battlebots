@@ -1,7 +1,6 @@
 #include "GameController.h"
 
 void GameController::init() {
-	running = true;
 	changeState(GameState::MENU);
 }
 
@@ -26,7 +25,7 @@ void GameController::changeState(GameState nextstate) {
 		gCurrentScreen.changestate(new ArenaScreen());
 		break;
 	case GameState::EXIT:
-		running = false;
+		TurriFramework::Instance().quit();
 	}
 
 }

@@ -1,14 +1,12 @@
 #pragma once
 #include "BaseScreen.h"
 #include "Scene.h"
+#include "ButtonManager.h"
 #include "GameController.h"
+#include "TurriFramework.h"
 
-class OptionsScreen: public BaseScreen
-{
-
+class OptionsScreen: public BaseScreen {
 private:
-
-
 	void init() override;
 	void input() override;
 	void update() override;
@@ -17,7 +15,8 @@ private:
 	void goToMenu();
 
 	Scene optionsScene;
-
+	
+	ButtonManager BManager;
 public:
 	
 };

@@ -4,7 +4,7 @@
 void TurriFramework::init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS) {
 	tFPS.init(enableLimiterFPS, maxFPS, printFPS);
 	// Up SDL window
-	tWindow.create(name, screenWidth, screenheight, 0);
+	tWindow.create(name, screenWidth, screenheight, 0x2);
 
 	// init input manager
 	InputManager::Instance().init();

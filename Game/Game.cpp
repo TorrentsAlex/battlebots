@@ -37,28 +37,6 @@ void Game::init() {
 
 	robot1->vectorForward = glm::vec3(0, -1, 0);
 	robot2->vectorForward = glm::vec3(0, -1, 0);
-
-	// another object loaded hardcoded
-
-	Bullet currentBullet;
-	OBJ bulletOBJ = Geometry::LoadModelFromFile("../battlebots/Game/resources/objects/bullet_beer.obj");
-
-	robotObject._angle = 0;
-	robotObject._rotation = glm::vec3(1, 1, 1);
-	robotObject._translate = glm::vec3(0, 0, 0);
-	robotObject._scale = glm::vec3(1, 1, 1);
-
-	currentBullet.setGameObject(robotObject);
-	currentBullet.setOBJ(bulletOBJ);
-	currentBullet.setMaterial(robotMaterial);
-	currentBullet.setTextureId(TextureManager::Instance().getTextureID("../battlebots/Game/resources/images/guinness.png"));
-
-	currentBullet.init();
-
-	robot1->setBullet(currentBullet);
-	robot2->setBullet(currentBullet);
-	// Open the controllers
-
 }
 
 void Game::input() {
@@ -115,15 +93,7 @@ void Game::render() {
 	
 	TurriFramework::Instance().renderEntity(*robot1);
 	TurriFramework::Instance().renderEntity(*robot2);
-	vector<Bullet> bullets = robot1->getBullets();
-	vector<Bullet> bullet2 = robot2->getBullets();
 	
-	for (int i = 0; i < bullets.size(); i++) {
-		TurriFramework::Instance().renderEntity(bullets.at(i));
-	}
-	for (int i = 0; i < bullet2.size(); i++) {
-		TurriFramework::Instance().renderEntity(bullet2.at(i));
-	}
 	TurriFramework::Instance().renderEntity(gScene.getSkyBox());
 	TurriFramework::Instance().stopRender();
 }

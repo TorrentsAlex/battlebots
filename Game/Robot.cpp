@@ -1,46 +1,32 @@
 #include "Robot.h"
 
+#include "GamePad.h"
 
-Robot::Robot() {
-	canShoot = true;
-}
-
+Robot::Robot() {}
 
 Robot::~Robot() {
+	if (rGamePad) {
+		rGamePad->clean();
+		delete rGamePad;
+	}
+	
 }
 
 void Robot::update() {
-	// Rotate
-	static int counter = 0;
-	if (counter >= 16) {
-		counter = 0;
-		canShoot = true;
-	}
-	counter++;
-	
-	static int bulletCounter = 0;
-	if (counter >= 200) {
-		bulletCounter = 0;
-		if (!bullets.empty()) {
-			bullets.pop_back();
-		}
-	}
-	bulletCounter++;
-	for (int i = 0; i < bullets.size(); i++) {
-		bullets.at(i).update();
-	}
+
 }
 
-vector<Bullet> Robot::getBullets() {
-	return bullets;
-}
-
-void Robot::setBullet(Bullet nextBullet) {
-	currentBullet = nextBullet;
-}
 
 void Robot::input() {
 
+}
+
+void Robot::setGamePad(GamePad& gamePad) {
+	*rGamePad = gamePad;
+}
+
+GamePad* Robot::getGamePad() {
+	return rGamePad;
 }
 
 void Robot::movement(glm::vec2 axis) {
@@ -68,15 +54,6 @@ void Robot::jump() {
 }
 
 void Robot::shoot() {
-	if (canShoot) {
-		canShoot = false;
-		GameObject go = currentBullet.getGameObject();
-		go._translate = eGameObject._translate;
-		go._translate.z = 15.0f;
-		currentBullet.setGameObject(go);
-		currentBullet.setDirection(vectorForward);
-		bullets.push_back(currentBullet);
-	}
 
 }
 

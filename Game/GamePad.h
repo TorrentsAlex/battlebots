@@ -1,5 +1,5 @@
 #pragma once
-
+#include "TurriIncludes.h"
 struct GamePad {
 
 	SDL_GameController* gameController;

@@ -3,9 +3,9 @@
 
 void InitScreen::init() {
 
-	menuScene = SceneCreator::Instance().createScene("../battlebots/Game/resources/scenes/Scene1.json");
+	menuScene = SceneCreator::Instance().createScene("./resources/scenes/Scene1.json");
 
-	iButtons = SceneCreator::Instance().createButtons("../battlebots/Game/resources/scenes/menu_buttons.json");
+	iButtons = SceneCreator::Instance().createButtons("./resources/scenes/menu_buttons.json");
 	
 	iBManager.setButtons(iButtons);
 	iBManager.init();

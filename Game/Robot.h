@@ -1,18 +1,15 @@
 #pragma once
 
 #include <iostream>
-
-#include "Bullet.h"
+#include "Entity.h"
 #include <glm/gtx/rotate_vector.hpp>
 
+struct GamePad;
 class Robot : public Entity {
 private:
 	
 	float velocity = 0.5;
-	std::vector<Bullet> bullets;
-	Bullet currentBullet;
-	bool canShoot;
-
+	GamePad* rGamePad;
 public:
 	Robot();
 	~Robot();
@@ -30,11 +27,8 @@ public:
 	void movement(glm::vec2 axis);
 	void rotation(glm::vec2 axis);
 
-
-	void setBullet(Bullet nextBullet);
-
-	vector<Bullet> getBullets();
-
+	void setGamePad(GamePad& gamePad);
+	GamePad* getGamePad();
 
 };
 

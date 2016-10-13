@@ -30,7 +30,7 @@ void InitScreen::input() {
 			GameController::Instance().changeState(GameState::OPTIONS);
 		}// goToOptions;
 		if (currentButton.compare("exit") == 0) {
-			cout << "exit" << endl;
+			GameController::Instance().changeState(GameState::EXIT);
 		}
 	}
 }
@@ -64,14 +64,4 @@ void InitScreen::render() {
 
 void InitScreen::clean() {
 
-}
-
-void InitScreen::goToOptions() {
-	cout << "options" << endl;
-	GameController::Instance().changeState(GameState::OPTIONS);
-}
-
-void InitScreen::goToPlayers() {
-	cout << " play" << endl;
-	GameController::Instance().changeState(GameState::PLAY);
 }

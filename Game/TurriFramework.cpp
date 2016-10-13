@@ -98,11 +98,6 @@ void TurriFramework::renderCamera() {
 
 void TurriFramework::setScreenSize(int widthScreen, int heightScreen) {
 	glm::vec2 newResolution = glm::vec2(widthScreen, heightScreen);
-	/*if (isFullScreen) {
-		newResolution = tWindow.getNativeResolution();
-		tWindow.setFullScreen();
-	}*/ 
-
 
 	tWindow.setScreenSize(newResolution.x, newResolution.y);
 	tCamera.initializeZBuffer(newResolution);

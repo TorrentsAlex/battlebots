@@ -101,6 +101,7 @@ void Window::setScreenSize(int resolutionX, int resolutionY)  {
 	_screenHeight = resolutionY;
 	SDL_SetWindowSize(_sdlWindow, resolutionX, resolutionY);
 	SDL_SetWindowFullscreen(_sdlWindow, false);
+	SDL_SetWindowPosition(_sdlWindow,SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 }
 
 glm::vec2 Window::getNativeResolution() {

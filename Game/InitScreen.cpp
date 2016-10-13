@@ -4,8 +4,8 @@
 void InitScreen::init() {
 
 	menuScene = SceneCreator::Instance().createScene("./resources/scenes/Scene1.json");
-
-	iButtons = SceneCreator::Instance().createButtons("./resources/scenes/menu_buttons.json");
+	
+	vector<Button> iButtons = SceneCreator::Instance().createButtons("./resources/scenes/menu_buttons.json");
 	
 	iBManager.setButtons(iButtons);
 	iBManager.init();
@@ -22,11 +22,12 @@ void InitScreen::input() {
 	}
 	if (InputManager::Instance().isKeyPressed(SDLK_RETURN)) {
 		string currentButton = iBManager.getCurrentButton();
+
 		if (currentButton.compare("start") == 0) {
-			cout << "start" << endl;
+			GameController::Instance().changeState(GameState::PLAY);
 		}// goToPlayers;
-		if (currentButton.compare("options") == 0) { 
-			cout << "options" << endl; 
+		if (currentButton.compare("options") == 0) {
+			GameController::Instance().changeState(GameState::OPTIONS);
 		}// goToOptions;
 		if (currentButton.compare("exit") == 0) {
 			cout << "exit" << endl;

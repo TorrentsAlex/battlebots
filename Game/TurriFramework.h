@@ -51,7 +51,8 @@ public:
 	
 	// Camera methods
 	void renderCamera();
-	void setScreenSize(int widthScreen, int heightScreen, bool isFullScreen);
+	void setScreenSize(int widthScreen, int heightScreen);
+	void addFlagscreen(unsigned int currentFlag);
 
 	// Input methods 
 	void quit();

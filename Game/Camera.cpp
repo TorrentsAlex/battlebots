@@ -47,22 +47,6 @@ void Camera::setPerspectiveCamera() {
 	cCameraMode = CameraMode::PERSPECTIVE;
 }
 
-void Camera::setOrthoCamera() {
-	cProjectionMatrix = glm::ortho(-cProjectionWidth / 2, cProjectionWidth / 2, -cProjectionHeight / 2, cProjectionHeight / 2, cNear, cFar);
-	cCameraPos = cCameraPosOrtho;
-	cCameraFront = glm::vec3(0.0f,1.0f,1.0f);
-
-	cCameraMode = CameraMode::ORTHOGRAPHIC;
-}
-
-void Camera::setEditorCamera() {
-	cProjectionMatrix = glm::ortho(-cProjectionWidth / 2, cProjectionWidth / 2, -cProjectionHeight / 2, cProjectionHeight / 2, cNear, cFar);
-	cCameraPos = cCameraPosEditor;
-	cCameraFront = glm::vec3(0.0f, 1.0f, 1.0f);
-
-	cCameraMode = CameraMode::EDITOR;
-}
-
 void Camera::setViewMatrix() {
 	glm::vec3 cameraDirection = glm::normalize(cCameraPos - cCameraFront);
 	glm::vec3 up = glm::vec3(0.0f, 0.0f, 1.0f);

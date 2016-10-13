@@ -19,9 +19,6 @@ private:
 	Scene menuScene;
 
 	ButtonManager iBManager;
-	vector<Button> iButtons;
-
-
 public:
 
 };

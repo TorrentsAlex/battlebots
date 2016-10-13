@@ -1,0 +1,54 @@
+{
+	"object" : "./resources/objects/button.obj",
+	"size" : 5,
+	"button0" : {
+		"name" : "1920x1080",
+		"position" : {
+			"x" : 20,
+			"y" : -20,
+			"z" : 20
+		},
+		"texture_on" : "./resources/images/button_start_on.png",
+		"texture_off" : "./resources/images/button_start.png"
+	},
+	"button1" : {
+		"name" : "1600x900",
+		"position" : {
+			"x" : 0,
+			"y" : -20,
+			"z" : 20
+		},
+		"texture_on" : "./resources/images/button_start_on.png",
+		"texture_off" : "./resources/images/button_start.png"
+	},
+	"button2" : {
+		"name" : "1280x800",
+		"position" : {
+			"x" : 10,
+			"y" : -20,
+			"z" : 20
+		},
+		"texture_on" : "./resources/images/button_start_on.png",
+		"texture_off" : "./resources/images/button_start.png"
+	},
+	"button3" : {
+		"name" : "FullScreen",
+		"position" : {
+			"x" : 0,
+			"y" : -20,
+			"z" : 0
+		},
+		"texture_on" : "./resources/images/button_start_on.png",
+		"texture_off" : "./resources/images/button_start.png"
+	},
+	"button4" : {
+		"name" : "Return",
+		"position" : {
+			"x" : 20,
+			"y" : -20,
+			"z" : 0
+		},
+		"texture_on" : "./resources/images/button_start_on.png",
+		"texture_off" : "./resources/images/button_start.png"
+	}
+}

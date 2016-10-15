@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Camera.h"
 #include "Window.h"
 #include "OpenGLManagement.h"
@@ -8,7 +7,7 @@
 #include "FPSLimiter.h"
 
 #include "Scene.h"
-
+#include "TurriIncludes.h"
 #ifndef M_PI	
 #define M_PI	3.14159265358979323846   // pi
 #endif

@@ -23,7 +23,7 @@ void InitScreen::input() {
 	if (InputManager::Instance().isKeyPressed(SDLK_RETURN)) {
 		string currentButton = iBManager.getCurrentButton();
 		if (currentButton.compare("start") == 0) {
-			cout << "start" << endl;
+			GameController::Instance().changeState(GameState::PLAY);
 		}// goToPlayers;
 		if (currentButton.compare("options") == 0) { 
 			cout << "options" << endl; 
@@ -47,17 +47,15 @@ void InitScreen::render() {
 	// send the lights to shaders
 	TurriFramework::Instance().renderLights(menuScene.getLights());
 
-	vector<Button> buttons = iBManager.getButtons();
-		for (int i = 0; i < buttons.size(); i++) {
-		TurriFramework::Instance().renderEntity(buttons.at(i));
-	}
-	TurriFramework::Instance().renderScene(menuScene);
 
 	// Render the skybox without lights
 	TurriFramework::Instance().disableLights();
 	TurriFramework::Instance().renderEntity(menuScene.getSkyBox());
-
-
+	vector<Button> buttons = iBManager.getButtons();
+	for (int i = 0; i < buttons.size(); i++) {
+		TurriFramework::Instance().renderEntity(buttons.at(i));
+	}
+	TurriFramework::Instance().renderScene(menuScene);
 	TurriFramework::Instance().stopRender();
 }
 

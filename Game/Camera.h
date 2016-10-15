@@ -17,9 +17,11 @@ private:
 	float cNear;
 	float cProjectionWidth;
 	float cProjectionHeight;
+
 	glm::vec3 cCameraPos;
 	glm::vec3 cCameraFront;
 	glm::vec3 cCameraUp;
+
 	float armLenght;
 	CameraMode cCameraMode;
 	glm::vec3 cCameraPosOrtho;

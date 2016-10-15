@@ -5,7 +5,7 @@
 AllvsAll::~AllvsAll() {
 }
 
-void AllvsAll::setPlayers(std::vector<Robot> players) {
+void AllvsAll::setPlayers(std::vector<Character> players) {
 }
 
 

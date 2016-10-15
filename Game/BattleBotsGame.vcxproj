@@ -187,7 +187,7 @@
     <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="PlayersScreen.cpp" />
     <ClCompile Include="PointLight.cpp" />
-    <ClCompile Include="Robot.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneCreator.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -201,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="AllvsAll.h" />
     <ClInclude Include="ArenaScreen.h" />
+    <ClInclude Include="AxisCommand.h" />
     <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Button.h" />
@@ -214,10 +215,11 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="GamePad.h" />
     <ClInclude Include="InitScreen.h" />
     <ClInclude Include="json\json-forwards.h" />
     <ClInclude Include="json\json.h" />
-    <ClInclude Include="JumpCommand.h" />
+    <ClInclude Include="ButtonCommands.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Game.h" />
@@ -232,10 +234,9 @@
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="PlayersScreen.h" />
     <ClInclude Include="PointLight.h" />
-    <ClInclude Include="Robot.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneCreator.h" />
-    <ClInclude Include="ShootCommand.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="StateManager.h" />

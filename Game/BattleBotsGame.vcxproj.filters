@@ -147,9 +147,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Robot.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="AllvsAll.cpp">
       <Filter>Game\Modes</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="ButtonManager.cpp">
       <Filter>Game\Entities\EntityManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Game\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +269,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Engine\Level</Filter>
     </ClInclude>
-    <ClInclude Include="Robot.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="AllvsAll.h">
       <Filter>Game\Modes</Filter>
     </ClInclude>
@@ -320,15 +317,7 @@
     <ClInclude Include="ModeScreen.h">
       <Filter>Game\Views</Filter>
     </ClInclude>
-
-    <ClInclude Include="ArenaScreen.h" />
     <ClInclude Include="Command.h">
-      <Filter>Engine\Systems\Input\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpCommand.h">
-      <Filter>Engine\Systems\Input\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="ShootCommand.h">
       <Filter>Engine\Systems\Input\Command</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
@@ -336,7 +325,21 @@
     </ClInclude>
     <ClInclude Include="ButtonManager.h">
       <Filter>Game\Entities\EntityManagers</Filter>
-
+    </ClInclude>
+    <ClInclude Include="GamePad.h">
+      <Filter>Engine\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonCommands.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ArenaScreen.h">
+      <Filter>Game\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisCommand.h">
+      <Filter>Engine\Systems\Input\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

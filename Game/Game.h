@@ -1,10 +1,11 @@
 #pragma once
 
+#include <Thread>
+#include <future>
+
 #include "TurriIncludes.h"
 
 using namespace std;
-
-
 //This class manages the game execution
 class Game : public BaseScreen {
 public:
@@ -18,6 +19,6 @@ private:
 	void clean() override;
 
 	Scene gScene;
-	Robot* robot1;
+	Character* robot1;
 
 };

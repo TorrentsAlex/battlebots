@@ -1,5 +1,13 @@
 #include "GameController.h"
 
+//
+#include "Game.h"
+#include "InitScreen.h"
+#include "OptionsScreen.h"
+#include "PlayersScreen.h"
+#include "ModeScreen.h"
+#include "ArenaScreen.h"
+
 void GameController::init() {
 	running = true;
 	changeState(GameState::MENU);

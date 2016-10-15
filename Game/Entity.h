@@ -5,6 +5,7 @@
 #include "Box.h"
 #include "TextureManager.h"
 #include "MaterialManager.h"
+#include <iostream>
 
 class Entity {
 protected:
@@ -48,6 +49,10 @@ public:
 	glm::vec3 getScale();
 	// x y z angle
 	glm::vec4 getRotation();
+protected:
+	virtual void update() {
+		std::cout << "update" << endl;
+	}
 
 };
 

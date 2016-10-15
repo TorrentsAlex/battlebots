@@ -11,8 +11,7 @@ class GameController {
 private:
 	GameState gGameState;
 	StateManager gCurrentScreen;
-	bool running;
-
+	
 	// Constructor
 	GameController() {}
 

@@ -58,6 +58,8 @@ public:
 	
 	// Camera methods
 	void renderCamera();
+	void setScreenSize(int widthScreen, int heightScreen);
+	void addFlagscreen(unsigned int currentFlag);
 
 	// Input methods 
 	void executeInput(Character& character);

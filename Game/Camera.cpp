@@ -34,8 +34,8 @@ Camera::~Camera() {
 void Camera::initializeZBuffer(glm::vec2 windowResolution) {
 	//Initialize the Zbuffer
 	glEnable(GL_DEPTH_TEST);
-	glViewport(0, 0, 1280, 800);
-	cAspectRatio = 1280.0f/800.0f;
+	glViewport(0, 0, windowResolution.x, windowResolution.y);
+	cAspectRatio = windowResolution.x / windowResolution.y;
 }
 
 // Setters
@@ -45,22 +45,6 @@ void Camera::setPerspectiveCamera() {
 	cCameraFront = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	cCameraMode = CameraMode::PERSPECTIVE;
-}
-
-void Camera::setOrthoCamera() {
-	cProjectionMatrix = glm::ortho(-cProjectionWidth / 2, cProjectionWidth / 2, -cProjectionHeight / 2, cProjectionHeight / 2, cNear, cFar);
-	cCameraPos = cCameraPosOrtho;
-	cCameraFront = glm::vec3(0.0f,1.0f,1.0f);
-
-	cCameraMode = CameraMode::ORTHOGRAPHIC;
-}
-
-void Camera::setEditorCamera() {
-	cProjectionMatrix = glm::ortho(-cProjectionWidth / 2, cProjectionWidth / 2, -cProjectionHeight / 2, cProjectionHeight / 2, cNear, cFar);
-	cCameraPos = cCameraPosEditor;
-	cCameraFront = glm::vec3(0.0f, 1.0f, 1.0f);
-
-	cCameraMode = CameraMode::EDITOR;
 }
 
 void Camera::setViewMatrix() {

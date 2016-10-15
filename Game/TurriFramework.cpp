@@ -13,7 +13,8 @@ void TurriFramework::init(string name, int screenWidth, int screenheight, bool e
 	tOpenGL.initializeShaders();
 
 	// Up Camera
-	tCamera.initializeZBuffer(tWindow.getWindowResolution());
+	tCamera.initializeZBuffer(glm::vec2(screenWidth, screenheight)); 
+
 	tCamera.setPerspectiveCamera();
 	tCamera.setViewMatrix();
 	running = true;
@@ -93,6 +94,30 @@ void TurriFramework::renderCamera() {
 	tOpenGL.sendViewerPosition(tCamera.getPosition());
 
 	tOpenGL.sendViewTransformationMatrix(tCamera.getViewMatrix(), tCamera.getProjectionCamera());
+}
+
+void TurriFramework::setScreenSize(int widthScreen, int heightScreen) {
+	glm::vec2 newResolution = glm::vec2(widthScreen, heightScreen);
+
+	tWindow.setScreenSize(newResolution.x, newResolution.y);
+	tCamera.initializeZBuffer(newResolution);
+
+	tCamera.setPerspectiveCamera();
+	tCamera.setViewMatrix();
+}
+
+void TurriFramework::addFlagscreen(unsigned int currentFlag) {
+	
+	if (currentFlag == (int)WindowFlags::FULLSCREEN) {
+		tWindow.setFullScreen();
+		tCamera.initializeZBuffer(tWindow.getNativeResolution());
+
+		tCamera.setPerspectiveCamera();
+		tCamera.setViewMatrix();
+	}
+	if (currentFlag == (int)WindowFlags::BORDERLESS) {
+		tWindow.setWindowedScreen();
+	}
 }
 
 // Input methods

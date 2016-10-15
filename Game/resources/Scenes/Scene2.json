@@ -1,21 +1,21 @@
 {
 	"sky" :{ 
-		"object" : "../battlebots/Game/resources/objects/skybox.obj",
-		"texture": "../battlebots/Game/resources/images/red.jpg"
+		"object" : "./resources/objects/skybox.obj",
+		"texture": "./resources/images/red.jpg"
 	},
 	"terrain": {
-		"object": "../battlebots/Game/resources/objects/cylinder_terrain.obj",
-		"texture": "../battlebots/Game/resources/images/rockydesert.jpg",
-		"material" : "../battlebots/Game/resources/materials/metal.json"
+		"object": "./resources/objects/cylinder_terrain.obj",
+		"texture": "./resources/images/rockydesert.jpg",
+		"material" : "./resources/materials/metal.json"
 	},
 	"decoration" : {
-		"object" : "../battlebots/Game/resources/objects/tree_texturized.obj",
-		"texture" : "../battlebots/Game/resources/images/tree_texture.png",
-		"elements" : "../battlebots/Game/resources/scenes/treeScene.txt",
-		"material" : "../battlebots/Game/resources/materials/metal.json"
+		"object" : "./resources/objects/tree_texturized.obj",
+		"texture" : "./resources/images/tree_texture.png",
+		"elements" : "./resources/scenes/treeScene.txt",
+		"material" : "./resources/materials/metal.json"
 	},
 	"lights" : [
-		"../battlebots/Game/resources/materials/lights/directional_white.json",
-		"../battlebots/Game/resources/materials/lights/directional_red.json"
+		"./resources/materials/lights/directional_white.json",
+		"./resources/materials/lights/directional_red.json"
 	]
 }

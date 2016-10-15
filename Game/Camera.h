@@ -36,8 +36,6 @@ public:
 	~Camera();
 	void initializeZBuffer(glm::vec2 windowResolution);
 	void setPerspectiveCamera();
-	void setOrthoCamera();
-	void setEditorCamera();
 	void setAngle(float angle);
 
 	void setViewMatrix();

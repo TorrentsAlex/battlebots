@@ -3,9 +3,10 @@
 
 void InitScreen::init() {
 
-	menuScene = SceneCreator::Instance().createScene("../battlebots/Game/resources/scenes/Scene1.json");
 
-	iButtons = SceneCreator::Instance().createButtons("../battlebots/Game/resources/scenes/menu_buttons.json");
+	menuScene = SceneCreator::Instance().createScene("./resources/scenes/Scene1.json");
+	
+	vector<Button> iButtons = SceneCreator::Instance().createButtons("./resources/scenes/menu_buttons.json");
 	
 	iBManager.setButtons(iButtons);
 	iBManager.init();
@@ -22,14 +23,15 @@ void InitScreen::input() {
 	}
 	if (InputManager::Instance().isKeyPressed(SDLK_RETURN)) {
 		string currentButton = iBManager.getCurrentButton();
+
 		if (currentButton.compare("start") == 0) {
 			GameController::Instance().changeState(GameState::PLAY);
 		}// goToPlayers;
-		if (currentButton.compare("options") == 0) { 
-			cout << "options" << endl; 
+		if (currentButton.compare("options") == 0) {
+			GameController::Instance().changeState(GameState::OPTIONS);
 		}// goToOptions;
 		if (currentButton.compare("exit") == 0) {
-			cout << "exit" << endl;
+			GameController::Instance().changeState(GameState::EXIT);
 		}
 	}
 }
@@ -61,14 +63,4 @@ void InitScreen::render() {
 
 void InitScreen::clean() {
 
-}
-
-void InitScreen::goToOptions() {
-	cout << "options" << endl;
-	GameController::Instance().changeState(GameState::OPTIONS);
-}
-
-void InitScreen::goToPlayers() {
-	cout << " play" << endl;
-	GameController::Instance().changeState(GameState::PLAY);
 }

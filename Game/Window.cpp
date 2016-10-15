@@ -19,7 +19,7 @@ Window::Window() 	{
 		printf("Warning: Linear texture filtering not enabled!");
 	}
 
-	int shouldBeZero = SDL_GetCurrentDisplayMode(0, &currentMode);
+	int shouldBeZero = SDL_GetCurrentDisplayMode(0, &wSDLDisplayMode);
 	if (shouldBeZero != 0) {
 		ErrorManagement::errorRunTime("Couldn't get display mode for video display");
 	}
@@ -96,8 +96,22 @@ void Window::swapBuffer() {
 	SDL_GL_SwapWindow(_sdlWindow);
 }
 
+void Window::setScreenSize(int resolutionX, int resolutionY)  {
+	_screenWidth = resolutionX;
+	_screenHeight = resolutionY;
+	SDL_SetWindowSize(_sdlWindow, resolutionX, resolutionY);
+	SDL_SetWindowFullscreen(_sdlWindow, false);
+	SDL_SetWindowPosition(_sdlWindow,SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+}
 
+glm::vec2 Window::getNativeResolution() {
+	return glm::vec2(wSDLDisplayMode.w, wSDLDisplayMode.h);
+}
 
-glm::vec2 Window::getWindowResolution() {
-	return glm::vec2(currentMode.w, currentMode.h);
+void Window::setFullScreen() {
+	SDL_SetWindowFullscreen(_sdlWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+}
+
+void Window::setWindowedScreen() {
+	
 }

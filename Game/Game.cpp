@@ -2,10 +2,11 @@
 
 
 void Game::init() {
-	cout << "init game" << endl;
-	gScene = SceneCreator::Instance().createScene("../battlebots/Game/resources/scenes/Scene2.json");
 	
-	OBJ robotOBJ = Geometry::LoadModelFromFile("../battlebots/Game/resources/objects/robot_01.obj");
+	cout << "init game" << endl;
+	gScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
+	
+	OBJ robotOBJ = Geometry::LoadModelFromFile("./resources/objects/robot_01.obj");
 	GameObject robotObject;
 	robotObject._angle = 0;
 	robotObject._rotation = glm::vec3(0, 0, 1);
@@ -21,14 +22,13 @@ void Game::init() {
 	robot1->setGameObject(robotObject);
 	robot1->setOBJ(robotOBJ);
 	robot1->setMaterial(robotMaterial);
-	robot1->setTextureId(TextureManager::Instance().getTextureID("../battlebots/Game/resources/images/robot01_txt.png"));
+	robot1->setTextureId(TextureManager::Instance().getTextureID("./resources/images/robot01_txt.png"));
 	
 	robot1->name = "Alex";
 
 	robot1->vectorForward = glm::vec3(0, -1, 0);
 
 	InputManager::Instance().getGameController(*robot1->getGamePad());
-
 }
 
 void Game::input() {

@@ -187,7 +187,7 @@
     <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="PlayersScreen.cpp" />
     <ClCompile Include="PointLight.cpp" />
-    <ClCompile Include="Robot.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneCreator.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -234,7 +234,7 @@
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="PlayersScreen.h" />
     <ClInclude Include="PointLight.h" />
-    <ClInclude Include="Robot.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneCreator.h" />
     <ClInclude Include="Sphere.h" />

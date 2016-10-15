@@ -5,14 +5,15 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 struct GamePad;
-class Robot : public Entity {
+class Character : public Entity {
 private:
 	
 	float velocity = 0.5;
 	GamePad* rGamePad;
+
 public:
-	Robot();
-	~Robot();
+	Character();
+	~Character();
 	glm::vec3 vectorForward;
 
 	virtual void update() override;
@@ -30,5 +31,6 @@ public:
 	void setGamePad(GamePad& gamePad);
 	GamePad* getGamePad();
 
+	void clean();
 };
 

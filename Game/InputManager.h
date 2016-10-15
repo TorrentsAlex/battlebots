@@ -42,7 +42,7 @@ public:
 	std::vector<Command*> getGamePadCommand(GamePad& pad);
 	std::vector<JoystickCommand*> getGamePadJoysticks(GamePad& pad);
 
-	void getController(GamePad& pad);
+	void getGameController(GamePad& gamePad);
 	void closeController(GamePad& pad);
 	void mapping(GamePad& pad);
 
@@ -52,10 +52,7 @@ public:
 	int getAxis();
 
 	glm::ivec2 getMouseCoords() { return _mouseCoords; }
-	GamePad* pad1;
-	GamePad* pad2;
-	GamePad* pad3;
-	GamePad* pad4;
+
 private:
 	int numControllers;
 	InputManager() {}

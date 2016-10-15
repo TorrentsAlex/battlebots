@@ -4,27 +4,9 @@
 void InputManager::init() {
 	numControllers = 0;
 
-	pad1 = new GamePad();
-	pad2 = new GamePad();
-	
-	getController(*pad1);
-	getController(*pad2);
-
-	mapping(*pad1);
-	mapping(*pad2);
-
 }
 
 void InputManager::clean() {
-	//closeController(*pad1);
-	//closeController(*pad2);
-
-	SDL_GameControllerClose(pad1->gameController);
-	SDL_GameControllerClose(pad2->gameController);
-	pad1->clean();
-	pad2->clean();
-	delete pad1;
-	delete pad2;
 }
 
 void InputManager::mapping(GamePad& pad) {
@@ -55,16 +37,19 @@ void InputManager::mapping(GamePad& pad) {
 	pad.iJoystick_RIGHT_SHOULDER = new RightShoulder();
 }
 
-void InputManager::getController(GamePad& pad) {
+void InputManager::getGameController(GamePad& gamePad) {
+
 	if (SDL_NumJoysticks() < 1) {
 		printf("Warning: No joysticks connected!\n");
 	} else {
 		//Load joystick
-		pad.gameController = SDL_GameControllerOpen(numControllers);
-		if (pad.gameController == NULL) {
+		gamePad.gameController = SDL_GameControllerOpen(numControllers);
+		if (gamePad.gameController == NULL) {
 			printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
 		} else {
-			cout << "open controller " << pad.gameController << endl;
+			cout << "open controller " << gamePad.gameController << endl;
+			
+			mapping(gamePad);
 			numControllers++;
 		}
 	}

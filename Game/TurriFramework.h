@@ -61,6 +61,7 @@ public:
 	void renderCamera();
 
 	// Input methods 
+	void executeInput(Character& character);
 	void quit();
 
 };

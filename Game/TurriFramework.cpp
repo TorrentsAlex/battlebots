@@ -4,7 +4,7 @@
 void TurriFramework::init(string name, int screenWidth, int screenheight, bool enableLimiterFPS, int maxFPS, bool printFPS) {
 	tFPS.init(enableLimiterFPS, maxFPS, printFPS);
 	// Up SDL window
-	tWindow.create(name, screenWidth, screenheight, 0x2);
+	tWindow.create(name, screenWidth, screenheight, 0);
 
 	// init input manager
 	InputManager::Instance().init();
@@ -96,7 +96,23 @@ void TurriFramework::renderCamera() {
 }
 
 // Input methods
+void TurriFramework::executeInput(Character& character) {
+	// Joystick
+	std::vector<JoystickCommand*> joystickComm = InputManager::Instance().getGamePadJoysticks(*character.getGamePad());
+	for (JoystickCommand* jcom : joystickComm) {
+		if (jcom) {
+			jcom->execute(character);
+		}
+	}
+	// Buttons
+	std::vector<Command*> commands = InputManager::Instance().getGamePadCommand(*character.getGamePad());
+	for (Command* com : commands) {
+		if (com) {
+			com->execute(character);
+		}
+	}
 
+}
 
 // Finish the game loop
 void TurriFramework::quit() {

@@ -1,11 +1,11 @@
 #pragma once
-#include "Robot.h"
+#include "Character.h"
 
 // Abstract classes with Command pattern for buttons, joysticks and commands
 class Command {
 public:
 	virtual ~Command() {};
-	virtual void execute(Robot& actor) = 0;
+	virtual void execute(Character& actor) = 0;
 };
 
 class JoystickCommand {
@@ -21,5 +21,5 @@ public:
 	}
 
 	virtual ~JoystickCommand() {};
-	virtual void execute(Robot& actor) = 0;
+	virtual void execute(Character& actor) = 0;
 };

@@ -153,6 +153,13 @@ std::vector<Command*> InputManager::getGamePadCommand(GamePad& pad) {
 	return commands;
 }
 
+bool InputManager::isKeyPressed(GamePad& pad, SDL_GameControllerButton keyID) {
+	if (SDL_GameControllerGetButton(pad.gameController, keyID)) {
+		return true;
+	}
+	return false;
+}
+
 void InputManager::pressKey(unsigned int keyID) {
 	// Here we are treating _keyMap as an associative array.
 	// if keyID doesn't already exist in _keyMap, it will get added

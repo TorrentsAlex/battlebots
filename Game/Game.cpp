@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include "SceneObjects.h"
 
 void Game::init() {
 	
@@ -29,6 +30,8 @@ void Game::init() {
 	robot1->vectorForward = glm::vec3(0, -1, 0);
 
 	InputManager::Instance().getGameController(*robot1->getGamePad());
+
+	
 }
 
 void Game::input() {

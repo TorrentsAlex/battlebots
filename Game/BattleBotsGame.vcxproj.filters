@@ -68,6 +68,12 @@
     <Filter Include="Game\Entities\EntityManagers">
       <UniqueIdentifier>{14fdc447-2e65-46d2-bbf9-374489cbe451}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Systems">
+      <UniqueIdentifier>{cb8b0be0-286b-4963-ad74-6e8e87c5e746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Systems\Entities">
+      <UniqueIdentifier>{50903c17-60c4-407f-b56f-2fc2da0a9fa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -198,6 +204,7 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="SceneObjects.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -341,5 +348,6 @@
     <ClInclude Include="Character.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="SceneObjects.h" />
   </ItemGroup>
 </Project>

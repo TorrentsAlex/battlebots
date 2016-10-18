@@ -13,6 +13,7 @@ private:
 	Scene* currentScene;
 	Scene* lastScene;
 
+	std::vector<Character*> playersToRender;
 public:	
 	
 	static SceneObjects& Instance() {
@@ -23,8 +24,14 @@ public:
 	void operator=(SceneObjects const&) = delete;
 
 	void clean();
+	void render();
 
+	void addCharacterToRender(Character& character);
+	void cleanCharactersToRender();
+	
 	Scene* getCurrentScene();
 	Character* getPlayerAt(int current);
+
+
 };
 

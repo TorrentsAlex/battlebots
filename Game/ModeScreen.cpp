@@ -2,7 +2,7 @@
 
 
 void ModeScreen::init() {
-	modeScreen = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
+//	modeScreen = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
 }
 
 void ModeScreen::input() {

@@ -38,6 +38,25 @@ void SceneObjects::clean() {
 	}
 }
 
+void SceneObjects::render() {
+
+	TurriFramework::Instance().startRender();
+
+	TurriFramework::Instance().renderCamera();
+
+	TurriFramework::Instance().renderLights(currentScene->getLights());
+	TurriFramework::Instance().renderScene(*currentScene);
+
+	TurriFramework::Instance().disableLights();
+
+	for (int i = 0; i < playersToRender.size(); i++) {
+		TurriFramework::Instance().renderEntity(*playersToRender.at(i));
+	}
+
+	TurriFramework::Instance().renderEntity(currentScene->getSkyBox());
+	TurriFramework::Instance().stopRender();
+}
+
 Character* SceneObjects::getPlayerAt(int current) {
 	switch (current) {
 	case 0:
@@ -56,4 +75,15 @@ Character* SceneObjects::getPlayerAt(int current) {
 
 Scene* SceneObjects::getCurrentScene() {
 	return currentScene;
+}
+
+/**
+	These 2 methods are for render the players in game 
+*/
+void SceneObjects::addCharacterToRender(Character& character) {
+	playersToRender.push_back(&character);
+}
+
+void SceneObjects::cleanCharactersToRender() {
+	playersToRender.clear();
 }

@@ -5,7 +5,7 @@
 
 void OptionsScreen::init() {
 	
-	optionsScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
+	SceneCreator::Instance().createScene("./resources/scenes/Scene2.json", *optionsScene);
 
 	 vector<Button> OptionButtons = SceneCreator::Instance().createButtons("./resources/scenes/option_buttons.json");
 	
@@ -59,17 +59,17 @@ void OptionsScreen::render() {
 	TurriFramework::Instance().renderCamera();
 
 	// send the lights to shaders
-	TurriFramework::Instance().renderLights(optionsScene.getLights());
+	TurriFramework::Instance().renderLights(optionsScene->getLights());
 
 	vector<Button> buttons = BManager.getButtons();
 	for (int i = 0; i < buttons.size(); i++) {
 		TurriFramework::Instance().renderEntity(buttons.at(i));
 	}
-	TurriFramework::Instance().renderScene(optionsScene);
+	TurriFramework::Instance().renderScene(*optionsScene);
 
 	// Render the skybox without lights
 	TurriFramework::Instance().disableLights();
-	TurriFramework::Instance().renderEntity(optionsScene.getSkyBox());
+	TurriFramework::Instance().renderEntity(optionsScene->getSkyBox());
 
 
 	TurriFramework::Instance().stopRender();
@@ -77,8 +77,4 @@ void OptionsScreen::render() {
 
 void OptionsScreen::clean() {
 
-}
-
-void OptionsScreen::goToMenu() {
-	GameController::Instance().changeState(GameState::MENU);
 }

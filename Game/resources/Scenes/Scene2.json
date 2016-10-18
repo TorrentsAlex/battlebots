@@ -9,8 +9,8 @@
 		"material" : "./resources/materials/metal.json"
 	},
 	"decoration" : {
-		"object" : "./resources/objects/tree_texturized.obj",
-		"texture" : "./resources/images/tree_texture.png",
+		"object" : "./resources/objects/barrel.obj",
+		"texture" : "./resources/images/barrel.png",
 		"elements" : "./resources/scenes/treeScene.txt",
 		"material" : "./resources/materials/metal.json"
 	},

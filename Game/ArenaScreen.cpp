@@ -2,7 +2,7 @@
 
 
 void ArenaScreen::init() {
-	arenaScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
+//	arenaScene = SceneCreator::Instance().createScene("./resources/scenes/Scene2.json");
 }
 
 void ArenaScreen::input() {

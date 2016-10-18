@@ -38,21 +38,23 @@ void InputManager::mapping(GamePad& pad) {
 }
 
 void InputManager::getGameController(GamePad& gamePad) {
-
+	//SDL_GameControllerAddMapping("4c05c405000000000000504944564944,PS4 Controller,a:b1,b:b2,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b12,leftshoulder:b4,leftstick:b10,lefttrigger:a3,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b11,righttrigger:a4,rightx:a2,righty:a5,start:b9,x:b0,y:b3,");
+	//SDL_GameControllerAddMappingsFromFile("./resources/gamecontrollerdb.txt");
 	if (SDL_NumJoysticks() < 1) {
 		printf("Warning: No joysticks connected!\n");
 	} else {
 		//Load joystick
 		gamePad.gameController = SDL_GameControllerOpen(numControllers);
+		numControllers++;
 		if (gamePad.gameController == NULL) {
 			printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
 		} else {
 			cout << "open controller " << gamePad.gameController << endl;
 			
 			mapping(gamePad);
-			numControllers++;
 		}
 	}
+
 }
 
 void InputManager::closeController(GamePad& pad) {

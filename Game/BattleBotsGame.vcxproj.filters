@@ -204,7 +204,9 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObjects.cpp" />
+    <ClCompile Include="SceneObjects.cpp">
+      <Filter>Game\Systems\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -348,6 +350,8 @@
     <ClInclude Include="Character.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="SceneObjects.h" />
+    <ClInclude Include="SceneObjects.h">
+      <Filter>Game\Systems\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

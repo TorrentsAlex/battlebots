@@ -81,6 +81,9 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 		specular.b = currentLight["specular"]["b"].asFloat();
 
 		// position
+		position.x = currentLight["position"]["x"].asFloat();
+		position.y = currentLight["position"]["y"].asFloat();
+		position.z = currentLight["position"]["z"].asFloat();
 		
 		// direction
 		direction.x = currentLight["direction"]["x"].asFloat();
@@ -92,6 +95,7 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 		l.setDiffuse(diffuse);
 		l.setSpecular(specular);
 		l.setDirection(direction);
+		l.setPosition(position);
 
 		sceneLights.push_back(l);
 	}
@@ -147,9 +151,10 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 
 	// Material
 	Material mat;
-	mat.ambient = glm::vec3(1, 1, 1);
-	mat.diffuse = glm::vec3(1, 1, 1);
-	mat.specular = glm::vec3(1, 1, 1);
+	mat.ambient = glm::vec3(0.25, 0.20725, 0.20725);
+	mat.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
+	mat.specular = glm::vec3(0.25, 0.20725, 0.20725);
+	mat.shininess = 32;
 
 	ch1.setMaterial(mat);
 	ch2.setMaterial(mat);

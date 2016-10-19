@@ -1,7 +1,7 @@
 {
 	"character0" : {
-		"object": "./resources/objects/dwarf.obj",
-		"texture": "./resources/images/robot01_txt.png",
+		"object": "./resources/objects/dwarf_beer.obj",
+		"texture": "./resources/images/dwarf.png",
 		"material" : "./resources/materials/metal.json",
 		"position" : {
 			"x" : -40,

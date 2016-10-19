@@ -6,6 +6,7 @@ class LeftJoystick : public JoystickCommand {
 public:
 	virtual void execute(Character& actor) {
 		actor.movement(cAxis);
+		actor.rotation(cAxis);
 	}
 };
 
@@ -13,7 +14,7 @@ public:
 class RightJoystick : public JoystickCommand {
 public:
 	virtual void execute(Character& actor) {
-		actor.rotation(cAxis);
+		
 	}
 };
 

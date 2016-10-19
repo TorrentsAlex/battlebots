@@ -21,6 +21,7 @@ public:
 	std::string name;
 
 	void jump();
+	void dash();
 	void shoot();
 
 	void pointGun(float x, float y);

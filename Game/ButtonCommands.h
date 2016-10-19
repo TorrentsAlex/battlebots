@@ -19,7 +19,8 @@ public:
 class Y : public Command {
 public:
 	virtual void execute(Character& actor) {
-		std::cout << "Y" << std::endl;
+		std::cout << "Y Dash" << std::endl;
+		actor.dash();
 	};
 };
 class B : public Command {

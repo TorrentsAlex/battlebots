@@ -59,6 +59,15 @@ void Character::jump() {
 
 void Character::dash() {
 	float dashSpeed = 5.0f;
+	float dashCooldown = 5.0f;
+	float dashCooldownRemaining = dashCooldown; // check http://gamedev.stackexchange.com/questions/44340/how-can-i-make-a-c-countdown-timer-that-doesnt-freeze-user-input
+
+	/*
+	if (dashCooldown == 0) {
+		eGameObject._translate.x += vectorForward.x * velocity * dashSpeed;
+		eGameObject._translate.y += vectorForward.y * velocity * dashSpeed;
+	} 
+	*/
 
 	eGameObject._translate.x += vectorForward.x * velocity * dashSpeed;
 	eGameObject._translate.y += vectorForward.y * velocity * dashSpeed;

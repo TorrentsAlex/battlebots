@@ -10,7 +10,7 @@ CollisionDetector::~CollisionDetector() {
 }
 
 // Detection between 2 spheres
-glm::vec2 CollisionDetector::GetCollision(Sphere s1, Sphere s2) {
+bool CollisionDetector::GetCollision(Sphere s1, Sphere s2) {
 	float deltaXSquared = s2.getXCenter() - s1.getXCenter();
 	float deltaYSquared = s2.getYCenter() - s1.getYCenter();
 
@@ -22,9 +22,9 @@ glm::vec2 CollisionDetector::GetCollision(Sphere s1, Sphere s2) {
 	sumRadisquared *= sumRadisquared;
 
 	if (deltaXSquared + deltaYSquared <= sumRadisquared) {
-		return glm::normalize(glm::vec2(s2.getXCenter() - s1.getXCenter(), s2.getYCenter() - s1.getYCenter()));
+		return true;
 	} else {
-		return glm::vec2(0, 0);
+		return false;
 	}
 }
 

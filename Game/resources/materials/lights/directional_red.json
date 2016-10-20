@@ -1,6 +1,10 @@
 {
 	"type" : "directional",
-	"position" : null,
+	"position" : {
+		"x" : 4.8,
+		"y" : 4.8,
+		"z" : 4.8
+	},
 	"direction" : {
 		"x" : -0.8,
 		"y" : -0.8,

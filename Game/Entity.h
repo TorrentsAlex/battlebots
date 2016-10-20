@@ -28,7 +28,10 @@ public:
 	void setGameObject(GameObject gameObject);
 
 	void setSquareBoundingBox();
+	
 	void setTextureId(GLuint textureId);
+	void setTextureSpecular(GLuint specularId);
+
 	void setPosition(glm::vec3 newPos);
 	void setPosition(glm::vec2 newPos);
 	void setMaterial(Material material);

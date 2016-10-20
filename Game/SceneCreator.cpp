@@ -43,6 +43,7 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 	entity.setOBJ(objDecoration);
 
 	vector<Entity> vEntityDecorations;
+	terrainMaterial.specularMap = TextureManager::Instance().getTextureID("./resources/images/lanternS.png");
 	for (GameObject gODecoration : vectorDecoration) {
 
 		gODecoration._translate.x *= 1.0f;
@@ -155,6 +156,7 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 	mat.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
 	mat.specular = glm::vec3(0.25, 0.20725, 0.20725);
 	mat.shininess = 32;
+	//mat.specularMap = TextureManager::Instance().getTextureID("./resources/images/dwarfsg.png");
 
 	ch1.setMaterial(mat);
 	ch2.setMaterial(mat);
@@ -162,7 +164,6 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 	ch4.setMaterial(mat);
 
 	// Texture
-
 	ch1.setTextureId(TextureManager::Instance().getTextureID(json["character0"]["texture"].asString()));
 	ch2.setTextureId(TextureManager::Instance().getTextureID(json["character1"]["texture"].asString()));
 	ch3.setTextureId(TextureManager::Instance().getTextureID(json["character2"]["texture"].asString()));

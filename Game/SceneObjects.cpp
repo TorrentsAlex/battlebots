@@ -1,6 +1,6 @@
 #include "SceneObjects.h"
 
-
+#include <thread>
 
 SceneObjects::SceneObjects() {
 	currentScene = new Scene();
@@ -38,6 +38,35 @@ void SceneObjects::clean() {
 	}
 }
 
+void SceneObjects::handleInputs() {
+	for (int i = 0; i < playersToRender.size(); i++) {
+		TurriFramework::Instance().executeInput(*playersToRender.at(i));
+	}
+}
+
+void SceneObjects::collisionDetection() {
+
+}
+
+/*
+	Update all scene, including the characters
+*/
+void SceneObjects::update() {
+	
+	// First check collision
+	collisionDetection();
+
+
+	// update the scene
+	for (int i = 0; i < playersToRender.size(); i++) {
+		playersToRender.at(0)->update();
+	}
+	// Update objects of the scene
+}
+
+/*
+	Send objects to render into the screen to OpenGL
+*/
 void SceneObjects::render() {
 
 	TurriFramework::Instance().startRender();
@@ -45,13 +74,23 @@ void SceneObjects::render() {
 	TurriFramework::Instance().renderCamera();
 
 	TurriFramework::Instance().renderLights(currentScene->getLights());
+
 	TurriFramework::Instance().renderScene(*currentScene);
 
-	TurriFramework::Instance().disableLights();
-
-	for (int i = 0; i < playersToRender.size(); i++) {
-		TurriFramework::Instance().renderEntity(*playersToRender.at(i));
+	if (player1->inGame) {
+		TurriFramework::Instance().renderEntity(*player1);
 	}
+	if (player2->inGame) {
+		TurriFramework::Instance().renderEntity(*player2);
+	}
+	if (player3->inGame) {
+		TurriFramework::Instance().renderEntity(*player3);
+	}
+	if (player4->inGame) {
+		TurriFramework::Instance().renderEntity(*player4);
+	}
+
+	TurriFramework::Instance().disableLights();
 
 	TurriFramework::Instance().renderEntity(currentScene->getSkyBox());
 	TurriFramework::Instance().stopRender();

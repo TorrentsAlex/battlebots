@@ -61,9 +61,3 @@ void PlayersScreen::render() {
 void PlayersScreen::clean() {
 
 }
-
-void PlayersScreen::goToMode() {
-	GameController::Instance().changeState(GameState::MODE);
-}
-
-

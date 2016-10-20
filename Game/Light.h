@@ -7,7 +7,7 @@
 
 class Light {
 protected:
-	int lType = LIGHT_DIRECTIONAL;
+	int lType = LIGHT_POINT;
 	glm::vec3 lAmbient;
 	glm::vec3 lDiffuse;
 	glm::vec3 lSpecular;

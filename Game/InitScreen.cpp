@@ -51,15 +51,17 @@ void InitScreen::render() {
 
 
 	TurriFramework::Instance().renderScene(*menuScene);
-	// Render the skybox without lights
-	TurriFramework::Instance().disableLights();
-
-	TurriFramework::Instance().renderEntity(menuScene->getSkyBox());
 
 	vector<Button> buttons = iBManager.getButtons();
 	for (int i = 0; i < buttons.size(); i++) {
 		TurriFramework::Instance().renderEntity(buttons.at(i));
 	}
+
+	// Render the skybox without lights
+	TurriFramework::Instance().disableLights();
+
+	TurriFramework::Instance().renderEntity(menuScene->getSkyBox());
+
 
 	TurriFramework::Instance().stopRender();
 }

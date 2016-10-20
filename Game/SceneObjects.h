@@ -12,8 +12,12 @@ private:
 
 	Scene* currentScene;
 	Scene* lastScene;
-
+	
+	glm::vec2 maxLimits;
+	glm::vec2 minLimits;
 	std::vector<Character*> playersToRender;
+
+	void collisionDetection();
 public:	
 	
 	static SceneObjects& Instance() {
@@ -25,10 +29,13 @@ public:
 
 	void clean();
 	void render();
+	void update();
+	void handleInputs();
 
 	void addCharacterToRender(Character& character);
 	void cleanCharactersToRender();
 	
+
 	Scene* getCurrentScene();
 	Character* getPlayerAt(int current);
 

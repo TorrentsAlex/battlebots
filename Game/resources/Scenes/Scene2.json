@@ -1,7 +1,7 @@
 {
 	"sky" :{ 
 		"object" : "./resources/objects/skybox.obj",
-		"texture": "./resources/images/red.jpg"
+		"texture": "./resources/images/beer_color.png"
 	},
 	"terrain": {
 		"object": "./resources/objects/cylinder_terrain.obj",
@@ -15,7 +15,6 @@
 		"material" : "./resources/materials/metal.json"
 	},
 	"lights" : [
-		"./resources/materials/lights/directional_white.json",
-		"./resources/materials/lights/directional_red.json"
+		"./resources/materials/lights/directional_white.json"
 	]
 }

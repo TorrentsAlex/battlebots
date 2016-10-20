@@ -75,7 +75,7 @@ void TurriFramework::renderScene(Scene scene) {
 	Entity terrain = scene.getTerrain();
 	tOpenGL.sendMaterial(terrain.getMaterial());
 	tOpenGL.sendObject(terrain.getMesh(), terrain.getGameObject(), terrain.getNumVertices());
-	
+
 	clearMaps();
 
 	// Decoration
@@ -84,8 +84,8 @@ void TurriFramework::renderScene(Scene scene) {
 	tOpenGL.sendMaterial(vectorDecoration.at(0).getMaterial());
 	for (Entity nextDecoration : vectorDecoration) {
 		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
-	}	
-	
+	}
+
 	clearMaps();
 }
 

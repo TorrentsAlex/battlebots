@@ -49,6 +49,7 @@ void InitScreen::render() {
 	// send the lights to shaders
 	TurriFramework::Instance().renderLights(menuScene.getLights());
 
+	TurriFramework::Instance().renderScene(menuScene);
 
 	// Render the skybox without lights
 	TurriFramework::Instance().disableLights();
@@ -57,7 +58,6 @@ void InitScreen::render() {
 	for (int i = 0; i < buttons.size(); i++) {
 		TurriFramework::Instance().renderEntity(buttons.at(i));
 	}
-	TurriFramework::Instance().renderScene(menuScene);
 	TurriFramework::Instance().stopRender();
 }
 

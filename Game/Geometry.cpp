@@ -12,8 +12,8 @@ using namespace std;
 
 OBJ Geometry::LoadModelFBXFromFile(std::string file) {
 	OBJ newOBJ;
-	/*
-	/ Create an instance of the Importer class
+	
+	// Create an instance of the Importer class
 	Assimp::Importer importer;
 	// And have it read the given file with some example postprocessing
 	// Usually - if speed is not the most important aspect for you - you'll 
@@ -43,13 +43,13 @@ OBJ Geometry::LoadModelFBXFromFile(std::string file) {
 		const aiVector3D* pPos = &(mesh->mVertices[i]);
 		const aiVector3D* pNormal = mesh->HasNormals() ? &(mesh->mNormals[i]): &Zero3D;
 	const aiVector3D* pTexCoord = mesh->HasTextureCoords(0) ? &(mesh->mTextureCoords[0][i]) : &Zero3D;
-
+	/*
 		Vertex v(Vector3f(pPos->x, pPos->y, pPos->z),
 			Vector2f(pTexCoord->x, pTexCoord->y),
 			Vector3f(pNormal->x, pNormal->y, pNormal->z));
 
 		vertices.push_back(v);
-	}*/
+	*/}
 	/*
 	    for (unsigned int i = 0 ; i < paiMesh->mNumVertices ; i++) {
         const aiVector3D* pPos = &(paiMesh->mVertices[i]);

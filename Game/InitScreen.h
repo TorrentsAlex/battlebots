@@ -14,7 +14,7 @@ private:
 	void render() override;
 	void clean() override;
 
-	Scene menuScene;
+	Scene* menuScene;
 
 	ButtonManager iBManager;
 public:

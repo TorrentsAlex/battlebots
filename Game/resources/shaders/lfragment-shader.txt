@@ -43,7 +43,6 @@ uniform sampler2D specularMap;
 uniform int hasNormalMap;
 uniform int hasSpecularMap;
 
-
 uniform int lightingEnabled;
 uniform vec3 viewerPosition;
 uniform Material material;

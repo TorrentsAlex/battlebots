@@ -3,8 +3,7 @@
 #include "Scene.h"
 #include "GameController.h"
 
-class PlayersScreen: public BaseScreen
-{
+class PlayersScreen: public BaseScreen {
 private:
 
 	void init() override;
@@ -12,9 +11,7 @@ private:
 	void update() override;
 	void render() override;
 	void clean() override;
-	void goToMode();
 
-	Scene playersScene;
 public:
 	
 };

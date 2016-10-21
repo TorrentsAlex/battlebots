@@ -1,5 +1,5 @@
 #pragma once
-#include <glm\vec2.hpp>
+#include <glm/vec2.hpp>
 #include "OBJ.h"
 #include "GameObject.h"
 
@@ -20,7 +20,7 @@ public:
 	float getXCenter();
 	float getYCenter();
 
-	void calculateBoundingBoxes(OBJ* mesh);
+	void calculateBoundingBoxes(OBJ mesh);
 
 };
 

@@ -12,7 +12,7 @@ Entity::~Entity() {
 Entity::Entity(OBJ mesh, GameObject gameObject) {
 	eMesh = mesh;
 	eGameObject = gameObject;
-	//sBoundingBox.calculateBoundingBoxes(mesh);
+	eBoundingBox.calculateBoundingBoxes(mesh);
 
 	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
 }
@@ -20,7 +20,7 @@ Entity::Entity(OBJ mesh, GameObject gameObject) {
 // Setters
 void Entity::setOBJ(OBJ mesh) {
 	eMesh = mesh;
-	//sBoundingBox.calculateBoundingBoxes(mesh);
+	eBoundingBox.calculateBoundingBoxes(mesh);
 }
 
 void Entity::setGameObject(GameObject gameObject) {
@@ -30,10 +30,11 @@ void Entity::setGameObject(GameObject gameObject) {
 
 void Entity::setSquareBoundingBox() {
 	haveSquareBBox = true;
-	eSquareBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
-	eSquareBoundingBox.setSize(eMesh.width.y - eMesh.width.x, eMesh.lenght.y - eMesh.lenght.x);
+	//eSquareBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
+	//eSquareBoundingBox.setSize(eMesh.width.y - eMesh.width.x, eMesh.lenght.y - eMesh.lenght.x);
 }
 
+// Entity transformations
 void Entity::setPosition(glm::vec3 newPos) {
 	eGameObject._translate.x = newPos.x;
 	eGameObject._translate.y = newPos.y;
@@ -42,11 +43,15 @@ void Entity::setPosition(glm::vec3 newPos) {
 void Entity::setPosition(glm::vec2 newPos) {
 	eGameObject._translate.x = newPos.x;
 	eGameObject._translate.y = newPos.y;
-
 }
 
+// Textures
 void Entity::setTextureId(GLuint textureId) {
 	eMaterial.textureMap = textureId;
+}
+
+void Entity::setTextureSpecular(GLuint specularId) {
+	eMaterial.specularMap = specularId;
 }
 
 void Entity::setMaterial(Material material) {

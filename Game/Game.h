@@ -18,7 +18,7 @@ private:
 	void render() override;
 	void clean() override;
 
-	Scene gScene;
+	Scene* gScene;
 	Character* robot1;
 
 };

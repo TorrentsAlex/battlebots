@@ -12,9 +12,8 @@ private:
 	void update() override;
 	void render() override;
 	void clean() override;
-	void goToMenu();
 
-	Scene optionsScene;
+	Scene* optionsScene;
 	
 	ButtonManager BManager;
 public:

@@ -38,12 +38,12 @@ float Sphere::getYCenter() {
 	return sCenter.y;
 }
 
-void Sphere::calculateBoundingBoxes(OBJ* mesh) {
+void Sphere::calculateBoundingBoxes(OBJ mesh) {
 
 	// if the object is not a square shape calculate the major radius
 	float xRadius, yRadius;
-	xRadius = (mesh->width.y - mesh->width.x) / 2;
-	yRadius = (mesh->lenght.y - mesh->lenght.x) / 2;
+	xRadius = (mesh.width.y - mesh.width.x) / 2;
+	yRadius = (mesh.lenght.y - mesh.lenght.x) / 2;
 
 	sRadius = (xRadius > yRadius) ? xRadius: yRadius;
 }

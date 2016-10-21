@@ -5,6 +5,74 @@
 
 using namespace std;
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <assimp/vector3.h>
+
+OBJ Geometry::LoadModelFBXFromFile(std::string file) {
+	OBJ newOBJ;
+	
+	// Create an instance of the Importer class
+	Assimp::Importer importer;
+	// And have it read the given file with some example postprocessing
+	// Usually - if speed is not the most important aspect for you - you'll 
+	// propably to request more postprocessing than we do in this example.
+	const aiScene* scene = importer.ReadFile(file,
+		aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_SortByPType);
+
+	// If the import failed, report it
+	if (!scene) {
+		cout << "error loading file: " << file << " Error:"
+			<< importer.GetErrorString() << endl;
+		return newOBJ;
+	}
+	std::vector<Vertex> vertices;
+	std::vector<Vertex> indices;
+
+	// get ONLY the first mesh 
+	const aiMesh* mesh = scene->mMeshes[0];
+
+	// init a zero3D vector if not exist some values
+	const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+
+		const aiVector3D* pPos = &(mesh->mVertices[i]);
+		const aiVector3D* pNormal = mesh->HasNormals() ? &(mesh->mNormals[i]): &Zero3D;
+	const aiVector3D* pTexCoord = mesh->HasTextureCoords(0) ? &(mesh->mTextureCoords[0][i]) : &Zero3D;
+	/*
+		Vertex v(Vector3f(pPos->x, pPos->y, pPos->z),
+			Vector2f(pTexCoord->x, pTexCoord->y),
+			Vector3f(pNormal->x, pNormal->y, pNormal->z));
+
+		vertices.push_back(v);
+	*/}
+	/*
+	    for (unsigned int i = 0 ; i < paiMesh->mNumVertices ; i++) {
+        const aiVector3D* pPos = &(paiMesh->mVertices[i]);
+        const aiVector3D* pNormal = &(paiMesh->mNormals[i]) : &Zero3D;
+        const aiVector3D* pTexCoord = paiMesh->HasTextureCoords(0) ? &(paiMesh->mTextureCoords[0][i]) : &Zero3D;
+
+        Vertex v(Vector3f(pPos->x, pPos->y, pPos->z),
+                Vector2f(pTexCoord->x, pTexCoord->y),
+                Vector3f(pNormal->x, pNormal->y, pNormal->z));
+
+        Vertices.push_back(v);
+    }
+    ...
+Here we prepare the contents of the vertex buffer by populating the Vertices vector. We use the following attributes of the aiMesh class:
+mNumVertices - the number of vertices.
+mVertices - an array of mNumVertices vectors that contain the position.
+mNormals - an array of mNumVertices vectors that contain the vertex normals.
+mTextureCoords - an array of mNumVertices vectors that contain the texture coordinates. 
+This is actualy a two dimensional array because each vertex can hold several texture coordinates.
+	*/
+	// We're done. Everything will be cleaned up by the importer destructor
+	return newOBJ;
+}
 
 OBJ Geometry::LoadModelFromFile(std::string file) {
 	float xMin = 5000, xMax = 0, yMin = 50000, yMax = 0;

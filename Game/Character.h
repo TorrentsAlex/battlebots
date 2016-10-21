@@ -7,11 +7,14 @@
 struct GamePad;
 class Character : public Entity {
 private:
-	
+
 	float velocity = 0.5;
 	GamePad* rGamePad;
-
+	
 public:
+
+	bool inGame;
+
 	Character();
 	~Character();
 	glm::vec3 vectorForward;

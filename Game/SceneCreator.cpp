@@ -1,8 +1,8 @@
 #include "SceneCreator.h"
 
-Scene SceneCreator::createScene(string file) {
+
+void SceneCreator::createScene(string file, Scene& newScene) {
 	cout << "creating scene" << endl;
-	Scene newScene;
 	Json::Reader reader; 
 	Json::Value json;
 
@@ -43,8 +43,9 @@ Scene SceneCreator::createScene(string file) {
 	entity.setOBJ(objDecoration);
 
 	vector<Entity> vEntityDecorations;
+	terrainMaterial.specularMap = TextureManager::Instance().getTextureID("./resources/images/lanternS.png");
 	for (GameObject gODecoration : vectorDecoration) {
-		gODecoration._scale *= 20.0f;
+
 		gODecoration._translate.x *= 1.0f;
 		gODecoration._translate.y *= 1.0f;
 
@@ -81,6 +82,9 @@ Scene SceneCreator::createScene(string file) {
 		specular.b = currentLight["specular"]["b"].asFloat();
 
 		// position
+		position.x = currentLight["position"]["x"].asFloat();
+		position.y = currentLight["position"]["y"].asFloat();
+		position.z = currentLight["position"]["z"].asFloat();
 		
 		// direction
 		direction.x = currentLight["direction"]["x"].asFloat();
@@ -92,14 +96,78 @@ Scene SceneCreator::createScene(string file) {
 		l.setDiffuse(diffuse);
 		l.setSpecular(specular);
 		l.setDirection(direction);
+		l.setPosition(position);
 
 		sceneLights.push_back(l);
 	}
 	newScene.setLights(sceneLights);
 
 	newScene.setDecoration(vEntityDecorations);
+}
 
-	return newScene;
+void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2, Character& ch3, Character& ch4) {
+	cout << "creating characters" << endl;
+	Scene newScene;
+	Json::Reader reader;
+	Json::Value json;
+
+	// Load File and save it into string
+	string jsonString = FileReader::LoadStringFromFile(file);
+	// Parse the string into json
+	reader.parse(jsonString, json);
+	
+	// Load MODEL
+	OBJ object = Geometry::LoadModelFromFile(json["character0"]["object"].asString());
+	ch1.setOBJ(object);
+	ch2.setOBJ(object);
+	ch3.setOBJ(object);
+	ch4.setOBJ(object);
+
+	// Load position
+	GameObject gameObject;
+
+	gameObject._angle = 0;
+	gameObject._rotation = glm::vec3(0,0,1);
+	gameObject._scale = glm::vec3(1,1,1);
+
+	gameObject._translate.x = json["character0"]["position"]["x"].asInt();
+	gameObject._translate.y = json["character0"]["position"]["y"].asInt();
+	gameObject._translate.z = json["character0"]["position"]["z"].asInt();
+	ch1.setGameObject(gameObject);
+
+	gameObject._translate.x = json["character1"]["position"]["x"].asInt();
+	gameObject._translate.y = json["character1"]["position"]["y"].asInt();
+	gameObject._translate.z = json["character1"]["position"]["z"].asInt();
+	ch2.setGameObject(gameObject);
+
+	gameObject._translate.x = json["character2"]["position"]["x"].asInt();
+	gameObject._translate.y = json["character2"]["position"]["y"].asInt();
+	gameObject._translate.z = json["character2"]["position"]["z"].asInt();
+	ch3.setGameObject(gameObject);
+
+	gameObject._translate.x = json["character3"]["position"]["x"].asInt();
+	gameObject._translate.y = json["character3"]["position"]["y"].asInt();
+	gameObject._translate.z = json["character3"]["position"]["z"].asInt();
+	ch4.setGameObject(gameObject);
+
+	// Material
+	Material mat;
+	mat.ambient = glm::vec3(0.25, 0.20725, 0.20725);
+	mat.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
+	mat.specular = glm::vec3(0.25, 0.20725, 0.20725);
+	mat.shininess = 32;
+	//mat.specularMap = TextureManager::Instance().getTextureID("./resources/images/dwarfsg.png");
+
+	ch1.setMaterial(mat);
+	ch2.setMaterial(mat);
+	ch3.setMaterial(mat);
+	ch4.setMaterial(mat);
+
+	// Texture
+	ch1.setTextureId(TextureManager::Instance().getTextureID(json["character0"]["texture"].asString()));
+	ch2.setTextureId(TextureManager::Instance().getTextureID(json["character1"]["texture"].asString()));
+	ch3.setTextureId(TextureManager::Instance().getTextureID(json["character2"]["texture"].asString()));
+	ch4.setTextureId(TextureManager::Instance().getTextureID(json["character3"]["texture"].asString()));
 }
 
 vector<Button> SceneCreator::createButtons(string file) {

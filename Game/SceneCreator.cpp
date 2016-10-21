@@ -37,25 +37,35 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 	// Decoration
 	OBJ objDecoration = Geometry::LoadModelFromFile(json["decoration"]["object"].asString());
 	GLuint textureDecoration = TextureManager::Instance().getTextureID(json["decoration"]["texture"].asString());
-	vector<GameObject> vectorDecoration = Geometry::LoadGameElements(json["decoration"]["elements"].asString());
+
+	string gameElements = json["decoration"]["elements"].asString();
 
 	Entity entity;
 	entity.setOBJ(objDecoration);
+	entity.setMaterial(terrainMaterial);
+	entity.setTextureId(textureDecoration);
 
 	vector<Entity> vEntityDecorations;
-	terrainMaterial.specularMap = TextureManager::Instance().getTextureID("./resources/images/lanternS.png");
-	for (GameObject gODecoration : vectorDecoration) {
 
-		gODecoration._translate.x *= 1.0f;
-		gODecoration._translate.y *= 1.0f;
-
-		entity.setMaterial(terrainMaterial);
-		entity.setTextureId(textureDecoration);
-		entity.setGameObject(gODecoration);
-
+	// Theres nothin into elements
+	if (gameElements.compare("") == 0) {
+		GameObject gameObject;
+		gameObject._translate = glm::vec3(json["position"]["x"].asFloat(), json["position"]["y"].asFloat(), json["position"]["z"].asFloat());;
+		
+		gameObject._scale = glm::vec3(1,1,1);
+		gameObject._angle = 0;
+		entity.setGameObject(gameObject);
 		vEntityDecorations.push_back(entity);
+
+	} else {
+		vector<GameObject> vectorDecoration = Geometry::LoadGameElements(gameElements);
+		for (GameObject gODecoration : vectorDecoration) {
+			entity.setGameObject(gODecoration);
+
+			vEntityDecorations.push_back(entity);
+		}
 	}
-	
+
 	// Lights
 	vector<Light> sceneLights;
 	Json::Value jsonLights = json["lights"];
@@ -185,9 +195,10 @@ vector<Button> SceneCreator::createButtons(string file) {
 		newButton.setOBJ(object);
 
 		Material mat;
-		mat.ambient = glm::vec3(1, 1, 1);
-		mat.diffuse = glm::vec3(1, 1, 1);
-		mat.specular = glm::vec3(1, 1, 1);
+		mat.ambient = glm::vec3(0.25, 0.20725, 0.20725);
+		mat.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
+		mat.specular = glm::vec3(0.25, 0.20725, 0.20725);
+		mat.shininess = 32;
 
 		mat.textureMap = TextureManager::Instance().getTextureID(json[currentButton]["texture_on"].asString());
 		GameObject buttonObject;
@@ -203,6 +214,9 @@ vector<Button> SceneCreator::createButtons(string file) {
 		newButton.setGameObject(buttonObject);
 		newButton.setMaterial(mat);
 		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_off"].asString()));
+
+		newButton.setSpecularMap(TextureManager::Instance().getTextureID(json[currentButton]["texture_specular"].asString()));
+
 		vectorButtons.push_back(newButton);
 	}
 

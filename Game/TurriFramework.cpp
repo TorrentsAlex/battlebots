@@ -120,6 +120,10 @@ void TurriFramework::addFlagscreen(unsigned int currentFlag) {
 	}
 }
 
+void TurriFramework::setCameraPosition(glm::vec3 position) {
+	tCamera.setCameraPosition(position);
+}
+
 // Input methods
 void TurriFramework::executeInput(Character& character) {
 	// Joystick

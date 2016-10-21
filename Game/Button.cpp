@@ -22,15 +22,21 @@ void Button::setTextureOff(GLuint textureOff) {
 	currentState = ButtonState::ON;
 }
 
+void Button::setSpecularMap(GLuint specularMap) {
+	bSpecularMapOn = specularMap;
+}
+
 void Button::changeStateOn() {
 	currentState = ButtonState::ON;
 	eMaterial.textureMap = bTextureOn;
+	eMaterial.specularMap = bSpecularMapOn;
 
 }
 void Button::changeStateOff() {
 	// change to off
 	currentState = ButtonState::OFF;
 	eMaterial.textureMap = bTextureOff;
+	eMaterial.specularMap = -1;
 }
 
 bool Button::isOn() {

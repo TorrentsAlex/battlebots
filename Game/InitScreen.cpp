@@ -11,6 +11,8 @@ void InitScreen::init() {
 	iBManager.setButtons(iButtons);
 	iBManager.init();
 
+
+	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -100, 70));
 }
 
 void InitScreen::input() {

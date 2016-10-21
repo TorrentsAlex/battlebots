@@ -12,6 +12,7 @@ private:
 
 	GLuint bTextureOff;
 	GLuint bTextureOn;
+	GLuint bSpecularMapOn;
 	ButtonState currentState;
 
 public:
@@ -20,6 +21,8 @@ public:
 
 
 	void setTextureOff(GLuint textureOff);
+	void setSpecularMap(GLuint specularMap);
+
 	void changeStateOn();
 	void changeStateOff();
 

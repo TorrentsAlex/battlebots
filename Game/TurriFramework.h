@@ -62,6 +62,8 @@ public:
 	void setScreenSize(int widthScreen, int heightScreen);
 	void addFlagscreen(unsigned int currentFlag);
 
+	void setCameraPosition(glm::vec3 position);
+
 	// Input methods 
 	void executeInput(Character& character);
 	void quit();

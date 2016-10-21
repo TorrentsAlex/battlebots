@@ -1,34 +1,37 @@
 {
-	"object" : "./resources/objects/button.obj",
+	"object" : "./resources/objects/menu_button.obj",
 	"size" : 3,
 	"button0" : {
 		"name" : "start",
 		"position" : {
-			"x" : 20,
-			"y" : 20,
-			"z" : 20
+			"x" : 0,
+			"y" : 0,
+			"z" : 16
 		},
-		"texture_on" : "./resources/images/button_start_on.png",
-		"texture_off" : "./resources/images/button_start.png"
+		"texture_on" : "./resources/images/buttons/play/play_butt_on_green.png",
+		"texture_off" : "./resources/images/buttons/play/play_butt_off.png",
+		"texture_specular" : "./resources/images/buttons/play/play_butt_glow.png"
 	},
 	"button1" : {
 		"name" : "options",
 		"position" : {
-			"x" : 20,
-			"y" : 20,
-			"z" : 10
+			"x" : 0,
+			"y" : 0,
+			"z" : 11
 		},
-		"texture_on" : "./resources/images/button_options_on.png",
-		"texture_off" : "./resources/images/button_options.png"
+		"texture_on" : "./resources/images/buttons/options/options_butt_on.png",
+		"texture_off" : "./resources/images/buttons/options/options_butt_off.png",
+		"texture_specular" : "./resources/images/buttons/options/options_butt_glow.png"
 	},
 	"button2" : {
-	"name" : "exit",
-	"position" : {
-		"x" : 20,
-		"y" : 20,
-		"z" : 0
-	},
-	"texture_on" : "./resources/images/button_exit_on.png",
-	"texture_off" : "./resources/images/button_exit.png"
+		"name" : "exit",
+		"position" : {
+			"x" : 0,
+			"y" : 0,
+			"z" : 6
+		},
+		"texture_on" : "./resources/images/buttons/exit/exit_butt_on.png",
+		"texture_off" : "./resources/images/buttons/exit/exit_butt_off.png",
+		"texture_specular" : "./resources/images/buttons/exit/exit_butt_glow.png"
 	}
 }

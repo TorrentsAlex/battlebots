@@ -18,6 +18,8 @@ void PlayersScreen::init() {
 	InputManager::Instance().getGameController(*SceneObjects::Instance().getPlayerAt(2)->getGamePad());
 	InputManager::Instance().getGameController(*SceneObjects::Instance().getPlayerAt(3)->getGamePad());
 
+	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -120, 100));
+
 }
 
 

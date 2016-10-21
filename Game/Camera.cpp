@@ -57,7 +57,7 @@ void Camera::setViewMatrix() {
 
 void Camera::setCameraPosition(glm::vec3 pos) {
 	if (cCameraMode == CameraMode::PERSPECTIVE) {
-		cCameraPos = glm::vec3(pos.x , pos.y, cCameraPosPersp.z);
+		cCameraPos = glm::vec3(pos.x , pos.y, pos.z);
 	} else {
 		cCameraPos = glm::vec3(pos.x, pos.y, cCameraPos.z);
 	}

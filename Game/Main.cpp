@@ -26,8 +26,11 @@ int main(int argc, char ** argv) {
 		std::cerr << "ERROR: " << e.what() << std::endl;
 		system("pause");
 	}
+
 	TextureManager::Instance().deleteTextures();
 	InputManager::Instance().clean();
+	GameController::Instance().clean();
+
 	//TurriFramework::Instance().clean();
 
 	return 0;

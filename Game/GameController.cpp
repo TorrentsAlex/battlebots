@@ -50,3 +50,7 @@ void GameController::update() {
 void GameController::render() {
 	gCurrentScreen.render();
 }
+
+void GameController::clean() {
+	gCurrentScreen.clean();
+}

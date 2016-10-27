@@ -4,8 +4,8 @@
 
 
 void OptionsScreen::init() {
-	
-	SceneCreator::Instance().createScene("./resources/scenes/Scene2.json", *optionsScene);
+	optionsScene = new Scene();
+	SceneCreator::Instance().createScene("./resources/scenes/Scene1.json", *optionsScene);
 
 	 vector<Button> OptionButtons = SceneCreator::Instance().createButtons("./resources/scenes/option_buttons.json");
 	

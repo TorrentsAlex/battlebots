@@ -17,6 +17,9 @@ private:
 	Scene* menuScene;
 
 	ButtonManager iBManager;
+
+	SDL_GameController* gameController;
+	GamePad* gamePad;
 public:
 
 };

@@ -89,7 +89,6 @@ void InitScreen::render() {
 	// send the lights to shaders
 	TurriFramework::Instance().renderLights(menuScene->getLights());
 
-
 	TurriFramework::Instance().renderScene(*menuScene);
 
 	vector<Button> buttons = iBManager.getButtons();
@@ -101,7 +100,6 @@ void InitScreen::render() {
 	TurriFramework::Instance().disableLights();
 
 	TurriFramework::Instance().renderEntity(menuScene->getSkyBox());
-
 
 	TurriFramework::Instance().stopRender();
 }

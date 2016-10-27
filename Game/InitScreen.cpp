@@ -71,7 +71,6 @@ void InitScreen::input() {
 	if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) {
 		position.z -= 1;
 	}
-	cout << position.x << "/" << position.y << "/" << position.z << endl;
 
 	TurriFramework::Instance().setCameraPosition(position);
 }

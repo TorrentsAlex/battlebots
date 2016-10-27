@@ -206,7 +206,15 @@ vector<Button> SceneCreator::createButtons(string file) {
 		buttonObject._translate.y = json[currentButton]["position"]["y"].asInt();
 		buttonObject._translate.z = json[currentButton]["position"]["z"].asInt();
 		
-		buttonObject._scale = glm::vec3(1, 1, 1);
+		Json::Value scaleJson = json[currentButton].get("scale", NULL);
+		if (scaleJson != NULL) {
+			buttonObject._scale.x = scaleJson["x"].asFloat();
+			buttonObject._scale.y = scaleJson["y"].asFloat();
+			buttonObject._scale.z = scaleJson["z"].asFloat();
+		} else {
+			buttonObject._scale = glm::vec3(1, 1, 1);
+		}
+		
 		buttonObject._angle = 0;
 		buttonObject._rotation = glm::vec3(0,0,0);
 		
@@ -215,7 +223,7 @@ vector<Button> SceneCreator::createButtons(string file) {
 		newButton.setMaterial(mat);
 		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_off"].asString()));
 
-		newButton.setSpecularMap(TextureManager::Instance().getTextureID(json[currentButton]["texture_specular"].asString()));
+		//newButton.setSpecularMap(TextureManager::Instance().getTextureID(json[currentButton]["texture_specular"].asString()));
 
 		vectorButtons.push_back(newButton);
 	}

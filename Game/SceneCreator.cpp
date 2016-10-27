@@ -189,6 +189,8 @@ vector<Button> SceneCreator::createButtons(string file) {
 	int size = json["size"].asInt();
 	OBJ object = Geometry::LoadModelFromFile(json["object"].asString());
 	vector<Button> vectorButtons;
+	GLuint specularMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
+
 	for (int i = 0; i < size; i++) {
 		string currentButton = "button" + std::to_string(i);
 		Button newButton;
@@ -200,7 +202,8 @@ vector<Button> SceneCreator::createButtons(string file) {
 		mat.specular = glm::vec3(0.25, 0.20725, 0.20725);
 		mat.shininess = 32;
 
-		mat.textureMap = TextureManager::Instance().getTextureID(json[currentButton]["texture_on"].asString());
+		string texture = json[currentButton]["texture_on"].asString();
+		mat.textureMap = TextureManager::Instance().getTextureID(texture);
 		GameObject buttonObject;
 		buttonObject._translate.x = json[currentButton]["position"]["x"].asInt();
 		buttonObject._translate.y = json[currentButton]["position"]["y"].asInt();
@@ -221,9 +224,9 @@ vector<Button> SceneCreator::createButtons(string file) {
 		newButton.setName(json[currentButton]["name"].asString());
 		newButton.setGameObject(buttonObject);
 		newButton.setMaterial(mat);
-		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_off"].asString()));
+		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_on"].asString()));
 
-		//newButton.setSpecularMap(TextureManager::Instance().getTextureID(json[currentButton]["texture_specular"].asString()));
+		newButton.setSpecularMap(specularMap);
 
 		vectorButtons.push_back(newButton);
 	}

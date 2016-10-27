@@ -36,11 +36,11 @@ void OptionsScreen::input() {
 			cout << "1280x800" << endl;
 			TurriFramework::Instance().setScreenSize(1280, 800);
 		}
-		if (currentButton.compare("FullScreen") == 0) {
+		if (currentButton.compare("fullscreen") == 0) {
 			cout << "Fullscreen" << endl;
 			TurriFramework::Instance().addFlagscreen((int)WindowFlags::FULLSCREEN);
 		}
-		if (currentButton.compare("Return") == 0) {
+		if (currentButton.compare("back") == 0) {
 			cout << "Return to Menu" << endl;
 			GameController::Instance().changeState(GameState::MENU);
 		}

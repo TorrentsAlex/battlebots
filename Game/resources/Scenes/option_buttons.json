@@ -4,28 +4,28 @@
 	"button0" : {
 		"name" : "1920x1080",
 		"position" : {
-			"x" : -4,
+			"x" : -5,
 			"y" : 0,
 			"z" : 16
 		},
 		"scale" : {
-			"x" : 0.9,
-			"y" : 0.9,
+			"x" : 0.8,
+			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/hd/hd_butt_on.png",
+		"texture_on" : "./resources/images/buttons/hd1080/1920x1080_butt_on.png",
 		"texture_off" : "./resources/images/buttons/hd1080/1920x1080_butt_off.png"
 	},
 	"button1" : {
 		"name" : "1600x900",
 		"position" : {
-			"x" : -4,
+			"x" : -5,
 			"y" : 0,
-			"z" : 12
+			"z" : 11
 		},
 		"scale" : {
-			"x" : 0.9,
-			"y" : 0.9,
+			"x" : 0.8,
+			"y" : 0.8,
 			"z" : 1	
 		},
 		"texture_on" : "./resources/images/buttons/1600x900/1600x900_butt_on.png",
@@ -34,13 +34,13 @@
 	"button2" : {
 		"name" : "1280x800",
 		"position" : {
-			"x" : -4,
+			"x" : -5,
 			"y" : 0,
-			"z" : 8
+			"z" : 6
 		},
 		"scale" : {
-			"x" : 0.9,
-			"y" : 0.9,
+			"x" : 0.8,
+			"y" : 0.8,
 			"z" : 1	
 		},
 		"texture_on" : "./resources/images/buttons/1280x800/1280x800_butt_on.png",
@@ -49,13 +49,13 @@
 	"button3" : {
 		"name" : "fullscreen",
 		"position" : {
-			"x" : 4,
+			"x" : 5,
 			"y" : 0,
-			"z" : 14
+			"z" : 13.5
 		},
 		"scale" : {
-			"x" : 0.9,
-			"y" : 0.9,
+			"x" : 0.8,
+			"y" : 0.8,
 			"z" : 1	
 		},
 		"texture_on" : "./resources/images/buttons/fullscreen/fullscreen_butt_on.png",
@@ -64,16 +64,16 @@
 	"button4" : {
 		"name" : "back",
 		"position" : {
-			"x" : 4,
+			"x" : 5,
 			"y" : 0,
-			"z" : 10
+			"z" : 8.5
 		},
 		"scale" : {
-			"x" : 0.9,
-			"y" : 0.9,
+			"x" : 0.8,
+			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/fullscreen/fullscreen_butt_on.png",
-		"texture_off" : "./resources/images/buttons/fullscreen/fullscreen_butt_off.png"
+		"texture_on" : "./resources/images/buttons/back/back_butt_on.png",
+		"texture_off" : "./resources/images/buttons/back/back_butt_off.png"
 	}
 }

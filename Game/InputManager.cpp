@@ -79,9 +79,11 @@ void InputManager::handleInput() {
 			TurriFramework::Instance().quit();
 			break;
 		case SDL_KEYDOWN:
+		case SDL_CONTROLLERBUTTONDOWN:
 			pressKey(evnt.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
+		case SDL_CONTROLLERBUTTONUP:
 			releaseKey(evnt.key.keysym.sym);
 			break;
 		}
@@ -156,7 +158,8 @@ std::vector<Command*> InputManager::getGamePadCommand(GamePad& pad) {
 }
 
 bool InputManager::isKeyPressed(GamePad& pad, SDL_GameControllerButton keyID) {
-	if (SDL_GameControllerGetButton(pad.gameController, keyID)) {
+	if (SDL_GameControllerGetButton(pad.gameController, keyID) &&
+		!wasKeyDown(keyID)) {
 		return true;
 	}
 	return false;

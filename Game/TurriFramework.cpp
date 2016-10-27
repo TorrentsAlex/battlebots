@@ -120,8 +120,17 @@ void TurriFramework::addFlagscreen(unsigned int currentFlag) {
 	}
 }
 
+// Camera 
 void TurriFramework::setCameraPosition(glm::vec3 position) {
 	tCamera.setCameraPosition(position);
+}
+
+void TurriFramework::setCameraLookAt(glm::vec3 lookAt) {
+	tCamera.setCameraFront(lookAt);
+}
+
+glm::vec3 TurriFramework::getCameraPosition() {
+	return tCamera.getPosition();
 }
 
 // Input methods

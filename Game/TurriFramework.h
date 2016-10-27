@@ -51,18 +51,19 @@ public:
 	void stopRender();
 
 	void renderEntity(Entity entity);
-	void renderScene(Scene scene, Entity entity);
 	void renderScene(Scene scene);
 
 	void renderLights(vector<Light> lights);
 	void disableLights();
 	
-	// Camera methods
 	void renderCamera();
 	void setScreenSize(int widthScreen, int heightScreen);
 	void addFlagscreen(unsigned int currentFlag);
-
+	
+	// Camera methods
 	void setCameraPosition(glm::vec3 position);
+	void setCameraLookAt(glm::vec3 lookAt);
+	glm::vec3 getCameraPosition();
 
 	// Input methods 
 	void executeInput(Character& character);

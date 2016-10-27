@@ -13,7 +13,7 @@ public:
 class RightJoystick : public JoystickCommand {
 public:
 	virtual void execute(Character& actor) {
-		actor.rotation(cAxis);
+		
 	}
 };
 

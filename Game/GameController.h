@@ -35,6 +35,6 @@ public:
 	void update();
 	void render();
 
-	void quit();
+	void clean();
 };
 

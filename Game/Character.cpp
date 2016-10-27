@@ -2,9 +2,11 @@
 
 #include "GamePad.h"
 
-Character::Character() {
+Character::Character():
+	maxDashVelocity(6) {
 	rGamePad = new GamePad();
-	vectorForward = glm::vec3(1, 0, 0);
+	vectorForward = glm::vec3(0, 1, 0);
+	currentState = STATE::IDLE;
 }
 
 Character::~Character() {
@@ -20,13 +22,32 @@ void Character::clean() {
 
 void Character::update() {
 	switch (currentState) {
-	case DASHING:
-		//calcular tiempos y aplicar cooldown a la llamada.
+	case IDLE:
+		currentVelocity = 0;
 
 		break;
+	case DASHING:
+		//calcular tiempos y aplicar cooldown a la llamada.
+		currentVelocity += dashAcceleration;
 
+		eGameObject._translate.x += dashForward.x * currentVelocity; 
+		eGameObject._translate.y += dashForward.y * currentVelocity; 
+
+		if (currentVelocity >= maxDashVelocity) {
+			currentState = STATE::IDLE; 
+			currentVelocity = 0;
+			// Cooldown for DASH
+			firstTick = SDL_GetTicks();
+		}
+		break;
 	case WALKING:
 		// Reducir drunkennes por tiempo.
+		if (currentVelocity <= maxVelocity) {
+			currentVelocity += acceleration;
+		}
+		eGameObject._translate.x += vectorForward.x * currentVelocity;
+		eGameObject._translate.y += vectorForward.y * currentVelocity;
+		currentState = STATE::IDLE;
 
 		break;
 
@@ -52,6 +73,8 @@ void Character::update() {
 
 		break;
 	}
+
+	//cout << currentVelocity << endl;
 }
 
 void Character::input() {
@@ -65,25 +88,29 @@ void Character::setGamePad(GamePad& gamePad) {
 GamePad* Character::getGamePad() {
 	return rGamePad;
 }
-void Character::movement(glm::vec2 axis) {
-	currentState = WALKING;
 
+void Character::movement(glm::vec2 axis) {
+	if (currentState == STATE::DASHING ||
+		currentState == STATE::DRINKING ||
+		currentState == STATE::STUNNED) {
+		return;
+	}
+	currentState = STATE::WALKING;
 	// Invert Y axis
 	// Get a value between 0 and 1
 	axis.x /= 32767;
-	axis.y /= 32767;
+	axis.y /= 32767; 
 
-	eGameObject._translate.x += axis.x * velocity;
-	eGameObject._translate.y += axis.y * velocity;
-}
-
-void Character::rotation(glm::vec2 axis) {
+	// Rotate
 	double angle = atan2((double)axis.y, (double)axis.x) * (180.0 / 3.14159);
 	glm::vec2 forwardRotated = glm::rotate(glm::vec2(1, 0), (float)angle);
 	vectorForward.x = forwardRotated.x;
 	vectorForward.y = forwardRotated.y;
 	eGameObject._angle = angle;
-	cout << " angle: " << angle << endl;
+	//cout << " angle: " << angle << endl;
+}
+
+void Character::rotation(glm::vec2 axis) {
 }
 
 void Character::jump() {
@@ -94,22 +121,18 @@ void Character::jump() {
 }
 
 void Character::dash() {
+	float currentTicks = SDL_GetTicks();
+	if (currentState == STATE::DASHING || 
+		(currentTicks <= firstTick + dashCooldown)) {
+	
+	} else {
+		firstTick = 0;
 
-	if (currentState == DASHING) {
-		return;
+		currentState = DASHING;
+		dashForward = vectorForward;
 	}
-
-	// REVISAR CALCULO Y IMPLEMENTAR BIEN
-	glm::vec2 finalPosition;
-	finalPosition.x = (eGameObject._translate.x + velocity * dashTime + ((1 / 2)*dashAcceleration*(dashTime*dashTime)));
-	finalPosition.y = (eGameObject._translate.y + velocity * dashTime + ((1 / 2)*dashAcceleration*(dashTime*dashTime)));
-	
-	currentState = DASHING;
-
-	eGameObject._translate.x += vectorForward.x * velocity * dashAcceleration*dashAcceleration;
-	eGameObject._translate.y += vectorForward.y * velocity * dashAcceleration*dashAcceleration;
-	
 }
+
 void Character::shoot() {
 
 }

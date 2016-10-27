@@ -108,8 +108,8 @@ vec4 calculateLights(Light light) {
 	if (hasSpecularMap == 1) {
 		vec4 mapInfo = texture(specularMap, fragmentTextureCoordinates);
 		specular *= mapInfo.r;
-		if (mapInfo.g > 4.5) {
-			diffuse = vec3(1.0f);
+		if (mapInfo.g > 0.5) {
+			diffuse = vec3(0.8f);
 		}
 	}
 

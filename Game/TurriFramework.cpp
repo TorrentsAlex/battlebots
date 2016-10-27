@@ -102,7 +102,6 @@ void TurriFramework::setScreenSize(int widthScreen, int heightScreen) {
 	tWindow.setScreenSize(newResolution.x, newResolution.y);
 	tCamera.initializeZBuffer(newResolution);
 
-	tCamera.setPerspectiveCamera();
 	tCamera.setViewMatrix();
 }
 
@@ -112,7 +111,6 @@ void TurriFramework::addFlagscreen(unsigned int currentFlag) {
 		tWindow.setFullScreen();
 		tCamera.initializeZBuffer(tWindow.getNativeResolution());
 
-		tCamera.setPerspectiveCamera();
 		tCamera.setViewMatrix();
 	}
 	if (currentFlag == (int)WindowFlags::BORDERLESS) {

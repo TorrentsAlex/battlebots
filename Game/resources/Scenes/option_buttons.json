@@ -1,54 +1,79 @@
 {
-	"object" : "./resources/objects/button.obj",
+	"object" : "./resources/objects/menu_button.obj",
 	"size" : 5,
 	"button0" : {
 		"name" : "1920x1080",
 		"position" : {
-			"x" : 20,
-			"y" : -20,
-			"z" : 20
+			"x" : -4,
+			"y" : 0,
+			"z" : 16
 		},
-		"texture_on" : "./resources/images/button_start_on.png",
-		"texture_off" : "./resources/images/button_start.png"
+		"scale" : {
+			"x" : 0.9,
+			"y" : 0.9,
+			"z" : 1	
+		},
+		"texture_on" : "./resources/images/buttons/hd/hd_butt_on.png",
+		"texture_off" : "./resources/images/buttons/hd1080/1920x1080_butt_off.png"
 	},
 	"button1" : {
 		"name" : "1600x900",
 		"position" : {
-			"x" : 0,
-			"y" : -20,
-			"z" : 20
+			"x" : -4,
+			"y" : 0,
+			"z" : 12
 		},
-		"texture_on" : "./resources/images/button_start_on.png",
-		"texture_off" : "./resources/images/button_start.png"
+		"scale" : {
+			"x" : 0.9,
+			"y" : 0.9,
+			"z" : 1	
+		},
+		"texture_on" : "./resources/images/buttons/1600x900/1600x900_butt_on.png",
+		"texture_off" : "./resources/images/buttons/1600x900/1600x900_butt_off.png"
 	},
 	"button2" : {
 		"name" : "1280x800",
 		"position" : {
-			"x" : 10,
-			"y" : -20,
-			"z" : 20
+			"x" : -4,
+			"y" : 0,
+			"z" : 8
 		},
-		"texture_on" : "./resources/images/button_start_on.png",
-		"texture_off" : "./resources/images/button_start.png"
+		"scale" : {
+			"x" : 0.9,
+			"y" : 0.9,
+			"z" : 1	
+		},
+		"texture_on" : "./resources/images/buttons/1280x800/1280x800_butt_on.png",
+		"texture_off" : "./resources/images/buttons/1280x800/1280x800_butt_off.png"
 	},
 	"button3" : {
-		"name" : "FullScreen",
+		"name" : "fullscreen",
 		"position" : {
-			"x" : 0,
-			"y" : -20,
-			"z" : 0
+			"x" : 4,
+			"y" : 0,
+			"z" : 14
 		},
-		"texture_on" : "./resources/images/button_start_on.png",
-		"texture_off" : "./resources/images/button_start.png"
+		"scale" : {
+			"x" : 0.9,
+			"y" : 0.9,
+			"z" : 1	
+		},
+		"texture_on" : "./resources/images/buttons/fullscreen/fullscreen_butt_on.png",
+		"texture_off" : "./resources/images/buttons/fullscreen/fullscreen_butt_off.png"
 	},
 	"button4" : {
-		"name" : "Return",
+		"name" : "back",
 		"position" : {
-			"x" : 20,
-			"y" : -20,
-			"z" : 0
+			"x" : 4,
+			"y" : 0,
+			"z" : 10
 		},
-		"texture_on" : "./resources/images/button_start_on.png",
-		"texture_off" : "./resources/images/button_start.png"
+		"scale" : {
+			"x" : 0.9,
+			"y" : 0.9,
+			"z" : 1	
+		},
+		"texture_on" : "./resources/images/buttons/fullscreen/fullscreen_butt_on.png",
+		"texture_off" : "./resources/images/buttons/fullscreen/fullscreen_butt_off.png"
 	}
 }

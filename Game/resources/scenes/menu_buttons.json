@@ -8,7 +8,7 @@
 			"y" : 0,
 			"z" : 16
 		},
-		"texture_on" : "./resources/images/buttons/play/play_butt_on_green.png",
+		"texture_on" : "./resources/images/buttons/play/play_butt_on.png",
 		"texture_off" : "./resources/images/buttons/play/play_butt_off.png",
 		"texture_specular" : "./resources/images/buttons/play/play_butt_glow.png"
 	},

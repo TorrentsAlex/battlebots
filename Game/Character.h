@@ -5,7 +5,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <ctime>
 
-typedef enum STATE {
+enum STATE {
 	IDLE, STUNNED, WALKING, DASHING, DRINKING, REFILL, JUMPING
 };
 

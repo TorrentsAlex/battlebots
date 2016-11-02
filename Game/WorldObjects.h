@@ -1,9 +1,9 @@
 #pragma once
 #include "TurriIncludes.h"
 
-class SceneObjects {
+class WorldObjects {
 private:
-	SceneObjects();
+	WorldObjects();
 
 	Character* player1;
 	Character* player2;
@@ -20,12 +20,12 @@ private:
 	void collisionDetection();
 public:	
 	
-	static SceneObjects& Instance() {
-		static SceneObjects instance;
+	static WorldObjects& Instance() {
+		static WorldObjects instance;
 		return instance;
 	}
-	SceneObjects(SceneObjects const&) = delete;
-	void operator=(SceneObjects const&) = delete;
+	WorldObjects(WorldObjects const&) = delete;
+	void operator=(WorldObjects const&) = delete;
 
 	void clean();
 	void render();

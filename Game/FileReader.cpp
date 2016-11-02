@@ -11,6 +11,7 @@ FileReader::~FileReader() {
 string FileReader::LoadStringFromFile(string fileName) {
 	string fileString;
 	string line;
+	//fileName.replace(0,2, "../battlebots/Game/");
 	ifstream myFile(fileName);
 	
 	if (myFile.is_open()) {
@@ -27,6 +28,7 @@ string FileReader::LoadStringFromFile(string fileName) {
 
 vector<vector<float>> FileReader::LoadArrayFromFile(string fileName) {
 	string line;
+	//fileName.replace(0, 2, "../battlebots/Game/");
 
 	ifstream myfile(fileName);
 	vector<vector<float>> myArray;
@@ -46,6 +48,7 @@ vector<vector<float>> FileReader::LoadArrayFromFile(string fileName) {
 
 vector<glm::vec3> FileReader::LoadVec3FromFile(string fileName) {
 	string line;
+	//fileName.replace(0, 2, "../battlebots/Game/");
 
 	ifstream myfile(fileName);
 	vector<glm::vec3> myArray;
@@ -67,6 +70,7 @@ vector<glm::vec3> FileReader::LoadVec3FromFile(string fileName) {
 OBJ FileReader::LoadOBJFromFile(string fileName) {
 	OBJ object;
 	string line;
+	//fileName.replace(0, 2, "../battlebots/Game/");
 
 	std::string vertex1, vertex2, vertex3;
 	vector<float> face1, face2, face3;

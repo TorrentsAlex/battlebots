@@ -79,11 +79,11 @@ void InputManager::handleInput() {
 			TurriFramework::Instance().quit();
 			break;
 		case SDL_KEYDOWN:
-		case SDL_CONTROLLERBUTTONDOWN:
+		//case SDL_CONTROLLERBUTTONDOWN:
 			pressKey(evnt.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-		case SDL_CONTROLLERBUTTONUP:
+		//case SDL_CONTROLLERBUTTONUP:
 			releaseKey(evnt.key.keysym.sym);
 			break;
 		}
@@ -211,7 +211,7 @@ bool InputManager::wasKeyDown(unsigned int keyID) {
 
 bool InputManager::isKeyPressed(unsigned int keyID) {
 		//Check if it was pressed current frame and not last frame
-	if ((isKeyDown(keyID)) && (wasKeyDown(keyID) == false)) {
+	if (isKeyDown(keyID) && !wasKeyDown(keyID)) {
 		return true;
 	}
 	return false;

@@ -140,24 +140,24 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 	gameObject._rotation = glm::vec3(0,0,1);
 	gameObject._scale = glm::vec3(1,1,1);
 
-	gameObject._translate.x = json["character0"]["position"]["x"].asInt();
-	gameObject._translate.y = json["character0"]["position"]["y"].asInt();
-	gameObject._translate.z = json["character0"]["position"]["z"].asInt();
+	gameObject._translate.x = json["character0"]["position"]["x"].asFloat();
+	gameObject._translate.y = json["character0"]["position"]["y"].asFloat();
+	gameObject._translate.z = json["character0"]["position"]["z"].asFloat();
 	ch1.setGameObject(gameObject);
 
-	gameObject._translate.x = json["character1"]["position"]["x"].asInt();
-	gameObject._translate.y = json["character1"]["position"]["y"].asInt();
-	gameObject._translate.z = json["character1"]["position"]["z"].asInt();
+	gameObject._translate.x = json["character1"]["position"]["x"].asFloat();
+	gameObject._translate.y = json["character1"]["position"]["y"].asFloat();
+	gameObject._translate.z = json["character1"]["position"]["z"].asFloat();
 	ch2.setGameObject(gameObject);
 
-	gameObject._translate.x = json["character2"]["position"]["x"].asInt();
-	gameObject._translate.y = json["character2"]["position"]["y"].asInt();
-	gameObject._translate.z = json["character2"]["position"]["z"].asInt();
+	gameObject._translate.x = json["character2"]["position"]["x"].asFloat();
+	gameObject._translate.y = json["character2"]["position"]["y"].asFloat();
+	gameObject._translate.z = json["character2"]["position"]["z"].asFloat();
 	ch3.setGameObject(gameObject);
 
-	gameObject._translate.x = json["character3"]["position"]["x"].asInt();
-	gameObject._translate.y = json["character3"]["position"]["y"].asInt();
-	gameObject._translate.z = json["character3"]["position"]["z"].asInt();
+	gameObject._translate.x = json["character3"]["position"]["x"].asFloat();
+	gameObject._translate.y = json["character3"]["position"]["y"].asFloat();
+	gameObject._translate.z = json["character3"]["position"]["z"].asFloat();
 	ch4.setGameObject(gameObject);
 
 	// Material

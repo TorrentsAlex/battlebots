@@ -1,8 +1,8 @@
-#include "SceneObjects.h"
+#include "WorldObjects.h"
 
 #include <thread>
 
-SceneObjects::SceneObjects() {
+WorldObjects::WorldObjects() {
 	currentScene = new Scene();
 	lastScene = new Scene();
 	player1 = new Character();
@@ -11,7 +11,7 @@ SceneObjects::SceneObjects() {
 	player4 = new Character();
 }
 
-void SceneObjects::clean() {
+void WorldObjects::clean() {
 	if (player1) {
 		player1->clean();
 		delete player1;
@@ -38,20 +38,20 @@ void SceneObjects::clean() {
 	}
 }
 
-void SceneObjects::handleInputs() {
+void WorldObjects::handleInputs() {
 	for (int i = 0; i < playersToRender.size(); i++) {
 		TurriFramework::Instance().executeInput(*playersToRender.at(i));
 	}
 }
 
-void SceneObjects::collisionDetection() {
+void WorldObjects::collisionDetection() {
 
 }
 
 /*
 	Update all scene, including the characters
 */
-void SceneObjects::update() {
+void WorldObjects::update() {
 	
 	// First check collision
 	collisionDetection();
@@ -67,7 +67,7 @@ void SceneObjects::update() {
 /*
 	Send objects to render into the screen to OpenGL
 */
-void SceneObjects::render() {
+void WorldObjects::render() {
 
 	TurriFramework::Instance().startRender();
 
@@ -96,7 +96,7 @@ void SceneObjects::render() {
 	TurriFramework::Instance().stopRender();
 }
 
-Character* SceneObjects::getPlayerAt(int current) {
+Character* WorldObjects::getPlayerAt(int current) {
 	switch (current) {
 	case 0:
 		return player1;
@@ -112,17 +112,17 @@ Character* SceneObjects::getPlayerAt(int current) {
 	}
 }
 
-Scene* SceneObjects::getCurrentScene() {
+Scene* WorldObjects::getCurrentScene() {
 	return currentScene;
 }
 
 /**
 	These 2 methods are for render the players in game 
 */
-void SceneObjects::addCharacterToRender(Character& character) {
+void WorldObjects::addCharacterToRender(Character& character) {
 	playersToRender.push_back(&character);
 }
 
-void SceneObjects::cleanCharactersToRender() {
+void WorldObjects::cleanCharactersToRender() {
 	playersToRender.clear();
 }

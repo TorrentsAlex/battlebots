@@ -74,6 +74,9 @@
     <Filter Include="Game\Systems\Entities">
       <UniqueIdentifier>{50903c17-60c4-407f-b56f-2fc2da0a9fa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Physics">
+      <UniqueIdentifier>{d596bc12-f3c1-4e1d-8666-bbd3bb0742ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\Scenes\treeScene.txt">
@@ -153,9 +156,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="AllvsAll.cpp">
-      <Filter>Game\Modes</Filter>
-    </ClCompile>
     <ClCompile Include="jsoncpp.cpp">
       <Filter>Engine\Utils\JSON</Filter>
     </ClCompile>
@@ -204,9 +204,8 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObjects.cpp">
-      <Filter>Game\Systems\Entities</Filter>
-    </ClCompile>
+    <ClCompile Include="WorldObjects.cpp" />
+    <ClCompile Include="WorldCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -248,9 +247,6 @@
     <ClInclude Include="Car.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionDetector.h">
-      <Filter>Engine\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="FileReader.h">
       <Filter>Engine\Text</Filter>
     </ClInclude>
@@ -277,9 +273,6 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Engine\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="AllvsAll.h">
-      <Filter>Game\Modes</Filter>
     </ClInclude>
     <ClInclude Include="json\json.h">
       <Filter>Engine\Utils\JSON</Filter>
@@ -350,8 +343,10 @@
     <ClInclude Include="Character.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="SceneObjects.h">
-      <Filter>Game\Systems\Entities</Filter>
+    <ClInclude Include="CollisionDetector.h">
+      <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="WorldObjects.h" />
+    <ClInclude Include="WorldCollision.h" />
   </ItemGroup>
 </Project>

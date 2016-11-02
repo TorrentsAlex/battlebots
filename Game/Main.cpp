@@ -1,13 +1,18 @@
 #include <Windows.h>
 
 #include "Game.h"
-#include "SceneCreator.h"
 
 #include "GameController.h"
+
+
+#include "WorldCollision.h" 
 
 int main(int argc, char ** argv) {
 	// Hide the command line
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+	WorldCollision::Instance().init();
+	WorldCollision::Instance().clean();
 
 	TurriFramework::Instance().init("BattleBots", 1280, 800, true, 80, false);
 
@@ -18,6 +23,8 @@ int main(int argc, char ** argv) {
 
 			GameController::Instance().input();
 			GameController::Instance().update();
+			// step world bullet physics
+			TurriFramework::Instance().stepBulletSimulation();
 			GameController::Instance().render();
 
 			TurriFramework::Instance().endSync();

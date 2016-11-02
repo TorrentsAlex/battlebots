@@ -136,7 +136,21 @@ void Character::dash() {
 }
 
 void Character::shoot() {
+	Json::Reader reader;
 
+	string jsonString = FileReader::LoadStringFromFile("./resources/scenes/character_values.json");
+	Json::Value jsonValues;
+
+	reader.parse(jsonString, jsonValues);
+	acceleration = jsonValues["walking"]["acceleration"].asFloat();
+	maxVelocity = jsonValues["walking"]["max_velocity"].asFloat();
+
+	dashAcceleration = jsonValues["dash"]["acceleration"].asFloat();
+	maxDashVelocity = jsonValues["dash"]["max_velocity"].asFloat();
+
+	dashCooldown = jsonValues["dash_cooldown"].asFloat();
+
+	cout << "Character values readed and saved!!" << endl;
 }
 
 void Character::refill() {

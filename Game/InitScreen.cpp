@@ -21,18 +21,15 @@ void InitScreen::init() {
 }
 
 void InitScreen::input() {
-	InputManager::Instance().handleInput();
+	//InputManager::Instance().handleInput();
 
-	if (InputManager::Instance().isKeyPressed(SDLK_UP) ||
-		InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
+	if (InputManager::Instance().isKeyPressed(SDLK_UP)) {
 		iBManager.upButton();
 	} 
-	if (InputManager::Instance().isKeyPressed(SDLK_DOWN) ||
-		InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_DOWN)) {
+	if (InputManager::Instance().isKeyPressed(SDLK_DOWN)) {
 		iBManager.downButton();
 	}
-	if (InputManager::Instance().isKeyPressed(SDLK_RETURN) || 
-		InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_A)) {
+	if (InputManager::Instance().isKeyPressed(SDLK_RETURN)) {
 		string currentButton = iBManager.getCurrentButton();
 
 		if (currentButton.compare("start") == 0) {

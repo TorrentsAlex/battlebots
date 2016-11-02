@@ -1,0 +1,11 @@
+{
+	"walking" : {
+		"acceleration": 2.075,
+		"max_velocity": 3.0
+	},
+	"dash": {
+		"acceleration" : 0.75,
+		"max_velocity" : 6
+	},
+	"dash_cooldown" : 5000, // miliseconds
+}

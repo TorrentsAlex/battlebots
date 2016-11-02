@@ -1,5 +1,7 @@
 #include "TextureManager.h"
+
 #include <SOIL/SOIL.h>
+
 #include "ErrorManagement.h"
 
 

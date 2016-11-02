@@ -69,5 +69,9 @@ public:
 	void executeInput(Character& character);
 	void quit();
 
+
+	// Bullet
+	void stepBulletSimulation();
+
 };
 

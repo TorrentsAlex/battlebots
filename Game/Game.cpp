@@ -1,6 +1,6 @@
 #include "Game.h"
 
-#include "SceneObjects.h"
+#include "WorldObjects.h"
 
 void Game::init() {
 	cout << "init game" << endl;
@@ -8,16 +8,16 @@ void Game::init() {
 }
 
 void Game::input() {
-	SceneObjects::Instance().handleInputs();
+	WorldObjects::Instance().handleInputs();
 }
 
 void Game::update() {
-	SceneObjects::Instance().update();
+	WorldObjects::Instance().update();
 }
 
 void Game::render() {
 
-	SceneObjects::Instance().render();
+	WorldObjects::Instance().render();
 
 }
 

@@ -154,3 +154,16 @@ void TurriFramework::executeInput(Character& character) {
 void TurriFramework::quit() {
 	running = false;
 }
+
+
+
+
+
+
+// Bullet simulation
+
+void TurriFramework::stepBulletSimulation() {
+	//float current
+	// calculate frame date and 
+	// bulletphysics step simulation
+}

@@ -11,7 +11,7 @@ void Scene::setSkyBox(OBJ object, GLuint texture) {
 	GameObject skyObject;
 	skyObject._angle = 0;
 	skyObject._translate = glm::vec3(0, 0, 0);
-	skyObject._scale = glm::vec3(1, 1, 1);
+	skyObject._scale = glm::vec3(2, 2, 2);
 	skyObject._rotation = glm::vec3(0, 0, 0);
 
 	sSkybox.setOBJ(object);

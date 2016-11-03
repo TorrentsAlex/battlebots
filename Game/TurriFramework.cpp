@@ -81,9 +81,10 @@ void TurriFramework::renderScene(Scene scene) {
 	// Decoration
 	vector<Entity> vectorDecoration = scene.getDecoration();
 
-	tOpenGL.sendMaterial(vectorDecoration.at(0).getMaterial());
 	for (Entity nextDecoration : vectorDecoration) {
+		tOpenGL.sendMaterial(nextDecoration.getMaterial());
 		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
+		clearMaps();
 	}
 
 	clearMaps();

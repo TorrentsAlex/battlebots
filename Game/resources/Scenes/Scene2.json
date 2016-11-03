@@ -4,16 +4,38 @@
 		"texture": "./resources/images/background/beer_color.png"
 	},
 	"terrain": {
-		"object": "./resources/objects/cylinder_terrain.obj",
-		"texture": "./resources/images/rockydesert.jpg",
+		"object": "./resources/objects/tavern_precaria.obj",
+		"texture": "./resources/images/tavern_txt_precaria.png",
 		"material" : "./resources/materials/metal.json"
 	},
-	"decoration" : {
-		"object" : "./resources/objects/barrel.obj",
-		"texture" : "./resources/images/barrel.png",
-		"elements" : "./resources/scenes/treeScene.txt",
-		"material" : "./resources/materials/metal.json"
-	},
+	"decoration" : [ 
+		{
+			"object" : "./resources/objects/barrel.obj",
+			"texture" : "./resources/images/barrel.png",
+			"texture_specular" : "",
+			"elements" : "./resources/scenes/treeScene.txt",
+			"material" : "./resources/materials/metal.json"
+		},
+		{
+			"object" : "./resources/objects/lamp.obj",
+			"texture" : "./resources/images/lamp_ao.png",
+			"texture_specular" : "./resources/images/lamp_glow.png",
+			"elements" : "./resources/scenes/lamp_scene.txt",
+			"material" : "./resources/materials/metal.json"
+		},
+		{
+			"object" : "./resources/objects/beer.obj",
+			"texture" : "./resources/images/beer_guinness.png",
+			"texture_specular" : "./resources/images/beer_guinness_specular.png",
+			"position" :{
+				"x" : -20.3,
+				"y" : 34.5,
+				"z" : 14.375
+			},
+			"material" : "./resources/materials/metal.json"
+		}
+
+	],
 	"lights" : [
 		"./resources/materials/lights/directional_white.json"
 	]

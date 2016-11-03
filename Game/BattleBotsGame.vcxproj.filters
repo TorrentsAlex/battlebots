@@ -204,8 +204,12 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="WorldObjects.cpp" />
-    <ClCompile Include="WorldCollision.cpp" />
+    <ClCompile Include="WorldCollision.cpp">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldObjects.cpp">
+      <Filter>Game\Systems\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -346,7 +350,11 @@
     <ClInclude Include="CollisionDetector.h">
       <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="WorldObjects.h" />
-    <ClInclude Include="WorldCollision.h" />
+    <ClInclude Include="WorldObjects.h">
+      <Filter>Game\Systems\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCollision.h">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

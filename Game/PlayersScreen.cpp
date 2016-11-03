@@ -19,7 +19,7 @@ void PlayersScreen::init() {
 	InputManager::Instance().getGameController(*WorldObjects::Instance().getPlayerAt(3)->getGamePad());
 
 	TurriFramework::Instance().setCameraLookAt(glm::vec3(0, 0, 0));
-	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -130, 100));
+	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -170, 100));
 
 }
 

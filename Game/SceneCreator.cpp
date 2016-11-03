@@ -165,7 +165,7 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 
 	gameObject._angle = 0;
 	gameObject._rotation = glm::vec3(0,0,1);
-	gameObject._scale = glm::vec3(1,1,1);
+	gameObject._scale = glm::vec3(0.8, 0.8, 0.8);
 
 	gameObject._translate.x = json["character0"]["position"]["x"].asFloat();
 	gameObject._translate.y = json["character0"]["position"]["y"].asFloat();
@@ -216,7 +216,7 @@ vector<Button> SceneCreator::createButtons(string file) {
 	int size = json["size"].asInt();
 	OBJ object = Geometry::LoadModelFromFile(json["object"].asString());
 	vector<Button> vectorButtons;
-	GLuint specularMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
+	GLuint specularMap = TextureManager::Instance().getTextureID("../battlebots/Game/resources/images/back_green.png");
 
 	for (int i = 0; i < size; i++) {
 		string currentButton = "button" + std::to_string(i);

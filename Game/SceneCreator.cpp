@@ -111,6 +111,22 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 		direction.x = currentLight["direction"]["x"].asFloat();
 		direction.y = currentLight["direction"]["y"].asFloat();
 		direction.z = currentLight["direction"]["z"].asFloat();
+		
+		// type
+		string type = currentLight["type"].asString();
+		l.setType(type);
+		// if the light is a pointlight
+		if (type.compare("point") == 0) {
+			float constant = currentLight["constant"].asFloat();
+			float linear = currentLight["linear"].asFloat();
+			float quadratic = currentLight["quadratic"].asFloat();
+			l.setConstant(constant);
+			l.setLinear(linear);
+			l.setQuadratic(quadratic);
+		}
+		//power 
+		float power = currentLight["power"].asFloat();
+		l.setPower(power);
 
 		// set the values into the light
 		l.setAmbient(ambient);

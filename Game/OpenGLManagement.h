@@ -14,7 +14,7 @@
 #include "GameObject.h"
 
 
-#define LIGHTS_SCENE 1
+#define LIGHTS_SCENE 4
 
 class OpenGLManagement {
 private:

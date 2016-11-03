@@ -37,6 +37,9 @@
 
 	],
 	"lights" : [
-		"./resources/materials/lights/directional_white.json"
+		"./resources/materials/lights/directional_white.json",
+		"./resources/materials/lights/pointlight_yellow.json",
+		"./resources/materials/lights/pointlight_yellow2.json",
+		"./resources/materials/lights/pointlight_middle.json"
 	]
 }

@@ -39,9 +39,19 @@ void WorldObjects::clean() {
 }
 
 void WorldObjects::handleInputs() {
-	for (int i = 0; i < playersToRender.size(); i++) {
-		TurriFramework::Instance().executeInput(*playersToRender.at(i));
+	if (player1->inGame) {
+		TurriFramework::Instance().executeInput(*player1);
 	}
+	if (player2->inGame) {
+		TurriFramework::Instance().executeInput(*player2);
+	}
+	if (player3->inGame) {
+		TurriFramework::Instance().executeInput(*player3);
+	}
+	if (player4->inGame) {
+		TurriFramework::Instance().executeInput(*player4);
+	}
+
 	if (InputManager::Instance().isKeyPressed(SDLK_e)) {
 		Json::Reader reader;
 
@@ -105,7 +115,7 @@ void WorldObjects::update() {
 
 	// update the scene
 	for (int i = 0; i < playersToRender.size(); i++) {
-		playersToRender.at(0)->update();
+		playersToRender.at(1)->update();
 	}
 	// Update objects of the scene
 }

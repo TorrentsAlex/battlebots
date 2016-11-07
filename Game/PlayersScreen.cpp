@@ -19,7 +19,7 @@ void PlayersScreen::init() {
 	InputManager::Instance().getGameController(*WorldObjects::Instance().getPlayerAt(3)->getGamePad());
 
 	TurriFramework::Instance().setCameraLookAt(glm::vec3(0, 0, 0));
-	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -130, 100));
+	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -170, 100));
 
 }
 
@@ -50,6 +50,32 @@ void PlayersScreen::input() {
 	if (InputManager::Instance().isKeyPressed(*WorldObjects::Instance().getPlayerAt(0)->getGamePad(), SDL_CONTROLLER_BUTTON_X)) {
 		GameController::Instance().changeState(GameState::PLAY);
 	}
+
+	// MOVING CAMERA
+
+	//GamePad* gamePad = WorldObjects::Instance().getPlayerAt(0)->getGamePad();
+	//glm::vec3 position = TurriFramework::Instance().getCameraPosition();
+	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
+	//	position.y += 1;
+	//}
+	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_DOWN)) {
+	//	position.y -= 1;
+	//}
+	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_LEFT)) {
+	//	position.x -= 1;
+	//}
+	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) {
+	//	position.x += 1;
+	//}
+	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) {
+	//	position.z += 1;
+	//}
+	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) {
+	//	position.z -= 1;
+	//}
+
+	//TurriFramework::Instance().setCameraPosition(position);
+
 }
 
 void PlayersScreen::update() {

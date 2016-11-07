@@ -3,8 +3,7 @@
 #include "Scene.h"
 #include "GameController.h"
 
-class ModeScreen: public BaseScreen
-{
+class ModeScreen: public BaseScreen {
 private:
 
 	void init() override;

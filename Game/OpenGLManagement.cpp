@@ -15,8 +15,8 @@ OpenGLManagement::~OpenGLManagement() {
 // INIT METHODS
 void OpenGLManagement::initializeShaders() {
 	//Compile the shaders
-	oGLBuffer.addShader(GL_VERTEX_SHADER, "./resources/shaders/lvertex-shader.txt");
-	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "./resources/shaders/lfragment-shader.txt");
+	oGLBuffer.addShader(GL_VERTEX_SHADER, "../battlebots/Game/resources/shaders/lvertex-shader.txt");
+	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "../battlebots/Game/resources/shaders/lfragment-shader.txt");
 	oGLBuffer.compileShaders();
 	//Attributes must be added before linking the code
 	oGLBuffer.addAttribute("vertexPosition");
@@ -162,7 +162,14 @@ void OpenGLManagement::sendLight(std::vector<Light> light) {
 		oGLBuffer.sendUniform(uniform_lightSpecular[i], light.at(i).getSpecular());
 
 		oGLBuffer.sendUniform(uniform_lightDirection[i], light.at(i).getDirection());
+		oGLBuffer.sendUniform(uniform_lightPosition[i], light.at(i).getPosition());
 		oGLBuffer.sendUniform(uniform_lightType[i], light.at(i).getType());
+		
+		oGLBuffer.sendUniform(uniform_lightLinear[i], light.at(i).getLinear());
+		oGLBuffer.sendUniform(uniform_lightConstant[i], light.at(i).getConstant());
+		oGLBuffer.sendUniform(uniform_lightQuadratic[i], light.at(i).getQuadratic());
+		// Power
+		oGLBuffer.sendUniform(uniform_lightPower[i], light.at(i).getPower());
 	}
 }
 

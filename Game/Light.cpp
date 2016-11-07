@@ -47,6 +47,26 @@ void Light::setPower(float power) {
 	lPower = power;
 }
 
+void Light::setType(string type) {
+	if (type.compare("point") == 0) {
+		lType = LIGHT_POINT;
+	} else if (type.compare("directional") == 0) {
+		lType = LIGHT_DIRECTIONAL;
+	}
+}
+
+// Point lights methods
+void Light::setConstant(float constant) {
+	lConstant = constant;
+}
+
+void Light::setLinear(float linear) {
+	lLinear = linear;
+}
+
+void Light::setQuadratic(float quadratic) {
+	lQuadratic = quadratic;
+}
 // Getters
 glm::vec3 Light::getAmbient() {
 	return lAmbient;
@@ -74,4 +94,18 @@ glm::vec3 Light::getPosition() {
 
 glm::vec3 Light::getDirection() {
 	return lDirection;
+}
+
+// Pointlight methods
+
+float Light::getConstant() {
+	return lConstant;
+}
+
+float Light::getLinear() {
+	return lLinear;
+}
+
+float Light::getQuadratic() {
+	return lQuadratic;
 }

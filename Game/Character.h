@@ -13,18 +13,18 @@ struct GamePad;
 class Character : public Entity {
 private:
 
-	float acceleration = 0.075f;
-	float dashAcceleration = 0.75f;
+	float acceleration = 2.075f;
+	float dashAcceleration = 0.3f;
 
 	float currentVelocity;
 
-	float maxVelocity = 1.0f;
-	float maxDashVelocity;
+	float maxVelocity = 3.0f;
+	float maxDashVelocity = 5;
 
 	GamePad* rGamePad;
 	STATE currentState;
-	float dashCooldown = 2000.0f; // millisecons
-	float dashTime = 3.0f;
+	float dashCooldown = 4000.0f; // millisecons
+	//float dashTime = 4.0f;
 	float jumpPower = 2.0f;
 	float stunTime = 4.0f;
 

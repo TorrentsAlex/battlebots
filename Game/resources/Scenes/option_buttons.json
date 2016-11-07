@@ -13,8 +13,8 @@
 			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/hd1080/1920x1080_butt_on.png",
-		"texture_off" : "./resources/images/buttons/hd1080/1920x1080_butt_off.png"
+		"texture_on" : "../battlebots/Game/resources/images/buttons/hd1080/1920x1080_butt_on.png",
+		"texture_off" : "../battlebots/Game/resources/images/buttons/hd1080/1920x1080_butt_off.png"
 	},
 	"button1" : {
 		"name" : "1600x900",
@@ -28,8 +28,8 @@
 			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/1600x900/1600x900_butt_on.png",
-		"texture_off" : "./resources/images/buttons/1600x900/1600x900_butt_off.png"
+		"texture_on" : "../battlebots/Game/resources/images/buttons/1600x900/1600x900_butt_on.png",
+		"texture_off" : "../battlebots/Game/resources/images/buttons/1600x900/1600x900_butt_off.png"
 	},
 	"button2" : {
 		"name" : "1280x800",
@@ -43,8 +43,8 @@
 			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/1280x800/1280x800_butt_on.png",
-		"texture_off" : "./resources/images/buttons/1280x800/1280x800_butt_off.png"
+		"texture_on" : "../battlebots/Game/resources/images/buttons/1280x800/1280x800_butt_on.png",
+		"texture_off" : "../battlebots/Game/resources/images/buttons/1280x800/1280x800_butt_off.png"
 	},
 	"button3" : {
 		"name" : "fullscreen",
@@ -58,8 +58,8 @@
 			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/fullscreen/fullscreen_butt_on.png",
-		"texture_off" : "./resources/images/buttons/fullscreen/fullscreen_butt_off.png"
+		"texture_on" : "../battlebots/Game/resources/images/buttons/fullscreen/fullscreen_butt_on.png",
+		"texture_off" : "../battlebots/Game/resources/images/buttons/fullscreen/fullscreen_butt_off.png"
 	},
 	"button4" : {
 		"name" : "back",
@@ -73,7 +73,7 @@
 			"y" : 0.8,
 			"z" : 1	
 		},
-		"texture_on" : "./resources/images/buttons/back/back_butt_on.png",
-		"texture_off" : "./resources/images/buttons/back/back_butt_off.png"
+		"texture_on" : "../battlebots/Game/resources/images/buttons/back/back_butt_on.png",
+		"texture_off" : "../battlebots/Game	/resources/images/buttons/back/back_butt_off.png"
 	}
 }

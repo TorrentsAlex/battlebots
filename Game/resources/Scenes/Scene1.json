@@ -1,16 +1,16 @@
 {
 	"sky" :{ 
 		"object" : "./resources/objects/skybox.obj",
-		"texture": "./resources/images/background/blue_light.png"},
+		"texture": "../battlebots/Game/resources/images/background/blue_light.png"},
 	"terrain": {
 		"object": "./resources/objects/terrain.obj",
-		"texture": "./resources/images/terrain_green.png",
+		"texture": "../battlebots/Game/resources/images/terrain_green.png",
 		"material" : "./resources/materials/metal.json"
 	},
 	"decoration" : [
 		{
 			"object" : "./resources/objects/menu_billboard.obj",
-			"texture" : "./resources/images/buttons/billboard_txt.jpg",
+			"texture" : "../battlebots/Game/resources/images/buttons/billboard_txt.jpg",
 			"texture_specular" : "",
 			"position" :{
 				"x" : 0,

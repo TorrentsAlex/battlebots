@@ -16,6 +16,8 @@ private:
 	Scene* optionsScene;
 	
 	ButtonManager BManager;
+	GamePad* gamePad;
+
 public:
 	
 };

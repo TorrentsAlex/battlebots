@@ -21,6 +21,7 @@ void InitScreen::init() {
 }
 
 void InitScreen::input() {
+	// update the gamepad state
 	InputManager::Instance().handleInput(*gamePad);
 
 	if (InputManager::Instance().isKeyPressed(SDLK_UP) ||

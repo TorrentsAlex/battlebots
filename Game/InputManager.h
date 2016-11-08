@@ -16,7 +16,7 @@
 // Otherwise, it is released.
 
 const int JOYSTICK_DEAD_ZONE = 8000;
-
+struct GamePadButtonState;
 class InputManager {
 public:
 

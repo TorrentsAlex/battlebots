@@ -39,30 +39,21 @@ void WorldObjects::clean() {
 }
 
 void WorldObjects::handleInputs() {
-	if (player1->getGamePad()->gameController) {
-		InputManager::Instance().handleInput(*player1->getGamePad());
-	}
-	if (player2->getGamePad()->gameController) {
-		InputManager::Instance().handleInput(*player2->getGamePad());
-	}
-	if (player3->getGamePad()->gameController) {
-		InputManager::Instance().handleInput(*player3->getGamePad());
-	}
-	if (player4->getGamePad()->gameController) {
-		InputManager::Instance().handleInput(*player4->getGamePad());
-	}
-	
 	
 	if (player1->inGame) {
+		InputManager::Instance().handleInput(*player1->getGamePad());
 		executeInput(*player1);
 	}
 	if (player2->inGame) {
+		InputManager::Instance().handleInput(*player2->getGamePad());
 		executeInput(*player2);
 	}
 	if (player3->inGame) {
+		InputManager::Instance().handleInput(*player3->getGamePad());
 		executeInput(*player3);
 	}
 	if (player4->inGame) {
+		InputManager::Instance().handleInput(*player4->getGamePad());
 		executeInput(*player4);
 	}
 
@@ -128,8 +119,18 @@ void WorldObjects::update() {
 
 
 	// update the scene
-	for (int i = 0; i < playersToRender.size(); i++) {
-		playersToRender.at(1)->update();
+
+	if (player1->inGame) {
+		player1->update();
+	}
+	if (player2->inGame) {
+		player2->update();
+	}
+	if (player3->inGame) {
+		player3->update();
+	}
+	if (player4->inGame) {
+		player4->update();
 	}
 	// Update objects of the scene
 }

@@ -133,30 +133,11 @@ glm::vec3 TurriFramework::getCameraPosition() {
 }
 
 // Input methods
-void TurriFramework::executeInput(Character& character) {
-	// Joystick
-	std::vector<JoystickCommand*> joystickComm = InputManager::Instance().getGamePadJoysticks(*character.getGamePad());
-	for (JoystickCommand* jcom : joystickComm) {
-		if (jcom) {
-			jcom->execute(character);
-		}
-	}
-	// Buttons
-	std::vector<Command*> commands = InputManager::Instance().getGamePadCommand(*character.getGamePad());
-	for (Command* com : commands) {
-		if (com) {
-			com->execute(character);
-		}
-	}
-
-}
 
 // Finish the game loop
 void TurriFramework::quit() {
 	running = false;
 }
-
-
 
 
 

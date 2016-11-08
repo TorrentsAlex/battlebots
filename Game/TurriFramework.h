@@ -66,7 +66,6 @@ public:
 	glm::vec3 getCameraPosition();
 
 	// Input methods 
-	void executeInput(Character& character);
 	void quit();
 
 

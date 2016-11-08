@@ -5,7 +5,7 @@
 Character::Character() {
 	rGamePad = new GamePad();
 
-	vectorForward = glm::vec3(0, 1, 0);
+	vectorForward = glm::vec3(1, 0, 0);
 	currentState = STATE::IDLE;
 }
 

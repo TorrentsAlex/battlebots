@@ -32,12 +32,12 @@ public:
 	void clean();
 
 	void handleInput();
-
+	void handleInput(GamePad& pad);
 	
 	//Returns true if the key was just pressed
 	bool isKeyPressed(unsigned int keyID); 
 	unsigned int keyPressed();
-	bool isKeyPressed(GamePad& pad, SDL_GameControllerButton keyID);
+	bool isKeyPressed(GamePadButtonState keyID);
 
 	// Game Pad buttons
 	std::vector<Command*> getGamePadCommand(GamePad& pad);

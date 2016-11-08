@@ -1,5 +1,11 @@
 #pragma once
 #include "TurriIncludes.h"
+
+struct GamePadButtonState {
+	Uint8 wasDown;
+	Uint8 isDown;
+};
+
 struct GamePad {
 
 	SDL_GameController* gameController;
@@ -33,6 +39,18 @@ struct GamePad {
 	JoystickCommand* iJoystick_LEFT_SHOULDER; 
 	JoystickCommand* iJoystick_RIGHT_SHOULDER;
 
+	GamePadButtonState dPadUp;
+	GamePadButtonState dPadDown;
+	GamePadButtonState dPadLeft;
+	GamePadButtonState dPadRight;
+	GamePadButtonState start;
+	GamePadButtonState select;
+	GamePadButtonState buttonA;
+	GamePadButtonState buttonB;
+	GamePadButtonState buttonX;
+	GamePadButtonState buttonY;
+	GamePadButtonState leftShoulder;
+	GamePadButtonState rightShoulder;
 
 	void clean() {
 		delete iButton_A;

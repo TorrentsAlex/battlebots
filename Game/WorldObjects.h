@@ -18,6 +18,8 @@ private:
 	std::vector<Character*> playersToRender;
 
 	void collisionDetection();
+
+	void executeInput(Character& character);
 public:	
 	
 	static WorldObjects& Instance() {

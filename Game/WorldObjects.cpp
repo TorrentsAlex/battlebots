@@ -39,17 +39,31 @@ void WorldObjects::clean() {
 }
 
 void WorldObjects::handleInputs() {
+	if (player1->getGamePad()->gameController) {
+		InputManager::Instance().handleInput(*player1->getGamePad());
+	}
+	if (player2->getGamePad()->gameController) {
+		InputManager::Instance().handleInput(*player2->getGamePad());
+	}
+	if (player3->getGamePad()->gameController) {
+		InputManager::Instance().handleInput(*player3->getGamePad());
+	}
+	if (player4->getGamePad()->gameController) {
+		InputManager::Instance().handleInput(*player4->getGamePad());
+	}
+	
+	
 	if (player1->inGame) {
-		TurriFramework::Instance().executeInput(*player1);
+		executeInput(*player1);
 	}
 	if (player2->inGame) {
-		TurriFramework::Instance().executeInput(*player2);
+		executeInput(*player2);
 	}
 	if (player3->inGame) {
-		TurriFramework::Instance().executeInput(*player3);
+		executeInput(*player3);
 	}
 	if (player4->inGame) {
-		TurriFramework::Instance().executeInput(*player4);
+		executeInput(*player4);
 	}
 
 	if (InputManager::Instance().isKeyPressed(SDLK_e)) {
@@ -119,7 +133,7 @@ void WorldObjects::update() {
 	}
 	// Update objects of the scene
 }
-
+ 
 /*
 	Send objects to render into the screen to OpenGL
 */
@@ -181,4 +195,22 @@ void WorldObjects::addCharacterToRender(Character& character) {
 
 void WorldObjects::cleanCharactersToRender() {
 	playersToRender.clear();
+}
+
+
+void WorldObjects::executeInput(Character& character) {
+	// Joystick
+	std::vector<JoystickCommand*> joystickComm = InputManager::Instance().getGamePadJoysticks(*character.getGamePad());
+	for (JoystickCommand* jcom : joystickComm) {
+		if (jcom) {
+			jcom->execute(character);
+		}
+	}
+	// Buttons
+	std::vector<Command*> commands = InputManager::Instance().getGamePadCommand(*character.getGamePad());
+	for (Command* com : commands) {
+		if (com) {
+			com->execute(character);
+		}
+	}
 }

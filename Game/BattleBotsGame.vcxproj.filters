@@ -129,9 +129,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionDetector.cpp">
       <Filter>Engine\Utils</Filter>
     </ClCompile>
@@ -247,9 +244,6 @@
     </ClInclude>
     <ClInclude Include="OBJ.h">
       <Filter>Engine\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
       <Filter>Engine\Text</Filter>

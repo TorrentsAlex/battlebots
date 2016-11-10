@@ -127,7 +127,7 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 	reader.parse(jsonString, json);
 	
 	// Load MODEL
-	OBJ object = Geometry::LoadModelFromFile(json["character0"]["object"].asString());
+	OBJ object = Geometry::LoadModelFBXFromFile(json["character0"]["object"].asString());
 	ch1.setOBJ(object);
 	ch2.setOBJ(object);
 	ch3.setOBJ(object);

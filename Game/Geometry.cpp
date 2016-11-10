@@ -19,9 +19,9 @@ OBJ Geometry::LoadModelFBXFromFile(std::string file) {
 	// Usually - if speed is not the most important aspect for you - you'll 
 	// propably to request more postprocessing than we do in this example.
 	const aiScene* scene = importer.ReadFile(file,
-		aiProcess_CalcTangentSpace |
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
+		aiProcess_RemoveComponent |
 		aiProcess_SortByPType);
 
 	// If the import failed, report it
@@ -32,13 +32,17 @@ OBJ Geometry::LoadModelFBXFromFile(std::string file) {
 	}
 
 	// get ONLY the first mesh 
+	
 	const aiMesh* mesh = scene->mMeshes[0];
-
+	
 	// init a zero3D vector if not exist some values
 	const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);
 	fbxObject.numVertices = mesh->mNumVertices;
 	// Load all vertexs, normal, and texture coordinates
 	for (int i = 0; i < mesh->mNumVertices; i++) {
+		if (mesh->mNumVertices >= 1000) {
+			std::cout << " " << endl;
+		}
 
 		const aiVector3D* pPos = &(mesh->mVertices[i]);
 		const aiVector3D* pNormal = mesh->HasNormals() ? &(mesh->mNormals[i]): &Zero3D;
@@ -53,9 +57,7 @@ OBJ Geometry::LoadModelFBXFromFile(std::string file) {
 	// Load the faces of the model
 	for (int i = 0; i < mesh->mNumFaces; i++) {
 		const aiFace& face = mesh->mFaces[i];
-		assert(face.mNumIndices == 3);
 		fbxObject.faces.push_back(face.mIndices[0]);
-
 		// And load the model
 		fbxObject.uv.push_back(face.mIndices[1]);
 
@@ -74,7 +76,6 @@ OBJ Geometry::LoadModelFBXFromFile(std::string file) {
 		fbxObject.mesh[i].setUV(fbxObject.textures_coord.at(vUV).x, fbxObject.textures_coord.at(vUV).y);
 		fbxObject.mesh[i].setNormal(fbxObject.vertex_normals.at(vNorm).x, fbxObject.vertex_normals.at(vNorm).y, fbxObject.vertex_normals.at(vNorm).z);
 	}
-
 	return fbxObject;
 }
 

@@ -11,8 +11,6 @@ int main(int argc, char ** argv) {
 	// Hide the command line
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-	WorldCollision::Instance().init();
-	WorldCollision::Instance().clean();
 
 	TurriFramework::Instance().init("BattleBots", 1280, 800, true, 80, false);
 

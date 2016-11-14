@@ -25,7 +25,6 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "CollisionDetector.h"
-#include "Car.h"
 #include "TextureManager.h"
 #include "MaterialManager.h"
 #include <glm/gtx/rotate_vector.hpp>

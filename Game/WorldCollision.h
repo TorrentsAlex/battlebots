@@ -3,21 +3,19 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 
+
+#include "TurriIncludes.h"
+
 class WorldCollision {
+protected:
+	WorldCollision();
+	~WorldCollision();
+	btDiscreteDynamicsWorld* wDynamicWorld;
 private:
 
-	WorldCollision() {};
 	
-	btDiscreteDynamicsWorld* wDynamicWorld;
-
 public:
-	static WorldCollision& Instance() {
-		static WorldCollision instance;
-		return instance;
-	}
-	WorldCollision(WorldCollision const&) = delete;
-	void operator=(WorldCollision const&) = delete;
-
+	
 	void init();
 
 	void clean();

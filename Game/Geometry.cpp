@@ -140,7 +140,6 @@ std::vector<GameObject> Geometry::LoadGameElements(std::string file) {
 		tempObject._angle = d.at(3);
 		tempObject._rotation = glm::vec3(d.at(4), d.at(5), d.at(6));
 		tempObject._scale = glm::vec3(d.at(7), d.at(8), d.at(9));
-		tempObject._textureRepetition = false;
 		vGObject.push_back(tempObject);
 	}
 	return vGObject;

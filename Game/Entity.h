@@ -12,8 +12,6 @@ protected:
 	OBJ eMesh;
 	GameObject eGameObject;
 
-	Sphere eBoundingBox;
-	Box eSquareBoundingBox;
 	bool haveSquareBBox;
 	
 	Material eMaterial;
@@ -42,9 +40,6 @@ public:
 	GameObject getGameObject();
 	int getNumVertices();
 	Material getMaterial();
-
-	Sphere getBoundingBox();
-	Box getSquareBoundingBox();
 
 	glm::vec3 getPosition();
 	float getXPosition();

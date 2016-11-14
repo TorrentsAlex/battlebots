@@ -12,20 +12,16 @@ Entity::~Entity() {
 Entity::Entity(OBJ mesh, GameObject gameObject) {
 	eMesh = mesh;
 	eGameObject = gameObject;
-	eBoundingBox.calculateBoundingBoxes(mesh);
 
-	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
 }
 
 // Setters
 void Entity::setOBJ(OBJ mesh) {
 	eMesh = mesh;
-	eBoundingBox.calculateBoundingBoxes(mesh);
 }
 
 void Entity::setGameObject(GameObject gameObject) {
 	eGameObject = gameObject;
-	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
 }
 
 void Entity::setSquareBoundingBox() {
@@ -88,14 +84,6 @@ float Entity::getYPosition() {
 
 glm::vec3 Entity::getScale() {
 	return eGameObject._scale;
-}
-
-Sphere Entity::getBoundingBox() {
-	return eBoundingBox;
-}
-
-Box Entity::getSquareBoundingBox() {
-	return eSquareBoundingBox;
 }
 
 GLuint Entity::getTextureId() {

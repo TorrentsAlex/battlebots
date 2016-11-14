@@ -2,6 +2,14 @@
 
 #include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 
+WorldCollision::WorldCollision() {
+
+}
+
+WorldCollision::~WorldCollision() {
+
+}
+
 void WorldCollision::init() {
 	btBroadphaseInterface* broadPhase = new btDbvtBroadphase();
 	

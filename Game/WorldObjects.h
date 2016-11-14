@@ -1,7 +1,7 @@
 #pragma once
-#include "TurriIncludes.h"
+#include "WorldCollision.h"
 
-class WorldObjects {
+class WorldObjects: WorldCollision {
 private:
 	WorldObjects();
 

@@ -23,7 +23,7 @@ void WorldCollision::init() {
 	
 	wDynamicWorld = new btDiscreteDynamicsWorld(dispatcher, broadPhase, solver, collisionConfiguration);
 
-	wDynamicWorld->setGravity(btVector3(0, -10, 0));
+	wDynamicWorld->setGravity(btVector3(0, 0, -10));
 }
 
 void WorldCollision::clean() {

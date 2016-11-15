@@ -3,6 +3,7 @@
 #include "Entity.h"
 
 #include "Light.h"
+
 class Scene {
 private:
 	Entity sSkybox;

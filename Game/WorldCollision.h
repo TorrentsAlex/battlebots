@@ -1,8 +1,7 @@
 #pragma once
 
-#include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
-
+#include <btBulletCollisionCommon.h>
 
 #include "TurriIncludes.h"
 
@@ -11,9 +10,10 @@ protected:
 	WorldCollision();
 	~WorldCollision();
 	btDiscreteDynamicsWorld* wDynamicWorld;
+	btCollisionWorld* wCollisionWorld;
+
 private:
 
-	
 public:
 	
 	void init();

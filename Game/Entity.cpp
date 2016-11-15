@@ -24,10 +24,8 @@ void Entity::setGameObject(GameObject gameObject) {
 	eGameObject = gameObject;
 }
 
-void Entity::setSquareBoundingBox() {
-	haveSquareBBox = true;
-	//eSquareBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
-	//eSquareBoundingBox.setSize(eMesh.width.y - eMesh.width.x, eMesh.lenght.y - eMesh.lenght.x);
+void Entity::setCollisionObject(btCollisionObject * btObject) {
+	collisionObject = btObject;
 }
 
 // Entity transformations
@@ -68,6 +66,10 @@ GameObject Entity::getGameObject() {
 
 Material Entity::getMaterial() {
 	return eMaterial;
+}
+
+btCollisionObject & Entity::getCollisionObject() {
+	return *collisionObject;
 }
 
 glm::vec3 Entity::getPosition() {

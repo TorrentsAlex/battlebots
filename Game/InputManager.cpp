@@ -24,7 +24,7 @@ void InputManager::mapping(GamePad& pad) {
 	pad.iButton_LB = new Lb();
 	pad.iButton_RB = new RB();
 
-	pad.iButton_SELECT = new Select();
+	//pad.iButton_SELECT = new Select();
 	pad.iButton_START = new Start();
 
 	pad.iButton_L3 = new L3();
@@ -148,7 +148,8 @@ std::vector<Command*> InputManager::getGamePadCommand(GamePad& pad) {
 	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))  commands.push_back(pad.iButton_L3);
 	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))  commands.push_back(pad.iButton_R3);
 
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_BACK))  commands.push_back(pad.iButton_SELECT);
+	// also is commented the 'new' line 27
+	//if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_BACK))  commands.push_back(pad.iButton_SELECT);
 	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_START))  commands.push_back(pad.iButton_START);
 	
 	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))  commands.push_back(pad.iButton_LB);

@@ -32,6 +32,8 @@ public:
 	void update();
 	void handleInputs();
 
+	void setCollisionsToWorld();
+
 	void addCharacterToRender(Character& character);
 	void cleanCharactersToRender();
 	

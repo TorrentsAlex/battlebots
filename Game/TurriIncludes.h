@@ -20,6 +20,7 @@
 
 #include "Window.h"
 #include "FPSLimiter.h"
+
 #include "Vertex.h"
 #include "Geometry.h"
 #include "InputManager.h"
@@ -29,6 +30,4 @@
 #include "MaterialManager.h"
 #include <glm/gtx/rotate_vector.hpp>
 
-
 #include "Scene.h"
-#include "Character.h"

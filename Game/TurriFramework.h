@@ -52,6 +52,7 @@ public:
 	void stopRender();
 
 	void renderEntity(Entity entity);
+	void renderEntityWithBullet(Entity entity);
 	void renderScene(Scene scene);
 
 	void renderLights(vector<Light> lights);

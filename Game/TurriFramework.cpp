@@ -63,6 +63,21 @@ void TurriFramework::disableLights() {
 	tOpenGL.sceneWithLights(false);
 }
 
+void TurriFramework::renderEntityWithBullet(Entity entity) {
+	tOpenGL.sendMaterial(entity.getMaterial());
+	btVector3 transform = entity.getCollisionObject().getWorldTransform().getOrigin();
+	float x = transform.getX();
+	float y = transform.getY();
+	float z = transform.getZ();
+	GameObject gameObject;
+	gameObject._translate = glm::vec3(x, y, z);
+	gameObject._angle = 0;
+	gameObject._scale = glm::vec3(1,1,1);
+
+	tOpenGL.sendObject(entity.getMesh(), gameObject, entity.getNumVertices());
+	clearMaps();
+}
+
 void TurriFramework::renderEntity(Entity entity) {
 	
 	tOpenGL.sendMaterial(entity.getMaterial());

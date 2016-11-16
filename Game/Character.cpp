@@ -22,6 +22,12 @@ void Character::clean() {
 }
 
 void Character::update() {
+	btTransform transform = collisionObject->getWorldTransform();
+
+	btVector3 origin = transform.getOrigin();
+	float x = origin.getX();
+	float y = origin.getY();
+
 	switch (currentState) {
 	case IDLE:
 		currentVelocity = 0;
@@ -46,8 +52,11 @@ void Character::update() {
 		if (currentVelocity <= maxVelocity) {
 			currentVelocity += acceleration;
 		}
-		eGameObject._translate.x += vectorForward.x * currentVelocity;
-		eGameObject._translate.y += vectorForward.y * currentVelocity;
+		x += vectorForward.x * currentVelocity;
+		y += vectorForward.y * currentVelocity;
+
+		transform.setOrigin(btVector3(x, y, origin.getZ()));
+		collisionObject->setWorldTransform(transform);
 		currentState = STATE::IDLE;
 
 		break;

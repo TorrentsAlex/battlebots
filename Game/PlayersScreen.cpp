@@ -27,7 +27,9 @@ void PlayersScreen::init() {
 void PlayersScreen::input() {
 	if (InputManager::Instance().isKeyPressed(*WorldObjects::Instance().getPlayerAt(0)->getGamePad(), SDL_CONTROLLER_BUTTON_START)) {
 		// player 1 in game
+
 		WorldObjects::Instance().getPlayerAt(0)->inGame = true;
+		WorldObjects::Instance().setCollisionsToWorld();
 		WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(0));
 	}
 	if (InputManager::Instance().isKeyPressed(*WorldObjects::Instance().getPlayerAt(1)->getGamePad(), SDL_CONTROLLER_BUTTON_START)) {
@@ -53,7 +55,7 @@ void PlayersScreen::input() {
 }
 
 void PlayersScreen::update() {
-
+	WorldObjects::Instance().update();
 }
 
 void PlayersScreen::render() {

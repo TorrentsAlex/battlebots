@@ -20,7 +20,8 @@ void PlayersScreen::init() {
 
 	TurriFramework::Instance().setCameraLookAt(glm::vec3(0, 0, 0));
 	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -170, 100));
-
+	WorldObjects::Instance().getPlayerAt(0)->inGame = true;
+	WorldObjects::Instance().setCollisionsToWorld();
 }
 
 
@@ -33,8 +34,7 @@ void PlayersScreen::input() {
 	if (InputManager::Instance().isKeyPressed(WorldObjects::Instance().getPlayerAt(0)->getGamePad()->start)) {
 		// player 1 in game
 
-		WorldObjects::Instance().getPlayerAt(0)->inGame = true;
-		WorldObjects::Instance().setCollisionsToWorld();
+
 		WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(0));
 	}
 	if (InputManager::Instance().isKeyPressed(WorldObjects::Instance().getPlayerAt(1)->getGamePad()->start)) {

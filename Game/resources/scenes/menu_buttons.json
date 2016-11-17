@@ -8,9 +8,9 @@
 			"y" : 0,
 			"z" : 16
 		},
-		"texture_on" : "../battlebots/Game/resources/images/buttons/play/play_butt_on.png",
-		"texture_off" : "../battlebots/Game/resources/images/buttons/play/play_butt_off.png",
-		"texture_specular" : "../battlebots/Game/resources/images/buttons/play/play_butt_glow.png"
+		"texture_on" : "./resources/images/buttons/play/play_butt_on.png",
+		"texture_off" : "./resources/images/buttons/play/play_butt_off.png",
+		"texture_specular" : "./resources/images/buttons/play/play_butt_glow.png"
 	},
 	"button1" : {
 		"name" : "options",
@@ -19,9 +19,9 @@
 			"y" : 0,
 			"z" : 11
 		},
-		"texture_on" : "../battlebots/Game/resources/images/buttons/options/options_butt_on.png",
-		"texture_off" : "../battlebots/Game/resources/images/buttons/options/options_butt_off.png",
-		"texture_specular" : "../battlebots/Game/resources/images/buttons/options/options_butt_glow.png"
+		"texture_on" : "./resources/images/buttons/options/options_butt_on.png",
+		"texture_off" : "./resources/images/buttons/options/options_butt_off.png",
+		"texture_specular" : "./resources/images/buttons/options/options_butt_glow.png"
 	},
 	"button2" : {
 		"name" : "exit",
@@ -30,8 +30,8 @@
 			"y" : 0,
 			"z" : 6
 		},
-		"texture_on" : "../battlebots/Game/resources/images/buttons/exit/exit_butt_on.png",
-		"texture_off" : "../battlebots/Game/resources/images/buttons/exit/exit_butt_off.png",
-		"texture_specular" : "../battlebots/Game/resources/images/buttons/exit/exit_butt_glow.png"
+		"texture_on" : "./resources/images/buttons/exit/exit_butt_on.png",
+		"texture_off" : "./resources/images/buttons/exit/exit_butt_off.png",
+		"texture_specular" : "./resources/images/buttons/exit/exit_butt_glow.png"
 	}
 }

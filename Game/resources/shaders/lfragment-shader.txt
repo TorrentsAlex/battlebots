@@ -34,7 +34,7 @@ in vec2 fragmentTextureCoordinates;
 in vec3 fragmentNormal;
 in vec3 fragmentPosition;
 
-#define LIGHTS_SCENE 1
+#define LIGHTS_SCENE 4
 
 uniform sampler2D normalMap;
 uniform sampler2D textureData;
@@ -125,7 +125,9 @@ void main() {
 	
 	if (lightingEnabled == 1) {			
 		for (int i = 0; i < LIGHTS_SCENE; ++i)	{
-			tempColor += calculateLights(pointLights[i]);
+			if (pointLights[i].ambient.r >= 0.1 ) {
+				tempColor += calculateLights(pointLights[i]);	
+			}
 		}
 
 		finalColor = tempColor;

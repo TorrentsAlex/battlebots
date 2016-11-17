@@ -7,7 +7,13 @@
 
 class Light {
 protected:
-	int lType = LIGHT_POINT;
+	int lType;
+	
+	// values for pointlights
+	float lConstant;
+	float lLinear;
+	float lQuadratic;
+
 	glm::vec3 lAmbient;
 	glm::vec3 lDiffuse;
 	glm::vec3 lSpecular;
@@ -29,12 +35,23 @@ public:
 	void setDiffuse(glm::vec3 diffuse);
 	void setSpecular(glm::vec3 specular);
 	void setPower(float power);
+	// methods for pointlights
+	void setConstant(float constant);
+	void setLinear(float linear);
+	void setQuadratic(float quadratic);
+
+	void setType(string type);
 
 	glm::vec3 getPosition();
 	glm::vec3 getDirection();
 	glm::vec3 getAmbient();
 	glm::vec3 getDiffuse();
 	glm::vec3 getSpecular();
+
+
+	float getConstant();
+	float getLinear();
+	float getQuadratic();
 
 	float getPower();
 

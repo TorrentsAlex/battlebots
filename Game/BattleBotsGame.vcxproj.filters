@@ -344,11 +344,11 @@
     <ClInclude Include="CollisionDetector.h">
       <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="WorldCollision.h">
-      <Filter>Engine\Systems\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="WorldObjects.h">
       <Filter>Game\Systems\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCollision.h">
+      <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

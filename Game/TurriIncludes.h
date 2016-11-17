@@ -31,3 +31,5 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 #include "Scene.h"
+
+#include "Character.h"

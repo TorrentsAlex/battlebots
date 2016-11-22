@@ -9,7 +9,7 @@
 #include "ArenaScreen.h"
 
 void GameController::init() {
-	changeState(GameState::MENU);
+	changeState(GameState::PLAYERS);
 }
 
 void GameController::changeState(GameState nextstate) {

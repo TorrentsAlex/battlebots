@@ -49,12 +49,25 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 		entity.setMaterial(terrainMaterial);
 		entity.setTextureId(textureDecoration);
 
+	
+		
+
+		// TESTING
+		Entity* e = new Entity;
+		e->setOBJ(objDecoration);
+		e->setMaterial(terrainMaterial);
+		e->setTextureId(textureDecoration);
+		DecorObjects d;
+		d.e = e;
+
+
 		//set specular material
 		if (textureSpecularString.compare("") != 0) {
 			GLuint specular = TextureManager::Instance().getTextureID(textureSpecularString);
 			entity.setTextureSpecular(specular);
+			e->setTextureSpecular(specular);
 		}
-		
+
 
 		// Theres nothin into elements
 		if (gameElements.compare("") == 0) {
@@ -66,6 +79,14 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 			entity.setGameObject(gameObject);
 			vEntityDecorations.push_back(entity);
 
+			// TESTING
+			std::vector<GameObject> gameObjects;
+			gameObjects.push_back(gameObject);
+			d.g.push_back(gameObject);
+
+
+			newScene.listObjects.push_back(d);
+
 		} else {
 			vector<GameObject> vectorDecoration = Geometry::LoadGameElements(gameElements);
 			for (GameObject gODecoration : vectorDecoration) {
@@ -73,6 +94,10 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 
 				vEntityDecorations.push_back(entity);
 			}
+			 // TESTING
+			d.g = vectorDecoration;
+			newScene.listObjects.push_back(d);
+
 		}
 	}
 	

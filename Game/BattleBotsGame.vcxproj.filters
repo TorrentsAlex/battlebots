@@ -207,6 +207,7 @@
     <ClCompile Include="WorldObjects.cpp">
       <Filter>Game\Systems\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="AllvsAll.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -350,5 +351,6 @@
     <ClInclude Include="WorldCollision.h">
       <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="AllvsAll.h" />
   </ItemGroup>
 </Project>

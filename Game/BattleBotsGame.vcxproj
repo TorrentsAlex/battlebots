@@ -165,6 +165,7 @@
     <Text Include="resources\shaders\lvertex-shader.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AllvsAll.cpp" />
     <ClCompile Include="ArenaScreen.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="WorldCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllvsAll.h" />
     <ClInclude Include="ArenaScreen.h" />
     <ClInclude Include="AxisCommand.h" />
     <ClInclude Include="BaseScreen.h" />

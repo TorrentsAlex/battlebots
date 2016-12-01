@@ -173,6 +173,11 @@ void OpenGLManagement::sendLight(std::vector<Light> light) {
 	}
 }
 
+// Send AABB to OpenGL
+void OpenGLManagement::sendAABB() {
+
+}
+
 // Calculate the transformation of the entity and send to OPENGL
 void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVertices) {
 
@@ -191,28 +196,3 @@ void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVerti
 
 	oGLBuffer.sendDataToGPU(data, numVertices);
 }
-
-// Calculate the transformation of the entity and send to OPENGL
-/*
-void OpenGLManagement::sendObject(Entity entity) {
-	glm::mat4 modelMatrix;
-	glm::mat3 normalMatrix;
-	ObjectTransformation transformation = entity.getTransformation();
-
-	//TODO: Compute its model transformation matrix
-	modelMatrix = glm::translate(modelMatrix, transformation.position);
-	if (transformation.angle != 0) {
-		modelMatrix = glm::rotate(modelMatrix, glm::radians(transformation.angle), transformation.rotation);
-	}
-
-	modelMatrix = glm::scale(modelMatrix, transformation.scale);
-	normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelMatrix)));
-
-	oGLBuffer.sendUniform(uniform_modelMatrix, modelMatrix);
-	oGLBuffer.sendUniform(uniform_modelNormalMatrix, normalMatrix);
-
-	//TODO: Pass the matrix as an uniform 
-	//Send data to GPU
-	oGLBuffer.sendDataToGPU(&entity.getVertexData(), entity.getNumVertices());
-}
-*/

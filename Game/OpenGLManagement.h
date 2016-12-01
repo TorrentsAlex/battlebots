@@ -72,7 +72,9 @@ public:
 	void unbindMaps();
 
 	//void sendObject(Entity entity);
-	void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVertices);
+	void sendObject(Vertex * data, GameObject object, int numVertices);
+	void sendAABB();
+
 	void start();
 	void end();
 

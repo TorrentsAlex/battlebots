@@ -65,6 +65,14 @@ void TurriFramework::disableLights() {
 
 void TurriFramework::renderEntityWithBullet(Entity entity) {
 	tOpenGL.sendMaterial(entity.getMaterial());
+	btCollisionShape* shape = entity.getCollisionObject().getCollisionShape();
+	btTransform* aabbTransform;
+	btVector3* vectorMin;
+	btVector3* vectorMax;
+
+	shape->getAabb(*aabbTransform, *vectorMin, *vectorMax);
+
+
 	btVector3 transform = entity.getCollisionObject().getWorldTransform().getOrigin();
 	float x = transform.getX();
 	float y = transform.getY();

@@ -24,7 +24,7 @@
 			"material" : "./resources/materials/metal.json"
 		},
 		{
-			"object" : "./resources/objects/beer.obj",
+			"object" : "./resources/objects/cube.obj",
 			"texture" : "./resources/images/beer_guinness.png",
 			"texture_specular" : "./resources/images/beer_guinness_specular.png",
 			"position" :{

@@ -119,10 +119,10 @@ OBJ Geometry::LoadModelFromFile(std::string file) {
 			yMin = currentVertex.y;
 		}
 		// Z
-		if (currentVertex.z> yMax) {
+		if (currentVertex.z > zMax) {
 			zMax = currentVertex.z;
 		}
-		if (currentVertex.z < yMin) {
+		if (currentVertex.z < zMin) {
 			zMin = currentVertex.z;
 		}
 

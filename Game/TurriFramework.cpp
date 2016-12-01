@@ -147,6 +147,30 @@ glm::vec3 TurriFramework::getCameraPosition() {
 	return tCamera.getPosition();
 }
 
+void TurriFramework::moveCameraWithKeyboard() {
+	glm::vec3 cameraPos = tCamera.getPosition();
+
+	if (InputManager::Instance().isKeyDown(SDLK_q)) {
+		cameraPos.y += 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_e)) {
+		cameraPos.y -= 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_w)) {
+		cameraPos.z += 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_s)) {
+		cameraPos.z -= 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_a)) {
+		cameraPos.x -= 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_d)) {
+		cameraPos.x += 1;
+	}
+	tCamera.setCameraPosition(cameraPos);
+}
+
 // Input methods
 
 // Finish the game loop
@@ -156,11 +180,3 @@ void TurriFramework::quit() {
 
 
 
-
-// Bullet simulation
-
-void TurriFramework::stepBulletSimulation() {
-	//float current
-	// calculate frame date and 
-	// bulletphysics step simulation
-}

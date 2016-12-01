@@ -105,11 +105,12 @@ void WorldObjects::handleInputs() {
 		currentScene->setLights(lights);
 		cout << "directional white values readed and saved!!" << endl;
 	}
+	TurriFramework::Instance().moveCameraWithKeyboard();
 }
 
 void WorldObjects::setCollisionsToWorld() {
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
-	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(40.), btScalar(40.), btScalar(10.)));
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(70.), btScalar(70.), btScalar(10.)));
 	collisionShapes.push_back(groundShape);
 
 	btTransform groundTransform;
@@ -140,7 +141,7 @@ void WorldObjects::setCollisionsToWorld() {
 		btScalar widht = player1->getOBJ().width.y - player1->getOBJ().width.x;
 		btScalar height = player1->getOBJ().lenght.y - player1->getOBJ().lenght.x;
 		btScalar hight = player1->getOBJ().high.y - player1->getOBJ().high.x;
-		btCollisionShape* colShape = new btBoxShape(btVector3(widht, height, hight));
+		btCollisionShape* colShape = new btBoxShape(btVector3(widht, hight, height));
 
 		collObject->setCollisionShape(colShape);
 		// add to world
@@ -189,7 +190,7 @@ void WorldObjects::setCollisionsToWorld() {
 			btTransform startTransform;
 			startTransform.setIdentity();
 
-			btScalar	mass(0.0f);
+			btScalar	mass(10.0f);
 
 			//rigidbody is dynamic if and only if mass is non zero, otherwise static
 			bool isDynamic = (mass != 0.f);
@@ -222,40 +223,42 @@ void WorldObjects::setCollisionsToWorld() {
 }
 
 void WorldObjects::collisionDetection() {
-	wDynamicWorld->stepSimulation(1/60.0f);
-	//print positions of all objects
-	for (int j = wDynamicWorld->getNumCollisionObjects() - 1; j >= 0; j--)
-	{
-		btCollisionObject* obj = wDynamicWorld->getCollisionObjectArray()[j];
-		btRigidBody* body = btRigidBody::upcast(obj);
-		btTransform trans;
-		if (body && body->getMotionState())
-		{
-			body->getMotionState()->getWorldTransform(trans);
 
-		}
-		else
-		{
-			trans = obj->getWorldTransform();
-		}
-	}
-	std::cout << wDynamicWorld->getDispatcher()->getNumManifolds() << endl;
-	int numManifolds = wDynamicWorld->getDispatcher()->getNumManifolds();
-	/*for (int i = 0; i < numManifolds; ++i) {
-		btPersistentManifold* manifold = wDynamicWorld->getDispatcher()->getManifoldByIndexInternal(i);
-		const btCollisionObject* object0 = manifold->getBody0();
-		const btCollisionObject* object1 = manifold->getBody1();
-		int numContacts = manifold->getNumContacts();
-		for (int j = 0; j<numContacts; j++) {
-			btManifoldPoint& pt = manifold->getContactPoint(j);
-			if (pt.getDistance()<0.f)
-			{
-				const btVector3& ptA = pt.getPositionWorldOnA();
-				const btVector3& ptB = pt.getPositionWorldOnB();
-				const btVector3& normalOnB = pt.m_normalWorldOnB;
-			}
-		}
-	}*/
+	wDynamicWorld->stepSimulation(1 / 60.0f);
+
+	//print positions of all objects
+	//for (int j = wDynamicWorld->getNumCollisionObjects() - 1; j >= 0; j--)
+	//{
+	//	btCollisionObject* obj = wDynamicWorld->getCollisionObjectArray()[j];
+	//	btRigidBody* body = btRigidBody::upcast(obj);
+	//	btTransform trans;
+	//	if (body && body->getMotionState())
+	//	{
+	//		body->getMotionState()->getWorldTransform(trans);
+
+	//	}
+	//	else
+	//	{
+	//		trans = obj->getWorldTransform();
+	//	}
+	//}
+	//int numManifolds = wDynamicWorld->getDispatcher()->getNumManifolds();
+	//for (int i = 0; i < numManifolds; ++i) {
+	//	btPersistentManifold* manifold = wDynamicWorld->getDispatcher()->getManifoldByIndexInternal(i);
+	//	const btCollisionObject* object0 = manifold->getBody0();
+	//	const btCollisionObject* object1 = manifold->getBody1();
+	//	int numContacts = manifold->getNumContacts();
+	//	for (int j = 0; j<numContacts; j++) {
+	//		btManifoldPoint& pt = manifold->getContactPoint(j);
+	//		cout << pt.getPositionWorldOnA().getX() << "/" << pt.getPositionWorldOnA().getY() << endl;
+	//		if (pt.getDistance()<0.f)
+	//		{
+	//			const btVector3& ptA = pt.getPositionWorldOnA();
+	//			const btVector3& ptB = pt.getPositionWorldOnB();
+	//			const btVector3& normalOnB = pt.m_normalWorldOnB;
+	//		}
+	//	}
+	//}
 }
 
 /*

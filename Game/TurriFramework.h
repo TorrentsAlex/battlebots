@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TURRI_TURRIFRAMEWORK
+#define TURRI_TURRIFRAMEWORK
 
 #include "Camera.h"
 #include "Window.h"
@@ -65,14 +66,13 @@ public:
 	// Camera methods
 	void setCameraPosition(glm::vec3 position);
 	void setCameraLookAt(glm::vec3 lookAt);
+	void moveCameraWithKeyboard();
+
 	glm::vec3 getCameraPosition();
 
 	// Input methods 
 	void quit();
 
 
-	// Bullet
-	void stepBulletSimulation();
-
 };
-
+#endif // !TURRI_TURRIFRAMEWORK;

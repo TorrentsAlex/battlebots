@@ -30,6 +30,8 @@ private:
 
 	void clearMaps();
 
+	void renderCube(OBJ cube, GameObject gameObject);
+
 public:
 
 	static TurriFramework& Instance() {
@@ -54,6 +56,10 @@ public:
 
 	void renderEntity(Entity entity);
 	void renderEntityWithBullet(Entity entity);
+
+	void renderCubeAt(OBJ cube, GameObject gameObject, Material material);
+	void renderCubeAt(OBJ cube, const btCollisionObject &object, Material material);
+
 	void renderScene(Scene scene);
 
 	void renderLights(vector<Light> lights);

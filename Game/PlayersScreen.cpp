@@ -26,10 +26,11 @@ void PlayersScreen::init() {
 
 
 void PlayersScreen::input() {
+	WorldObjects::Instance().handleInputs();/*
 	InputManager::Instance().handleInput(*WorldObjects::Instance().getPlayerAt(0)->getGamePad());
 	InputManager::Instance().handleInput(*WorldObjects::Instance().getPlayerAt(1)->getGamePad());
 	InputManager::Instance().handleInput(*WorldObjects::Instance().getPlayerAt(2)->getGamePad());
-	InputManager::Instance().handleInput(*WorldObjects::Instance().getPlayerAt(3)->getGamePad());
+	InputManager::Instance().handleInput(*WorldObjects::Instance().getPlayerAt(3)->getGamePad());*/
 
 	if (InputManager::Instance().isKeyPressed(WorldObjects::Instance().getPlayerAt(0)->getGamePad()->start)) {
 		// player 1 in game
@@ -58,31 +59,6 @@ void PlayersScreen::input() {
 		cout << "play!!!" << endl;
 		GameController::Instance().changeState(GameState::PLAY);
 	}
-
-	// MOVING CAMERA
-
-	//GamePad* gamePad = WorldObjects::Instance().getPlayerAt(0)->getGamePad();
-	//glm::vec3 position = TurriFramework::Instance().getCameraPosition();
-	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
-	//	position.y += 1;
-	//}
-	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_DOWN)) {
-	//	position.y -= 1;
-	//}
-	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_LEFT)) {
-	//	position.x -= 1;
-	//}
-	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) {
-	//	position.x += 1;
-	//}
-	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) {
-	//	position.z += 1;
-	//}
-	//if (InputManager::Instance().isKeyPressed(*gamePad, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) {
-	//	position.z -= 1;
-	//}
-
-	//TurriFramework::Instance().setCameraPosition(position);
 
 }
 

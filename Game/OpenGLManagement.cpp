@@ -173,9 +173,16 @@ void OpenGLManagement::sendLight(std::vector<Light> light) {
 	}
 }
 
-// Send AABB to OpenGL
-void OpenGLManagement::sendAABB() {
-
+// Change fill mode or LINE
+void OpenGLManagement::setFillOrWireframe(POLYGONMODE mode) {
+	switch (mode) {
+	case POLYGONMODE::FILL:
+		oGLBuffer.fillMode();
+		break;
+	case POLYGONMODE::WIREFRAME:
+		oGLBuffer.wireFrameMode();
+		break;
+	}
 }
 
 // Calculate the transformation of the entity and send to OPENGL

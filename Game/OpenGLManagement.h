@@ -16,6 +16,8 @@
 
 #define LIGHTS_SCENE 4
 
+enum POLYGONMODE { FILL, WIREFRAME};
+
 class OpenGLManagement {
 private:
 	OpenGL oGLBuffer;
@@ -73,7 +75,8 @@ public:
 
 	//void sendObject(Entity entity);
 	void sendObject(Vertex * data, GameObject object, int numVertices);
-	void sendAABB();
+	
+	void setFillOrWireframe(POLYGONMODE mode);
 
 	void start();
 	void end();

@@ -40,6 +40,7 @@ void TurriFramework::update() {
 // Render methods
 void TurriFramework::startRender() {
 	tOpenGL.start();
+	tOpenGL.setFillOrWireframe(POLYGONMODE::FILL);
 }
 
 void TurriFramework::stopRender() {
@@ -65,13 +66,6 @@ void TurriFramework::disableLights() {
 
 void TurriFramework::renderEntityWithBullet(Entity entity) {
 	tOpenGL.sendMaterial(entity.getMaterial());
-	btCollisionShape* shape = entity.getCollisionObject().getCollisionShape();
-	btTransform* aabbTransform;
-	btVector3* vectorMin;
-	btVector3* vectorMax;
-
-	shape->getAabb(*aabbTransform, *vectorMin, *vectorMax);
-
 
 	btVector3 transform = entity.getCollisionObject().getWorldTransform().getOrigin();
 	float x = transform.getX();
@@ -84,6 +78,42 @@ void TurriFramework::renderEntityWithBullet(Entity entity) {
 
 	tOpenGL.sendObject(entity.getMesh(), gameObject, entity.getNumVertices());
 	clearMaps();
+}
+
+void TurriFramework::renderCube(OBJ cube, GameObject gameObject) {
+	tOpenGL.setFillOrWireframe(POLYGONMODE::WIREFRAME);
+
+	tOpenGL.sendObject(cube.mesh, gameObject, cube.numVertices);
+}
+
+void TurriFramework::renderCubeAt(OBJ cube, GameObject gameObject, Material material) {
+
+	tOpenGL.sendMaterial(material);
+	renderCube(cube, gameObject);
+	tOpenGL.unbindMaps();
+}
+
+void TurriFramework::renderCubeAt(OBJ cube, const btCollisionObject &object, Material material) {
+
+	btVector3 transform = object.getWorldTransform().getOrigin();
+	float x = transform.getX();
+	float y = transform.getY();
+	float z = transform.getZ();
+	const btCollisionShape *shape = object.getCollisionShape();
+	
+	btTransform *shapeTransform = new btTransform();
+	btVector3 *aabbMin = new btVector3, *aabbMax = new btVector3();
+	shape->getAabb(*shapeTransform, *aabbMin, *aabbMax);
+
+	GameObject gameObject;
+	gameObject._translate = glm::vec3(x, y, z);
+	gameObject._angle = 0;
+	gameObject._scale = glm::vec3(1, 1, 1);
+	//gameObject._scale = glm::vec3(aabbMax->getX() - aabbMin->getX(), aabbMax->getY() - aabbMin->getY(), aabbMax->getZ() - aabbMin->getZ());
+
+	tOpenGL.sendMaterial(material);
+	renderCube(cube, gameObject);
+	tOpenGL.unbindMaps();
 }
 
 void TurriFramework::renderEntity(Entity entity) {

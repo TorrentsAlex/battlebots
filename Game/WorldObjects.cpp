@@ -10,6 +10,15 @@ WorldObjects::WorldObjects() {
 	player2 = new Character();
 	player3 = new Character();
 	player4 = new Character();
+
+	unitCube = Geometry::LoadModelFromFile("./resources/objects/cube.obj");
+	cubeMaterial.textureMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
+	cubeMaterial.ambient = glm::vec3(0.25, 0.20725, 0.20725);
+	cubeMaterial.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
+	cubeMaterial.specular = glm::vec3(0.25, 0.20725, 0.20725);
+	cubeMaterial.shininess = 4;
+
+	debug = true;
 }
 
 void WorldObjects::clean() {
@@ -59,52 +68,6 @@ void WorldObjects::handleInputs() {
 		executeInput(*player4);
 	}
 
-	if (InputManager::Instance().isKeyPressed(SDLK_e)) {
-		Json::Reader reader;
-
-		string jsonString = FileReader::LoadStringFromFile("./resources/materials/lights/pointlight_middle.json");
-		Json::Value json;
-		std::vector<Light> lights = currentScene->getLights();
-		
-		glm::vec3 ambient, diffuse, specular, position;
-
-		reader.parse(jsonString, json);
-		position.r = json["position"]["x"].asFloat();
-		position.g = json["position"]["y"].asFloat();
-		position.b = json["position"]["z"].asFloat();
-
-		ambient.r = json["ambient"]["r"].asFloat();
-		ambient.g = json["ambient"]["g"].asFloat();
-		ambient.b = json["ambient"]["b"].asFloat();
-
-		diffuse.r = json["diffuse"]["r"].asFloat();
-		diffuse.g = json["diffuse"]["g"].asFloat();
-		diffuse.b = json["diffuse"]["b"].asFloat();
-
-		specular.r = json["specular"]["r"].asFloat();
-		specular.g = json["specular"]["g"].asFloat();
-		specular.b = json["specular"]["b"].asFloat();
-		
-		string type = json["type"].asString();
-		if (type.compare("point") == 0) {
-			float constant = json["constant"].asFloat();
-			float linear = json["linear"].asFloat();
-			float quadratic = json["quadratic"].asFloat();
-			lights.at(3).setConstant(constant);
-			lights.at(3).setLinear(linear);
-			lights.at(3).setQuadratic(quadratic);
-		}
-		lights.at(3).setPosition(position);
-
-		lights.at(3).setPower(json["power"].asFloat());
-		lights.at(3).setType(type);
-		lights.at(3).setAmbient(ambient);
-		lights.at(3).setDiffuse(diffuse);
-		lights.at(3).setSpecular(specular);
-
-		currentScene->setLights(lights);
-		cout << "directional white values readed and saved!!" << endl;
-	}
 	TurriFramework::Instance().moveCameraWithKeyboard();
 }
 
@@ -141,7 +104,7 @@ void WorldObjects::setCollisionsToWorld() {
 		btScalar widht = player1->getOBJ().width.y - player1->getOBJ().width.x;
 		btScalar height = player1->getOBJ().lenght.y - player1->getOBJ().lenght.x;
 		btScalar hight = player1->getOBJ().high.y - player1->getOBJ().high.x;
-		btCollisionShape* colShape = new btBoxShape(btVector3(widht , height , hight ));
+		btCollisionShape* colShape = new btBoxShape(btVector3(widht, height, widht/2));
 
 		collObject->setCollisionShape(colShape);
 		// add to world
@@ -183,7 +146,7 @@ void WorldObjects::setCollisionsToWorld() {
 			btScalar widht = decor.getOBJ().width.y - decor.getOBJ().width.x;
 			btScalar height = decor.getOBJ().lenght.y - decor.getOBJ().lenght.x;
 			btScalar hight = decor.getOBJ().high.y - decor.getOBJ().high.x;
-			btCollisionShape* colShape = new btBoxShape(btVector3(widht , height , hight));
+			btCollisionShape* colShape = new btBoxShape(btVector3(widht, height, hight));
 
 			// add to world
 			collisionShapes.push_back(colShape);
@@ -266,7 +229,6 @@ void WorldObjects::render() {
 
 	for (Entity decor : currentScene->getDecoration()) {
 		TurriFramework::Instance().renderEntityWithBullet(decor);
-
 	}
 
 	if (player1->inGame) {
@@ -285,9 +247,29 @@ void WorldObjects::render() {
 	TurriFramework::Instance().disableLights();
 
 	TurriFramework::Instance().renderEntity(currentScene->getSkyBox());
+	
+	// Render wireframes
+//#if debug
+	for (Entity decor : currentScene->getDecoration()) {
+		TurriFramework::Instance().renderCubeAt(unitCube, decor.getCollisionObject(), cubeMaterial);
+
+	}	if (player1->inGame) {
+		TurriFramework::Instance().renderCubeAt(unitCube, player1->getCollisionObject(), cubeMaterial);
+	}
+	/*if (player2->inGame) {
+		TurriFramework::Instance().renderEntity(*player2);
+	}
+	if (player3->inGame) {
+		TurriFramework::Instance().renderEntity(*player3);
+	}
+	if (player4->inGame) {
+		TurriFramework::Instance().renderEntity(*player4);
+	}*/
+
+//#endif
+
 	TurriFramework::Instance().stopRender();
 
-	wDynamicWorld->debugDrawWorld();
 }
 
 Character* WorldObjects::getPlayerAt(int current) {

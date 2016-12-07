@@ -14,7 +14,9 @@
 #include "GameObject.h"
 
 
-#define LIGHTS_SCENE 1
+#define LIGHTS_SCENE 4
+
+enum POLYGONMODE { FILL, WIREFRAME};
 
 class OpenGLManagement {
 private:
@@ -72,7 +74,10 @@ public:
 	void unbindMaps();
 
 	//void sendObject(Entity entity);
-	void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVertices);
+	void sendObject(Vertex * data, GameObject object, int numVertices);
+	
+	void setFillOrWireframe(POLYGONMODE mode);
+
 	void start();
 	void end();
 

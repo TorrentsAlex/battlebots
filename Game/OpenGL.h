@@ -11,6 +11,7 @@
 #include "unordered_map"
 #include "ErrorManagement.h"
 #include "Vertex.h"
+#include "OBJ.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ private:
 	GLuint _programID;
 	int _numAttributes;
 	void compileShader(GLenum shaderType, const string& shaderFileName);
+
+	OBJ cube;
 
 public:
 	OpenGL();
@@ -42,6 +45,10 @@ public:
 	void clearColor();
 	void use();
 	void unuse();
+
+	void wireFrameMode();
+	void fillMode();
+
 	GLint getUniformLocation(const string & uniformName);
 	GLint getAttribLocation(const string & attribName);
 

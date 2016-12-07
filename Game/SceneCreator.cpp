@@ -34,37 +34,48 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 	newScene.setTerrain(objTerrain, textureTerrain, terrainMaterial);
 
 	cout << "decoration..." << endl;
+	Json::Value jsonDecoration = json["decoration"];
 	// Decoration
-	OBJ objDecoration = Geometry::LoadModelFromFile(json["decoration"]["object"].asString());
-	GLuint textureDecoration = TextureManager::Instance().getTextureID(json["decoration"]["texture"].asString());
-
-	string gameElements = json["decoration"]["elements"].asString();
-
-	Entity entity;
-	entity.setOBJ(objDecoration);
-	entity.setMaterial(terrainMaterial);
-	entity.setTextureId(textureDecoration);
-
 	vector<Entity> vEntityDecorations;
+	for (int i = 0; i < jsonDecoration.size(); i++) {
+		Json::Value currentDecoration = jsonDecoration[i];
+		OBJ objDecoration = Geometry::LoadModelFromFile(currentDecoration["object"].asString());
+		GLuint textureDecoration = TextureManager::Instance().getTextureID(currentDecoration["texture"].asString());
 
-	// Theres nothin into elements
-	if (gameElements.compare("") == 0) {
-		GameObject gameObject;
-		gameObject._translate = glm::vec3(json["position"]["x"].asFloat(), json["position"]["y"].asFloat(), json["position"]["z"].asFloat());;
+		string gameElements = currentDecoration["elements"].asString();
+		string textureSpecularString = currentDecoration["texture_specular"].asString();
+		Entity entity;
+		entity.setOBJ(objDecoration);
+		entity.setMaterial(terrainMaterial);
+		entity.setTextureId(textureDecoration);
+
+		//set specular material
+		if (textureSpecularString.compare("") != 0) {
+			GLuint specular = TextureManager::Instance().getTextureID(textureSpecularString);
+			entity.setTextureSpecular(specular);
+		}
 		
-		gameObject._scale = glm::vec3(1,1,1);
-		gameObject._angle = 0;
-		entity.setGameObject(gameObject);
-		vEntityDecorations.push_back(entity);
 
-	} else {
-		vector<GameObject> vectorDecoration = Geometry::LoadGameElements(gameElements);
-		for (GameObject gODecoration : vectorDecoration) {
-			entity.setGameObject(gODecoration);
+		// Theres nothin into elements
+		if (gameElements.compare("") == 0) {
+			GameObject gameObject;
+			gameObject._translate = glm::vec3(currentDecoration["position"]["x"].asFloat(), currentDecoration["position"]["y"].asFloat(), currentDecoration["position"]["z"].asFloat());;
 
+			gameObject._scale = glm::vec3(1, 1, 1);
+			gameObject._angle = 0;
+			entity.setGameObject(gameObject);
 			vEntityDecorations.push_back(entity);
+
+		} else {
+			vector<GameObject> vectorDecoration = Geometry::LoadGameElements(gameElements);
+			for (GameObject gODecoration : vectorDecoration) {
+				entity.setGameObject(gODecoration);
+
+				vEntityDecorations.push_back(entity);
+			}
 		}
 	}
+	
 
 	// Lights
 	vector<Light> sceneLights;
@@ -100,6 +111,22 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 		direction.x = currentLight["direction"]["x"].asFloat();
 		direction.y = currentLight["direction"]["y"].asFloat();
 		direction.z = currentLight["direction"]["z"].asFloat();
+		
+		// type
+		string type = currentLight["type"].asString();
+		l.setType(type);
+		// if the light is a pointlight
+		if (type.compare("point") == 0) {
+			float constant = currentLight["constant"].asFloat();
+			float linear = currentLight["linear"].asFloat();
+			float quadratic = currentLight["quadratic"].asFloat();
+			l.setConstant(constant);
+			l.setLinear(linear);
+			l.setQuadratic(quadratic);
+		}
+		//power 
+		float power = currentLight["power"].asFloat();
+		l.setPower(power);
 
 		// set the values into the light
 		l.setAmbient(ambient);
@@ -138,7 +165,7 @@ void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2,
 
 	gameObject._angle = 0;
 	gameObject._rotation = glm::vec3(0,0,1);
-	gameObject._scale = glm::vec3(1,1,1);
+	gameObject._scale = glm::vec3(0.8, 0.8, 0.8);
 
 	gameObject._translate.x = json["character0"]["position"]["x"].asFloat();
 	gameObject._translate.y = json["character0"]["position"]["y"].asFloat();

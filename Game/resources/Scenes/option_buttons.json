@@ -74,6 +74,6 @@
 			"z" : 1	
 		},
 		"texture_on" : "./resources/images/buttons/back/back_butt_on.png",
-		"texture_off" : "./resources/images/buttons/back/back_butt_off.png"
+		"texture_off" : ".	/resources/images/buttons/back/back_butt_off.png"
 	}
 }

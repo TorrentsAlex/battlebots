@@ -129,9 +129,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionDetector.cpp">
-      <Filter>Engine\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="FileReader.cpp">
       <Filter>Engine\Text</Filter>
     </ClCompile>
@@ -207,6 +204,10 @@
     <ClCompile Include="WorldObjects.cpp">
       <Filter>Game\Systems\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionDetector.cpp">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpotLight.h">
@@ -344,11 +345,12 @@
     <ClInclude Include="CollisionDetector.h">
       <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="WorldCollision.h">
-      <Filter>Engine\Systems\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="WorldObjects.h">
       <Filter>Game\Systems\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="WorldCollision.h">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionCallback.h" />
   </ItemGroup>
 </Project>

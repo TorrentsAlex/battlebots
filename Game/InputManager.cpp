@@ -132,35 +132,71 @@ std::vector<JoystickCommand*> InputManager::getGamePadJoysticks(GamePad& pad) {
 	return commands;
 }
 
+void InputManager::handleInput(GamePad& pad) {
+	pad.dPadUp.wasDown = pad.dPadUp.isDown;
+	pad.dPadUp.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_UP);
+
+	pad.dPadDown.wasDown = pad.dPadDown.isDown;
+	pad.dPadDown.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+
+	pad.dPadLeft.wasDown = pad.dPadLeft.isDown;
+	pad.dPadLeft.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+
+	pad.dPadRight.wasDown = pad.dPadRight.isDown;
+	pad.dPadRight.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
+
+	pad.start.wasDown = pad.start.isDown;
+	pad.start.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_START);
+
+	pad.select.wasDown = pad.select.isDown;
+	pad.select.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_BACK);
+
+	pad.buttonA.wasDown = pad.select.isDown;
+	pad.buttonA.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_A);
+
+	pad.buttonB.wasDown = pad.select.isDown;
+	pad.buttonB.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_B);
+
+	pad.buttonX.wasDown = pad.select.isDown;
+	pad.buttonX.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_X);
+
+	pad.buttonY.wasDown = pad.select.isDown;
+	pad.buttonY.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_Y);
+
+	pad.leftShoulder.wasDown = pad.select.isDown;
+	pad.leftShoulder.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
+
+	pad.rightShoulder.wasDown = pad.select.isDown;
+	pad.rightShoulder.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
+
+}
+
 std::vector<Command*> InputManager::getGamePadCommand(GamePad& pad) {
 	std::vector<Command*> commands;
 
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_A)) commands.push_back(pad.iButton_A);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_B))  commands.push_back(pad.iButton_B);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_X))  commands.push_back(pad.iButton_X);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_Y))  commands.push_back(pad.iButton_Y);
+	if (pad.buttonA.isDown) commands.push_back(pad.iButton_A);
+	if (pad.buttonB.isDown)  commands.push_back(pad.iButton_B);
+	if (pad.buttonX.isDown)  commands.push_back(pad.iButton_X);
+	if (pad.buttonY.isDown)  commands.push_back(pad.iButton_Y);
 
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN))  commands.push_back(pad.iButton_DOWN);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_UP))  commands.push_back(pad.iButton_UP);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))  commands.push_back(pad.iButton_RIGHT);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  commands.push_back(pad.iButton_LEFT);
-	
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSTICK))  commands.push_back(pad.iButton_L3);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSTICK))  commands.push_back(pad.iButton_R3);
+	if (pad.dPadDown.isDown)  commands.push_back(pad.iButton_DOWN);
+	if (pad.dPadUp.isDown)  commands.push_back(pad.iButton_UP);
+	if (pad.dPadRight.isDown)  commands.push_back(pad.iButton_RIGHT);
+	if (pad.dPadLeft.isDown)  commands.push_back(pad.iButton_LEFT);
 
 	// also is commented the 'new' line 27
 	//if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_BACK))  commands.push_back(pad.iButton_SELECT);
 	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_START))  commands.push_back(pad.iButton_START);
+
 	
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))  commands.push_back(pad.iButton_LB);
-	if (SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))  commands.push_back(pad.iButton_RB);
+	if (pad.leftShoulder.isDown)  commands.push_back(pad.iButton_LB);
+	if (pad.rightShoulder.isDown)  commands.push_back(pad.iButton_RB);
 
 	return commands;
 }
 
-bool InputManager::isKeyPressed(GamePad& pad, SDL_GameControllerButton keyID) {
-	if (SDL_GameControllerGetButton(pad.gameController, keyID) &&
-		!wasKeyDown(keyID)) {
+bool InputManager::isKeyPressed(GamePadButtonState keyID) {
+	if (keyID.isDown && !keyID.wasDown) {
 		return true;
 	}
 	return false;

@@ -40,6 +40,7 @@ public:
 	// Getters
 	Vertex* getMesh();
 	GameObject getGameObject();
+	OBJ getOBJ();
 	int getNumVertices();
 	Material getMaterial();
 	btCollisionObject& getCollisionObject();

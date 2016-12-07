@@ -75,7 +75,7 @@ This is actualy a two dimensional array because each vertex can hold several tex
 }
 
 OBJ Geometry::LoadModelFromFile(std::string file) {
-	float xMin = 5000, xMax = 0, yMin = 50000, yMax = 0;
+	float xMin = 5000, xMax = 0, yMin = 50000, yMax = 0, zMin = 50000, zMax = 0;
 	glm::vec3 currentVertex;
 	// read the file and add the vertex and the faces into the object
 	OBJ object = FileReader::LoadOBJFromFile(file);
@@ -100,30 +100,39 @@ OBJ Geometry::LoadModelFromFile(std::string file) {
 	} catch (std::exception e) {
 		std::cerr << "ERROR: " << iDebug << " i " << e.what() << std::endl;
 	}
+
 	// We only need to know the vertex, the faces don't 
 	for (int i = 0; i < object.vertexs.size(); i++) {
 		currentVertex = object.vertexs.at(i);
-		if (currentVertex.z < 1) {
-			// X 
-			if (currentVertex.x > xMax) {
-				xMax = currentVertex.x;
-			}
-			if (currentVertex.x < xMin) {
-				xMin = currentVertex.x;
-			}
-			// Y
-			if (currentVertex.y > yMax) {
-				yMax = currentVertex.y;
-			}
-			if (currentVertex.y < yMin) {
-				yMin = currentVertex.y;
-			}
+		// X 
+		if (currentVertex.x > xMax) {
+			xMax = currentVertex.x;
 		}
+		if (currentVertex.x < xMin) {
+			xMin = currentVertex.x;
+		}
+		// Y
+		if (currentVertex.y > yMax) {
+			yMax = currentVertex.y;
+		}
+		if (currentVertex.y < yMin) {
+			yMin = currentVertex.y;
+		}
+		// Z
+		if (currentVertex.z > zMax) {
+			zMax = currentVertex.z;
+		}
+		if (currentVertex.z < zMin) {
+			zMin = currentVertex.z;
+		}
+
 	}
 	object.width.x = xMin;
 	object.width.y = xMax;
 	object.lenght.x = yMin;
 	object.lenght.y = yMax;
+	object.high.x = zMin;
+	object.high.y = zMax;
 
 	return object;
 }

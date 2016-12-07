@@ -64,6 +64,10 @@ GameObject Entity::getGameObject() {
 	return eGameObject;
 }
 
+OBJ Entity::getOBJ() {
+	return eMesh;
+}
+
 Material Entity::getMaterial() {
 	return eMaterial;
 }

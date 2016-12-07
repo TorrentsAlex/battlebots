@@ -11,17 +11,25 @@ void OptionsScreen::init() {
 	
 	 BManager.setButtons(OptionButtons);
 	 BManager.init();
+
+	 gamePad = new GamePad();
+	 gamePad->gameController = SDL_GameControllerOpen(0);
 }
 
 void OptionsScreen::input() {
+	// update the gamepad state
+	InputManager::Instance().handleInput(*gamePad);
 
-	if (InputManager::Instance().isKeyPressed(SDLK_UP)) {
+	if (InputManager::Instance().isKeyPressed(SDLK_UP) || 
+		InputManager::Instance().isKeyPressed(gamePad->dPadUp)) {
 		BManager.upButton();
 	}
-	if (InputManager::Instance().isKeyPressed(SDLK_DOWN)) {
+	if (InputManager::Instance().isKeyPressed(SDLK_DOWN) ||
+		InputManager::Instance().isKeyPressed(gamePad->dPadDown)) {
 		BManager.downButton();
 	}
-	if (InputManager::Instance().isKeyPressed(SDLK_RETURN)) {
+	if (InputManager::Instance().isKeyPressed(SDLK_RETURN) ||
+		InputManager::Instance().isKeyPressed(gamePad->buttonA)) {
 		string currentButton = BManager.getCurrentButton();
 
 		if (currentButton.compare("1920x1080") == 0) {
@@ -76,5 +84,7 @@ void OptionsScreen::render() {
 }
 
 void OptionsScreen::clean() {
-
+	SDL_GameControllerClose(gamePad->gameController);
+	gamePad->clean();
+	delete gamePad;
 }

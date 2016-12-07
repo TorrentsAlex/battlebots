@@ -2,11 +2,10 @@
 
 #include "GamePad.h"
 
-Character::Character():
-	maxDashVelocity(6) {
+Character::Character() {
 	rGamePad = new GamePad();
 
-	vectorForward = glm::vec3(0, 1, 0);
+	vectorForward = glm::vec3(1, 0, 0);
 	currentState = STATE::IDLE;
 }
 
@@ -22,6 +21,12 @@ void Character::clean() {
 }
 
 void Character::update() {
+	btTransform transform = collisionObject->getWorldTransform();
+
+	btVector3 origin = transform.getOrigin();
+	float x = origin.getX();
+	float y = origin.getY();
+
 	switch (currentState) {
 	case IDLE:
 		currentVelocity = 0;
@@ -46,8 +51,11 @@ void Character::update() {
 		if (currentVelocity <= maxVelocity) {
 			currentVelocity += acceleration;
 		}
-		eGameObject._translate.x += vectorForward.x * currentVelocity;
-		eGameObject._translate.y += vectorForward.y * currentVelocity;
+		x += vectorForward.x * currentVelocity;
+		y += vectorForward.y * currentVelocity;
+
+		transform.setOrigin(btVector3(x, y, origin.getZ()));
+		collisionObject->setWorldTransform(transform);
 		currentState = STATE::IDLE;
 
 		break;
@@ -136,21 +144,21 @@ void Character::dash() {
 }
 
 void Character::shoot() {
-	Json::Reader reader;
+	//Json::Reader reader;
 
-	string jsonString = FileReader::LoadStringFromFile("./resources/scenes/character_values.json");
-	Json::Value jsonValues;
+	//string jsonString = FileReader::LoadStringFromFile("./resources/scenes/character_values.json");
+	//Json::Value jsonValues;
 
-	reader.parse(jsonString, jsonValues);
-	acceleration = jsonValues["walking"]["acceleration"].asFloat();
-	maxVelocity = jsonValues["walking"]["max_velocity"].asFloat();
+	//reader.parse(jsonString, jsonValues);
+	//acceleration = jsonValues["walking"]["acceleration"].asFloat();
+	//maxVelocity = jsonValues["walking"]["max_velocity"].asFloat();
 
-	dashAcceleration = jsonValues["dash"]["acceleration"].asFloat();
-	maxDashVelocity = jsonValues["dash"]["max_velocity"].asFloat();
+	//dashAcceleration = jsonValues["dash"]["acceleration"].asFloat();
+	//maxDashVelocity = jsonValues["dash"]["max_velocity"].asFloat();
 
-	dashCooldown = jsonValues["dash_cooldown"].asFloat();
+	//dashCooldown = jsonValues["dash_cooldown"].asFloat();
 
-	cout << "Character values readed and saved!!" << endl;
+	//cout << "Character values readed and saved!!" << endl;
 }
 
 void Character::refill() {

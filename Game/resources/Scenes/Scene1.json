@@ -7,16 +7,19 @@
 		"texture": "./resources/images/terrain_green.png",
 		"material" : "./resources/materials/metal.json"
 	},
-	"decoration" : {
-		"object" : "./resources/objects/menu_billboard.obj",
-		"texture" : "./resources/images/buttons/billboard_txt.jpg",
-		"position" :{
-			"x" : 0,
-			"y" : 0,
-			"z" : 0
-		},
+	"decoration" : [
+		{
+			"object" : "./resources/objects/menu_billboard.obj",
+			"texture" : "./resources/images/buttons/billboard_txt.jpg",
+			"texture_specular" : "",
+			"position" :{
+				"x" : 0,
+				"y" : 0,
+				"z" : 0
+			},
 		"material" : "./resources/materials/metal.json"
-	},
+		}
+	],
 	"lights" : [
 		"./resources/materials/lights/directional_white.json"
 	]

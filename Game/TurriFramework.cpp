@@ -40,6 +40,7 @@ void TurriFramework::update() {
 // Render methods
 void TurriFramework::startRender() {
 	tOpenGL.start();
+	tOpenGL.setFillOrWireframe(POLYGONMODE::FILL);
 }
 
 void TurriFramework::stopRender() {
@@ -63,6 +64,58 @@ void TurriFramework::disableLights() {
 	tOpenGL.sceneWithLights(false);
 }
 
+void TurriFramework::renderEntityWithBullet(Entity entity) {
+	tOpenGL.sendMaterial(entity.getMaterial());
+
+	btVector3 transform = entity.getCollisionObject().getWorldTransform().getOrigin();
+	float x = transform.getX();
+	float y = transform.getY();
+	float z = transform.getZ();
+	GameObject gameObject;
+	gameObject._translate = glm::vec3(x, y, z);
+	gameObject._angle = 0;
+	gameObject._scale = glm::vec3(1,1,1);
+
+	tOpenGL.sendObject(entity.getMesh(), gameObject, entity.getNumVertices());
+	clearMaps();
+}
+
+void TurriFramework::renderCube(OBJ cube, GameObject gameObject) {
+	tOpenGL.setFillOrWireframe(POLYGONMODE::WIREFRAME);
+
+	tOpenGL.sendObject(cube.mesh, gameObject, cube.numVertices);
+}
+
+void TurriFramework::renderCubeAt(OBJ cube, GameObject gameObject, Material material) {
+
+	tOpenGL.sendMaterial(material);
+	renderCube(cube, gameObject);
+	tOpenGL.unbindMaps();
+}
+
+void TurriFramework::renderCubeAt(OBJ cube, const btCollisionObject &object, Material material) {
+
+	btVector3 transform = object.getWorldTransform().getOrigin();
+	float x = transform.getX();
+	float y = transform.getY();
+	float z = transform.getZ();
+	const btCollisionShape *shape = object.getCollisionShape();
+	
+	btTransform *shapeTransform = new btTransform();
+	btVector3 *aabbMin = new btVector3, *aabbMax = new btVector3();
+	shape->getAabb(*shapeTransform, *aabbMin, *aabbMax);
+
+	GameObject gameObject;
+	gameObject._translate = glm::vec3(x, y, z);
+	gameObject._angle = 0;
+	gameObject._scale = glm::vec3(1, 1, 1);
+	//gameObject._scale = glm::vec3(aabbMax->getX() - aabbMin->getX(), aabbMax->getY() - aabbMin->getY(), aabbMax->getZ() - aabbMin->getZ());
+
+	tOpenGL.sendMaterial(material);
+	renderCube(cube, gameObject);
+	tOpenGL.unbindMaps();
+}
+
 void TurriFramework::renderEntity(Entity entity) {
 	
 	tOpenGL.sendMaterial(entity.getMaterial());
@@ -78,15 +131,16 @@ void TurriFramework::renderScene(Scene scene) {
 
 	clearMaps();
 
-	// Decoration
-	vector<Entity> vectorDecoration = scene.getDecoration();
+	//// Decoration
+	//vector<Entity> vectorDecoration = scene.getDecoration();
 
-	tOpenGL.sendMaterial(vectorDecoration.at(0).getMaterial());
-	for (Entity nextDecoration : vectorDecoration) {
-		tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
-	}
+	//for (Entity nextDecoration : vectorDecoration) {
+	//	tOpenGL.sendMaterial(nextDecoration.getMaterial());
+	//	tOpenGL.sendObject(nextDecoration.getMesh(), nextDecoration.getGameObject(), nextDecoration.getNumVertices());
+	//	clearMaps();
+	//}
 
-	clearMaps();
+	//clearMaps();
 }
 
 // send Camera values
@@ -131,24 +185,31 @@ glm::vec3 TurriFramework::getCameraPosition() {
 	return tCamera.getPosition();
 }
 
-// Input methods
-void TurriFramework::executeInput(Character& character) {
-	// Joystick
-	std::vector<JoystickCommand*> joystickComm = InputManager::Instance().getGamePadJoysticks(*character.getGamePad());
-	for (JoystickCommand* jcom : joystickComm) {
-		if (jcom) {
-			jcom->execute(character);
-		}
-	}
-	// Buttons
-	std::vector<Command*> commands = InputManager::Instance().getGamePadCommand(*character.getGamePad());
-	for (Command* com : commands) {
-		if (com) {
-			com->execute(character);
-		}
-	}
+void TurriFramework::moveCameraWithKeyboard() {
+	glm::vec3 cameraPos = tCamera.getPosition();
 
+	if (InputManager::Instance().isKeyDown(SDLK_q)) {
+		cameraPos.y += 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_e)) {
+		cameraPos.y -= 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_w)) {
+		cameraPos.z += 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_s)) {
+		cameraPos.z -= 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_a)) {
+		cameraPos.x -= 1;
+	}
+	if (InputManager::Instance().isKeyDown(SDLK_d)) {
+		cameraPos.x += 1;
+	}
+	tCamera.setCameraPosition(cameraPos);
 }
+
+// Input methods
 
 // Finish the game loop
 void TurriFramework::quit() {
@@ -157,13 +218,3 @@ void TurriFramework::quit() {
 
 
 
-
-
-
-// Bullet simulation
-
-void TurriFramework::stepBulletSimulation() {
-	//float current
-	// calculate frame date and 
-	// bulletphysics step simulation
-}

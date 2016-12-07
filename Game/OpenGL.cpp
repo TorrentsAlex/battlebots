@@ -4,7 +4,6 @@
 * Constructor
 */
 OpenGL::OpenGL() :gVAO(0), gVBO(0), _programID(0), _numAttributes(0) {
-
 }
 
 /*
@@ -70,27 +69,10 @@ void OpenGL::initializeVertexArrayObject() {
 	glEnableVertexAttribArray(getAttribLocation("vertexUV"));
 	glEnableVertexAttribArray(getAttribLocation("vertexNormal"));
 
-	//Point Opengl to the data in our VBO
-	/* The vertexPosition attribute refers to the 3D position
-	The first argument is the shader variable that the data should be sent to
-	The second argument, 3, says that each vertex has three numbers
-	The third argument, GL_FLOAT, says that the three numbers are GLfloats
-	The fourth argument, GL_FALSE, says that we do not want the floats to be "normalized." If they were normalized, they would be restricted to having a minimum of zero, and a maximum of one. We don't want that restriction on our points, which is why this argument is false.
-	The fifth argument, sizeof(Vertex), says that the information in the buffer vertex object will be composed by elements of the type Vertex
-	The sixth argument, (void*)offsetof(Vertex, position), says where starts this kind of information in the vertex buffer object
-	*/
+
 	glVertexAttribPointer(getAttribLocation("vertexPosition"), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 
-	/* The vertexUV attribute refers to the uv positions of the texture
-	The first argument is the shader variable that the data should be sent to
-	The second argument, 2, says that each vertex has the UV positions
-	The third argument, GL_FLOAT, says that the three numbers are GLfloats
-	The fourth argument, GL_FALSE, says that we do not want the floats to be "normalized." If they were normalized, they would be restricted to having a minimum of zero, and a maximum of one. We don't want that restriction on our points, which is why this argument is false.
-	The fifth argument, sizeof(Vertex), says that the information in the buffer vertex object will be composed by elements of the type Vertex
-	The sixth argument, (void*)offsetof(Vertex, uv), says where starts this kind of information in the vertex buffer object
-	*/
 	glVertexAttribPointer(getAttribLocation("vertexUV"), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
-
 
 	glVertexAttribPointer(getAttribLocation("vertexNormal"), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
@@ -125,6 +107,13 @@ void OpenGL::sendDataToGPU(Vertex * data, int numVertices) {
 
 }
 
+void OpenGL::fillMode() {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void OpenGL::wireFrameMode() {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+}
 // SHADERS
 
 

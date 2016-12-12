@@ -153,12 +153,6 @@
     <ClCompile Include="jsoncpp.cpp">
       <Filter>Engine\Utils\JSON</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Engine\Utils\Volumes</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Engine\Utils\Volumes</Filter>
-    </ClCompile>
     <ClCompile Include="MaterialManager.cpp">
       <Filter>Engine\Systems\Textures</Filter>
     </ClCompile>
@@ -203,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="WorldObjects.cpp">
       <Filter>Game\Systems\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionDetector.cpp">
-      <Filter>Engine\Systems\Physics</Filter>
     </ClCompile>
     <ClCompile Include="CollisionCallback.cpp" />
   </ItemGroup>
@@ -279,12 +270,6 @@
     <ClInclude Include="json\json-forwards.h">
       <Filter>Engine\Utils\JSON</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Engine\Utils\Volumes</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Engine\Utils\Volumes</Filter>
-    </ClInclude>
     <ClInclude Include="MaterialManager.h">
       <Filter>Engine\Systems\Textures</Filter>
     </ClInclude>
@@ -341,9 +326,6 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionDetector.h">
-      <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
     <ClInclude Include="WorldObjects.h">
       <Filter>Game\Systems\Entities</Filter>

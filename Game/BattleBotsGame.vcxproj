@@ -166,12 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArenaScreen.cpp" />
-    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionCallback.cpp" />
-    <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="ErrorManagement.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -196,7 +194,6 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneCreator.cpp" />
     <ClCompile Include="WorldObjects.cpp" />
-    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TextManager.cpp" />
@@ -209,12 +206,10 @@
     <ClInclude Include="ArenaScreen.h" />
     <ClInclude Include="AxisCommand.h" />
     <ClInclude Include="BaseScreen.h" />
-    <ClInclude Include="Box.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionCallback.h" />
-    <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="ErrorManagement.h" />
@@ -244,7 +239,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneCreator.h" />
     <ClInclude Include="WorldObjects.h" />
-    <ClInclude Include="Sphere.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="TextManager.h" />

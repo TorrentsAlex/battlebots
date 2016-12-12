@@ -249,7 +249,7 @@ void WorldObjects::render() {
 	TurriFramework::Instance().renderEntity(currentScene->getSkyBox());
 	
 	// Render wireframes
-//#if debug
+#if _DEBUG
 	for (Entity decor : currentScene->getDecoration()) {
 		TurriFramework::Instance().renderCubeAt(unitCube, decor.getCollisionObject(), cubeMaterial);
 
@@ -265,8 +265,7 @@ void WorldObjects::render() {
 	if (player4->inGame) {
 		TurriFramework::Instance().renderEntity(*player4);
 	}*/
-
-//#endif
+#endif
 
 	TurriFramework::Instance().stopRender();
 

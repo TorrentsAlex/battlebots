@@ -12,12 +12,22 @@ Entity::~Entity() {
 Entity::Entity(OBJ mesh, GameObject gameObject) {
 	eMesh = mesh;
 	eGameObject = gameObject;
-
+	calculateVolume();
 }
+
+// Private Methods
+
+void Entity::calculateVolume() {
+	eWidthVolume = eMesh.width.y - eMesh.width.x;
+	eHightVolume = eMesh.lenght.y - eMesh.lenght.x;
+	eHeightVolume = eMesh.high.y - eMesh.high.x;
+}
+
 
 // Setters
 void Entity::setOBJ(OBJ mesh) {
 	eMesh = mesh;
+	calculateVolume();
 }
 
 void Entity::setGameObject(GameObject gameObject) {
@@ -100,4 +110,8 @@ GLuint Entity::getTextureId() {
 glm::vec4 Entity::getRotation() {
 	glm::vec4 rotation(eGameObject._rotation, eGameObject._angle);
 	return rotation;
+}
+
+glm::vec3 Entity::getCollisionVolume() {
+	return glm::vec3(eWidthVolume, eHightVolume, eHeightVolume);
 }

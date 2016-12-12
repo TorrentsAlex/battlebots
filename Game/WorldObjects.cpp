@@ -10,15 +10,6 @@ WorldObjects::WorldObjects() {
 	player2 = new Character();
 	player3 = new Character();
 	player4 = new Character();
-
-	unitCube = Geometry::LoadModelFromFile("./resources/objects/cube.obj");
-	cubeMaterial.textureMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
-	cubeMaterial.ambient = glm::vec3(0.25, 0.20725, 0.20725);
-	cubeMaterial.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
-	cubeMaterial.specular = glm::vec3(0.25, 0.20725, 0.20725);
-	cubeMaterial.shininess = 4;
-
-	debug = true;
 }
 
 void WorldObjects::clean() {
@@ -99,12 +90,10 @@ void WorldObjects::setCollisionsToWorld() {
 	{
 		// Add character 1
 		btCollisionObject* collObject = new btCollisionObject();
+		glm::vec3 volume = player1->getCollisionVolume();
 
 		// widht, height and hight
-		btScalar widht = player1->getOBJ().width.y - player1->getOBJ().width.x;
-		btScalar height = player1->getOBJ().lenght.y - player1->getOBJ().lenght.x;
-		btScalar hight = player1->getOBJ().high.y - player1->getOBJ().high.x;
-		btCollisionShape* colShape = new btBoxShape(btVector3(widht, height, widht/2));
+		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
 
 		collObject->setCollisionShape(colShape);
 		// add to world
@@ -143,10 +132,8 @@ void WorldObjects::setCollisionsToWorld() {
 		for (Entity decor : currentScene->getDecoration()) {
 
 			// widht, height and hight
-			btScalar widht = decor.getOBJ().width.y - decor.getOBJ().width.x;
-			btScalar height = decor.getOBJ().lenght.y - decor.getOBJ().lenght.x;
-			btScalar hight = decor.getOBJ().high.y - decor.getOBJ().high.x;
-			btCollisionShape* colShape = new btBoxShape(btVector3(widht, height, hight));
+			glm::vec3 volume = decor.getCollisionVolume();
+			btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
 
 			// add to world
 			collisionShapes.push_back(colShape);
@@ -251,10 +238,10 @@ void WorldObjects::render() {
 	// Render wireframes
 #if _DEBUG
 	for (Entity decor : currentScene->getDecoration()) {
-		TurriFramework::Instance().renderCubeAt(unitCube, decor.getCollisionObject(), cubeMaterial);
+		TurriFramework::Instance().renderCubeAt(&decor);
 
 	}	if (player1->inGame) {
-		TurriFramework::Instance().renderCubeAt(unitCube, player1->getCollisionObject(), cubeMaterial);
+		TurriFramework::Instance().renderCubeAt(player1);
 	}
 	/*if (player2->inGame) {
 		TurriFramework::Instance().renderEntity(*player2);

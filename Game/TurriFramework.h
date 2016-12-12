@@ -30,7 +30,10 @@ private:
 
 	void clearMaps();
 
-	void renderCube(OBJ cube, GameObject gameObject);
+	void renderCube(GameObject* gameObject);
+
+	OBJ unitCube;
+	Material cubeMaterial;
 
 public:
 
@@ -57,8 +60,8 @@ public:
 	void renderEntity(Entity entity);
 	void renderEntityWithBullet(Entity entity);
 
-	void renderCubeAt(OBJ cube, GameObject gameObject, Material material);
-	void renderCubeAt(OBJ cube, const btCollisionObject &object, Material material);
+	void renderCubeAt(GameObject* gameObject);
+	void renderCubeAt(Entity* entity);
 
 	void renderScene(Scene scene);
 

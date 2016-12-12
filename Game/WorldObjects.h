@@ -4,7 +4,6 @@
 class WorldObjects: WorldCollision {
 private:
 
-	bool debug;
 
 	WorldObjects();
 
@@ -20,8 +19,6 @@ private:
 	glm::vec2 minLimits;
 	std::vector<Character*> playersToRender;
 	
-	OBJ unitCube;
-	Material cubeMaterial;
 	void collisionDetection();
 
 	void executeInput(Character& character);

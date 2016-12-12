@@ -18,6 +18,13 @@ protected:
 
 	btCollisionObject* collisionObject;
 
+	btScalar eWidthVolume; // X 
+	btScalar eHightVolume; // Y 
+	btScalar eHeightVolume; // Z
+
+private:
+	void calculateVolume();
+
 public:
 	Entity();
 	Entity(OBJ mesh, GameObject gameObject);
@@ -49,6 +56,8 @@ public:
 	float getXPosition();
 	float getYPosition();
 	glm::vec3 getScale();
+
+	glm::vec3 getCollisionVolume();
 
 	// x y z angle
 	glm::vec4 getRotation();

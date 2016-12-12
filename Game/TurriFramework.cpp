@@ -18,6 +18,14 @@ void TurriFramework::init(string name, int screenWidth, int screenheight, bool e
 	tCamera.setPerspectiveCamera();
 	tCamera.setViewMatrix();
 	running = true;
+
+	//  init Cube for debug collisions
+	unitCube = Geometry::LoadModelFromFile("./resources/objects/cube.obj");
+	cubeMaterial.textureMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
+	cubeMaterial.ambient = glm::vec3(0.25, 0.20725, 0.20725);
+	cubeMaterial.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
+	cubeMaterial.specular = glm::vec3(0.25, 0.20725, 0.20725);
+	cubeMaterial.shininess = 4;
 }
 
 bool TurriFramework::isRunning() {
@@ -80,39 +88,35 @@ void TurriFramework::renderEntityWithBullet(Entity entity) {
 	clearMaps();
 }
 
-void TurriFramework::renderCube(OBJ cube, GameObject gameObject) {
+void TurriFramework::renderCube(GameObject* gameObject) {
 	tOpenGL.setFillOrWireframe(POLYGONMODE::WIREFRAME);
 
-	tOpenGL.sendObject(cube.mesh, gameObject, cube.numVertices);
+	tOpenGL.sendObject(unitCube.mesh, *gameObject, unitCube.numVertices);
 }
 
-void TurriFramework::renderCubeAt(OBJ cube, GameObject gameObject, Material material) {
+void TurriFramework::renderCubeAt(GameObject* gameObject) {
 
-	tOpenGL.sendMaterial(material);
-	renderCube(cube, gameObject);
+	tOpenGL.sendMaterial(cubeMaterial);
+	renderCube(gameObject);
 	tOpenGL.unbindMaps();
 }
 
-void TurriFramework::renderCubeAt(OBJ cube, const btCollisionObject &object, Material material) {
+void TurriFramework::renderCubeAt(Entity* entity) {
 
-	btVector3 transform = object.getWorldTransform().getOrigin();
+	btVector3 transform = entity->getCollisionObject().getWorldTransform().getOrigin();
 	float x = transform.getX();
 	float y = transform.getY();
 	float z = transform.getZ();
-	const btCollisionShape *shape = object.getCollisionShape();
 	
-	btTransform *shapeTransform = new btTransform();
-	btVector3 *aabbMin = new btVector3, *aabbMax = new btVector3();
-	shape->getAabb(*shapeTransform, *aabbMin, *aabbMax);
-
+	glm::vec3 scale = entity->getCollisionVolume();
+	
 	GameObject gameObject;
 	gameObject._translate = glm::vec3(x, y, z);
 	gameObject._angle = 0;
-	gameObject._scale = glm::vec3(1, 1, 1);
-	//gameObject._scale = glm::vec3(aabbMax->getX() - aabbMin->getX(), aabbMax->getY() - aabbMin->getY(), aabbMax->getZ() - aabbMin->getZ());
+	gameObject._scale = glm::vec3(scale.x, scale.y, scale.z);
 
-	tOpenGL.sendMaterial(material);
-	renderCube(cube, gameObject);
+	tOpenGL.sendMaterial(cubeMaterial);
+	renderCube(&gameObject);
 	tOpenGL.unbindMaps();
 }
 

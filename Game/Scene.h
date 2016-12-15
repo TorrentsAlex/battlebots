@@ -3,6 +3,12 @@
 #include "Entity.h"
 
 #include "Light.h"
+
+struct DecorObjects {
+	Entity* e;
+	vector<GameObject> g;
+};
+
 class Scene {
 private:
 	Entity sSkybox;
@@ -17,6 +23,7 @@ public:
 	Scene();
 	~Scene();
 	
+	vector<DecorObjects> listObjects;
 	// Setters
 	void setSkyBox(OBJ object, GLuint texture);
 	void setTerrain(OBJ object, GLuint texture, Material material);

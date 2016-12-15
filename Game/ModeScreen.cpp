@@ -20,7 +20,7 @@ void ModeScreen::render() {
 	TurriFramework::Instance().renderCamera();
 
 
-	TurriFramework::Instance().renderScene(modeScreen);
+	//TurriFramework::Instance().renderScene(modeScreen);
 	TurriFramework::Instance().stopRender();
 	// Mode Selector
 	// RENDER

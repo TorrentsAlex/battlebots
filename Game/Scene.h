@@ -7,6 +7,7 @@
 struct DecorObjects {
 	Entity* e;
 	vector<GameObject> g;
+	vector<btCollisionObject>* b;
 };
 
 class Scene {

@@ -120,25 +120,26 @@ void TurriFramework::renderCubeAt(Entity* entity) {
 	tOpenGL.unbindMaps();
 }
 
-void TurriFramework::renderEntity(Entity entity) {
+void TurriFramework::renderEntity(Entity* entity) {
 	
-	tOpenGL.sendMaterial(entity.getMaterial());
-	tOpenGL.sendObject(entity.getMesh(), entity.getGameObject(), entity.getNumVertices());
+	tOpenGL.sendMaterial(entity->getMaterial());
+	tOpenGL.sendObject(entity->getMesh(), entity->getGameObject(), entity->getNumVertices());
 	clearMaps();
 }
 
-void TurriFramework::renderScene(Scene scene) {
+void TurriFramework::renderScene(Scene* scene) {
 	// Terrain
-	Entity terrain = scene.getTerrain();
+	Entity terrain = scene->getTerrain();
 	tOpenGL.sendMaterial(terrain.getMaterial());
 	tOpenGL.sendObject(terrain.getMesh(), terrain.getGameObject(), terrain.getNumVertices());
 
 	clearMaps();
 
-	for (DecorObjects decor : scene.listObjects) {
+	for (DecorObjects decor : scene->listObjects) {
 		tOpenGL.sendMaterial(decor.e->getMaterial());
 
 		for (GameObject gameObject : decor.g) {
+
 			tOpenGL.sendObject(decor.e->getMesh(), gameObject, decor.e->getNumVertices());
 
 		}

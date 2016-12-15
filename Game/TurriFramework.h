@@ -57,13 +57,13 @@ public:
 	void startRender();
 	void stopRender();
 
-	void renderEntity(Entity entity);
+	void renderEntity(Entity* entity);
 	void renderEntityWithBullet(Entity entity);
 
 	void renderCubeAt(GameObject* gameObject);
 	void renderCubeAt(Entity* entity);
 
-	void renderScene(Scene scene);
+	void renderScene(Scene* scene);
 
 	void renderLights(vector<Light> lights);
 	void disableLights();

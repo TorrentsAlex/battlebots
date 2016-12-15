@@ -11,7 +11,7 @@ int main(int argc, char ** argv) {
 	// Hide the command line
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-	TurriFramework::Instance().init("BattleBots", 1280, 800, false, 80, true);
+	TurriFramework::Instance().init("BattleBots", 1280, 800, false, 60, true);
 
 	GameController::Instance().init();
 	try {

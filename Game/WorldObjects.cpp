@@ -94,7 +94,7 @@ void WorldObjects::setCollisionsToWorld() {
 
 		// widht, height and hight
 		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
-
+		
 		collObject->setCollisionShape(colShape);
 		// add to world
 		collisionShapes.push_back(colShape);
@@ -111,7 +111,7 @@ void WorldObjects::setCollisionsToWorld() {
 			colShape->calculateLocalInertia(mass, localInertia);
 
 		startTransform.setOrigin(btVector3(0, 0, volume.z/2.0f));
-
+		
 		// Add transform to my object
 		collObject->setWorldTransform(startTransform);
 
@@ -120,7 +120,7 @@ void WorldObjects::setCollisionsToWorld() {
 		btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
 		btRigidBody* body = new btRigidBody(rbInfo1);
 		//body->setLinearFactor(btVector3(1, 1, 0));
-
+		//body->setCollisionFlags(btCollisionObject::CollisionFlags::CF_CHARACTER_OBJECT);
 		wDynamicWorld->addRigidBody(body);
 		btCollisionShape* collShape;
 
@@ -141,7 +141,7 @@ void WorldObjects::setCollisionsToWorld() {
 			btTransform startTransform;
 			startTransform.setIdentity();
 
-			btScalar	mass(0.0f);
+			btScalar	mass(10.0f);
 
 			//rigidbody is dynamic if and only if mass is non zero, otherwise static
 			bool isDynamic = (mass != 0.f);
@@ -159,8 +159,9 @@ void WorldObjects::setCollisionsToWorld() {
 			btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
 			btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
 			btRigidBody* body = new btRigidBody(rbInfo1);
+			
 			body->setWorldTransform(startTransform);
-			body->setLinearFactor(btVector3(1, 1, 0));
+			//body->setLinearFactor(btVector3(1, 1, 0));
 
 			wDynamicWorld->addRigidBody(body);
 
@@ -214,28 +215,24 @@ void WorldObjects::render() {
 
 	TurriFramework::Instance().renderLights(currentScene->getLights());
 
-	TurriFramework::Instance().renderScene(*currentScene);
-
-	for (Entity decor : currentScene->getDecoration()) {
-		TurriFramework::Instance().renderEntityWithBullet(decor);
-	}
+	TurriFramework::Instance().renderScene(currentScene);
 
 	if (player1->inGame) {
 		TurriFramework::Instance().renderEntityWithBullet(*player1);
 	}
 	if (player2->inGame) {
-		TurriFramework::Instance().renderEntity(*player2);
+		TurriFramework::Instance().renderEntity(player2);
 	}
 	if (player3->inGame) {
-		TurriFramework::Instance().renderEntity(*player3);
+		TurriFramework::Instance().renderEntity(player3);
 	}
 	if (player4->inGame) {
-		TurriFramework::Instance().renderEntity(*player4);
+		TurriFramework::Instance().renderEntity(player4);
 	}
 
 	TurriFramework::Instance().disableLights();
 
-	TurriFramework::Instance().renderEntity(currentScene->getSkyBox());
+	TurriFramework::Instance().renderEntity(&currentScene->getSkyBox());
 	
 	// Render wireframes
 #if _DEBUG

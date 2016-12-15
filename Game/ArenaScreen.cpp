@@ -21,7 +21,7 @@ void ArenaScreen::render() {
 	TurriFramework::Instance().renderCamera();
 
 
-	TurriFramework::Instance().renderScene(arenaScene);
+	TurriFramework::Instance().renderScene(&arenaScene);
 	TurriFramework::Instance().stopRender();
 	// Arena Selector
 	// RENDER

@@ -115,8 +115,13 @@ void Character::movement(glm::vec2 axis) {
 	glm::vec2 forwardRotated = glm::rotate(glm::vec2(1, 0), (float)angle);
 	vectorForward.x = forwardRotated.x;
 	vectorForward.y = forwardRotated.y;
-	eGameObject._angle = angle;
-	//cout << " angle: " << angle << endl;
+	
+	btTransform tr = collisionObject->getWorldTransform();
+	btQuaternion quat;
+	quat.setEuler(0, 0, angle);
+	tr.setRotation(quat);
+
+	collisionObject->setInterpolationWorldTransform(tr);
 }
 
 void Character::rotation(glm::vec2 axis) {
@@ -124,7 +129,7 @@ void Character::rotation(glm::vec2 axis) {
 
 void Character::jump() {
 
-	currentState = JUMPING;
+	//currentState = JUMPING;
 	cout << "jump " << vectorForward.x << "/" << vectorForward.y << endl;
 	//eGameObject._translate.z += jumpPower;
 	

@@ -71,13 +71,13 @@ void OptionsScreen::render() {
 
 	vector<Button> buttons = BManager.getButtons();
 	for (int i = 0; i < buttons.size(); i++) {
-		TurriFramework::Instance().renderEntity(buttons.at(i));
+		TurriFramework::Instance().renderEntity(&buttons.at(i));
 	}
-	TurriFramework::Instance().renderScene(*optionsScene);
+	TurriFramework::Instance().renderScene(optionsScene);
 
 	// Render the skybox without lights
 	TurriFramework::Instance().disableLights();
-	TurriFramework::Instance().renderEntity(optionsScene->getSkyBox());
+	TurriFramework::Instance().renderEntity(&optionsScene->getSkyBox());
 
 
 	TurriFramework::Instance().stopRender();

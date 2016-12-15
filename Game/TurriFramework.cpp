@@ -191,6 +191,10 @@ glm::vec3 TurriFramework::getCameraPosition() {
 
 void TurriFramework::moveCameraWithKeyboard() {
 	glm::vec3 cameraPos = tCamera.getPosition();
+	// Show fps
+	if (InputManager::Instance().isKeyDown(SDLK_f)) {
+		tFPS.showFPS();
+	}
 
 	if (InputManager::Instance().isKeyDown(SDLK_q)) {
 		cameraPos.y += 1;

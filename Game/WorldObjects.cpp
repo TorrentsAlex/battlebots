@@ -101,7 +101,7 @@ void WorldObjects::setCollisionsToWorld() {
 		btTransform startTransform;
 		startTransform.setIdentity();
 
-		btScalar	mass(10000.f);
+		btScalar	mass(200.f);
 
 		//rigidbody is dynamic if and only if mass is non zero, otherwise static
 		bool isDynamic = (mass != 0.f);
@@ -110,7 +110,7 @@ void WorldObjects::setCollisionsToWorld() {
 		if (isDynamic)
 			colShape->calculateLocalInertia(mass, localInertia);
 
-		startTransform.setOrigin(btVector3(0, 0, 40));
+		startTransform.setOrigin(btVector3(0, 0, volume.z/2.0f));
 
 		// Add transform to my object
 		collObject->setWorldTransform(startTransform);
@@ -119,6 +119,7 @@ void WorldObjects::setCollisionsToWorld() {
 		btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
 		btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
 		btRigidBody* body = new btRigidBody(rbInfo1);
+		//body->setLinearFactor(btVector3(1, 1, 0));
 
 		wDynamicWorld->addRigidBody(body);
 		btCollisionShape* collShape;
@@ -140,7 +141,7 @@ void WorldObjects::setCollisionsToWorld() {
 			btTransform startTransform;
 			startTransform.setIdentity();
 
-			btScalar	mass(20.0f);
+			btScalar	mass(0.0f);
 
 			//rigidbody is dynamic if and only if mass is non zero, otherwise static
 			bool isDynamic = (mass != 0.f);
@@ -159,6 +160,7 @@ void WorldObjects::setCollisionsToWorld() {
 			btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
 			btRigidBody* body = new btRigidBody(rbInfo1);
 			body->setWorldTransform(startTransform);
+			body->setLinearFactor(btVector3(1, 1, 0));
 
 			wDynamicWorld->addRigidBody(body);
 
@@ -237,6 +239,7 @@ void WorldObjects::render() {
 	
 	// Render wireframes
 #if _DEBUG
+ 
 	for (Entity decor : currentScene->getDecoration()) {
 		TurriFramework::Instance().renderCubeAt(&decor);
 
@@ -277,18 +280,6 @@ Character* WorldObjects::getPlayerAt(int current) {
 Scene* WorldObjects::getCurrentScene() {
 	return currentScene;
 }
-
-/**
-	These 2 methods are for render the players in game 
-*/
-void WorldObjects::addCharacterToRender(Character& character) {
-	playersToRender.push_back(&character);
-}
-
-void WorldObjects::cleanCharactersToRender() {
-	playersToRender.clear();
-}
-
 
 void WorldObjects::executeInput(Character& character) {
 	// Joystick

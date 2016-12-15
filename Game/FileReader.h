@@ -17,9 +17,7 @@ private:
 	static vector<string> splitString(const string &line, char delim);
 
 public:
-	/**
-	return array of in
-	*/
+	
 	static vector<vector<float>> LoadArrayFromFile(std::string fileName);
 	static vector<glm::vec3> LoadVec3FromFile(std::string fileName);
 
@@ -30,4 +28,5 @@ public:
 	static bool CheckExistFile(string fileName);
 
 	static string LoadStringFromFile(string fileName);
+
 };

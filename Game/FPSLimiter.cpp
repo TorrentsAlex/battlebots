@@ -69,6 +69,10 @@ void FPSLimiter::forceSynchronization() {
 	}
 }
 
+void FPSLimiter::showFPS() {
+	_printFPS = _printFPS ? false : true;
+}
+
 /**
 * Compute the average of the fps based on the last 10 rendered frames 
 */

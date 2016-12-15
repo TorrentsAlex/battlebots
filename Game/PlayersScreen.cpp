@@ -36,22 +36,22 @@ void PlayersScreen::input() {
 		// player 1 in game
 
 
-		WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(0));
+	//	WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(0));
 	}
 	if (InputManager::Instance().isKeyPressed(WorldObjects::Instance().getPlayerAt(1)->getGamePad()->start)) {
 		// player 2 in game
 		WorldObjects::Instance().getPlayerAt(1)->inGame = true;
-		WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(1));
+		//WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(1));
 	}
 	if (InputManager::Instance().isKeyPressed(WorldObjects::Instance().getPlayerAt(2)->getGamePad()->start)) {
 		// player 3 in game
 		WorldObjects::Instance().getPlayerAt(2)->inGame = true;
-		WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(2));
+	//	WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(2));
 	}
 	if (InputManager::Instance().isKeyPressed(WorldObjects::Instance().getPlayerAt(3)->getGamePad()->start)) {
 		// player 4 in game
 		WorldObjects::Instance().getPlayerAt(3)->inGame = true;
-		WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(3));
+		//WorldObjects::Instance().addCharacterToRender(*WorldObjects::Instance().getPlayerAt(3));
 	}
 	
 	// PLAY!!

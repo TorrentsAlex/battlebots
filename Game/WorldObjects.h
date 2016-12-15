@@ -1,7 +1,7 @@
 #pragma once
 #include "WorldCollision.h"
 
-class WorldObjects: WorldCollision {
+class WorldObjects: public WorldCollision {
 private:
 
 
@@ -14,10 +14,7 @@ private:
 
 	Scene* currentScene;
 	Scene* lastScene;
-	
-	glm::vec2 maxLimits;
-	glm::vec2 minLimits;
-	std::vector<Character*> playersToRender;
+
 	
 	void collisionDetection();
 
@@ -37,10 +34,6 @@ public:
 	void handleInputs();
 
 	void setCollisionsToWorld();
-
-	void addCharacterToRender(Character& character);
-	void cleanCharactersToRender();
-	
 
 	Scene* getCurrentScene();
 	Character* getPlayerAt(int current);

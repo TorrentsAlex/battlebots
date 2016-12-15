@@ -15,8 +15,8 @@ OpenGLManagement::~OpenGLManagement() {
 // INIT METHODS
 void OpenGLManagement::initializeShaders() {
 	//Compile the shaders
-	oGLBuffer.addShader(GL_VERTEX_SHADER, "../battlebots/Game/resources/shaders/lvertex-shader.txt");
-	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "../battlebots/Game/resources/shaders/lfragment-shader.txt");
+	oGLBuffer.addShader(GL_VERTEX_SHADER, "./resources/shaders/lvertex-shader.txt");
+	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "./resources/shaders/lfragment-shader.txt");
 	oGLBuffer.compileShaders();
 	//Attributes must be added before linking the code
 	oGLBuffer.addAttribute("vertexPosition");
@@ -173,6 +173,18 @@ void OpenGLManagement::sendLight(std::vector<Light> light) {
 	}
 }
 
+// Change fill mode or LINE
+void OpenGLManagement::setFillOrWireframe(POLYGONMODE mode) {
+	switch (mode) {
+	case POLYGONMODE::FILL:
+		oGLBuffer.fillMode();
+		break;
+	case POLYGONMODE::WIREFRAME:
+		oGLBuffer.wireFrameMode();
+		break;
+	}
+}
+
 // Calculate the transformation of the entity and send to OPENGL
 void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVertices) {
 
@@ -191,28 +203,3 @@ void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVerti
 
 	oGLBuffer.sendDataToGPU(data, numVertices);
 }
-
-// Calculate the transformation of the entity and send to OPENGL
-/*
-void OpenGLManagement::sendObject(Entity entity) {
-	glm::mat4 modelMatrix;
-	glm::mat3 normalMatrix;
-	ObjectTransformation transformation = entity.getTransformation();
-
-	//TODO: Compute its model transformation matrix
-	modelMatrix = glm::translate(modelMatrix, transformation.position);
-	if (transformation.angle != 0) {
-		modelMatrix = glm::rotate(modelMatrix, glm::radians(transformation.angle), transformation.rotation);
-	}
-
-	modelMatrix = glm::scale(modelMatrix, transformation.scale);
-	normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelMatrix)));
-
-	oGLBuffer.sendUniform(uniform_modelMatrix, modelMatrix);
-	oGLBuffer.sendUniform(uniform_modelNormalMatrix, normalMatrix);
-
-	//TODO: Pass the matrix as an uniform 
-	//Send data to GPU
-	oGLBuffer.sendDataToGPU(&entity.getVertexData(), entity.getNumVertices());
-}
-*/

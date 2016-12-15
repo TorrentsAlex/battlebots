@@ -33,4 +33,6 @@ public:
 
 	//Force system to wait in order to sync with the refresh rate
 	void forceSynchronization();
+
+	void showFPS();
 };

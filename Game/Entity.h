@@ -1,22 +1,29 @@
 #pragma once
+
 #include "GameObject.h"
 #include "OBJ.h"
-#include "Sphere.h"
-#include "Box.h"
 #include "TextureManager.h"
 #include "MaterialManager.h"
+
 #include <iostream>
+
+#include <btBulletCollisionCommon.h>
 
 class Entity {
 protected:
 	OBJ eMesh;
 	GameObject eGameObject;
-
-	Sphere eBoundingBox;
-	Box eSquareBoundingBox;
-	bool haveSquareBBox;
 	
 	Material eMaterial;
+
+	btCollisionObject* collisionObject;
+
+	btScalar eWidthVolume; // X 
+	btScalar eHightVolume; // Y 
+	btScalar eHeightVolume; // Z
+
+private:
+	void calculateVolume();
 
 public:
 	Entity();
@@ -27,7 +34,7 @@ public:
 	void setOBJ(OBJ mesh);
 	void setGameObject(GameObject gameObject);
 
-	void setSquareBoundingBox();
+	void setCollisionObject(btCollisionObject*  btObject);
 	
 	void setTextureId(GLuint textureId);
 	void setTextureSpecular(GLuint specularId);
@@ -40,16 +47,18 @@ public:
 	// Getters
 	Vertex* getMesh();
 	GameObject getGameObject();
+	OBJ getOBJ();
 	int getNumVertices();
 	Material getMaterial();
-
-	Sphere getBoundingBox();
-	Box getSquareBoundingBox();
+	btCollisionObject& getCollisionObject();
 
 	glm::vec3 getPosition();
 	float getXPosition();
 	float getYPosition();
 	glm::vec3 getScale();
+
+	glm::vec3 getCollisionVolume();
+
 	// x y z angle
 	glm::vec4 getRotation();
 protected:

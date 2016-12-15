@@ -1,8 +1,10 @@
 #pragma once
-#include "TurriIncludes.h"
+#include "WorldCollision.h"
 
-class WorldObjects {
+class WorldObjects: public WorldCollision {
 private:
+
+
 	WorldObjects();
 
 	Character* player1;
@@ -12,11 +14,8 @@ private:
 
 	Scene* currentScene;
 	Scene* lastScene;
-	
-	glm::vec2 maxLimits;
-	glm::vec2 minLimits;
-	std::vector<Character*> playersToRender;
 
+	
 	void collisionDetection();
 
 	void executeInput(Character& character);
@@ -34,9 +33,7 @@ public:
 	void update();
 	void handleInputs();
 
-	void addCharacterToRender(Character& character);
-	void cleanCharactersToRender();
-	
+	void setCollisionsToWorld();
 
 	Scene* getCurrentScene();
 	Character* getPlayerAt(int current);

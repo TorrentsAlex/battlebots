@@ -1,23 +1,21 @@
 #pragma once
 
-#include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
+#include <btBulletCollisionCommon.h>
+
+#include "TurriIncludes.h"
 
 class WorldCollision {
+protected:
+	WorldCollision();
+	~WorldCollision();
+	btDiscreteDynamicsWorld* wDynamicWorld;
+	btCollisionWorld* wCollisionWorld;
+
 private:
 
-	WorldCollision() {};
-	
-	btDiscreteDynamicsWorld* wDynamicWorld;
-
 public:
-	static WorldCollision& Instance() {
-		static WorldCollision instance;
-		return instance;
-	}
-	WorldCollision(WorldCollision const&) = delete;
-	void operator=(WorldCollision const&) = delete;
-
+	
 	void init();
 
 	void clean();

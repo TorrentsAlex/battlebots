@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TURRI_TURRIFRAMEWORK
+#define TURRI_TURRIFRAMEWORK
 
 #include "Camera.h"
 #include "Window.h"
@@ -8,6 +9,7 @@
 
 #include "Scene.h"
 #include "TurriIncludes.h"
+
 #ifndef M_PI	
 #define M_PI	3.14159265358979323846   // pi
 #endif
@@ -27,6 +29,11 @@ private:
 	bool running;
 
 	void clearMaps();
+
+	void renderCube(GameObject* gameObject);
+
+	OBJ unitCube;
+	Material cubeMaterial;
 
 public:
 
@@ -51,6 +58,11 @@ public:
 	void stopRender();
 
 	void renderEntity(Entity entity);
+	void renderEntityWithBullet(Entity entity);
+
+	void renderCubeAt(GameObject* gameObject);
+	void renderCubeAt(Entity* entity);
+
 	void renderScene(Scene scene);
 
 	void renderLights(vector<Light> lights);
@@ -63,14 +75,13 @@ public:
 	// Camera methods
 	void setCameraPosition(glm::vec3 position);
 	void setCameraLookAt(glm::vec3 lookAt);
+	void moveCameraWithKeyboard();
+
 	glm::vec3 getCameraPosition();
 
 	// Input methods 
 	void quit();
 
 
-	// Bullet
-	void stepBulletSimulation();
-
 };
-
+#endif // !TURRI_TURRIFRAMEWORK;

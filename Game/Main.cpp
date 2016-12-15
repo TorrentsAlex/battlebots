@@ -21,7 +21,6 @@ int main(int argc, char ** argv) {
 			GameController::Instance().input();
 			GameController::Instance().update();
 			// step world bullet physics
-			TurriFramework::Instance().stepBulletSimulation();
 			GameController::Instance().render();
 
 			TurriFramework::Instance().endSync();

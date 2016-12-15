@@ -241,7 +241,7 @@ vector<Button> SceneCreator::createButtons(string file) {
 	int size = json["size"].asInt();
 	OBJ object = Geometry::LoadModelFromFile(json["object"].asString());
 	vector<Button> vectorButtons;
-	GLuint specularMap = TextureManager::Instance().getTextureID("../battlebots/Game/resources/images/back_green.png");
+	GLuint specularMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
 
 	for (int i = 0; i < size; i++) {
 		string currentButton = "button" + std::to_string(i);

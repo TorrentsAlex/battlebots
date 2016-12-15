@@ -3,6 +3,7 @@
 #include <thread>
 
 WorldObjects::WorldObjects() {
+	WorldCollision::init();
 	currentScene = new Scene();
 	lastScene = new Scene();
 	player1 = new Character();
@@ -12,6 +13,7 @@ WorldObjects::WorldObjects() {
 }
 
 void WorldObjects::clean() {
+	WorldCollision::clean();
 	if (player1) {
 		player1->clean();
 		delete player1;
@@ -57,55 +59,123 @@ void WorldObjects::handleInputs() {
 		executeInput(*player4);
 	}
 
-	if (InputManager::Instance().isKeyPressed(SDLK_e)) {
-		Json::Reader reader;
+	TurriFramework::Instance().moveCameraWithKeyboard();
+}
 
-		string jsonString = FileReader::LoadStringFromFile("./resources/materials/lights/pointlight_middle.json");
-		Json::Value json;
-		std::vector<Light> lights = currentScene->getLights();
-		
-		glm::vec3 ambient, diffuse, specular, position;
+void WorldObjects::setCollisionsToWorld() {
+	btAlignedObjectArray<btCollisionShape*> collisionShapes;
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(70.), btScalar(70.), btScalar(10.)));
+	collisionShapes.push_back(groundShape);
 
-		reader.parse(jsonString, json);
-		position.r = json["position"]["x"].asFloat();
-		position.g = json["position"]["y"].asFloat();
-		position.b = json["position"]["z"].asFloat();
+	btTransform groundTransform;
+	groundTransform.setIdentity();
+	groundTransform.setOrigin(btVector3(0, 0, -10));
 
-		ambient.r = json["ambient"]["r"].asFloat();
-		ambient.g = json["ambient"]["g"].asFloat();
-		ambient.b = json["ambient"]["b"].asFloat();
+	btScalar mass(0.);
 
-		diffuse.r = json["diffuse"]["r"].asFloat();
-		diffuse.g = json["diffuse"]["g"].asFloat();
-		diffuse.b = json["diffuse"]["b"].asFloat();
+	//rigidbody is dynamic if and only if mass is non zero, otherwise static
+	bool isDynamic = (mass != 0.f);
 
-		specular.r = json["specular"]["r"].asFloat();
-		specular.g = json["specular"]["g"].asFloat();
-		specular.b = json["specular"]["b"].asFloat();
-		
-		string type = json["type"].asString();
-		if (type.compare("point") == 0) {
-			float constant = json["constant"].asFloat();
-			float linear = json["linear"].asFloat();
-			float quadratic = json["quadratic"].asFloat();
-			lights.at(3).setConstant(constant);
-			lights.at(3).setLinear(linear);
-			lights.at(3).setQuadratic(quadratic);
-		}
-		lights.at(3).setPosition(position);
+	btVector3 localInertia(0, 0, 0);
+	if (isDynamic)
+		groundShape->calculateLocalInertia(mass, localInertia);
 
-		lights.at(3).setPower(json["power"].asFloat());
-		lights.at(3).setType(type);
-		lights.at(3).setAmbient(ambient);
-		lights.at(3).setDiffuse(diffuse);
-		lights.at(3).setSpecular(specular);
+	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
+	btRigidBody* body = new btRigidBody(rbInfo);
 
-		currentScene->setLights(lights);
-		cout << "directional white values readed and saved!!" << endl;
+	//add the body to the dynamics world
+	wDynamicWorld->addRigidBody(body);
+	{
+		// Add character 1
+		btCollisionObject* collObject = new btCollisionObject();
+		glm::vec3 volume = player1->getCollisionVolume();
+
+		// widht, height and hight
+		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+
+		collObject->setCollisionShape(colShape);
+		// add to world
+		collisionShapes.push_back(colShape);
+		btTransform startTransform;
+		startTransform.setIdentity();
+
+		btScalar	mass(200.f);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0, 0, 0);
+		if (isDynamic)
+			colShape->calculateLocalInertia(mass, localInertia);
+
+		startTransform.setOrigin(btVector3(0, 0, volume.z/2.0f));
+
+		// Add transform to my object
+		collObject->setWorldTransform(startTransform);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
+		btRigidBody* body = new btRigidBody(rbInfo1);
+		//body->setLinearFactor(btVector3(1, 1, 0));
+
+		wDynamicWorld->addRigidBody(body);
+		btCollisionShape* collShape;
+
+		player1->setCollisionObject(body);
 	}
+	// Add decoration
+
+	{
+		std::vector<Entity> newDecoration;
+		for (Entity decor : currentScene->getDecoration()) {
+
+			// widht, height and hight
+			glm::vec3 volume = decor.getCollisionVolume();
+			btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+
+			// add to world
+			collisionShapes.push_back(colShape);
+			btTransform startTransform;
+			startTransform.setIdentity();
+
+			btScalar	mass(0.0f);
+
+			//rigidbody is dynamic if and only if mass is non zero, otherwise static
+			bool isDynamic = (mass != 0.f);
+
+			btVector3 localInertia(0, 0, 0);
+			if (isDynamic)
+				colShape->calculateLocalInertia(mass, localInertia);
+			
+			glm::vec3 position = decor.getPosition();
+			startTransform.setOrigin(btVector3(position.x, position.y, position.z));
+
+			// Add transform to my object
+
+			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+			btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
+			btRigidBody* body = new btRigidBody(rbInfo1);
+			body->setWorldTransform(startTransform);
+			body->setLinearFactor(btVector3(1, 1, 0));
+
+			wDynamicWorld->addRigidBody(body);
+
+			decor.setCollisionObject(body);
+
+			newDecoration.push_back(decor);
+		}
+		currentScene->setDecoration(newDecoration);
+
+	}
+
 }
 
 void WorldObjects::collisionDetection() {
+	wDynamicWorld->stepSimulation(1 / 60.0f);
 
 }
 
@@ -113,13 +183,11 @@ void WorldObjects::collisionDetection() {
 	Update all scene, including the characters
 */
 void WorldObjects::update() {
-	
 	// First check collision
 	collisionDetection();
 
 
 	// update the scene
-
 	if (player1->inGame) {
 		player1->update();
 	}
@@ -148,8 +216,12 @@ void WorldObjects::render() {
 
 	TurriFramework::Instance().renderScene(*currentScene);
 
+	for (Entity decor : currentScene->getDecoration()) {
+		TurriFramework::Instance().renderEntityWithBullet(decor);
+	}
+
 	if (player1->inGame) {
-		TurriFramework::Instance().renderEntity(*player1);
+		TurriFramework::Instance().renderEntityWithBullet(*player1);
 	}
 	if (player2->inGame) {
 		TurriFramework::Instance().renderEntity(*player2);
@@ -164,7 +236,29 @@ void WorldObjects::render() {
 	TurriFramework::Instance().disableLights();
 
 	TurriFramework::Instance().renderEntity(currentScene->getSkyBox());
+	
+	// Render wireframes
+#if _DEBUG
+ 
+	for (Entity decor : currentScene->getDecoration()) {
+		TurriFramework::Instance().renderCubeAt(&decor);
+
+	}	if (player1->inGame) {
+		TurriFramework::Instance().renderCubeAt(player1);
+	}
+	/*if (player2->inGame) {
+		TurriFramework::Instance().renderEntity(*player2);
+	}
+	if (player3->inGame) {
+		TurriFramework::Instance().renderEntity(*player3);
+	}
+	if (player4->inGame) {
+		TurriFramework::Instance().renderEntity(*player4);
+	}*/
+#endif
+
 	TurriFramework::Instance().stopRender();
+
 }
 
 Character* WorldObjects::getPlayerAt(int current) {
@@ -186,18 +280,6 @@ Character* WorldObjects::getPlayerAt(int current) {
 Scene* WorldObjects::getCurrentScene() {
 	return currentScene;
 }
-
-/**
-	These 2 methods are for render the players in game 
-*/
-void WorldObjects::addCharacterToRender(Character& character) {
-	playersToRender.push_back(&character);
-}
-
-void WorldObjects::cleanCharactersToRender() {
-	playersToRender.clear();
-}
-
 
 void WorldObjects::executeInput(Character& character) {
 	// Joystick

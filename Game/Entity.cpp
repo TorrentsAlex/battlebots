@@ -12,26 +12,30 @@ Entity::~Entity() {
 Entity::Entity(OBJ mesh, GameObject gameObject) {
 	eMesh = mesh;
 	eGameObject = gameObject;
-	eBoundingBox.calculateBoundingBoxes(mesh);
-
-	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
+	calculateVolume();
 }
+
+// Private Methods
+
+void Entity::calculateVolume() {
+	eWidthVolume = eMesh.width.y - eMesh.width.x;
+	eHightVolume = eMesh.lenght.y - eMesh.lenght.x;
+	eHeightVolume = eMesh.high.y - eMesh.high.x;
+}
+
 
 // Setters
 void Entity::setOBJ(OBJ mesh) {
 	eMesh = mesh;
-	eBoundingBox.calculateBoundingBoxes(mesh);
+	calculateVolume();
 }
 
 void Entity::setGameObject(GameObject gameObject) {
 	eGameObject = gameObject;
-	eBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
 }
 
-void Entity::setSquareBoundingBox() {
-	haveSquareBBox = true;
-	//eSquareBoundingBox.setCenter(eGameObject._translate.x, eGameObject._translate.y);
-	//eSquareBoundingBox.setSize(eMesh.width.y - eMesh.width.x, eMesh.lenght.y - eMesh.lenght.x);
+void Entity::setCollisionObject(btCollisionObject * btObject) {
+	collisionObject = btObject;
 }
 
 // Entity transformations
@@ -70,8 +74,16 @@ GameObject Entity::getGameObject() {
 	return eGameObject;
 }
 
+OBJ Entity::getOBJ() {
+	return eMesh;
+}
+
 Material Entity::getMaterial() {
 	return eMaterial;
+}
+
+btCollisionObject & Entity::getCollisionObject() {
+	return *collisionObject;
 }
 
 glm::vec3 Entity::getPosition() {
@@ -90,14 +102,6 @@ glm::vec3 Entity::getScale() {
 	return eGameObject._scale;
 }
 
-Sphere Entity::getBoundingBox() {
-	return eBoundingBox;
-}
-
-Box Entity::getSquareBoundingBox() {
-	return eSquareBoundingBox;
-}
-
 GLuint Entity::getTextureId() {
 	return eMaterial.textureMap;
 }
@@ -106,4 +110,8 @@ GLuint Entity::getTextureId() {
 glm::vec4 Entity::getRotation() {
 	glm::vec4 rotation(eGameObject._rotation, eGameObject._angle);
 	return rotation;
+}
+
+glm::vec3 Entity::getCollisionVolume() {
+	return glm::vec3(eWidthVolume, eHightVolume, eHeightVolume);
 }

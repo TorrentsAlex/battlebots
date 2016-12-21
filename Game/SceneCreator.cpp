@@ -12,102 +12,14 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 	reader.parse(jsonString, json);
 	cout << "skybox..." << endl;
 
-	// SkyBox
-	OBJ objSky = Geometry::LoadModelFromFile(json["sky"]["object"].asString());
-	GLuint textureSky = TextureManager::Instance().getTextureID(json["sky"]["texture"].asString());
-	newScene.setSkyBox(objSky, textureSky);
-
-	cout << "terrain..." << endl;
-	// Terrain
-	OBJ objTerrain = Geometry::LoadModelFromFile(json["terrain"]["object"].asString());
-	GLuint textureTerrain = TextureManager::Instance().getTextureID(json["terrain"]["texture"].asString());
-	
-	// Terrain material
-	string jsonMaterialString = FileReader::LoadStringFromFile(json["terrain"]["material"].asString());
-	Json::Value jsonMaterial;
-	reader.parse(jsonMaterialString, jsonMaterial);
-	Material terrainMaterial;
-	terrainMaterial.ambient = glm::vec3(jsonMaterial["ambient"]["r"].asFloat(), jsonMaterial["ambient"]["g"].asFloat(), jsonMaterial["ambient"]["b"].asFloat());
-	terrainMaterial.diffuse = glm::vec3(jsonMaterial["diffuse"]["r"].asFloat(), jsonMaterial["ambient"]["g"].asFloat(), jsonMaterial["ambient"]["b"].asFloat());
-	terrainMaterial.specular = glm::vec3(jsonMaterial["specular"]["r"].asFloat(), jsonMaterial["ambient"]["g"].asFloat(), jsonMaterial["ambient"]["b"].asFloat());
-	terrainMaterial.shininess = jsonMaterial["shininess"].asFloat();
-	newScene.setTerrain(objTerrain, textureTerrain, terrainMaterial);
-
-	cout << "decoration..." << endl;
-	Json::Value jsonDecoration = json["decoration"];
-	// Decoration
-	vector<Entity> vEntityDecorations;
-	for (int i = 0; i < jsonDecoration.size(); i++) {
-		Json::Value currentDecoration = jsonDecoration[i];
-		OBJ objDecoration = Geometry::LoadModelFromFile(currentDecoration["object"].asString());
-		GLuint textureDecoration = TextureManager::Instance().getTextureID(currentDecoration["texture"].asString());
-
-		string gameElements = currentDecoration["elements"].asString();
-		string textureSpecularString = currentDecoration["texture_specular"].asString();
-		Entity entity;
-		entity.setOBJ(objDecoration);
-		entity.setMaterial(terrainMaterial);
-		entity.setTextureId(textureDecoration);
-
-	
-		
-
-		// TESTING
-		Entity* e = new Entity;
-		e->setOBJ(objDecoration);
-		e->setMaterial(terrainMaterial);
-		e->setTextureId(textureDecoration);
-		DecorObjects d;
-		d.e = e;
-
-
-		//set specular material
-		if (textureSpecularString.compare("") != 0) {
-			GLuint specular = TextureManager::Instance().getTextureID(textureSpecularString);
-			entity.setTextureSpecular(specular);
-			e->setTextureSpecular(specular);
-		}
-
-
-		// Theres nothin into elements
-		if (gameElements.compare("") == 0) {
-			GameObject gameObject;
-			gameObject.translate = glm::vec3(currentDecoration["position"]["x"].asFloat(), currentDecoration["position"]["y"].asFloat(), currentDecoration["position"]["z"].asFloat());;
-
-			gameObject.scale = glm::vec3(1, 1, 1);
-			gameObject.angle = 0;
-			entity.setGameObject(gameObject);
-			vEntityDecorations.push_back(entity);
-
-			// TESTING
-			std::vector<GameObject> gameObjects;
-			gameObjects.push_back(gameObject);
-			d.g.push_back(gameObject);
-
-
-			newScene.listObjects.push_back(d);
-
-		} else {
-			vector<GameObject> vectorDecoration = Geometry::LoadGameElements(gameElements);
-			for (GameObject gODecoration : vectorDecoration) {
-				entity.setGameObject(gODecoration);
-
-				vEntityDecorations.push_back(entity);
-			}
-			 // TESTING
-			d.g = vectorDecoration;
-			newScene.listObjects.push_back(d);
-
-		}
-	}
-	
+	// Terrain and skybox
+	populateTerrain(&newScene, json);
 
 
 	// Lights
 	vector<Light> sceneLights = populateLights(json["lights"]);
 	newScene.setLights(sceneLights);
 
-	newScene.setDecoration(vEntityDecorations);
 }
 
 void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2, Character& ch3, Character& ch4) {
@@ -299,4 +211,94 @@ vector<Light> SceneCreator::populateLights(Json::Value jsonLights) {
 		sceneLights.push_back(l);
 	}
 	return sceneLights;
+}
+
+void SceneCreator::createRigidBodyForDecoration(Scene * scene, Entity* entity) {
+
+
+}
+
+void SceneCreator::populateDecoration(Scene * scene, Json::Value decoration) {
+
+	cout << "decoration..." << endl;
+	Json::Value jsonDecoration = decoration["decoration"];
+	// Decoration
+	vector<Entity> vEntityDecorations;
+	for (int i = 0; i < jsonDecoration.size(); i++) {
+		Json::Value currentDecoration = jsonDecoration[i];
+		OBJ objDecoration = Geometry::LoadModelFromFile(currentDecoration["object"].asString());
+		GLuint textureDecoration = TextureManager::Instance().getTextureID(currentDecoration["texture"].asString());
+
+		string gameElements = currentDecoration["elements"].asString();
+		string textureSpecularString = currentDecoration["texture_specular"].asString();
+
+		Entity* e = new Entity();
+		e->setOBJ(objDecoration);
+		e->setMaterial(metalMaterial);
+		e->setTextureId(textureDecoration);
+		DecorObjects d;
+		d.e = e;
+
+
+		//set specular material
+		if (textureSpecularString.compare("") != 0) {
+			GLuint specular = TextureManager::Instance().getTextureID(textureSpecularString);
+			e->setTextureSpecular(specular);
+		}
+
+
+		// Theres nothin into elements
+		if (gameElements.compare("") == 0) {
+			GameObject gameObject;
+			gameObject.translate = glm::vec3(currentDecoration["position"]["x"].asFloat(), currentDecoration["position"]["y"].asFloat(), currentDecoration["position"]["z"].asFloat());;
+
+			gameObject.scale = glm::vec3(1, 1, 1);
+			gameObject.angle = 0;
+
+			std::vector<GameObject> gameObjects;
+			gameObjects.push_back(gameObject);
+			d.g.push_back(gameObject);
+
+			scene->listObjects.push_back(d);
+
+		} else { // There are more than 1 element
+			d.g = Geometry::LoadGameElements(gameElements);
+			scene->listObjects.push_back(d);
+		}
+	}
+}
+
+void SceneCreator::populateTerrain(Scene * scene, Json::Value terrain) {
+	// SkyBox
+	OBJ objSky = Geometry::LoadModelFromFile(terrain["sky"]["object"].asString());
+	GLuint textureSky = TextureManager::Instance().getTextureID(terrain["sky"]["texture"].asString());
+	scene->setSkyBox(objSky, textureSky);
+
+	cout << "terrain..." << endl;
+	// Terrain
+	OBJ objTerrain = Geometry::LoadModelFromFile(terrain["terrain"]["object"].asString());
+	GLuint textureTerrain = TextureManager::Instance().getTextureID(terrain["terrain"]["texture"].asString());
+	// Terrain material
+	scene->setTerrain(objTerrain, textureTerrain, metalMaterial);
+
+	// Set physics for terrain
+
+	btTransform btTGround;
+	btTGround.setIdentity();
+	btTGround.setOrigin(btVector3(0, 0, -10));
+	glm::vec3 terrainVolume = scene->getTerrain().getCollisionVolume();
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(terrainVolume.x), btScalar(terrainVolume.y), btScalar(terrainVolume.z)));
+	
+	
+	//collisionShapes.push_back(groundShape);
+	btScalar mass(0.);
+	btVector3 localInertia(0, 0, 0);
+	
+	// Create terrain collision object 
+	btDefaultMotionState* myMotionState = new btDefaultMotionState(btTGround);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
+	btRigidBody* body = new btRigidBody(rbInfo);
+	
+	scene->addBodyToDynamicWorld(body);
+
 }

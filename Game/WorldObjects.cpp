@@ -60,115 +60,115 @@ void WorldObjects::handleInputs() {
 }
 
 void WorldObjects::setCollisionsToWorld() {
-	//btAlignedObjectArray<btCollisionShape*> collisionShapes;
-	//btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(70.), btScalar(70.), btScalar(10.)));
-	//collisionShapes.push_back(groundShape);
+	btAlignedObjectArray<btCollisionShape*> collisionShapes;
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(70.), btScalar(70.), btScalar(10.)));
+	collisionShapes.push_back(groundShape);
 
-	//btTransform groundTransform;
-	//groundTransform.setIdentity();
-	//groundTransform.setOrigin(btVector3(0, 0, -10));
+	btTransform groundTransform;
+	groundTransform.setIdentity();
+	groundTransform.setOrigin(btVector3(0, 0, -10));
 
-	//btScalar mass(0.);
+	btScalar mass(0.);
 
-	////rigidbody is dynamic if and only if mass is non zero, otherwise static
-	//bool isDynamic = (mass != 0.f);
+	//rigidbody is dynamic if and only if mass is non zero, otherwise static
+	bool isDynamic = (mass != 0.f);
 
-	//btVector3 localInertia(0, 0, 0);
-	//if (isDynamic)
-	//	groundShape->calculateLocalInertia(mass, localInertia);
+	btVector3 localInertia(0, 0, 0);
+	if (isDynamic)
+		groundShape->calculateLocalInertia(mass, localInertia);
 
-	////using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
-	//btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
-	//btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
-	//btRigidBody* body = new btRigidBody(rbInfo);
+	//using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
+	btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
+	btRigidBody* body = new btRigidBody(rbInfo);
 
-	////add the body to the dynamics world
-	//wDynamicWorld->addRigidBody(body);
-	//{
-	//	// Add character 1
-	//	btCollisionObject* collObject = new btCollisionObject();
-	//	glm::vec3 volume = player1->getCollisionVolume();
+	//add the body to the dynamics world
+	wDynamicWorld->addRigidBody(body);
+	{
+		// Add character 1
+		btCollisionObject* collObject = new btCollisionObject();
+		glm::vec3 volume = player1->getCollisionVolume();
 
-	//	// widht, height and hight
-	//	btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
-	//	
-	//	collObject->setCollisionShape(colShape);
-	//	// add to world
-	//	collisionShapes.push_back(colShape);
-	//	btTransform startTransform;
-	//	startTransform.setIdentity();
+		// widht, height and hight
+		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+		
+		collObject->setCollisionShape(colShape);
+		// add to world
+		collisionShapes.push_back(colShape);
+		btTransform startTransform;
+		startTransform.setIdentity();
 
-	//	btScalar	mass(200.f);
+		btScalar	mass(200.f);
 
-	//	//rigidbody is dynamic if and only if mass is non zero, otherwise static
-	//	bool isDynamic = (mass != 0.f);
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
 
-	//	btVector3 localInertia(0, 0, 0);
-	//	if (isDynamic)
-	//		colShape->calculateLocalInertia(mass, localInertia);
+		btVector3 localInertia(0, 0, 0);
+		if (isDynamic)
+			colShape->calculateLocalInertia(mass, localInertia);
 
-	//	startTransform.setOrigin(btVector3(0, 0, volume.z/2.0f));
-	//	
-	//	// Add transform to my object
-	//	collObject->setWorldTransform(startTransform);
+		startTransform.setOrigin(btVector3(0, 0, volume.z/2.0f));
+		
+		// Add transform to my object
+		collObject->setWorldTransform(startTransform);
 
-	//	//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-	//	btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
-	//	btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
-	//	btRigidBody* body = new btRigidBody(rbInfo1);
-	//	//body->setLinearFactor(btVector3(1, 1, 0));
-	//	//body->setCollisionFlags(btCollisionObject::CollisionFlags::CF_CHARACTER_OBJECT);
-	//	wDynamicWorld->addRigidBody(body);
-	//	btCollisionShape* collShape;
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
+		btRigidBody* body = new btRigidBody(rbInfo1);
+		//body->setLinearFactor(btVector3(1, 1, 0));
+		//body->setCollisionFlags(btCollisionObject::CollisionFlags::CF_CHARACTER_OBJECT);
+		wDynamicWorld->addRigidBody(body);
+		btCollisionShape* collShape;
 
-	//	player1->setCollisionObject(body);
-	//}
-	//// Add decoration
+		player1->setCollisionObject(body);
+	}
+	// Add decoration
 
-	//{
-	//	std::vector<Entity> newDecoration;
-	//	for (Entity decor : currentScene->getDecoration()) {
+	{
+		std::vector<Entity> newDecoration;
+		for (Entity decor : currentScene->getDecoration()) {
 
-	//		// widht, height and hight
-	//		glm::vec3 volume = decor.getCollisionVolume();
-	//		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+			// widht, height and hight
+			glm::vec3 volume = decor.getCollisionVolume();
+			btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
 
-	//		// add to world
-	//		collisionShapes.push_back(colShape);
-	//		btTransform startTransform;
-	//		startTransform.setIdentity();
+			// add to world
+			collisionShapes.push_back(colShape);
+			btTransform startTransform;
+			startTransform.setIdentity();
 
-	//		btScalar	mass(10.0f);
+			btScalar	mass(10.0f);
 
-	//		//rigidbody is dynamic if and only if mass is non zero, otherwise static
-	//		bool isDynamic = (mass != 0.f);
+			//rigidbody is dynamic if and only if mass is non zero, otherwise static
+			bool isDynamic = (mass != 0.f);
 
-	//		btVector3 localInertia(0, 0, 0);
-	//		if (isDynamic)
-	//			colShape->calculateLocalInertia(mass, localInertia);
-	//		
-	//		glm::vec3 position = decor.getPosition();
-	//		startTransform.setOrigin(btVector3(position.x, position.y, position.z));
+			btVector3 localInertia(0, 0, 0);
+			if (isDynamic)
+				colShape->calculateLocalInertia(mass, localInertia);
+			
+			glm::vec3 position = decor.getPosition();
+			startTransform.setOrigin(btVector3(position.x, position.y, position.z));
 
-	//		// Add transform to my object
+			// Add transform to my object
 
-	//		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-	//		btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
-	//		btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
-	//		btRigidBody* body = new btRigidBody(rbInfo1);
-	//		
-	//		body->setWorldTransform(startTransform);
-	//		//body->setLinearFactor(btVector3(1, 1, 0));
+			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+			btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
+			btRigidBody* body = new btRigidBody(rbInfo1);
+			
+			body->setWorldTransform(startTransform);
+			//body->setLinearFactor(btVector3(1, 1, 0));
 
-	//		wDynamicWorld->addRigidBody(body);
+			wDynamicWorld->addRigidBody(body);
 
-	//		decor.setCollisionObject(body);
+			decor.setCollisionObject(body);
 
-	//		newDecoration.push_back(decor);
-	//	}
-	//	currentScene->setDecoration(newDecoration);
+			newDecoration.push_back(decor);
+		}
+		currentScene->setDecoration(newDecoration);
 
-	//}
+	}
 
 }
 

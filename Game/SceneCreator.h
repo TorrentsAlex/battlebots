@@ -18,10 +18,19 @@ using namespace std;
 
 class SceneCreator {
 private:
-
-	SceneCreator() {};
+	Material metalMaterial;
+	SceneCreator() {
+		metalMaterial.ambient = glm::vec3(0.25, 0.20725, 0.20725);
+		metalMaterial.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
+		metalMaterial.specular = glm::vec3(0.25, 0.20725, 0.20725);
+		metalMaterial.shininess = 4;
+	};
 
 	vector<Light> populateLights(Json::Value lights);
+	void populateDecoration(Scene* scene, Json::Value decoration);
+	void populateTerrain(Scene* scene, Json::Value terrain);
+	void createRigidBodyForDecoration(Scene * scene, Entity* entity);
+
 public:
 	static SceneCreator& Instance() {
 		static SceneCreator instance;	// Guaranteed to be destroyed.

@@ -14,7 +14,6 @@ struct GameObject {
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	btCollisionObject* collisionObject;
-
 };
 
 class Entity {

@@ -132,42 +132,42 @@ std::vector<JoystickCommand*> InputManager::getGamePadJoysticks(GamePad& pad) {
 	return commands;
 }
 
-void InputManager::handleInput(GamePad& pad) {
-	pad.dPadUp.wasDown = pad.dPadUp.isDown;
-	pad.dPadUp.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_UP);
+void InputManager::handleInput(GamePad* pad) {
+	pad->dPadUp.wasDown = pad->dPadUp.isDown;
+	pad->dPadUp.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP);
 
-	pad.dPadDown.wasDown = pad.dPadDown.isDown;
-	pad.dPadDown.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+	pad->dPadDown.wasDown = pad->dPadDown.isDown;
+	pad->dPadDown.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
 
-	pad.dPadLeft.wasDown = pad.dPadLeft.isDown;
-	pad.dPadLeft.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+	pad->dPadLeft.wasDown = pad->dPadLeft.isDown;
+	pad->dPadLeft.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
 
-	pad.dPadRight.wasDown = pad.dPadRight.isDown;
-	pad.dPadRight.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
+	pad->dPadRight.wasDown = pad->dPadRight.isDown;
+	pad->dPadRight.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
 
-	pad.start.wasDown = pad.start.isDown;
-	pad.start.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_START);
+	pad->start.wasDown = pad->start.isDown;
+	pad->start.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_START);
 
-	pad.select.wasDown = pad.select.isDown;
-	pad.select.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_BACK);
+	pad->select.wasDown = pad->select.isDown;
+	pad->select.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_BACK);
 
-	pad.buttonA.wasDown = pad.select.isDown;
-	pad.buttonA.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_A);
+	pad->buttonA.wasDown = pad->select.isDown;
+	pad->buttonA.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_A);
 
-	pad.buttonB.wasDown = pad.select.isDown;
-	pad.buttonB.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_B);
+	pad->buttonB.wasDown = pad->select.isDown;
+	pad->buttonB.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_B);
 
-	pad.buttonX.wasDown = pad.select.isDown;
-	pad.buttonX.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_X);
+	pad->buttonX.wasDown = pad->select.isDown;
+	pad->buttonX.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_X);
 
-	pad.buttonY.wasDown = pad.select.isDown;
-	pad.buttonY.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_Y);
+	pad->buttonY.wasDown = pad->select.isDown;
+	pad->buttonY.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_Y);
 
-	pad.leftShoulder.wasDown = pad.select.isDown;
-	pad.leftShoulder.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
+	pad->leftShoulder.wasDown = pad->select.isDown;
+	pad->leftShoulder.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
 
-	pad.rightShoulder.wasDown = pad.select.isDown;
-	pad.rightShoulder.isDown = SDL_GameControllerGetButton(pad.gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
+	pad->rightShoulder.wasDown = pad->select.isDown;
+	pad->rightShoulder.isDown = SDL_GameControllerGetButton(pad->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
 
 }
 

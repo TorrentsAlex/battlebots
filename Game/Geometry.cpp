@@ -145,10 +145,10 @@ std::vector<GameObject> Geometry::LoadGameElements(std::string file) {
 	vector<vector<float>> data = FileReader::LoadArrayFromFile(file);
 
 	for (vector<float> d : data) {
-		tempObject._translate = glm::vec3(d.at(0), d.at(1), d.at(2));
-		tempObject._angle = d.at(3);
-		tempObject._rotation = glm::vec3(d.at(4), d.at(5), d.at(6));
-		tempObject._scale = glm::vec3(d.at(7), d.at(8), d.at(9));
+		tempObject.translate = glm::vec3(d.at(0), d.at(1), d.at(2));
+		tempObject.angle = d.at(3);
+		tempObject.rotation = glm::vec3(d.at(4), d.at(5), d.at(6));
+		tempObject.scale = glm::vec3(d.at(7), d.at(8), d.at(9));
 		vGObject.push_back(tempObject);
 	}
 	return vGObject;

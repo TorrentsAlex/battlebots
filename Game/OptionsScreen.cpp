@@ -1,8 +1,6 @@
 #include "OptionsScreen.h"
 
 
-
-
 void OptionsScreen::init() {
 	optionsScene = new Scene();
 	SceneCreator::Instance().createScene("./resources/scenes/Scene1.json", *optionsScene);
@@ -18,7 +16,7 @@ void OptionsScreen::init() {
 
 void OptionsScreen::input() {
 	// update the gamepad state
-	InputManager::Instance().handleInput(*gamePad);
+	InputManager::Instance().handleInput(gamePad);
 
 	if (InputManager::Instance().isKeyPressed(SDLK_UP) || 
 		InputManager::Instance().isKeyPressed(gamePad->dPadUp)) {

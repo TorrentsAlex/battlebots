@@ -1,5 +1,8 @@
 #pragma once
 
+#include <btBulletDynamicsCommon.h>
+#include <btBulletCollisionCommon.h>
+
 #include "Entity.h"
 
 #include "Light.h"
@@ -7,18 +10,20 @@
 struct DecorObjects {
 	Entity* e;
 	vector<GameObject> g;
-	vector<btCollisionObject>* b;
 };
 
 class Scene {
 private:
 	Entity sSkybox;
-
 	Entity sTerrain;
 	
 	vector<Entity> sDecoration;
 
 	vector<Light> sLights;
+
+	// Bullet physics
+	btDiscreteDynamicsWorld* wDynamicWorld;
+	btCollisionWorld* wCollisionWorld;
 
 public:
 	Scene();
@@ -36,6 +41,9 @@ public:
 	Entity getSkyBox();
 	vector<Entity> getDecoration();
 	vector<Light> getLights();
+
+
+	void addBodyToDynamicWorld(btRigidBody* body);
 
 	void clean();
 	void update();

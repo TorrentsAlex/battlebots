@@ -35,18 +35,18 @@ void Entity::setGameObject(GameObject gameObject) {
 }
 
 void Entity::setCollisionObject(btCollisionObject * btObject) {
-	collisionObject = btObject;
+	eGameObject.collisionObject = btObject;
 }
 
 // Entity transformations
 void Entity::setPosition(glm::vec3 newPos) {
-	eGameObject._translate.x = newPos.x;
-	eGameObject._translate.y = newPos.y;
+	eGameObject.translate.x = newPos.x;
+	eGameObject.translate.y = newPos.y;
 	
 }
 void Entity::setPosition(glm::vec2 newPos) {
-	eGameObject._translate.x = newPos.x;
-	eGameObject._translate.y = newPos.y;
+	eGameObject.translate.x = newPos.x;
+	eGameObject.translate.y = newPos.y;
 }
 
 // Textures
@@ -83,23 +83,23 @@ Material Entity::getMaterial() {
 }
 
 btCollisionObject & Entity::getCollisionObject() {
-	return *collisionObject;
+	return *eGameObject.collisionObject;
 }
 
 glm::vec3 Entity::getPosition() {
-	return eGameObject._translate;
+	return eGameObject.translate;
 }
 
 float Entity::getXPosition() {
-	return eGameObject._translate.x;
+	return eGameObject.translate.x;
 }
 
 float Entity::getYPosition() {
-	return eGameObject._translate.y;
+	return eGameObject.translate.y;
 }
 
 glm::vec3 Entity::getScale() {
-	return eGameObject._scale;
+	return eGameObject.scale;
 }
 
 GLuint Entity::getTextureId() {
@@ -108,7 +108,7 @@ GLuint Entity::getTextureId() {
 
 // x y z angle
 glm::vec4 Entity::getRotation() {
-	glm::vec4 rotation(eGameObject._rotation, eGameObject._angle);
+	glm::vec4 rotation(eGameObject.rotation, eGameObject.angle);
 	return rotation;
 }
 

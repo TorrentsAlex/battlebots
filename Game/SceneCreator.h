@@ -20,6 +20,8 @@ class SceneCreator {
 private:
 
 	SceneCreator() {};
+
+	vector<Light> populateLights(Json::Value lights);
 public:
 	static SceneCreator& Instance() {
 		static SceneCreator instance;	// Guaranteed to be destroyed.

@@ -1,6 +1,22 @@
 #include "Scene.h"
 
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
+
 Scene::Scene() {
+
+	btBroadphaseInterface* broadPhase = new btDbvtBroadphase();
+
+	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
+	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	// Include btGImpactCollisionAlgorithm
+	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
+
+	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+
+	wDynamicWorld = new btDiscreteDynamicsWorld(dispatcher, broadPhase, solver, collisionConfiguration);
+
+	wDynamicWorld->setGravity(btVector3(0, 0, -10));
 }
 
 
@@ -9,10 +25,10 @@ Scene::~Scene() {
 
 void Scene::setSkyBox(OBJ object, GLuint texture) {
 	GameObject skyObject;
-	skyObject._angle = 0;
-	skyObject._translate = glm::vec3(0, 0, 0);
-	skyObject._scale = glm::vec3(2, 2, 2);
-	skyObject._rotation = glm::vec3(0, 0, 0);
+	skyObject.angle = 0;
+	skyObject.translate = glm::vec3(0, 0, 0);
+	skyObject.scale = glm::vec3(2, 2, 2);
+	skyObject.rotation = glm::vec3(0, 0, 0);
 
 	sSkybox.setOBJ(object);
 	sSkybox.setTextureId(texture);
@@ -21,10 +37,10 @@ void Scene::setSkyBox(OBJ object, GLuint texture) {
 
 void Scene::setTerrain(OBJ object, GLuint texture, Material material) {
 	GameObject terrainObject;
-	terrainObject._angle = 0;
-	terrainObject._translate = glm::vec3(0, 0, 0);
-	terrainObject._scale = glm::vec3(1, 1, 1);
-	terrainObject._rotation = glm::vec3(0, 0, 0);
+	terrainObject.angle = 0;
+	terrainObject.translate = glm::vec3(0, 0, 0);
+	terrainObject.scale = glm::vec3(1, 1, 1);
+	terrainObject.rotation = glm::vec3(0, 0, 0);
 
 	sTerrain.setOBJ(object);
 	sTerrain.setMaterial(material);
@@ -57,10 +73,16 @@ vector<Light> Scene::getLights() {
 	return sLights;
 }
 
+void Scene::addBodyToDynamicWorld(btRigidBody * body) {
+	wDynamicWorld->addRigidBody(body);
+}
+
 void Scene::clean() {
+	if (wDynamicWorld) delete wDynamicWorld;
+
 }
 
 // 
 void Scene::update() {
-
+	wDynamicWorld->stepSimulation(1/60.0f);
 }

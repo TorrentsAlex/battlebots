@@ -1,6 +1,5 @@
 #pragma once
 
-#include "GameObject.h"
 #include "OBJ.h"
 #include "TextureManager.h"
 #include "MaterialManager.h"
@@ -9,14 +8,23 @@
 
 #include <btBulletCollisionCommon.h>
 
+struct GameObject {
+	glm::vec3 translate;
+	float angle;
+	glm::vec3 rotation;
+	glm::vec3 scale;
+	btCollisionObject* collisionObject;
+
+};
+
 class Entity {
 protected:
+	string id;
+
 	OBJ eMesh;
 	GameObject eGameObject;
 	
 	Material eMaterial;
-
-	btCollisionObject* collisionObject;
 
 	btScalar eWidthVolume; // X 
 	btScalar eHightVolume; // Y 

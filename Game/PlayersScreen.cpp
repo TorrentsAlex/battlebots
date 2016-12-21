@@ -5,7 +5,7 @@
 
 void PlayersScreen::init() {
 
-	SceneCreator::Instance().createScene("./resources/scenes/Scene2.json", *WorldObjects::Instance().getCurrentScene());
+	SceneCreator::Instance().createScene("./resources/scenes/Scene2.json", WorldObjects::Instance().getCurrentScene());
 	
 	SceneCreator::Instance().createCharacters("./resources/scenes/character.json", 
 		*WorldObjects::Instance().getPlayerAt(0),

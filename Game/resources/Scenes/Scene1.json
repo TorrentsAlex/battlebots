@@ -17,7 +17,8 @@
 				"y" : 0,
 				"z" : 0
 			},
-		"material" : "./resources/materials/metal.json"
+			"material" : "./resources/materials/metal.json",
+			"mass" : 0.0,
 		}
 	],
 	"lights" : [

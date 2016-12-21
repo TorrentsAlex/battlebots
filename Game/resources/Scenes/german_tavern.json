@@ -10,10 +10,21 @@
 	},
 	"decoration" : [ 
 		{
-			"object" : "./resources/objects/barrel.obj",
-			"texture" : "./resources/images/barrel.png",
-			"texture_specular" : "",
-			"elements" : "./resources/scenes/treeScene.txt",
+			"name" : "chair",
+			"object" : "./resources/objects/chair.obj",
+			"texture" : "./resources/images/chair_txt.png",
+			"texture_specular" : null,
+			"elements" : "./resources/scenes/chair_positions.txt",
+			"material" : "./resources/materials/metal.json",
+			"mass" : 50.0,
+			"convex" : "hull"
+		},
+		{
+			"name" : "table",
+			"object" : "./resources/objects/table.obj",
+			"texture" : "./resources/images/table_txt.png",
+			"texture_specular" : null,
+			"elements" : "./resources/scenes/table_positions.txt",
 			"material" : "./resources/materials/metal.json",
 			"mass" : 50.0,
 			"convex" : "hull"
@@ -31,7 +42,6 @@
 	"lights" : [
 		"./resources/materials/lights/directional_white.json",
 		"./resources/materials/lights/pointlight_yellow.json",
-		"./resources/materials/lights/pointlight_yellow2.json",
-		"./resources/materials/lights/pointlight_middle.json"
-	]
+		"./resources/materials/lights/pointlight_yellow2.json"
+		]
 }

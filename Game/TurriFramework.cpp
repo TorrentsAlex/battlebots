@@ -80,9 +80,9 @@ void TurriFramework::renderEntityWithBullet(Entity entity) {
 	float y = transform.getY();
 	float z = transform.getZ();
 	GameObject gameObject;
-	gameObject._translate = glm::vec3(x, y, z);
-	gameObject._angle = 0;
-	gameObject._scale = glm::vec3(1,1,1);
+	gameObject.translate = glm::vec3(x, y, z);
+	gameObject.angle = 0;
+	gameObject.scale = glm::vec3(1,1,1);
 
 	tOpenGL.sendObject(entity.getMesh(), gameObject, entity.getNumVertices());
 	clearMaps();
@@ -111,9 +111,9 @@ void TurriFramework::renderCubeAt(Entity* entity) {
 	glm::vec3 scale = entity->getCollisionVolume();
 	
 	GameObject gameObject;
-	gameObject._translate = glm::vec3(x, y, z);
-	gameObject._angle = 0;
-	gameObject._scale = glm::vec3(scale.x, scale.y, scale.z);
+	gameObject.translate = glm::vec3(x, y, z);
+	gameObject.angle = 0;
+	gameObject.scale = glm::vec3(scale.x, scale.y, scale.z);
 
 	tOpenGL.sendMaterial(cubeMaterial);
 	renderCube(&gameObject);

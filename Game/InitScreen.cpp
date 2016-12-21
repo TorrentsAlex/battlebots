@@ -4,7 +4,7 @@
 void InitScreen::init() {
 	menuScene = new Scene();
 	SceneCreator::Instance().createScene("./resources/scenes/Scene1.json", *menuScene);
-	//SceneCreator::Instance().createScene("./resources/scenes/Scene1.json", *SceneObjects::Instance().getCurrentScene());
+	//SceneCreator::Instance().createScene("./resources/scenes/Scene1.json", SceneObjects::Instance().getCurrentScene());
 
 	vector<Button> iButtons = SceneCreator::Instance().createButtons("./resources/scenes/menu_buttons.json");
 	
@@ -22,7 +22,7 @@ void InitScreen::init() {
 
 void InitScreen::input() {
 	// update the gamepad state
-	InputManager::Instance().handleInput(*gamePad);
+	InputManager::Instance().handleInput(gamePad);
 
 	if (InputManager::Instance().isKeyPressed(SDLK_UP) ||
 		InputManager::Instance().isKeyPressed(gamePad->dPadUp)) {

@@ -192,9 +192,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="WorldCollision.cpp">
-      <Filter>Engine\Systems\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="WorldObjects.cpp">
       <Filter>Game\Systems\Entities</Filter>
     </ClCompile>
@@ -330,9 +327,6 @@
     </ClInclude>
     <ClInclude Include="WorldObjects.h">
       <Filter>Game\Systems\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldCollision.h">
-      <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
     <ClInclude Include="AllvsAll.h" />
     <ClInclude Include="CollisionCallback.h" />

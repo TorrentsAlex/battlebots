@@ -191,11 +191,11 @@ void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVerti
 	glm::mat4 modelMatrix;
 	glm::mat3 normalMatrix;
 
-	modelMatrix = glm::translate(modelMatrix, object._translate);
-	if (object._angle != 0) {
-		modelMatrix = glm::rotate(modelMatrix, glm::radians(object._angle), object._rotation);
+	modelMatrix = glm::translate(modelMatrix, object.translate);
+	if (object.angle != 0) {
+		modelMatrix = glm::rotate(modelMatrix, glm::radians(object.angle), object.rotation);
 	}
-	modelMatrix = glm::scale(modelMatrix, object._scale);
+	modelMatrix = glm::scale(modelMatrix, object.scale);
 	normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelMatrix)));
 
 	oGLBuffer.sendUniform(uniform_modelMatrix, modelMatrix);

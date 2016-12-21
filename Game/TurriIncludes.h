@@ -1,4 +1,7 @@
 #pragma once
+#ifndef  TURRI_INCLUDES
+#define TURRI_INCLUDES
+
 
 #include "TurriFramework.h"
 
@@ -32,3 +35,5 @@
 #include "Scene.h"
 
 #include "Character.h"
+
+#endif // ! TURRI_INCLUDES

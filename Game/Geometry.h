@@ -1,9 +1,13 @@
 #pragma once
+#ifndef  TURRI_GEOMETRY
+#define TURRI_GEOMETRY
+
 #include "Vertex.h"
 #include <vector>
-#include "GameObject.h"
 #include "FileReader.h"
 #include <thread>
+
+#include "TurriIncludes.h"
 
 class Geometry {
 public:
@@ -13,3 +17,5 @@ public:
 	static OBJ LoadModelFromFile(std::string file);
 	static OBJ LoadModelFBXFromFile(std::string file);
 };
+
+#endif // ! TURRI_GEOMETRY

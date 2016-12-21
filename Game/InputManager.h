@@ -32,7 +32,7 @@ public:
 	void clean();
 
 	void handleInput();
-	void handleInput(GamePad& pad);
+	void handleInput(GamePad* pad);
 	
 	//Returns true if the key was just pressed
 	bool isKeyPressed(unsigned int keyID); 

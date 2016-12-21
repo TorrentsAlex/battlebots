@@ -21,7 +21,7 @@ void Character::clean() {
 }
 
 void Character::update() {
-	btTransform transform = collisionObject->getWorldTransform();
+	btTransform transform = eGameObject.collisionObject->getWorldTransform();
 
 	btVector3 origin = transform.getOrigin();
 	float x = origin.getX();
@@ -36,8 +36,8 @@ void Character::update() {
 		//calcular tiempos y aplicar cooldown a la llamada.
 		currentVelocity += dashAcceleration;
 
-		eGameObject._translate.x += dashForward.x * currentVelocity; 
-		eGameObject._translate.y += dashForward.y * currentVelocity; 
+		eGameObject.translate.x += dashForward.x * currentVelocity; 
+		eGameObject.translate.y += dashForward.y * currentVelocity; 
 
 		if (currentVelocity >= maxDashVelocity) {
 			currentState = STATE::IDLE; 
@@ -55,7 +55,7 @@ void Character::update() {
 		y += vectorForward.y * currentVelocity;
 
 		transform.setOrigin(btVector3(x, y, origin.getZ()));
-		collisionObject->setWorldTransform(transform);
+		eGameObject.collisionObject->setWorldTransform(transform);
 		currentState = STATE::IDLE;
 
 		break;
@@ -116,12 +116,12 @@ void Character::movement(glm::vec2 axis) {
 	vectorForward.x = forwardRotated.x;
 	vectorForward.y = forwardRotated.y;
 	
-	btTransform tr = collisionObject->getWorldTransform();
+	btTransform tr = eGameObject.collisionObject->getWorldTransform();
 	btQuaternion quat;
 	quat.setEuler(0, 0, angle);
 	tr.setRotation(quat);
 
-	collisionObject->setInterpolationWorldTransform(tr);
+	eGameObject.collisionObject->setInterpolationWorldTransform(tr);
 }
 
 void Character::rotation(glm::vec2 axis) {

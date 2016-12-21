@@ -4,9 +4,6 @@
 
 #include "GameController.h"
 
-
-#include "WorldCollision.h" 
-
 int main(int argc, char ** argv) {
 	// Hide the command line
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);

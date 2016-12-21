@@ -1,7 +1,10 @@
 #pragma once
-#include "WorldCollision.h"
+#ifndef  TURRI_WORLD_OBJECTS
+#define TURRI_WORLD_OBJECTS
 
-class WorldObjects: public WorldCollision {
+#include "TurriIncludes.h"
+
+class WorldObjects  {
 private:
 
 
@@ -35,9 +38,9 @@ public:
 
 	void setCollisionsToWorld();
 
-	Scene* getCurrentScene();
+	Scene& getCurrentScene();
 	Character* getPlayerAt(int current);
 
 
 };
-
+#endif // ! TURRI_WORLD_OBJECTS

@@ -26,7 +26,8 @@ void Character::update() {
 	btVector3 origin = transform.getOrigin();
 	float x = origin.getX();
 	float y = origin.getY();
-
+	float z = origin.getZ();
+	
 	switch (currentState) {
 	case IDLE:
 		currentVelocity = 0;
@@ -54,7 +55,8 @@ void Character::update() {
 		x += vectorForward.x * currentVelocity;
 		y += vectorForward.y * currentVelocity;
 
-		transform.setOrigin(btVector3(x, y, origin.getZ()));
+		transform.setOrigin(btVector3(x, y, z));
+		cout << "z:" << origin.getZ() << endl;
 		collisionObject->setWorldTransform(transform);
 		currentState = STATE::IDLE;
 

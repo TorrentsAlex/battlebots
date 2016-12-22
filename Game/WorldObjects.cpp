@@ -1,6 +1,7 @@
 #include "WorldObjects.h"
 
 #include <thread>
+#include <Math.h>
 
 WorldObjects::WorldObjects() {
 	WorldCollision::init();
@@ -64,12 +65,12 @@ void WorldObjects::handleInputs() {
 
 void WorldObjects::setCollisionsToWorld() {
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
-	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(70.), btScalar(70.), btScalar(10.)));
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(280.), btScalar(280.), btScalar(5.)));
 	collisionShapes.push_back(groundShape);
 
 	btTransform groundTransform;
 	groundTransform.setIdentity();
-	groundTransform.setOrigin(btVector3(0, 0, -10));
+	groundTransform.setOrigin(btVector3(0, 0, -3.0f));
 
 	btScalar mass(0.);
 
@@ -93,7 +94,8 @@ void WorldObjects::setCollisionsToWorld() {
 		glm::vec3 volume = player1->getCollisionVolume();
 
 		// widht, height and hight
-		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+		btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z / 4.0f));
+		cout << "z volume: " << volume.z << endl;
 
 		collObject->setCollisionShape(colShape);
 		// add to world
@@ -110,7 +112,8 @@ void WorldObjects::setCollisionsToWorld() {
 		if (isDynamic)
 			colShape->calculateLocalInertia(mass, localInertia);
 
-		startTransform.setOrigin(btVector3(0, 0, volume.z/2.0f));
+		glm::vec3 pos = player1->getPosition();
+		startTransform.setOrigin(btVector3(pos.x, pos.y, pos.z));
 
 		// Add transform to my object
 		collObject->setWorldTransform(startTransform);
@@ -119,7 +122,7 @@ void WorldObjects::setCollisionsToWorld() {
 		btDefaultMotionState* myMotionState1 = new btDefaultMotionState(startTransform);
 		btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
 		btRigidBody* body = new btRigidBody(rbInfo1);
-		//body->setLinearFactor(btVector3(1, 1, 0));
+		body->setCcdSweptSphereRadius(0.2f);
 
 		wDynamicWorld->addRigidBody(body);
 		btCollisionShape* collShape;
@@ -134,14 +137,24 @@ void WorldObjects::setCollisionsToWorld() {
 
 			// widht, height and hight
 			glm::vec3 volume = decor.getCollisionVolume();
-			btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+			btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z/3.0f));
+			cout << decor.tag << " :" << volume.x <<"/" << volume.y << "/" << volume.z;
+			btScalar mass;
+			
+			if (decor.tag.compare("chair") == 0) {
+				mass = 10.0f;
+			} else {
+				mass = 0.0f;
+				volume.z = 300.0f;
+			}
+			// Load obj
 
 			// add to world
 			collisionShapes.push_back(colShape);
 			btTransform startTransform;
 			startTransform.setIdentity();
-
-			btScalar	mass(0.0f);
+			
+	
 
 			//rigidbody is dynamic if and only if mass is non zero, otherwise static
 			bool isDynamic = (mass != 0.f);
@@ -151,8 +164,15 @@ void WorldObjects::setCollisionsToWorld() {
 				colShape->calculateLocalInertia(mass, localInertia);
 			
 			glm::vec3 position = decor.getPosition();
-			startTransform.setOrigin(btVector3(position.x, position.y, position.z));
+			startTransform.setOrigin(btVector3(position.x, position.y, position.z+2.0f));
 
+			btQuaternion angle;
+			float angleFloat = decor.getGameObject()._angle;
+			glm::vec3 rot = decor.getGameObject()._rotation;
+			float asda = std::sin(angleFloat /2.0f);
+			
+			angle.setRotation(btVector3(rot.x, rot.y, rot.z), btScalar(asda));
+			startTransform.setRotation(angle);
 			// Add transform to my object
 
 			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
@@ -160,7 +180,6 @@ void WorldObjects::setCollisionsToWorld() {
 			btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
 			btRigidBody* body = new btRigidBody(rbInfo1);
 			body->setWorldTransform(startTransform);
-			body->setLinearFactor(btVector3(1, 1, 0));
 
 			wDynamicWorld->addRigidBody(body);
 
@@ -239,13 +258,14 @@ void WorldObjects::render() {
 	
 	// Render wireframes
 #if _DEBUG
- 
-	for (Entity decor : currentScene->getDecoration()) {
+
+	//TurriFramework::Instance().renderCubeAt();
+	/*for (Entity decor : currentScene->getDecoration()) {
 		TurriFramework::Instance().renderCubeAt(&decor);
 
 	}	if (player1->inGame) {
 		TurriFramework::Instance().renderCubeAt(player1);
-	}
+	}*/
 	/*if (player2->inGame) {
 		TurriFramework::Instance().renderEntity(*player2);
 	}

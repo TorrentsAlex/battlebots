@@ -5,7 +5,7 @@
 
 void PlayersScreen::init() {
 
-	SceneCreator::Instance().createScene("./resources/scenes/Scene2.json", *WorldObjects::Instance().getCurrentScene());
+	SceneCreator::Instance().createScene("./resources/scenes/german_tavern.json", *WorldObjects::Instance().getCurrentScene());
 	
 	SceneCreator::Instance().createCharacters("./resources/scenes/character.json", 
 		*WorldObjects::Instance().getPlayerAt(0),
@@ -19,7 +19,7 @@ void PlayersScreen::init() {
 	InputManager::Instance().getGameController(*WorldObjects::Instance().getPlayerAt(3)->getGamePad());
 
 	TurriFramework::Instance().setCameraLookAt(glm::vec3(0, 0, 0));
-	TurriFramework::Instance().setCameraPosition(glm::vec3(0, -170, 100));
+	TurriFramework::Instance().setCameraPosition(glm::vec3(-185, -185, 110));
 	WorldObjects::Instance().getPlayerAt(0)->inGame = true;
 	WorldObjects::Instance().setCollisionsToWorld();
 }

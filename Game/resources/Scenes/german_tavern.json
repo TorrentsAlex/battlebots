@@ -1,0 +1,38 @@
+{
+	"sky" :{ 
+		"object" : "./resources/objects/skybox.obj",
+		"texture": "../battlebots/Game/resources/images/background/beer_color.png"
+	},
+	"terrain": {
+		"object": "./resources/objects/tavern_big.obj",
+		"texture": "../battlebots/Game/resources/images/tavern_big_txt.png",
+		"material" : "./resources/materials/metal.json"
+	},
+	"decoration" : [ 
+		{
+			"name" : "chair",
+			"object" : "./resources/objects/chair.obj",
+			"texture" : "../battlebots/Game/resources/images/chair_txt.png",
+			"texture_specular" : null,
+			"elements" : "./resources/scenes/chair_positions.txt",
+			"material" : "./resources/materials/metal.json",
+			"mass" : 50.0,
+			"convex" : "hull"
+		},
+		{
+			"name" : "table",
+			"object" : "./resources/objects/table.obj",
+			"texture" : "../battlebots/Game/resources/images/table_txt.png",
+			"texture_specular" : null,
+			"elements" : "./resources/scenes/table_positions.txt",
+			"material" : "./resources/materials/metal.json",
+			"mass" : 0.0,
+			"convex" : "square"
+		}
+	],
+	"lights" : [
+		"./resources/materials/lights/directional_white.json",
+		"./resources/materials/lights/pointlight_yellow.json",
+		"./resources/materials/lights/pointlight_yellow2.json"
+		]
+}

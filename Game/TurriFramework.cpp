@@ -21,7 +21,7 @@ void TurriFramework::init(string name, int screenWidth, int screenheight, bool e
 
 	//  init Cube for debug collisions
 	unitCube = Geometry::LoadModelFromFile("./resources/objects/cube.obj");
-	cubeMaterial.textureMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
+	cubeMaterial.textureMap = TextureManager::Instance().getTextureID("../battlebots/Game/resources/images/back_green.png");
 	cubeMaterial.ambient = glm::vec3(0.25, 0.20725, 0.20725);
 	cubeMaterial.diffuse = glm::vec3(0.25, 0.20725, 0.20725);
 	cubeMaterial.specular = glm::vec3(0.25, 0.20725, 0.20725);
@@ -79,10 +79,8 @@ void TurriFramework::renderEntityWithBullet(Entity entity) {
 	float x = transform.getX();
 	float y = transform.getY();
 	float z = transform.getZ();
-	GameObject gameObject;
+	GameObject gameObject = entity.getGameObject();
 	gameObject._translate = glm::vec3(x, y, z);
-	gameObject._angle = 0;
-	gameObject._scale = glm::vec3(1,1,1);
 
 	tOpenGL.sendObject(entity.getMesh(), gameObject, entity.getNumVertices());
 	clearMaps();

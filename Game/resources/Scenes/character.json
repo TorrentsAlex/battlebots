@@ -1,17 +1,17 @@
 {
 	"character0" : {
-		"object": "./resources/objects/dwarf.obj",
-		"texture": "./resources/images/dwarf_1.png",
+		"object": "./resources/objects/dwarf_beer.obj",
+		"texture": "../battlebots/Game/resources/images/dwarf_1.png",
 		"material" : "./resources/materials/metal.json",
 		"position" : {
-			"x" : -40,
-			"y" : -40,
-			"z" : 0
+			"x" : 0,
+			"y" : 0,
+			"z" : 25
 		}
 	},
 	"character1" : {
 		"object": "./resources/objects/robot_01.obj",
-		"texture": "./resources/images/robot01_txt.png",
+		"texture": "../battlebots/Game/resources/images/robot01_txt.png",
 		"material" : "./resources/materials/metal.json",
 		"position" : {
 			"x" : -20,
@@ -21,7 +21,7 @@
 	},
 	"character2" : {
 		"object": "./resources/objects/robot_01.obj",
-		"texture": "./resources/images/robot01_txt.png",
+		"texture": "../battlebots/Game/resources/images/robot01_txt.png",
 		"material" : "./resources/materials/metal.json",
 		"position" : {
 			"x" : 0,
@@ -31,7 +31,7 @@
 	},
 	"character3" : {
 		"object": "./resources/objects/robot_01.obj",
-		"texture": "./resources/images/robot01_txt.png",
+		"texture": "../battlebots/Game/resources/images/robot01_txt.png",
 		"material" : "./resources/materials/metal.json",
 		"position" : {
 			"x" : 20,

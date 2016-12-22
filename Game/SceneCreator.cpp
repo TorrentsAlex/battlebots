@@ -48,6 +48,7 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 		entity.setOBJ(objDecoration);
 		entity.setMaterial(terrainMaterial);
 		entity.setTextureId(textureDecoration);
+		entity.tag = currentDecoration["name"].asString();
 
 		//set specular material
 		if (textureSpecularString.compare("") != 0) {

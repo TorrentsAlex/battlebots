@@ -26,6 +26,7 @@ private:
 	void calculateVolume();
 
 public:
+	string tag;
 	Entity();
 	Entity(OBJ mesh, GameObject gameObject);
 	~Entity();

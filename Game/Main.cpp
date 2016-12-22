@@ -12,9 +12,12 @@ int main(int argc, char ** argv) {
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 
-	TurriFramework::Instance().init("BattleBots", 1280, 800, true, 80, true);
+	TurriFramework::Instance().init("Beard Knights", 1280, 800, false, 80, false);
 
 	GameController::Instance().init();
+	TurriFramework::Instance().addFlagscreen((int)WindowFlags::FULLSCREEN);
+	//TurriFramework::Instance().setScreenSize(1920, 1080);
+
 	try {
 		while(TurriFramework::Instance().isRunning()) {
 			TurriFramework::Instance().startSync();

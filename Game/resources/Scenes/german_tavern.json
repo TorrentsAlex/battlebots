@@ -1,18 +1,18 @@
 {
 	"sky" :{ 
 		"object" : "./resources/objects/skybox.obj",
-		"texture": "./resources/images/background/beer_color.png"
+		"texture": "../battlebots/Game/resources/images/background/beer_color.png"
 	},
 	"terrain": {
-		"object": "./resources/objects/tavern_precaria.obj",
-		"texture": "./resources/images/tavern_txt_precaria.png",
+		"object": "./resources/objects/tavern_big.obj",
+		"texture": "../battlebots/Game/resources/images/tavern_big_txt.png",
 		"material" : "./resources/materials/metal.json"
 	},
 	"decoration" : [ 
 		{
 			"name" : "chair",
 			"object" : "./resources/objects/chair.obj",
-			"texture" : "./resources/images/chair_txt.png",
+			"texture" : "../battlebots/Game/resources/images/chair_txt.png",
 			"texture_specular" : null,
 			"elements" : "./resources/scenes/chair_positions.txt",
 			"material" : "./resources/materials/metal.json",
@@ -22,18 +22,9 @@
 		{
 			"name" : "table",
 			"object" : "./resources/objects/table.obj",
-			"texture" : "./resources/images/table_txt.png",
+			"texture" : "../battlebots/Game/resources/images/table_txt.png",
 			"texture_specular" : null,
 			"elements" : "./resources/scenes/table_positions.txt",
-			"material" : "./resources/materials/metal.json",
-			"mass" : 50.0,
-			"convex" : "hull"
-		},
-		{
-			"object" : "./resources/objects/lamp.obj",
-			"texture" : "./resources/images/lamp_ao.png",
-			"texture_specular" : "./resources/images/lamp_glow.png",
-			"elements" : "./resources/scenes/lamp_scene.txt",
 			"material" : "./resources/materials/metal.json",
 			"mass" : 0.0,
 			"convex" : "square"

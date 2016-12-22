@@ -31,8 +31,8 @@ public:
 	
 	vector<DecorObjects> listObjects;
 	// Setters
-	void setSkyBox(OBJ object, GLuint texture);
-	void setTerrain(OBJ object, GLuint texture, Material material);
+	void setSkyBox(OBJ object, GLuint texture, btCollisionObject* collisionObject);
+	void setTerrain(OBJ object, GLuint texture, Material material, btCollisionObject* collObject);
 	void setDecoration(vector<Entity> decoration);
 	void setLights(vector<Light> lights);
 

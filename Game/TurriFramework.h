@@ -58,9 +58,8 @@ public:
 	void stopRender();
 
 	void renderEntity(Entity* entity);
-	void renderEntityWithBullet(Entity entity);
 
-	void renderCubeAt(GameObject* gameObject);
+	void renderCubeAt(GameObject* gameObject, glm::vec3 volume);
 	void renderCubeAt(Entity* entity);
 
 	void renderScene(Scene* scene);

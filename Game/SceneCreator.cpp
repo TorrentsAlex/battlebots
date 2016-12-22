@@ -15,6 +15,7 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 	// Terrain and skybox
 	populateTerrain(&newScene, json);
 
+	populateDecoration(&newScene, json);
 
 	// Lights
 	vector<Light> sceneLights = populateLights(json["lights"]);
@@ -23,6 +24,13 @@ void SceneCreator::createScene(string file, Scene& newScene) {
 }
 
 void SceneCreator::createCharacters(string file, Character& ch1, Character& ch2, Character& ch3, Character& ch4) {
+	
+	/*
+			IMPORTANT!!!!
+
+			see these page fot anti tunneling
+			http://bulletphysics.org/mediawiki-1.5.8/index.php/Anti_tunneling_by_Motion_Clamping
+	*/
 	cout << "creating characters" << endl;
 	Scene newScene;
 	Json::Reader reader;
@@ -96,7 +104,7 @@ vector<Button> SceneCreator::createButtons(string file) {
 	int size = json["size"].asInt();
 	OBJ object = Geometry::LoadModelFromFile(json["object"].asString());
 	vector<Button> vectorButtons;
-	GLuint specularMap = TextureManager::Instance().getTextureID("./resources/images/back_green.png");
+	//GLuint specularMap = TextureManager::Instance().getTextureID("../battlebots/Game/resources/images/back_green.png");
 
 	for (int i = 0; i < size; i++) {
 		string currentButton = "button" + std::to_string(i);
@@ -133,16 +141,13 @@ vector<Button> SceneCreator::createButtons(string file) {
 		newButton.setMaterial(mat);
 		newButton.setTextureOff(TextureManager::Instance().getTextureID(json[currentButton]["texture_on"].asString()));
 
-		newButton.setSpecularMap(specularMap);
+		//newButton.setSpecularMap(specularMap);
 
 		vectorButtons.push_back(newButton);
 	}
 
 	return vectorButtons;
 }
-
-
-
 
 
 
@@ -238,14 +243,13 @@ void SceneCreator::populateDecoration(Scene * scene, Json::Value decoration) {
 		e->setTextureId(textureDecoration);
 		DecorObjects d;
 		d.e = e;
-
+		
 
 		//set specular material
 		if (textureSpecularString.compare("") != 0) {
 			GLuint specular = TextureManager::Instance().getTextureID(textureSpecularString);
 			e->setTextureSpecular(specular);
 		}
-
 
 		// Theres nothin into elements
 		if (gameElements.compare("") == 0) {
@@ -263,31 +267,74 @@ void SceneCreator::populateDecoration(Scene * scene, Json::Value decoration) {
 
 		} else { // There are more than 1 element
 			d.g = Geometry::LoadGameElements(gameElements);
+			glm::vec3 volume = e->getCollisionVolume();
+			
+			btScalar mass = currentDecoration["mass"].asFloat();
+			cout << "mass " << mass << endl;
+ 			bool isDynamic = (mass != 0.f);
+
+			btVector3 localInertia(0, 0, 0);
+			btTransform objectOrigin;
+			for (int i = 0; i < d.g.size();i++) {
+				btCollisionObject* collObject = new btCollisionObject();
+				// Box shape to collisionObject
+				btCollisionShape* colShape = new btBoxShape(btVector3(volume.x, volume.y, volume.z));
+							
+				collObject->setCollisionShape(colShape);
+				// Calculate inertia
+				if (isDynamic) colShape->calculateLocalInertia(mass, localInertia);
+
+				objectOrigin.setOrigin(btVector3(d.g.at(i).translate.x, d.g.at(i).translate.y, d.g.at(i).translate.z + volume.z/2.0f));
+				collObject->setWorldTransform(objectOrigin);
+
+				//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+				btDefaultMotionState* myMotionState1 = new btDefaultMotionState(objectOrigin);
+				btRigidBody::btRigidBodyConstructionInfo rbInfo1(mass, myMotionState1, colShape, localInertia);
+				btRigidBody* body = new btRigidBody(rbInfo1);
+
+				scene->addBodyToDynamicWorld(body); //bt
+				d.g.at(i).collisionObject = body; //btRigidBody
+			}
 			scene->listObjects.push_back(d);
 		}
 	}
 }
 
 void SceneCreator::populateTerrain(Scene * scene, Json::Value terrain) {
+
 	// SkyBox
 	OBJ objSky = Geometry::LoadModelFromFile(terrain["sky"]["object"].asString());
 	GLuint textureSky = TextureManager::Instance().getTextureID(terrain["sky"]["texture"].asString());
-	scene->setSkyBox(objSky, textureSky);
+	btTransform btTSky;
+	btTSky.setIdentity();
+	btTSky.setOrigin(btVector3(0, 0, 0));
+	btCollisionShape* skyShape = new btBoxShape(btVector3(0,0,0));
+	btScalar skymass(0.);
+	btVector3 skylocalInertia(0, 0, 0);
+
+	// Create terrain collision object 
+	btDefaultMotionState* myMotionStatesky = new btDefaultMotionState(btTSky);
+	btRigidBody::btRigidBodyConstructionInfo rbInfosky(skymass, myMotionStatesky, skyShape, skylocalInertia);
+	btRigidBody* skyBody = new btRigidBody(rbInfosky);
+
+
+	scene->setSkyBox(objSky, textureSky, skyBody);
+	scene->addBodyToDynamicWorld(skyBody);
+
 
 	cout << "terrain..." << endl;
 	// Terrain
 	OBJ objTerrain = Geometry::LoadModelFromFile(terrain["terrain"]["object"].asString());
 	GLuint textureTerrain = TextureManager::Instance().getTextureID(terrain["terrain"]["texture"].asString());
 	// Terrain material
-	scene->setTerrain(objTerrain, textureTerrain, metalMaterial);
-
+	
 	// Set physics for terrain
+	glm::vec3 terrainVolume = scene->getTerrain().getCollisionVolume();
 
 	btTransform btTGround;
 	btTGround.setIdentity();
-	btTGround.setOrigin(btVector3(0, 0, -10));
-	glm::vec3 terrainVolume = scene->getTerrain().getCollisionVolume();
-	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(terrainVolume.x), btScalar(terrainVolume.y), btScalar(terrainVolume.z)));
+	btTGround.setOrigin(btVector3(0, 0, 0));
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(terrainVolume.x), btScalar(terrainVolume.y), btScalar(10.0f)));
 	
 	
 	//collisionShapes.push_back(groundShape);
@@ -300,5 +347,7 @@ void SceneCreator::populateTerrain(Scene * scene, Json::Value terrain) {
 	btRigidBody* body = new btRigidBody(rbInfo);
 	
 	scene->addBodyToDynamicWorld(body);
+	scene->setTerrain(objTerrain, textureTerrain, metalMaterial, body);
+
 
 }

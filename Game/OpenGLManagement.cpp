@@ -15,8 +15,8 @@ OpenGLManagement::~OpenGLManagement() {
 // INIT METHODS
 void OpenGLManagement::initializeShaders() {
 	//Compile the shaders
-	oGLBuffer.addShader(GL_VERTEX_SHADER, "./resources/shaders/lvertex-shader.txt");
-	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "./resources/shaders/lfragment-shader.txt");
+	oGLBuffer.addShader(GL_VERTEX_SHADER, "../battlebots/Game/resources/shaders/lvertex-shader.txt");
+	oGLBuffer.addShader(GL_FRAGMENT_SHADER, "../battlebots/Game/resources/shaders/lfragment-shader.txt");
 	oGLBuffer.compileShaders();
 	//Attributes must be added before linking the code
 	oGLBuffer.addAttribute("vertexPosition");
@@ -190,8 +190,10 @@ void OpenGLManagement::sendObject(Vertex * data, GameObject object, int numVerti
 
 	glm::mat4 modelMatrix;
 	glm::mat3 normalMatrix;
-
-	modelMatrix = glm::translate(modelMatrix, object.translate);
+	
+	btVector3 transform = object.collisionObject->getWorldTransform().getOrigin();
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(transform.getX(), transform.getY(), transform.getZ()));
+	
 	if (object.angle != 0) {
 		modelMatrix = glm::rotate(modelMatrix, glm::radians(object.angle), object.rotation);
 	}
